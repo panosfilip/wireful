@@ -3133,6 +3133,41 @@ a.contact-line:hover .label::after {
   margin: -0.5rem 0 1rem;
 }
 
+.field-error {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1rem 0 0;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--accent);
+  border-left-width: 3px;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+.field-error::before {
+  content: "!";
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  font-size: 0.72rem;
+}
+
+.field-error[hidden] {
+  display: none;
+}
+
 /* Capability chooser — the visual service markers double as the selectable control. */
 .capability-option-grid {
   display: grid;
@@ -3142,12 +3177,14 @@ a.contact-line:hover .label::after {
 
 .capability-option {
   --capability-tone: var(--accent);
+  position: relative;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: 0.6rem;
   min-height: 3.75rem;
-  padding: 0.55rem;
+  /* Extra right padding reserves a gutter for the top-right remove badge */
+  padding: 0.55rem 1.9rem 0.55rem 0.55rem;
   border: 1px solid var(--line);
   background: transparent;
   color: var(--muted);
@@ -3197,9 +3234,10 @@ a.contact-line:hover .label::after {
   color: var(--text);
 }
 
+/* Recommended = a faint hint, clearly weaker than a real selection: just a
+   soft border and a gentle pulse on the mark, no filled background. */
 .capability-option.is-recommended:not(:has(input:checked)) {
-  border-color: color-mix(in srgb, var(--capability-tone) 70%, var(--line-strong));
-  background: color-mix(in srgb, var(--capability-tone) 6%, transparent);
+  border-color: color-mix(in srgb, var(--capability-tone) 28%, var(--line));
 }
 
 .capability-option.is-recommended:not(:has(input:checked)) .capability-option-mark {
@@ -3212,23 +3250,29 @@ a.contact-line:hover .label::after {
   color: var(--bg);
 }
 
-.capability-option-mark-text,
-.capability-option-mark-remove {
-  grid-area: 1 / 1;
-  transition: opacity 0.2s var(--ease-out);
-}
-
-.capability-option-mark-remove {
+/* Remove badge — sits in the box's top-right corner when selected */
+.capability-option-remove {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  display: grid;
+  place-items: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  background: var(--capability-tone);
+  color: var(--bg);
+  font-size: 0.68rem;
+  line-height: 1;
   opacity: 0;
-  font-size: 0.8rem;
+  transform: scale(0.6);
+  transition: opacity 0.2s var(--ease-out), transform 0.25s var(--ease-expo);
+  pointer-events: none;
 }
 
-.capability-option input:checked ~ .capability-option-mark .capability-option-mark-text {
-  opacity: 0;
-}
-
-.capability-option input:checked ~ .capability-option-mark .capability-option-mark-remove {
+.capability-option input:checked ~ .capability-option-remove {
   opacity: 1;
+  transform: scale(1);
 }
 
 .capability-option:has(input:focus-visible) {
@@ -3237,10 +3281,36 @@ a.contact-line:hover .label::after {
 }
 
 .capability-upsell {
+  position: relative;
   margin-top: 1rem;
-  padding: 1rem;
+  padding: 1rem 2.5rem 1rem 1rem;
   border: 1px solid var(--line-strong);
   background: var(--bg-raise);
+}
+
+.capability-upsell-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease-out), color 0.2s var(--ease-out), background 0.2s var(--ease-out);
+}
+
+.capability-upsell-close:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
 }
 
 .capability-upsell-label {
@@ -3348,6 +3418,8 @@ a.contact-line:hover .label::after {
     align-content: start;
     gap: 0.4rem;
     min-height: 6.5rem;
+    /* Vertical stack: badge sits above the label, so no right gutter needed */
+    padding: 0.55rem;
   }
 }
 

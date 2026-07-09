@@ -106,20 +106,18 @@ const timelines = ["As soon as possible", "1–3 months", "Flexible"];
       </button>
     </div>
 
-    <form id="project-form">
+    <form id="project-form" novalidate>
       <fieldset>
-        <legend><span class="step">01</span>What can I help with?</legend>
+        <legend><span class="step">01</span>What can I help with? *</legend>
         <p class="field-hint">Pick everything that feels relevant — you can add detail below.</p>
         <div class="capability-option-grid">
           {
             projectCapabilities.map((capability) => (
               <label class={`capability-option capability-option--${capability.tone}`}>
                 <input type="checkbox" name="type" value={capability.label} />
-                <span class="capability-option-mark" aria-hidden="true">
-                  <span class="capability-option-mark-text">{capability.mark}</span>
-                  <span class="capability-option-mark-remove">✕</span>
-                </span>
+                <span class="capability-option-mark" aria-hidden="true">{capability.mark}</span>
                 <span class="capability-option-label">{capability.label}</span>
+                <span class="capability-option-remove" aria-hidden="true">✕</span>
               </label>
             ))
           }
@@ -130,15 +128,17 @@ const timelines = ["As soon as possible", "1–3 months", "Flexible"];
           aria-live="polite"
           data-capabilities={JSON.stringify(projectCapabilities)}
         >
+          <button class="capability-upsell-close" type="button" aria-label="Dismiss suggestions">✕</button>
           <p class="capability-upsell-label">Worth considering alongside this</p>
           <p class="capability-upsell-copy"></p>
           <div class="capability-upsell-options"></div>
         </aside>
         <button class="capability-clear" type="button" hidden>Clear options</button>
+        <p class="field-error" data-error="type" role="alert" hidden>Pick at least one thing I can help with.</p>
       </fieldset>
 
       <fieldset>
-        <legend><span class="step">02</span>Budget</legend>
+        <legend><span class="step">02</span>Budget *</legend>
         <p class="field-hint">A rough range is fine — it helps me suggest the right scope.</p>
         <div class="option-grid">
           {
@@ -151,10 +151,11 @@ const timelines = ["As soon as possible", "1–3 months", "Flexible"];
             ))
           }
         </div>
+        <p class="field-error" data-error="budget" role="alert" hidden>Choose a budget range.</p>
       </fieldset>
 
       <fieldset>
-        <legend><span class="step">03</span>Timeline</legend>
+        <legend><span class="step">03</span>Timeline *</legend>
         <div class="option-grid">
           {
             timelines.map((timeline) => (
@@ -166,6 +167,7 @@ const timelines = ["As soon as possible", "1–3 months", "Flexible"];
             ))
           }
         </div>
+        <p class="field-error" data-error="timeline" role="alert" hidden>Choose a timeline.</p>
       </fieldset>
 
       <fieldset>
@@ -254,6 +256,7 @@ const timelines = ["As soon as possible", "1–3 months", "Flexible"];
   const capabilityUpsell = overlay.querySelector<HTMLElement>(".capability-upsell")!;
   const capabilityUpsellCopy = overlay.querySelector<HTMLElement>(".capability-upsell-copy")!;
   const capabilityUpsellOptions = overlay.querySelector<HTMLElement>(".capability-upsell-options")!;
+  const capabilityUpsellClose = overlay.querySelector<HTMLButtonElement>(".capability-upsell-close")!;
   const capabilityClear = overlay.querySelector<HTMLButtonElement>(".capability-clear")!;
   const attachmentInput = document.getElementById("pf-attachments") as HTMLInputElement;
   const attachmentClear = overlay.querySelector<HTMLButtonElement>(".attachment-clear")!;
@@ -284,6 +287,63 @@ const timelines = ["As soon as possible", "1–3 months", "Flexible"];
   };
 
   setHumanCheck();
+
+  // Single-choice groups (Budget, Timeline) are optional, so let a second click
+  // on the already-selected option clear it — matching the toggle behaviour of
+  // the capability checkboxes above. The inputs are pointer-events:none, so the
+  // click arrives via the wrapping <label>; we track the checked option per
+  // group rather than reading pointer state.
+  const checkedByGroup = new Map<string, HTMLInputElement | null>();
+  overlay.querySelectorAll<HTMLInputElement>('#project-form input[type="radio"]').forEach((radio) => {
+    radio.addEventListener("click", () => {
+      if (checkedByGroup.get(radio.name) === radio) {
+        radio.checked = false;
+        checkedByGroup.set(radio.name, null);
+        radio.dispatchEvent(new Event("change", { bubbles: true }));
+      } else {
+        checkedByGroup.set(radio.name, radio);
+      }
+    });
+  });
+
+  // Steps 01–03 are mandatory but use visually-hidden inputs, so we validate
+  // them explicitly with inline messages rather than native required bubbles
+  // (which can't anchor to an opacity:0 control). Errors only appear after a
+  // first submit attempt, then update live as the user answers each step.
+  const stepErrors = {
+    type: overlay.querySelector<HTMLElement>('[data-error="type"]')!,
+    budget: overlay.querySelector<HTMLElement>('[data-error="budget"]')!,
+    timeline: overlay.querySelector<HTMLElement>('[data-error="timeline"]')!,
+  };
+  type StepKey = keyof typeof stepErrors;
+  const stepOrder: StepKey[] = ["type", "budget", "timeline"];
+  let submitAttempted = false;
+
+  const isStepInvalid = (key: StepKey) =>
+    key === "type"
+      ? !capabilityInputs.some((input) => input.checked)
+      : !form.querySelector(`input[name="${key}"]:checked`);
+
+  const refreshStepError = (key: StepKey) => {
+    stepErrors[key].hidden = !isStepInvalid(key);
+  };
+
+  const revalidateIfAttempted = (key: StepKey) => {
+    if (submitAttempted) refreshStepError(key);
+  };
+
+  const focusStep = (key: StepKey) => {
+    stepErrors[key].closest("fieldset")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const first =
+      key === "type"
+        ? capabilityInputs[0]
+        : form.querySelector<HTMLInputElement>(`input[name="${key}"]`);
+    first?.focus({ preventScroll: true });
+  };
+
+  overlay
+    .querySelectorAll<HTMLInputElement>('#project-form input[name="budget"], #project-form input[name="timeline"]')
+    .forEach((radio) => radio.addEventListener("change", () => revalidateIfAttempted(radio.name as StepKey)));
 
   const capabilityByLabel = new Map(projectCapabilities.map((capability) => [capability.label, capability]));
 
@@ -338,8 +398,13 @@ const timelines = ["As soon as possible", "1–3 months", "Flexible"];
     input.addEventListener("change", () => {
       if (!addingRecommendation) recommendationAccepted = false;
       updateCapabilityUpsell();
+      revalidateIfAttempted("type");
     }),
   );
+  capabilityUpsellClose.addEventListener("click", () => {
+    recommendationAccepted = true;
+    updateCapabilityUpsell();
+  });
   capabilityUpsellOptions.addEventListener("click", (event) => {
     const target = (event.target as HTMLElement).closest<HTMLButtonElement>("[data-add-capability]");
     if (!target) return;
@@ -358,6 +423,7 @@ const timelines = ["As soon as possible", "1–3 months", "Flexible"];
     });
     recommendationAccepted = false;
     updateCapabilityUpsell();
+    revalidateIfAttempted("type");
     capabilityInputs[0]?.focus();
   });
 
@@ -462,6 +528,17 @@ const timelines = ["As soon as possible", "1–3 months", "Flexible"];
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
+    submitAttempted = true;
+
+    // Mandatory choice steps (01–03) first, top to bottom.
+    stepOrder.forEach(refreshStepError);
+    const firstInvalidStep = stepOrder.find(isStepInvalid);
+    if (firstInvalidStep) {
+      focusStep(firstInvalidStep);
+      return;
+    }
+
+    // Then the native fields (name, email, brief, consent) and human check.
     if (Number(humanInput.value) !== humanAnswer) {
       humanInput.setCustomValidity("Please answer the human check before sending your request.");
       humanInput.reportValidity();
@@ -470,30 +547,9 @@ const timelines = ["As soon as possible", "1–3 months", "Flexible"];
     humanInput.setCustomValidity("");
     if (!form.reportValidity()) return;
 
-    const data = new FormData(form);
-    const types = data.getAll("type").join(", ") || "Not specified";
-    const attachments = Array.from(attachmentInput.files ?? []).map((file) => file.name);
-    const lines = [
-      `Name: ${data.get("name")}`,
-      `Email: ${data.get("email")}`,
-      `Company: ${data.get("company") || "—"}`,
-      "",
-      `Needs: ${types}`,
-      `Budget: ${data.get("budget") || "Not specified"}`,
-      `Timeline: ${data.get("timeline") || "Not specified"}`,
-      `Files to attach: ${attachments.length ? attachments.join(", ") : "—"}`,
-      "",
-      "Brief:",
-      `${data.get("brief")}`,
-      attachments.length
-        ? "\nReminder: please attach the files listed above before sending this email."
-        : "",
-    ];
-    const subject = `New project request — ${data.get("name")}`;
-    const mailto = `mailto:panosfilip@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
-
+    // TODO: submit to a real form endpoint. For now the request is validated
+    // client-side and acknowledged — no email client is opened.
     note.textContent =
-      "Opening your email app with everything pre-filled — just press send. If nothing opens, copy the details into a plain email.";
-    window.location.href = mailto;
+      "Thanks — your request looks complete. Sending isn't wired up yet, so nothing has been submitted; the form endpoint is coming soon.";
   });
 </script>
