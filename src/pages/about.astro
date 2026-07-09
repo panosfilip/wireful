@@ -34,8 +34,8 @@ const facts = [
         loop
         playsinline
         preload="metadata"
-        poster="/media/about-hero-poster.jpg"
-        src="/media/about-hero-bg.mp4"></video>
+        poster="media/about-hero-poster.jpg"
+        src="media/about-hero-bg.mp4"></video>
     </div>
     <div class="container">
       <h1 data-intro style="--intro: 1">{site.fullName}.</h1>
@@ -60,7 +60,7 @@ const facts = [
     <div class="container">
       <div class="about-strip">
         <div class="about-intro" data-reveal>
-          <h2>The short version</h2>
+          <h2>The short <span class="title-keyword">version</span></h2>
           <div class="prose">
             <p>
               I have spent 10+ years designing brand identities, websites, campaigns, and
@@ -129,7 +129,7 @@ const facts = [
 
   <section class="section">
     <div class="container">
-      <h2 data-reveal>At a glance</h2>
+      <h2 data-reveal>At a <span class="title-keyword">glance</span></h2>
       <ul class="fact-list" data-reveal-group>
         {
           facts.map((fact) => (
@@ -145,13 +145,13 @@ const facts = [
 
   <section class="section contact-cta">
     <div class="container">
-      <h2 data-reveal>Want the longer version?</h2>
+      <h2 data-reveal>Want the <span class="title-keyword">longer version</span>?</h2>
       <p class="lead" data-reveal style="--reveal-delay: 1">
         You can view the portfolio/profile PDFs or send me a short project note.
       </p>
       <div class="hero-actions" data-reveal style="--reveal-delay: 2">
-        <a href="/contact" class="btn" data-overlay-trigger data-magnetic>Start a project</a>
-        <a href="/docs/panagiotis-filippaios-portfolio.pdf" class="btn btn-ghost">
+        <a href="contact" class="btn" data-overlay-trigger data-magnetic>Start a project</a>
+        <a href="docs/panagiotis-filippaios-portfolio.pdf" class="btn btn-ghost">
           Portfolio PDF
         </a>
       </div>

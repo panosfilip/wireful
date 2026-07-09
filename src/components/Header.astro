@@ -1,19 +1,23 @@
 ---
 import ContactIcons from "./ContactIcons.astro";
 
-const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const base = `${import.meta.env.BASE_URL}/`;
+const path = Astro.url.pathname.replace(/\/$/, "") || base;
 const links = [
-  { href: "/work", label: "Work" },
-  { href: "/approach", label: "Approach" },
-  { href: "/about", label: "About" },
+  { href: `${base}work`, label: "Work" },
+  { href: `${base}approach`, label: "Approach" },
+  { href: `${base}about`, label: "About" },
 ];
-const isActive = (href: string) => path === href || path.startsWith(href + "/");
+const isActive = (href: string) => {
+  const normalizedHref = href.replace(/\/$/, "");
+  return path === normalizedHref || path.startsWith(normalizedHref + "/");
+};
 ---
 
 <header class="site-header" id="site-header">
   <div class="header-shell">
     <div class="container header-inner">
-      <a href="/" class="wordmark" data-magnetic aria-label="WIREFUL home">
+      <a href={base} class="wordmark" data-magnetic aria-label="WIREFUL home">
         WIREFUL<span class="tick tick-blink">_</span>
       </a>
       <nav class="primary-nav" aria-label="Primary">
@@ -31,7 +35,7 @@ const isActive = (href: string) => path === href || path.startsWith(href + "/");
       </nav>
       <div class="header-actions">
         <ContactIcons variant="header" />
-        <a href="/contact" class="btn btn-small" data-overlay-trigger data-magnetic><span>Start a project</span></a>
+        <a href="contact" class="btn btn-small" data-overlay-trigger data-magnetic><span>Start a project</span></a>
       </div>
     </div>
   </div>

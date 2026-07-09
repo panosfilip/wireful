@@ -23,12 +23,12 @@ export const site = {
     { label: "LinkedIn", href: "https://www.linkedin.com/in/panosfilip", note: "panosfilip" },
     {
       label: "Portfolio PDF",
-      href: "/docs/panagiotis-filippaios-portfolio.pdf",
+      href: "docs/panagiotis-filippaios-portfolio.pdf",
       note: "Graphic design, web, and UI/UX samples",
     },
     {
       label: "Profile PDF",
-      href: "/docs/panagiotis-filippaios-profile.pdf",
+      href: "docs/panagiotis-filippaios-profile.pdf",
       note: "Experience and background",
     },
   ],

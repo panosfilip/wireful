@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">Project image placeholder</title>
+  <desc id="description">A generic placeholder indicating that a project image is coming soon.</desc>
+  <rect width="1600" height="900" fill="#110b1c"/>
+  <rect x="48" y="48" width="1504" height="804" fill="none" stroke="#3a2e59" stroke-width="2"/>
+  <text x="800" y="438" fill="#f1edf9" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="28" letter-spacing="4" text-anchor="middle">PROJECT IMAGE</text>
+  <path d="M730 470h140" stroke="#e95793" stroke-width="3"/>
+  <text x="800" y="522" fill="#a89fc4" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" letter-spacing="2" text-anchor="middle">COMING SOON</text>
+</svg>

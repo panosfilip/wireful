@@ -22,14 +22,15 @@ const { title, description = site.description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <base href={`${import.meta.env.BASE_URL}/`} />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <title>{title}</title>
     <script is:inline>
       // Marks JS availability so reveal animations never hide content without JS.
       document.documentElement.classList.add("js");
     </script>
   </head>
-  <body>
+  <body id="top">
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
     <Header />
@@ -37,6 +38,10 @@ const { title, description = site.description } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <a class="sticky-back-to-top" href="#top" aria-label="Back to top" hidden>
+      <span aria-hidden="true">↑</span>
+      <span>Top</span>
+    </a>
     <ProjectOverlay />
     <script>
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -126,6 +131,7 @@ const { title, description = site.description } = Astro.props;
       // Scroll progress bar, header state, and hero parallax
       const bar = document.getElementById("progress-bar");
       const header = document.getElementById("site-header");
+      const backToTop = document.querySelector<HTMLAnchorElement>(".sticky-back-to-top");
       const parallaxEl = reducedMotion
         ? null
         : document.querySelector<HTMLElement>("[data-parallax]");
@@ -232,6 +238,9 @@ const { title, description = site.description } = Astro.props;
         }
         if (header) {
           header.classList.toggle("is-scrolled", doc.scrollTop > 20);
+        }
+        if (backToTop) {
+          backToTop.hidden = doc.scrollTop < window.innerHeight * 0.65;
         }
         if (parallaxEl && doc.scrollTop < window.innerHeight * 1.2) {
           parallaxEl.style.transform = `translateY(${(doc.scrollTop * 0.16).toFixed(1)}px)`;

@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import CaseCard from "../components/CaseCard.astro";
 import { caseStudies } from "../data/caseStudies";
-import { site, approachPillars, proofPoints, skills, capabilities } from "../data/site";
+import { site, approachPillars, proofPoints, capabilities } from "../data/site";
 
 const featuredWork = caseStudies.find((cs) => cs.slug === "my1521-taxpayer-portal")!;
 const homeWorkSlugs = [
@@ -14,7 +14,7 @@ const homeWorkSlugs = [
   "fysiko-aerio-campaigns",
 ];
 const homeWork = homeWorkSlugs.map((slug) => caseStudies.find((cs) => cs.slug === slug)!);
-const homeSkills = [...skills.design.slice(0, 4), ...skills.tools.slice(0, 3)];
+const [headlineBefore, headlineAfter] = site.headline.split("clarity");
 const marqueeItems = [...capabilities, ...capabilities];
 const capabilityDirectory = [
   { mark: "WD", label: "Website design", tone: "violet" },
@@ -39,21 +39,23 @@ const capabilityDirectory = [
         loop
         playsinline
         preload="metadata"
-        poster="/media/hero-poster.jpg"
-        src="/media/hero-bg.mp4"></video>
+        poster="media/hero-poster.jpg"
+        src="media/hero-bg.mp4"></video>
     </div>
     <div class="container hero-grid">
       <div class="hero-copy">
-        <h1 data-intro style="--intro: 0">{site.headline}</h1>
+        <h1 data-intro style="--intro: 0">
+          {headlineBefore}<span class="title-keyword">clarity</span>{headlineAfter}
+        </h1>
         <p class="lead" data-intro style="--intro: 1">{site.intro}</p>
         <div class="hero-actions" data-intro style="--intro: 2">
-          <a href="/contact" class="btn" data-overlay-trigger data-magnetic>Start a project</a>
-          <a href="/work" class="btn btn-ghost">See selected work</a>
+          <a href="contact" class="btn" data-overlay-trigger data-magnetic>Start a project</a>
+          <a href="work" class="btn btn-ghost">See selected work</a>
         </div>
       </div>
       <div class="hero-portrait" data-intro style="--intro: 1">
         <img
-          src="/media/portrait.webp"
+          src="media/portrait.webp"
           alt={`Portrait of ${site.fullName}`}
           width="1135"
           height="1282"
@@ -102,7 +104,7 @@ const capabilityDirectory = [
     <div class="container">
       <div class="section-head" data-reveal>
         <div>
-          <h2 id="services-heading">What I can help you shape.</h2>
+          <h2 id="services-heading">What I can help you <span class="title-keyword">shape</span>.</h2>
           <p class="section-kicker">
             Freelance-first, with senior UI/UX depth behind the work.
           </p>
@@ -126,13 +128,13 @@ const capabilityDirectory = [
     <div class="container">
       <div class="section-head" data-reveal>
         <div>
-          <h2 id="work-heading">Work that ships at national scale.</h2>
+          <h2 id="work-heading">Work that ships at <span class="title-keyword">national scale</span>.</h2>
           <p class="section-kicker">
             Government platforms, institutional redesigns, and national brand campaigns —
             led by my1521, AADE's taxpayer service portal used by citizens across Greece.
           </p>
         </div>
-        <a href="/work" class="section-link">All work <span class="arrow">↗</span></a>
+        <a href="work" class="section-link">All work <span class="arrow">↗</span></a>
       </div>
       <div class="case-grid">
         <CaseCard cs={featuredWork} />
@@ -146,9 +148,9 @@ const capabilityDirectory = [
     <div class="container">
       <div class="section-head" data-reveal>
         <div>
-          <h2 id="approach-heading">How I move from brief to build.</h2>
+          <h2 id="approach-heading">How I move from <span class="title-keyword">brief to build</span>.</h2>
         </div>
-        <a href="/approach" class="section-link">Full approach <span class="arrow">↗</span></a>
+        <a href="approach" class="section-link">Full approach <span class="arrow">↗</span></a>
       </div>
       <div class="pillar-grid" data-reveal-group>
         {
@@ -164,36 +166,24 @@ const capabilityDirectory = [
     </div>
   </section>
 
-  <!-- About strip -->
-  <section class="section" id="about" aria-labelledby="about-heading">
+  <!-- Project fit -->
+  <section class="section project-fit" id="project-fit" aria-labelledby="project-fit-heading">
     <div class="container">
-      <div class="about-strip">
-        <div data-reveal>
-          <h2 id="about-heading">A designer who thinks like a product person.</h2>
-          <div class="prose">
-            <p>
-              I am {site.fullName}, a senior UI/UX engineer and graphic designer in Athens.
-              I work across websites, product interfaces, brand systems, and campaign
-              assets, with enough technical context to keep Figma handoff, WordPress
-              maintenance, and implementation realistic.
-            </p>
-            <p>
-              I also teach Figma and UI design practice in the Human Computer Interaction
-              space at the National and Kapodistrian University of Athens. That keeps my work
-              close to research, usability, and clear design reasoning.
-            </p>
-          </div>
-          <a href="/about" class="section-link">More about me <span class="arrow">↗</span></a>
-        </div>
-        <div data-reveal>
-          <div class="skill-group">
-            <h3>Working across</h3>
-            <ul class="skill-list">
-              {homeSkills.map((skill) => <li>{skill.title}</li>)}
-            </ul>
-          </div>
-        </div>
+      <div class="project-fit-intro" data-reveal>
+        <h2 id="project-fit-heading">
+          Bring me in when the work has become <span class="title-keyword">harder</span> than it needs to be.
+        </h2>
+        <p class="lead">
+          A rough brief, a messy current state, or a clear ambition is enough to start.
+          We can find the useful next move from there.
+        </p>
       </div>
+      <ul class="project-fit-list" data-reveal-group>
+        <li>A <span class="title-keyword">product flow</span> is hard to use or explain.</li>
+        <li>A website has <span class="title-keyword">outgrown</span> its structure or visual direction.</li>
+        <li>Your team needs a <span class="title-keyword">Figma system</span> that holds up after handoff.</li>
+        <li>A campaign or brand needs <span class="title-keyword">one clear visual language</span>.</li>
+      </ul>
     </div>
   </section>
 
@@ -206,19 +196,19 @@ const capabilityDirectory = [
         loop
         playsinline
         preload="metadata"
-        poster="/media/cta-poster.jpg"
-        src="/media/cta-bg.mp4"></video>
+        poster="media/cta-poster.jpg"
+        src="media/cta-bg.mp4"></video>
     </div>
     <div class="container">
       <h2 id="contact-heading" data-reveal>
-        Have a website, product, or brand system that needs sharper direction?
+        Have a website, product, or brand system that needs <span class="title-keyword">sharper direction</span>?
       </h2>
       <p class="lead" data-reveal style="--reveal-delay: 1">
         Send the rough version. I can help turn it into a clear interface, a better web
         experience, or a visual system your team can keep using.
       </p>
       <div class="hero-actions" data-reveal style="--reveal-delay: 2">
-        <a href="/contact" class="btn" data-overlay-trigger data-magnetic>Start a conversation</a>
+        <a href="contact" class="btn" data-overlay-trigger data-magnetic>Start a conversation</a>
       </div>
     </div>
   </section>

@@ -15,7 +15,13 @@ const { tags, variant = "card" } = Astro.props;
     tags.map((tag) => {
       const definition = projectTagDefinitions[tag];
       return (
-        <li class={`capability-tag capability-tag--${definition.tone}`} title={definition.label}>
+        <li
+          class={`capability-tag capability-tag--${definition.tone}`}
+          data-capability-tag={tag}
+          aria-expanded="false"
+          aria-label={`${definition.label}: tap once to reveal, tap again to view related projects`}
+          title={definition.label}
+        >
           <span class="capability-tag-mark" aria-hidden="true">{definition.mark}</span>
           <span class="capability-tag-label">{definition.label}</span>
         </li>
@@ -23,3 +29,35 @@ const { tags, variant = "card" } = Astro.props;
     })
   }
 </ul>
+
+<script>
+  const capabilityTags = Array.from(document.querySelectorAll<HTMLElement>("[data-capability-tag]"));
+  const isTouchInterface = window.matchMedia("(hover: none) and (pointer: coarse)");
+
+  const collapseTags = () => {
+    capabilityTags.forEach((tag) => {
+      tag.classList.remove("is-expanded");
+      tag.setAttribute("aria-expanded", "false");
+    });
+  };
+
+  capabilityTags.forEach((tag) => {
+    tag.addEventListener("click", (event) => {
+      if (!isTouchInterface.matches) return;
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (tag.classList.contains("is-expanded")) {
+        window.location.href = new URL(
+          `work?tag=${tag.dataset.capabilityTag}#taxonomy`,
+          document.baseURI,
+        ).href;
+        return;
+      }
+
+      collapseTags();
+      tag.classList.add("is-expanded");
+      tag.setAttribute("aria-expanded", "true");
+    });
+  });
+</script>

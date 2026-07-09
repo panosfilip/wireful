@@ -281,6 +281,12 @@ html.js .tick-blink {
   color: var(--accent-ink);
 }
 
+.hero-actions .btn-ghost {
+  border-color: var(--line-strong);
+  background-color: var(--bg-raise);
+  box-shadow: 0 0.6rem 1.5rem rgba(0, 0, 0, 0.18);
+}
+
 .btn-small {
   padding: 0.5rem 1.15rem;
   font-size: 0.85rem;
@@ -715,9 +721,9 @@ html.js .is-loaded [data-intro] {
 
 .hero-portrait img {
   position: relative;
-  width: 122%;
+  width: 116%;
   max-width: none;
-  margin-left: -22%;
+  margin-left: 0;
   filter: grayscale(1) contrast(1.04) drop-shadow(0 30px 50px rgba(0, 0, 0, 0.55));
   transform-origin: bottom center;
   transition: filter 0.6s var(--ease-out), transform 0.6s var(--ease-out);
@@ -765,18 +771,54 @@ html.js .is-loaded [data-intro] {
 }
 
 @media (max-width: 820px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
+  .hero:not(.hero-inner) {
+    min-height: calc(100vh - var(--header-h, 4.5rem));
+    min-height: calc(100svh - var(--header-h, 4.5rem));
+    padding-top: clamp(3rem, 7vh, 4rem);
   }
 
-  .hero-copy {
+  .hero-grid {
+    flex: 1;
+    grid-template-columns: 1fr;
+    align-content: start;
+    align-items: start;
+  }
+
+  .hero:not(.hero-inner) .hero-copy {
+    z-index: 2;
     padding-bottom: 0;
   }
 
-  .hero-portrait {
-    justify-self: center;
-    width: min(380px, 80vw);
-    margin-top: 2.5rem;
+  .hero:not(.hero-inner) .hero-portrait {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 50%;
+    width: min(300px, 70vw);
+    margin: 0;
+    translate: -50% 0;
+  }
+
+  .hero:not(.hero-inner) .hero-portrait img {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .hero:not(.hero-inner) .hero-actions {
+    position: absolute;
+    z-index: 3;
+    right: var(--gutter);
+    bottom: clamp(1rem, 2.5svh, 1.5rem);
+    left: var(--gutter);
+    flex-wrap: nowrap;
+    gap: 0.65rem;
+  }
+
+  .hero:not(.hero-inner) .hero-actions .btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-inline: 0.75rem;
+    box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.24);
   }
 }
 
@@ -1263,6 +1305,21 @@ html.js .marquee-track {
   }
 }
 
+.capability-tag.is-expanded {
+  max-width: 12rem;
+  background: color-mix(in srgb, var(--tag-tone) 19%, var(--bg-raise));
+}
+
+.capability-tag.is-expanded .capability-tag-mark {
+  color: var(--text);
+  transform: scale(1.08);
+}
+
+.capability-tag.is-expanded .capability-tag-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 .capability-tags--detail {
   margin: 0;
   padding: 0;
@@ -1704,7 +1761,7 @@ html.js .marquee-track {
   display: grid;
   grid-template-columns: 1.1rem minmax(0, 1fr);
   gap: 0.15rem;
-  align-items: start;
+  align-items: center;
   padding: 0.8rem 0;
   cursor: pointer;
   list-style: none;
@@ -1721,7 +1778,13 @@ html.js .marquee-track {
 .process-artifact-list summary::before {
   content: "+";
   grid-column: 1;
+  display: grid;
+  place-items: center;
+  width: 1.1rem;
+  height: 1.1rem;
   color: var(--accent);
+  font-family: var(--font-mono);
+  line-height: 1;
 }
 
 .process-artifact-list details[open] summary {
@@ -1774,10 +1837,6 @@ html.js .marquee-track {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 2rem;
   }
-
-  .process-artifact-list li:has(details[open]) {
-    grid-column: 1 / -1;
-  }
 }
 
 @media (hover: hover) {
@@ -1828,6 +1887,47 @@ html.js .marquee-track {
   .process-step:hover .process-step-marker {
     border-color: var(--accent);
     background: var(--accent-ink);
+  }
+}
+
+/* ---- Project fit ------------------------------------------------------------------------------------------------ */
+
+.project-fit-intro {
+  max-width: 52rem;
+}
+
+.project-fit-intro h2 {
+  max-width: 17ch;
+}
+
+.project-fit-intro .lead {
+  max-width: 43rem;
+  margin: 1.4rem 0 0;
+}
+
+.project-fit-list {
+  display: grid;
+  margin-top: clamp(2.75rem, 6vw, 5rem);
+  border-top: 1px solid var(--line);
+}
+
+.project-fit-list li {
+  padding: clamp(1.2rem, 2.5vw, 1.75rem) clamp(0.2rem, 1.5vw, 1rem);
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 3vw, 2.35rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  transition: background 0.3s var(--ease-out), color 0.3s var(--ease-out), padding-left 0.35s var(--ease-expo);
+}
+
+@media (hover: hover) {
+  .project-fit-list li:hover {
+    padding-left: clamp(0.7rem, 2vw, 1.5rem);
+    background: var(--bg-raise);
+    color: var(--text);
   }
 }
 
@@ -2580,6 +2680,41 @@ a.contact-line:hover .label::after {
   color: var(--accent);
 }
 
+.sticky-back-to-top {
+  position: fixed;
+  z-index: 45;
+  right: var(--gutter);
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg-raise) 88%, transparent);
+  box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.25);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: border-color 0.25s var(--ease-out), background 0.25s var(--ease-out), color 0.25s var(--ease-out), transform 0.3s var(--ease-expo);
+}
+
+.sticky-back-to-top:hover {
+  border-color: var(--accent);
+  background: var(--surface-hover);
+  color: var(--accent);
+  transform: translateY(-0.2rem);
+}
+
+.sticky-back-to-top > span:first-child {
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  line-height: 0.8;
+}
+
 .footer-grid .contact-icons {
   gap: 1.1rem;
   margin-bottom: 0.85rem;
@@ -2746,6 +2881,10 @@ a.contact-line:hover .label::after {
   font-size: 1.15rem;
   letter-spacing: -0.01em;
   margin: 0;
+}
+
+.title-keyword {
+  color: var(--accent);
 }
 
 .overlay-close {
@@ -3138,8 +3277,20 @@ a.contact-line:hover .label::after {
   opacity: 1;
 }
 
+.attachment-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--line-strong);
+}
+
 .attachment-field input[type="file"] {
-  padding: 0.45rem 0;
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
+  padding: 0;
+  border: 0;
   color: var(--muted);
   font-size: 0.82rem;
 }
@@ -3156,6 +3307,81 @@ a.contact-line:hover .label::after {
   letter-spacing: 0.07em;
   text-transform: uppercase;
   cursor: pointer;
+  transition: border-color 0.2s var(--ease-out), color 0.2s var(--ease-out), background 0.2s var(--ease-out);
+}
+
+.attachment-field input[type="file"]::file-selector-button:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--text);
+}
+
+.attachment-clear {
+  flex: none;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.07em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease-out), color 0.2s var(--ease-out), background 0.2s var(--ease-out);
+}
+
+.attachment-clear:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--text);
+}
+
+.attachment-list {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.7rem;
+}
+
+.attachment-item {
+  display: grid;
+  grid-template-columns: 2.35rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.7rem 0.55rem 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line-strong));
+  background: color-mix(in srgb, var(--accent) 7%, var(--bg-raise));
+}
+
+.attachment-item-type {
+  display: grid;
+  place-items: center;
+  min-height: 2.1rem;
+  padding-inline: 0.2rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--line-strong));
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.attachment-item-name {
+  overflow: hidden;
+  color: var(--text);
+  font-size: 0.84rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.attachment-item-size {
+  color: var(--faint);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 
 .attachment-field .field-hint {

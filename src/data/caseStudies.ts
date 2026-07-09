@@ -725,7 +725,7 @@ export const caseStudies: CaseStudy[] = ([
       type: "image",
       motif: "sitemap",
       alt: "Wireframe diagram of an academic website and brand system",
-      src: "/media/work/figma-projects-public-sector.png",
+      src: "media/work/figma-projects-public-sector.png",
     },
     sections: [
       {
@@ -774,7 +774,7 @@ export const caseStudies: CaseStudy[] = ([
       type: "image",
       motif: "search",
       alt: "Wireframe of a music app interface with branded content modules",
-      src: "/media/work/figma-projects-products.png",
+      src: "media/work/figma-projects-products.png",
     },
     sections: [
       {
@@ -823,7 +823,7 @@ export const caseStudies: CaseStudy[] = ([
       type: "image",
       motif: "homepage",
       alt: "Wireframe of a homepage layout with clear content hierarchy",
-      src: "/media/work/figma-projects-current.png",
+      src: "media/work/figma-projects-current.png",
     },
     sections: [
       {
@@ -872,7 +872,7 @@ export const caseStudies: CaseStudy[] = ([
       type: "image",
       motif: "landing",
       alt: "Wireframe of a campaign landing page with deadline banner and dual call-to-action",
-      src: "/media/work/figma-projects-current.png",
+      src: "media/work/figma-projects-current.png",
     },
     sections: [
       {
@@ -921,7 +921,7 @@ export const caseStudies: CaseStudy[] = ([
       type: "image",
       motif: "audit",
       alt: "Wireframe of interface components with annotation marks from a design audit",
-      src: "/media/work/figma-projects-products.png",
+      src: "media/work/figma-projects-products.png",
     },
     sections: [
       {
