@@ -686,8 +686,16 @@ html.js .tick-blink {
     padding-top: clamp(2.5rem, 6vh, 5.5rem);
   }
 
+  /* Grid fills the fold; the copy centers vertically while the portrait keeps
+     standing on the bottom edge. Keeps the fold balanced regardless of copy
+     length. */
+  .hero:not(.hero-inner) .hero-grid {
+    flex: 1 1 auto;
+  }
+
   .hero:not(.hero-inner) .hero-copy {
-    padding-bottom: clamp(2.5rem, 6vh, 4.5rem);
+    align-self: center;
+    padding-bottom: 0;
   }
 
   .hero:not(.hero-inner) h1 {

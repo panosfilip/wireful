@@ -10,9 +10,9 @@ export const site = {
   fullName: "Panagiotis Filippaios",
   role: "Senior UI/UX Engineer and Freelance Web Designer",
   headline:
-    "Websites, product UI, brand systems, and design consulting shaped with clarity from idea to launch.",
+    "Digital products and brands, shaped with clarity from idea to launch.",
   intro:
-    "I am Panagiotis Filippaios, a senior UI/UX engineer and graphic designer in Athens. I help founders, businesses, agencies, and product teams turn rough briefs into polished Figma prototypes, responsive websites, campaign assets, AI-assisted digital experiences, and hands-on design consulting.",
+    "I'm Panagiotis Filippaios, a senior UI/UX engineer and designer in Athens who turns rough briefs into interfaces, websites, and brand systems teams can actually ship.",
   location: "Athens, Greece",
   email: "panosfilip@gmail.com",
   emailHref: "mailto:panosfilip@gmail.com",
