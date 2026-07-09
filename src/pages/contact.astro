@@ -1,0 +1,37 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../data/site";
+import { withPlaceholders } from "../utils/placeholders";
+---
+
+<Base title={`Contact | ${site.name}`}>
+  <section class="hero hero-inner contact-cta">
+    <div class="container">
+      <h1 data-intro style="--intro: 1">Tell me what you want to improve.</h1>
+      <p class="lead" data-intro style="--intro: 2">
+        A new website, a WordPress redesign, a Figma prototype, a brand system, campaign
+        assets, or a product UI that needs sharper direction. Send a few lines and I will
+        reply with a practical next step. Hiring conversations are welcome too.
+      </p>
+
+      <a class="mail-link" href={site.emailHref} data-intro style="--intro: 3">
+        {site.email}
+      </a>
+
+      <div class="contact-lines" data-reveal-group>
+        {
+          site.socials.map((s) => (
+            <a class="contact-line" href={s.href}>
+              <span class="label">{s.label}</span>
+              <span set:html={withPlaceholders(s.note)} />
+            </a>
+          ))
+        }
+        <div class="contact-line">
+          <span class="label">Location</span>
+          <span>{site.location}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

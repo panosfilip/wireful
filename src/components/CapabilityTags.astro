@@ -1,0 +1,25 @@
+---
+import { projectTagDefinitions, type ProjectTag } from "../data/projectTags";
+
+interface Props {
+  tags: ProjectTag[];
+  variant?: "card" | "detail";
+}
+
+const { tags, variant = "card" } = Astro.props;
+
+---
+
+<ul class={`capability-tags capability-tags--${variant}`} aria-label="Project tags">
+  {
+    tags.map((tag) => {
+      const definition = projectTagDefinitions[tag];
+      return (
+        <li class={`capability-tag capability-tag--${definition.tone}`} title={definition.label}>
+          <span class="capability-tag-mark" aria-hidden="true">{definition.mark}</span>
+          <span class="capability-tag-label">{definition.label}</span>
+        </li>
+      );
+    })
+  }
+</ul>

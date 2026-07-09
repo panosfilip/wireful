@@ -1,0 +1,225 @@
+---
+import Base from "../layouts/Base.astro";
+import CaseCard from "../components/CaseCard.astro";
+import { caseStudies } from "../data/caseStudies";
+import { site, approachPillars, proofPoints, skills, capabilities } from "../data/site";
+
+const featuredWork = caseStudies.find((cs) => cs.slug === "my1521-taxpayer-portal")!;
+const homeWorkSlugs = [
+  "teka-ui-redesign",
+  "growthfund-microsite",
+  "ekapy-web-design",
+  "kifissia-municipality-redesign",
+  "eu-regions-week-2025",
+  "fysiko-aerio-campaigns",
+];
+const homeWork = homeWorkSlugs.map((slug) => caseStudies.find((cs) => cs.slug === slug)!);
+const homeSkills = [...skills.design.slice(0, 4), ...skills.tools.slice(0, 3)];
+const marqueeItems = [...capabilities, ...capabilities];
+const capabilityDirectory = [
+  { mark: "WD", label: "Website design", tone: "violet" },
+  { mark: "UI", label: "Product UI", tone: "rose" },
+  { mark: "UX", label: "UX research & audits", tone: "amber" },
+  { mark: "FI", label: "Figma prototypes", tone: "lime" },
+  { mark: "BR", label: "Brand systems", tone: "green" },
+  { mark: "CA", label: "Campaign assets", tone: "cyan" },
+  { mark: "WP", label: "WordPress & Elementor", tone: "blue" },
+  { mark: "AI", label: "AI-assisted workflows", tone: "violet" },
+  { mark: "CO", label: "Design consulting", tone: "rose" },
+];
+---
+
+<Base title={`${site.name} | ${site.owner}, ${site.role}`}>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-media" aria-hidden="true" data-parallax>
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/media/hero-poster.jpg"
+        src="/media/hero-bg.mp4"></video>
+    </div>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h1 data-intro style="--intro: 0">{site.headline}</h1>
+        <p class="lead" data-intro style="--intro: 1">{site.intro}</p>
+        <div class="hero-actions" data-intro style="--intro: 2">
+          <a href="/contact" class="btn" data-overlay-trigger data-magnetic>Start a project</a>
+          <a href="/work" class="btn btn-ghost">See selected work</a>
+        </div>
+      </div>
+      <div class="hero-portrait" data-intro style="--intro: 1">
+        <img
+          src="/media/portrait.webp"
+          alt={`Portrait of ${site.fullName}`}
+          width="1135"
+          height="1282"
+          fetchpriority="high"
+        />
+        <span class="hero-portrait-tag" aria-hidden="true">that's me</span>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const heroVideo = document.querySelector<HTMLVideoElement>(".hero-media video");
+      if (heroVideo) {
+        heroVideo.removeAttribute("autoplay");
+        heroVideo.pause();
+      }
+    }
+  </script>
+
+  <!-- Capability marquee -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      {marqueeItems.map((item) => <span class="marquee-item">{item}</span>)}
+    </div>
+  </div>
+
+  <!-- Proof stats -->
+  <section class="stat-strip" aria-label="Track record">
+    <div class="container">
+      <div class="stat-grid" data-reveal-group>
+        {
+          proofPoints.map((proof) => (
+            <div class="stat">
+              <strong data-count>{proof.value}</strong>
+              <span>{proof.label}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Offer -->
+  <section class="section" id="services" aria-labelledby="services-heading">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div>
+          <h2 id="services-heading">What I can help you shape.</h2>
+          <p class="section-kicker">
+            Freelance-first, with senior UI/UX depth behind the work.
+          </p>
+        </div>
+      </div>
+      <ul class="capability-directory" aria-label="Capabilities" data-reveal-group>
+        {
+          capabilityDirectory.map((capability) => (
+            <li class={`capability-directory-item capability-directory-item--${capability.tone}`}>
+              <span class="capability-directory-mark" aria-hidden="true">{capability.mark}</span>
+              <span class="capability-directory-label">{capability.label}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Selected work -->
+  <section class="section" id="work" aria-labelledby="work-heading">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div>
+          <h2 id="work-heading">Work that ships at national scale.</h2>
+          <p class="section-kicker">
+            Government platforms, institutional redesigns, and national brand campaigns —
+            led by my1521, AADE's taxpayer service portal used by citizens across Greece.
+          </p>
+        </div>
+        <a href="/work" class="section-link">All work <span class="arrow">↗</span></a>
+      </div>
+      <div class="case-grid">
+        <CaseCard cs={featuredWork} />
+        {homeWork.map((cs) => <CaseCard cs={cs} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Approach -->
+  <section class="section" id="approach" aria-labelledby="approach-heading">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div>
+          <h2 id="approach-heading">How I move from brief to build.</h2>
+        </div>
+        <a href="/approach" class="section-link">Full approach <span class="arrow">↗</span></a>
+      </div>
+      <div class="pillar-grid" data-reveal-group>
+        {
+          approachPillars.map((pillar) => (
+            <div class="pillar">
+              <span class="num">{pillar.number}</span>
+              <h3>{pillar.title}</h3>
+              <p>{pillar.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- About strip -->
+  <section class="section" id="about" aria-labelledby="about-heading">
+    <div class="container">
+      <div class="about-strip">
+        <div data-reveal>
+          <h2 id="about-heading">A designer who thinks like a product person.</h2>
+          <div class="prose">
+            <p>
+              I am {site.fullName}, a senior UI/UX engineer and graphic designer in Athens.
+              I work across websites, product interfaces, brand systems, and campaign
+              assets, with enough technical context to keep Figma handoff, WordPress
+              maintenance, and implementation realistic.
+            </p>
+            <p>
+              I also teach Figma and UI design practice in the Human Computer Interaction
+              space at the National and Kapodistrian University of Athens. That keeps my work
+              close to research, usability, and clear design reasoning.
+            </p>
+          </div>
+          <a href="/about" class="section-link">More about me <span class="arrow">↗</span></a>
+        </div>
+        <div data-reveal>
+          <div class="skill-group">
+            <h3>Working across</h3>
+            <ul class="skill-list">
+              {homeSkills.map((skill) => <li>{skill.title}</li>)}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="section contact-cta" id="contact" aria-labelledby="contact-heading">
+    <div class="cta-media" aria-hidden="true">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/media/cta-poster.jpg"
+        src="/media/cta-bg.mp4"></video>
+    </div>
+    <div class="container">
+      <h2 id="contact-heading" data-reveal>
+        Have a website, product, or brand system that needs sharper direction?
+      </h2>
+      <p class="lead" data-reveal style="--reveal-delay: 1">
+        Send the rough version. I can help turn it into a clear interface, a better web
+        experience, or a visual system your team can keep using.
+      </p>
+      <div class="hero-actions" data-reveal style="--reveal-delay: 2">
+        <a href="/contact" class="btn" data-overlay-trigger data-magnetic>Start a conversation</a>
+      </div>
+    </div>
+  </section>
+</Base>

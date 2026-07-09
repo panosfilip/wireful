@@ -1,0 +1,160 @@
+---
+import Base from "../layouts/Base.astro";
+import { site, skills } from "../data/site";
+import { withPlaceholders } from "../utils/placeholders";
+
+const facts = [
+  { label: "Role", value: "Senior UI/UX Engineer and Senior Graphic Designer" },
+  { label: "Based in", value: site.location },
+  {
+    label: "Focus",
+    value:
+      "Freelance websites, product UI, brand systems, Figma prototypes, AI-assisted workflows, WordPress-ready design, and design consulting",
+  },
+  {
+    label: "Experience",
+    value:
+      "10+ years across brands, websites, product interfaces, campaigns, hospitality web projects, music app UI, and academic digital initiatives",
+  },
+  {
+    label: "Teaching",
+    value:
+      "UI Design Instructor / T.A. at NKUA, focused on Figma, interaction design methodology, user-centered design, Think Aloud, and focus groups",
+  },
+];
+
+---
+
+<Base title={`About | ${site.name}`}>
+  <section class="hero hero-inner">
+    <div class="hero-media" aria-hidden="true" data-parallax>
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/media/about-hero-poster.jpg"
+        src="/media/about-hero-bg.mp4"></video>
+    </div>
+    <div class="container">
+      <h1 data-intro style="--intro: 1">{site.fullName}.</h1>
+      <p class="lead" data-intro style="--intro: 2">
+        I design the digital presence around a business: the interface, the website, the
+        visual system, and the assets needed to launch it properly.
+      </p>
+    </div>
+  </section>
+
+  <script>
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const heroVideo = document.querySelector<HTMLVideoElement>(".hero-media video");
+      if (heroVideo) {
+        heroVideo.removeAttribute("autoplay");
+        heroVideo.pause();
+      }
+    }
+  </script>
+
+  <section class="section">
+    <div class="container">
+      <div class="about-strip">
+        <div class="about-intro" data-reveal>
+          <h2>The short version</h2>
+          <div class="prose">
+            <p>
+              I have spent 10+ years designing brand identities, websites, campaigns, and
+              digital products. The work has moved through agencies, media brands, hospitality
+              websites, app UI, academic projects, and freelance clients, so I am comfortable
+              going from a loose brief to a polished, usable interface.
+            </p>
+            <p>
+              Day to day, that means Figma systems, responsive web layouts, identity work,
+              UI details, content structure, and WordPress or Elementor-ready decisions. I use
+              AI and LLMs to speed up research synthesis, content structure, concept
+              exploration, UX writing options, and prototype planning, then filter the output
+              through design judgement.
+            </p>
+            <p>
+              I also teach in the Human Computer Interaction space at the National and
+              Kapodistrian University of Athens, with a focus on UI design, Figma, navigation,
+              interaction choices, usability standards, and user-centered methods.
+            </p>
+          </div>
+        </div>
+        <div data-reveal>
+          <div class="skill-group">
+            <h3>Design & UX</h3>
+            <ul class="skill-list">
+              {skills.design.map((skill) => (
+                <li>
+                  <details>
+                    <summary><span class="skill-title">{skill.title}</span></summary>
+                    <span class="skill-description">{skill.description}</span>
+                  </details>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>Tools & delivery</h3>
+            <ul class="skill-list">
+              {skills.tools.map((skill) => (
+                <li>
+                  <details>
+                    <summary><span class="skill-title">{skill.title}</span></summary>
+                    <span class="skill-description">{skill.description}</span>
+                  </details>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>Research & methods</h3>
+            <ul class="skill-list">
+              {skills.research.map((skill) => (
+                <li>
+                  <details>
+                    <summary><span class="skill-title">{skill.title}</span></summary>
+                    <span class="skill-description">{skill.description}</span>
+                  </details>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 data-reveal>At a glance</h2>
+      <ul class="fact-list" data-reveal-group>
+        {
+          facts.map((fact) => (
+            <li>
+              <span class="fact-label">{fact.label}</span>
+              <span class="fact-value" set:html={withPlaceholders(fact.value)} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section contact-cta">
+    <div class="container">
+      <h2 data-reveal>Want the longer version?</h2>
+      <p class="lead" data-reveal style="--reveal-delay: 1">
+        You can view the portfolio/profile PDFs or send me a short project note.
+      </p>
+      <div class="hero-actions" data-reveal style="--reveal-delay: 2">
+        <a href="/contact" class="btn" data-overlay-trigger data-magnetic>Start a project</a>
+        <a href="/docs/panagiotis-filippaios-portfolio.pdf" class="btn btn-ghost">
+          Portfolio PDF
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

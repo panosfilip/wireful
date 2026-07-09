@@ -1,0 +1,275 @@
+---
+import Base from "../layouts/Base.astro";
+import CaseCard from "../components/CaseCard.astro";
+import { approachPillars, principles, site } from "../data/site";
+import { caseStudies } from "../data/caseStudies";
+
+const featuredWork = caseStudies.find((cs) => cs.slug === "my1521-taxpayer-portal")!;
+const toolkit = [
+  {
+    label: "Core workspace",
+    title: "Interface",
+    description: "Structure, systems, and interaction-ready screens.",
+    mark: "UI",
+    tone: "figma",
+    tools: [
+      {
+        name: "Figma",
+        why: "My central workspace for interface design, responsive layouts, component libraries, and developer-ready handoff.",
+      },
+      {
+        name: "FigJam",
+        why: "A shared canvas for mapping flows, organising ideas, and getting teams aligned before screens become expensive to change.",
+      },
+      {
+        name: "Interactive prototypes",
+        why: "They turn static layouts into testable journeys, so interaction choices can be discussed before development starts.",
+      },
+      {
+        name: "Design systems & Dev Mode",
+        why: "Reusable components and clear specifications make interfaces more consistent and handoff more reliable.",
+      },
+    ],
+  },
+  {
+    label: "Visual production",
+    title: "Craft",
+    description: "Visual assets that give the interface character and clarity.",
+    mark: "AD",
+    tone: "adobe",
+    tools: [
+      {
+        name: "Adobe Illustrator",
+        why: "For crisp icons, vector assets, diagrams, and identity elements that need to scale cleanly across a product.",
+      },
+      {
+        name: "Adobe Photoshop",
+        why: "For preparing imagery, visual mockups, and campaign assets that bring an interface closer to its real context.",
+      },
+      {
+        name: "Adobe InDesign",
+        why: "For longer-form documents and print material when a digital product needs a consistent visual system beyond the screen.",
+      },
+    ],
+  },
+  {
+    label: "AI copilots",
+    title: "Acceleration",
+    description: "Fast exploration, sharper thinking, and better-informed making.",
+    mark: "AI",
+    tone: "ai",
+    tools: [
+      {
+        name: "Claude",
+        why: "A thinking partner for research synthesis, content structure, UX-writing routes, and turning a large set of inputs into useful starting points.",
+      },
+      {
+        name: "Codex",
+        why: "Used to explore implementation details, prototype functional ideas, and spot the responsive or technical considerations that affect a UI before handoff.",
+      },
+      {
+        name: "Figma Make",
+        why: "Useful for quickly turning an early product concept into something tangible to discuss, test, and evolve with a team.",
+      },
+    ],
+  },
+  {
+    label: "Evidence loop",
+    title: "Validation",
+    description: "Methods that keep design decisions anchored in user needs.",
+    mark: "UX",
+    tone: "research",
+    tools: [
+      {
+        name: "Information architecture",
+        why: "I use it to make content, navigation, and user journeys understandable before polishing the interface.",
+      },
+      {
+        name: "UX research",
+        why: "It brings user needs, behaviours, and constraints into the work instead of relying on assumptions.",
+      },
+      {
+        name: "Usability testing",
+        why: "Testing reveals where people hesitate, misunderstand, or abandon a task so the design can be improved with evidence.",
+      },
+      {
+        name: "Think Aloud sessions",
+        why: "Hearing what people expect as they use a flow makes the reasoning behind a usability issue visible.",
+      },
+      {
+        name: "Competitor analysis",
+        why: "It clarifies category patterns, opportunities, and the quality bar an interface needs to meet without copying what already exists.",
+      },
+    ],
+  },
+];
+---
+
+<Base title={`Approach | ${site.name}`}>
+  <section class="hero hero-inner">
+    <div class="hero-media" aria-hidden="true" data-parallax>
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/media/approach-hero-poster.jpg"
+        src="/media/approach-hero-bg.mp4"></video>
+    </div>
+    <div class="container">
+      <h1 data-intro style="--intro: 1">From brief to launch-ready design.</h1>
+      <p class="lead" data-intro style="--intro: 2">
+        The scale changes from a brand refresh to a WordPress site to a product interface.
+        The rhythm stays the same: frame the problem, shape the structure, design in Figma,
+        and prepare the work for real use.
+      </p>
+    </div>
+  </section>
+
+  <script>
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const heroVideo = document.querySelector<HTMLVideoElement>(".hero-media video");
+      if (heroVideo) {
+        heroVideo.removeAttribute("autoplay");
+        heroVideo.pause();
+      }
+    }
+  </script>
+
+  <!-- Principles -->
+  <section class="section" aria-labelledby="principles-heading">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div>
+          <h2 id="principles-heading">Three things I refuse to skip.</h2>
+        </div>
+      </div>
+      <div class="principle-grid" data-reveal-group>
+        {
+          principles.map((principle, i) => (
+            <div class="principle">
+              <span class="principle-num">0{i + 1}</span>
+              <h3>{principle.title}</h3>
+              <p>{principle.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Process phases -->
+  <section class="section" aria-labelledby="process-heading">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div>
+          <h2 id="process-heading">Four phases, every project.</h2>
+          <p class="section-kicker">
+            Each phase ends with something concrete you can react to — not a status update.
+          </p>
+        </div>
+      </div>
+      <ol class="process-journey" data-reveal-group aria-label="Project phases">
+        {
+          approachPillars.map((pillar) => (
+            <li class="process-step">
+              <div class="process-step-marker" aria-hidden="true">
+                <span>{pillar.number}</span>
+              </div>
+              <div class="process-step-intro">
+                <h3>{pillar.title}</h3>
+                <p>{pillar.body}</p>
+              </div>
+              <div class="process-step-work">
+                <p class="process-step-detail">{pillar.detail}</p>
+                <div class="process-outcome">
+                  <span class="process-outcome-label">You leave with</span>
+                  <ul class="process-artifact-list" aria-label={`${pillar.title} deliverables`}>
+                    {pillar.artifacts.map((artifact) => (
+                      <li>
+                        <details>
+                          <summary>
+                            <span class="process-artifact-name">{artifact.name}</span>
+                          </summary>
+                          <span class="process-artifact-description">{artifact.description}</span>
+                        </details>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Toolkit -->
+  <section class="section toolkit-section" aria-labelledby="toolkit-heading">
+    <div class="container">
+      <div class="toolkit-intro" data-reveal>
+        <div>
+          <h2 id="toolkit-heading">The tools behind<br />the process.</h2>
+          <div class="prose">
+            <p>
+              The toolkit is deliberately focused: tools that help turn a complex brief into a
+              clear, usable interface — then make sure it holds up in the real world.
+            </p>
+          </div>
+        </div>
+        <p class="toolkit-note"><span>+</span> Open a tool to see why it earns a place in the workflow.</p>
+      </div>
+      <div class="toolkit-grid" data-reveal-group>
+        {
+          toolkit.map((group) => (
+            <article class={`toolkit-card toolkit-card--${group.tone}`}>
+              <div class="toolkit-card-top">
+                <span class="toolkit-mark" aria-hidden="true">{group.mark}</span>
+              </div>
+              <span class="toolkit-label">{group.label}</span>
+              <h3>{group.title}</h3>
+              <p>{group.description}</p>
+              <ul class="toolkit-list">
+                {group.tools.map((tool) => (
+                  <li>
+                    <details>
+                      <summary>{tool.name}</summary>
+                      <p>{tool.why}</p>
+                    </details>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section class="section" aria-labelledby="proof-heading">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div>
+          <h2 id="proof-heading">The process at national scale.</h2>
+        </div>
+        <a href="/work" class="section-link">All work <span class="arrow">↗</span></a>
+      </div>
+      <div class="case-grid">
+        <CaseCard cs={featuredWork} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact-cta">
+    <div class="container">
+      <h2 data-reveal>Need this kind of design process?</h2>
+      <div class="hero-actions" data-reveal style="--reveal-delay: 1">
+        <a href="/contact" class="btn" data-overlay-trigger data-magnetic>Let's talk</a>
+        <a href="/work" class="btn btn-ghost">See the work first</a>
+      </div>
+    </div>
+  </section>
+</Base>

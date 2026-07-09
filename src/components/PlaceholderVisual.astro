@@ -1,0 +1,185 @@
+---
+/**
+ * Wireframe-style placeholder cover art, drawn as inline SVG.
+ * Each motif suggests the kind of artefact the real screenshot will show:
+ * sitemap, search tool, homepage system, campaign landing, or design audit.
+ * Swap for a real image by setting cover.type = "image" in caseStudies.ts.
+ */
+import type { CoverMotif } from "../data/caseStudies";
+
+interface Props {
+  motif: CoverMotif;
+  alt: string;
+}
+
+const { motif, alt } = Astro.props;
+---
+
+{
+  motif === "sitemap" && (
+    <svg viewBox="0 0 640 400" role="img" aria-label={alt} fill="none" stroke="currentColor" stroke-width="1.5">
+      <rect x="270" y="28" width="100" height="40" rx="4" />
+      <path d="M320 68v36M320 104H140v32M320 104h180v32M320 104v32" stroke-dasharray="4 5" />
+      <rect x="90" y="136" width="100" height="36" rx="4" />
+      <rect x="270" y="136" width="100" height="36" rx="4" stroke="var(--accent)" fill="rgba(233,87,147,0.09)" />
+      <rect x="450" y="136" width="100" height="36" rx="4" />
+      <path d="M140 172v28M140 200h-46v24M140 200h46v24M320 172v28M320 200h-52v24M320 200h52v24M500 172v28M500 200v24" stroke-dasharray="4 5" />
+      <rect x="52" y="224" width="84" height="30" rx="4" />
+      <rect x="144" y="224" width="84" height="30" rx="4" />
+      <rect x="226" y="224" width="84" height="30" rx="4" stroke="var(--accent)" />
+      <rect x="330" y="224" width="84" height="30" rx="4" />
+      <rect x="458" y="224" width="84" height="30" rx="4" />
+      <path d="M268 254v26M268 280h-40v22M268 280h40v22" stroke-dasharray="4 5" />
+      <rect x="188" y="302" width="80" height="28" rx="4" />
+      <rect x="288" y="302" width="80" height="28" rx="4" />
+      <path d="M90 352h180M90 366h120" stroke-opacity="0.45" />
+    </svg>
+  )
+}
+
+{
+  motif === "search" && (
+    <svg viewBox="0 0 640 400" role="img" aria-label={alt} fill="none" stroke="currentColor" stroke-width="1.5">
+      <rect x="60" y="40" width="420" height="44" rx="6" />
+      <circle cx="88" cy="62" r="9" />
+      <path d="M95 69l8 8M116 62h180" stroke-opacity="0.5" />
+      <rect x="500" y="40" width="80" height="44" rx="6" stroke="var(--accent)" fill="rgba(233,87,147,0.09)" />
+      <rect x="60" y="104" width="86" height="26" rx="13" />
+      <rect x="156" y="104" width="104" height="26" rx="13" stroke="var(--accent)" />
+      <rect x="270" y="104" width="86" height="26" rx="13" />
+      <path d="M60 156h520" stroke-opacity="0.45" />
+      <rect x="60" y="176" width="520" height="44" rx="4" stroke="var(--accent)" fill="rgba(233,87,147,0.07)" />
+      <path d="M84 198h130M320 198h90M470 198h84" stroke-opacity="0.6" />
+      <rect x="60" y="230" width="520" height="44" rx="4" />
+      <path d="M84 252h150M320 252h70M470 252h84" stroke-opacity="0.45" />
+      <rect x="60" y="284" width="520" height="44" rx="4" />
+      <path d="M84 306h110M320 306h100M470 306h84" stroke-opacity="0.45" />
+      <rect x="60" y="338" width="520" height="44" rx="4" />
+      <path d="M84 360h140M320 360h80M470 360h84" stroke-opacity="0.45" />
+    </svg>
+  )
+}
+
+{
+  motif === "homepage" && (
+    <svg viewBox="0 0 640 400" role="img" aria-label={alt} fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M60 56h80M420 56h40M480 56h40M540 56h40" stroke-opacity="0.6" />
+      <path d="M60 80h520" stroke-opacity="0.45" />
+      <path d="M60 124h300M60 148h240" stroke-width="6" stroke-opacity="0.8" />
+      <path d="M60 184h200" stroke-opacity="0.5" />
+      <rect x="60" y="208" width="120" height="34" rx="4" stroke="var(--accent)" fill="rgba(233,87,147,0.09)" />
+      <rect x="196" y="208" width="120" height="34" rx="4" />
+      <rect x="60" y="278" width="160" height="92" rx="4" />
+      <path d="M78 302h100M78 320h124M78 338h80" stroke-opacity="0.45" />
+      <rect x="240" y="278" width="160" height="92" rx="4" stroke="var(--accent)" />
+      <path d="M258 302h100M258 320h124M258 338h80" stroke-opacity="0.45" />
+      <rect x="420" y="278" width="160" height="92" rx="4" />
+      <path d="M438 302h100M438 320h124M438 338h80" stroke-opacity="0.45" />
+      <rect x="420" y="110" width="160" height="132" rx="4" />
+      <path d="M420 110l160 132M580 110L420 242" stroke-opacity="0.3" />
+    </svg>
+  )
+}
+
+{
+  motif === "landing" && (
+    <svg viewBox="0 0 640 400" role="img" aria-label={alt} fill="none" stroke="currentColor" stroke-width="1.5">
+      <rect x="60" y="40" width="220" height="30" rx="15" stroke="var(--accent)" fill="rgba(233,87,147,0.09)" />
+      <path d="M84 55h170" stroke-opacity="0.6" />
+      <path d="M60 106h380M60 132h320" stroke-width="6" stroke-opacity="0.8" />
+      <path d="M60 168h260" stroke-opacity="0.5" />
+      <rect x="60" y="196" width="150" height="38" rx="4" stroke="var(--accent)" fill="rgba(233,87,147,0.09)" />
+      <rect x="226" y="196" width="150" height="38" rx="4" />
+      <rect x="470" y="40" width="110" height="194" rx="4" />
+      <path d="M488 68h74M488 90h74M488 112h50" stroke-opacity="0.45" />
+      <rect x="488" y="150" width="74" height="24" rx="4" stroke-opacity="0.6" />
+      <rect x="488" y="184" width="74" height="24" rx="4" stroke-opacity="0.6" />
+      <path d="M60 274h520" stroke-opacity="0.45" />
+      <rect x="60" y="294" width="520" height="36" rx="4" />
+      <path d="M80 312h240M556 306l12 12M568 306l-12 12" stroke-opacity="0.6" />
+      <rect x="60" y="340" width="520" height="36" rx="4" />
+      <path d="M80 358h200" stroke-opacity="0.6" />
+    </svg>
+  )
+}
+
+{
+  motif === "signage" && (
+    <svg viewBox="0 0 640 400" role="img" aria-label={alt} fill="none" stroke="currentColor" stroke-width="1.5">
+      <rect x="230" y="30" width="180" height="46" rx="4" stroke="var(--accent)" fill="rgba(233,87,147,0.09)" />
+      <path d="M254 53h130" stroke-opacity="0.7" />
+      <path d="M320 76v34" stroke-dasharray="4 5" />
+      <rect x="120" y="130" width="400" height="40" rx="4" />
+      <path d="M144 150h90" stroke-opacity="0.6" />
+      <path d="M470 138l24 12-24 12" stroke="var(--accent)" />
+      <rect x="120" y="186" width="180" height="40" rx="4" />
+      <path d="M144 206h130" stroke-opacity="0.5" />
+      <path d="M96 206l-24-12 24-12" />
+      <rect x="340" y="186" width="180" height="40" rx="4" />
+      <path d="M364 206h130" stroke-opacity="0.5" />
+      <path d="M544 194l24 12-24 12" />
+      <path d="M320 170v220M320 246h-160v144M320 246h160v144" stroke-dasharray="4 5" stroke-opacity="0.6" />
+      <rect x="70" y="300" width="120" height="90" rx="4" stroke-opacity="0.8" />
+      <path d="M88 322h84M88 342h60M88 362h72" stroke-opacity="0.4" />
+      <rect x="450" y="300" width="120" height="90" rx="4" stroke-opacity="0.8" />
+      <path d="M468 322h84M468 342h60M468 362h72" stroke-opacity="0.4" />
+    </svg>
+  )
+}
+
+{
+  motif === "portal" && (
+    <svg viewBox="0 0 640 400" role="img" aria-label={alt} fill="none" stroke="currentColor" stroke-width="1.5">
+      <rect x="40" y="36" width="140" height="328" rx="4" />
+      <path d="M62 66h96" stroke-opacity="0.7" />
+      <rect x="56" y="96" width="108" height="28" rx="4" stroke="var(--accent)" fill="rgba(233,87,147,0.09)" />
+      <path d="M62 148h80M62 176h92M62 204h70M62 232h88" stroke-opacity="0.45" />
+      <path d="M40 300h140" stroke-opacity="0.3" />
+      <path d="M62 326h72" stroke-opacity="0.45" />
+      <path d="M212 60h180" stroke-width="5" stroke-opacity="0.8" />
+      <rect x="470" y="44" width="130" height="34" rx="17" stroke="var(--accent)" fill="rgba(233,87,147,0.09)" />
+      <rect x="212" y="100" width="120" height="70" rx="4" />
+      <path d="M228 126h60" stroke-opacity="0.5" />
+      <path d="M228 148h88" stroke-width="4" stroke-opacity="0.7" />
+      <rect x="346" y="100" width="120" height="70" rx="4" stroke="var(--accent)" />
+      <path d="M362 126h60" stroke-opacity="0.5" />
+      <path d="M362 148h88" stroke-width="4" stroke-opacity="0.7" />
+      <rect x="480" y="100" width="120" height="70" rx="4" />
+      <path d="M496 126h60" stroke-opacity="0.5" />
+      <path d="M496 148h88" stroke-width="4" stroke-opacity="0.7" />
+      <path d="M212 196h388" stroke-opacity="0.45" />
+      <rect x="212" y="216" width="388" height="42" rx="4" stroke="var(--accent)" fill="rgba(233,87,147,0.07)" />
+      <circle cx="238" cy="237" r="8" />
+      <path d="M262 237h120M420 237h60M540 231l12 12M552 231l-12 12" stroke-opacity="0.6" />
+      <rect x="212" y="266" width="388" height="42" rx="4" />
+      <circle cx="238" cy="287" r="8" stroke-opacity="0.6" />
+      <path d="M262 287h140M420 287h48" stroke-opacity="0.45" />
+      <rect x="212" y="316" width="388" height="42" rx="4" />
+      <circle cx="238" cy="337" r="8" stroke-opacity="0.6" />
+      <path d="M262 337h110M420 337h70" stroke-opacity="0.45" />
+    </svg>
+  )
+}
+
+{
+  motif === "audit" && (
+    <svg viewBox="0 0 640 400" role="img" aria-label={alt} fill="none" stroke="currentColor" stroke-width="1.5">
+      <rect x="60" y="48" width="150" height="40" rx="4" />
+      <path d="M84 68h100" stroke-opacity="0.6" />
+      <circle cx="210" cy="48" r="14" stroke="var(--accent)" />
+      <path d="M220 38l44-22" stroke="var(--accent)" stroke-dasharray="3 4" />
+      <rect x="60" y="120" width="240" height="44" rx="4" />
+      <path d="M80 142h120" stroke-opacity="0.5" />
+      <circle cx="300" cy="164" r="14" stroke="var(--accent)" />
+      <path d="M312 172l50 26" stroke="var(--accent)" stroke-dasharray="3 4" />
+      <rect x="60" y="196" width="110" height="28" rx="14" />
+      <circle cx="86" cy="210" r="8" stroke-opacity="0.7" />
+      <rect x="60" y="256" width="240" height="96" rx="4" />
+      <path d="M80 282h160M80 302h190M80 322h120" stroke-opacity="0.45" />
+      <rect x="380" y="48" width="200" height="304" rx="4" stroke-dasharray="5 6" />
+      <path d="M400 84h150M400 116h160M400 148h120M400 180h150M400 212h100" stroke-opacity="0.45" />
+      <rect x="396" y="240" width="168" height="34" rx="4" stroke="var(--accent)" fill="rgba(233,87,147,0.09)" />
+      <path d="M400 300h150M400 324h110" stroke-opacity="0.45" />
+    </svg>
+  )
+}

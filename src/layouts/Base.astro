@@ -1,0 +1,255 @@
+---
+import "@fontsource-variable/inter";
+import "@fontsource-variable/space-grotesk";
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ProjectOverlay from "../components/ProjectOverlay.astro";
+import { site } from "../data/site";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = site.description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <script is:inline>
+      // Marks JS availability so reveal animations never hide content without JS.
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <ProjectOverlay />
+    <script>
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Kick off hero intro staggers once styles are applied
+      requestAnimationFrame(() => document.body.classList.add("is-loaded"));
+
+      // Scroll reveals — single elements and staggered groups
+      const revealEls = document.querySelectorAll("[data-reveal], [data-reveal-group]");
+      if (reducedMotion || !("IntersectionObserver" in window)) {
+        revealEls.forEach((el) => el.classList.add("is-visible"));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -5% 0px" },
+        );
+        revealEls.forEach((el) => io.observe(el));
+      }
+
+      // Count-up stats: animates the numeric part of values like "200+" or "98%"
+      const countEls = document.querySelectorAll<HTMLElement>("[data-count]");
+      if (countEls.length) {
+        const runCount = (el: HTMLElement) => {
+          const raw = el.textContent ?? "";
+          const match = raw.trim().match(/^(\d+)(.*)$/);
+          if (!match) return;
+          const target = parseInt(match[1], 10);
+          const suffix = match[2];
+          const duration = 1400;
+          const start = performance.now();
+          const step = (now: number) => {
+            const t = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - t, 4);
+            el.innerHTML =
+              Math.round(target * eased) + (suffix ? `<span class="unit">${suffix}</span>` : "");
+            if (t < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        };
+        if (reducedMotion || !("IntersectionObserver" in window)) {
+          countEls.forEach((el) => {
+            const match = (el.textContent ?? "").trim().match(/^(\d+)(.*)$/);
+            if (match) el.innerHTML = match[1] + (match[2] ? `<span class="unit">${match[2]}</span>` : "");
+          });
+        } else {
+          const countIo = new IntersectionObserver(
+            (entries) => {
+              for (const entry of entries) {
+                if (entry.isIntersecting) {
+                  runCount(entry.target as HTMLElement);
+                  countIo.unobserve(entry.target);
+                }
+              }
+            },
+            { threshold: 0.4 },
+          );
+          countEls.forEach((el) => countIo.observe(el));
+        }
+      }
+
+      // Magnetic wordmark / CTA for pointer devices only. Offsets go through
+      // --mx/--my custom props so they compose with the header slide transform.
+      if (!reducedMotion && window.matchMedia("(pointer: fine)").matches) {
+        document.querySelectorAll<HTMLElement>("[data-magnetic]").forEach((el) => {
+          const strength = 6;
+          el.addEventListener("mousemove", (event) => {
+            const rect = el.getBoundingClientRect();
+            const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+            const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+            el.style.setProperty("--mx", `${(x * strength).toFixed(1)}px`);
+            el.style.setProperty("--my", `${(y * strength).toFixed(1)}px`);
+          });
+          el.addEventListener("mouseleave", () => {
+            el.style.removeProperty("--mx");
+            el.style.removeProperty("--my");
+          });
+        });
+      }
+
+      // Scroll progress bar, header state, and hero parallax
+      const bar = document.getElementById("progress-bar");
+      const header = document.getElementById("site-header");
+      const parallaxEl = reducedMotion
+        ? null
+        : document.querySelector<HTMLElement>("[data-parallax]");
+      const setHeaderHeight = () => {
+        if (header && document.documentElement.scrollTop <= 20) {
+          document.documentElement.style.setProperty("--header-h", `${header.offsetHeight}px`);
+        }
+      };
+      setHeaderHeight();
+      window.addEventListener("resize", setHeaderHeight, { passive: true });
+
+      // Header convergence: at the top of the page the wordmark and CTA sit
+      // near the viewport edges; over the first ~450px of scroll they glide
+      // inward to their natural container positions. A lerp loop smooths the
+      // motion so it trails the wheel instead of snapping with it.
+      const wordmark = header?.querySelector<HTMLElement>(".wordmark");
+      const headerInner = header?.querySelector<HTMLElement>(".header-inner");
+      const headerCta = header?.querySelector<HTMLElement>(".header-actions .btn");
+      let wordmarkOut = 0;
+      let ctaOut = 0;
+      let wordmarkCur = 0;
+      let ctaCur = 0;
+
+      const convergenceTargets = () => {
+        const p = Math.min(document.documentElement.scrollTop / 450, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        return { wm: -wordmarkOut * (1 - eased), cta: ctaOut * (1 - eased) };
+      };
+
+      const applySlide = () => {
+        wordmark?.style.setProperty("--slide-x", `${wordmarkCur.toFixed(2)}px`);
+        headerCta?.style.setProperty("--slide-x", `${ctaCur.toFixed(2)}px`);
+      };
+
+      const measureConvergence = () => {
+        if (!wordmark || !headerInner || !headerCta) return;
+        wordmark.style.setProperty("--slide-x", "0px");
+        headerCta.style.setProperty("--slide-x", "0px");
+        if (reducedMotion || !window.matchMedia("(min-width: 821px)").matches) {
+          wordmarkOut = 0;
+          ctaOut = 0;
+          wordmarkCur = 0;
+          ctaCur = 0;
+          applySlide();
+          return;
+        }
+        const gutter = parseFloat(getComputedStyle(headerInner).paddingLeft) || 24;
+        const w = wordmark.getBoundingClientRect();
+        const c = headerCta.getBoundingClientRect();
+        wordmarkOut = Math.max(0, w.left - gutter);
+        ctaOut = Math.max(0, window.innerWidth - gutter - c.right);
+        // Snap to the correct state for the current scroll position — no
+        // fly-in on page load or resize.
+        const target = convergenceTargets();
+        wordmarkCur = target.wm;
+        ctaCur = target.cta;
+        applySlide();
+      };
+
+      measureConvergence();
+      window.addEventListener("resize", measureConvergence, { passive: true });
+
+      if (!reducedMotion) {
+        const lerpLoop = () => {
+          const target = convergenceTargets();
+          const dw = target.wm - wordmarkCur;
+          const dc = target.cta - ctaCur;
+          if (Math.abs(dw) > 0.05 || Math.abs(dc) > 0.05) {
+            wordmarkCur += dw * 0.09;
+            ctaCur += dc * 0.09;
+            applySlide();
+          }
+          requestAnimationFrame(lerpLoop);
+        };
+        requestAnimationFrame(lerpLoop);
+      }
+
+      // Sticky card stacks: while the next card slides over a pinned one,
+      // --stack-p (0 = uncovered, 1 = fully covered) drives the covered
+      // card's scale-back and dim (see .service-card). Sticky tops are
+      // measured from computed style so CSS stays the source of truth.
+      const stackMedia = window.matchMedia("(min-width: 860px)");
+      const stackGroups = reducedMotion
+        ? []
+        : Array.from(document.querySelectorAll<HTMLElement>("[data-stack]")).map((group) => ({
+            cards: Array.from(group.children) as HTMLElement[],
+            tops: [] as number[],
+          }));
+      const measureStacks = () => {
+        for (const group of stackGroups) {
+          group.tops = group.cards.map((card) =>
+            stackMedia.matches ? parseFloat(getComputedStyle(card).top) || 0 : 0,
+          );
+        }
+      };
+      measureStacks();
+      window.addEventListener("resize", measureStacks, { passive: true });
+
+      const update = () => {
+        const doc = document.documentElement;
+        if (bar) {
+          const max = doc.scrollHeight - doc.clientHeight;
+          bar.style.transform = `scaleX(${max > 0 ? doc.scrollTop / max : 0})`;
+        }
+        if (header) {
+          header.classList.toggle("is-scrolled", doc.scrollTop > 20);
+        }
+        if (parallaxEl && doc.scrollTop < window.innerHeight * 1.2) {
+          parallaxEl.style.transform = `translateY(${(doc.scrollTop * 0.16).toFixed(1)}px)`;
+        }
+        if (stackMedia.matches) {
+          const travel = window.innerHeight * 0.55;
+          for (const group of stackGroups) {
+            for (let i = 0; i < group.cards.length - 1; i++) {
+              const nextTop = group.cards[i + 1].getBoundingClientRect().top;
+              const p = Math.min(Math.max(1 - (nextTop - group.tops[i + 1]) / travel, 0), 1);
+              group.cards[i].style.setProperty("--stack-p", p.toFixed(3));
+            }
+          }
+        }
+      };
+      window.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update, { passive: true });
+      update();
+    </script>
+  </body>
+</html>

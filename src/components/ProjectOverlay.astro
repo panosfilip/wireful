@@ -1,0 +1,449 @@
+---
+/**
+ * Fullscreen "Start a project" overlay.
+ * Left: hero imagery + wordmark. Right: guided request form.
+ * Opens from any element carrying [data-overlay-trigger]; those elements keep
+ * href="/contact" as the no-JS fallback. Submit composes a pre-filled email.
+ */
+import { site } from "../data/site";
+
+const projectCapabilities = [
+  {
+    mark: "WD",
+    label: "Website design",
+    tone: "violet",
+    recommends: ["Brand systems", "WordPress & Elementor"],
+  },
+  {
+    mark: "UI",
+    label: "Product UI",
+    tone: "rose",
+    recommends: ["UX research & audits", "Figma prototypes"],
+  },
+  {
+    mark: "UX",
+    label: "UX research & audits",
+    tone: "amber",
+    recommends: ["Product UI", "Figma prototypes"],
+  },
+  {
+    mark: "FI",
+    label: "Figma prototypes",
+    tone: "lime",
+    recommends: ["Product UI", "UX research & audits"],
+  },
+  {
+    mark: "BR",
+    label: "Brand systems",
+    tone: "green",
+    recommends: ["Website design", "Campaign assets"],
+  },
+  {
+    mark: "CA",
+    label: "Campaign assets",
+    tone: "cyan",
+    recommends: ["Brand systems", "Website design"],
+  },
+  {
+    mark: "WP",
+    label: "WordPress & Elementor",
+    tone: "blue",
+    recommends: ["Website design", "Figma prototypes"],
+  },
+  {
+    mark: "AI",
+    label: "AI-assisted workflows",
+    tone: "violet",
+    recommends: ["Figma prototypes", "UX research & audits"],
+  },
+  {
+    mark: "CO",
+    label: "Design consulting",
+    tone: "rose",
+    recommends: ["UX research & audits", "Product UI"],
+  },
+];
+const budgets = ["Under €2k", "€2k–5k", "€5k–10k", "€10k+", "Not sure yet"];
+const timelines = ["As soon as possible", "1–3 months", "Flexible"];
+---
+
+<div
+  class="project-overlay"
+  id="project-overlay"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="overlay-title"
+  hidden
+>
+  <div class="overlay-media" aria-hidden="true">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster="/media/hero-poster.jpg"
+      src="/media/hero-bg.mp4"></video>
+    <div class="overlay-media-copy">
+      <p class="wordmark">WIREFUL<span class="tick tick-blink">_</span></p>
+      <div>
+        <p class="overlay-media-title">Tell me what you want to build.</p>
+        <p class="overlay-media-sub">
+          A few answers are enough. I read every request and reply with a practical
+          next step — usually within two working days.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay-form-panel">
+    <div class="overlay-form-head">
+      <p class="overlay-form-label" id="overlay-title">
+        New project request<span class="tick tick-blink">_</span>
+      </p>
+      <button class="overlay-close" type="button" aria-label="Close dialog">
+        <span class="esc">ESC</span> ✕
+      </button>
+    </div>
+
+    <form id="project-form">
+      <fieldset>
+        <legend><span class="step">01</span>What can I help with?</legend>
+        <p class="field-hint">Pick everything that feels relevant — you can add detail below.</p>
+        <div class="capability-option-grid">
+          {
+            projectCapabilities.map((capability) => (
+              <label class={`capability-option capability-option--${capability.tone}`}>
+                <input type="checkbox" name="type" value={capability.label} />
+                <span class="capability-option-mark" aria-hidden="true">{capability.mark}</span>
+                <span class="capability-option-label">{capability.label}</span>
+              </label>
+            ))
+          }
+        </div>
+        <aside
+          class="capability-upsell"
+          hidden
+          aria-live="polite"
+          data-capabilities={JSON.stringify(projectCapabilities)}
+        >
+          <p class="capability-upsell-label">Worth considering alongside this</p>
+          <p class="capability-upsell-copy"></p>
+          <div class="capability-upsell-options"></div>
+        </aside>
+        <button class="capability-clear" type="button" hidden>Clear options</button>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="step">02</span>Budget</legend>
+        <p class="field-hint">A rough range is fine — it helps me suggest the right scope.</p>
+        <div class="option-grid">
+          {
+            budgets.map((budget) => (
+              <label class="option">
+                <input type="radio" name="budget" value={budget} />
+                <span class="box" aria-hidden="true"></span>
+                <span class="text">{budget}</span>
+              </label>
+            ))
+          }
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="step">03</span>Timeline</legend>
+        <div class="option-grid">
+          {
+            timelines.map((timeline) => (
+              <label class="option">
+                <input type="radio" name="timeline" value={timeline} />
+                <span class="box" aria-hidden="true"></span>
+                <span class="text">{timeline}</span>
+              </label>
+            ))
+          }
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="step">04</span>About you</legend>
+        <div class="field-row">
+          <div class="field">
+            <label for="pf-name">Name *</label>
+            <input id="pf-name" name="name" type="text" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="pf-email">Email *</label>
+            <input id="pf-email" name="email" type="email" autocomplete="email" required />
+          </div>
+        </div>
+        <div class="field">
+          <label for="pf-company">Company / organization</label>
+          <input id="pf-company" name="company" type="text" autocomplete="organization" />
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="step">05</span>The brief</legend>
+        <div class="field">
+          <label for="pf-brief">What are we improving? *</label>
+          <textarea
+            id="pf-brief"
+            name="brief"
+            rows="4"
+            required
+            placeholder="The rough version is enough — what it is, who it's for, what's not working today, links if you have them."></textarea>
+        </div>
+        <div class="field attachment-field">
+          <label for="pf-attachments">Supporting files</label>
+          <input
+            id="pf-attachments"
+            name="attachments"
+            type="file"
+            multiple
+            accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.webp"
+          />
+          <p class="field-hint">
+            Add briefs, references, or screenshots. Your email app will open next, where you can
+            attach the selected files before sending.
+          </p>
+        </div>
+        <label class="option consent-option">
+          <input type="checkbox" name="consent" required />
+          <span class="box" aria-hidden="true"></span>
+          <span class="text">
+            I agree that WIREFUL can use my details to respond to this request.
+          </span>
+        </label>
+        <div class="field human-check">
+          <label for="pf-human">Quick human check <span class="human-question"></span></label>
+          <input
+            id="pf-human"
+            name="human-check"
+            type="number"
+            inputmode="numeric"
+            autocomplete="off"
+            required
+          />
+        </div>
+      </fieldset>
+
+      <div class="overlay-actions">
+        <button type="submit" class="btn">Send request ↗</button>
+        <p class="overlay-alt">
+          Prefer plain email? <a href={site.emailHref}>{site.email}</a>
+        </p>
+      </div>
+      <p class="overlay-note" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
+
+<script>
+  const overlay = document.getElementById("project-overlay")!;
+  const form = document.getElementById("project-form") as HTMLFormElement;
+  const closeBtn = overlay.querySelector<HTMLButtonElement>(".overlay-close")!;
+  const note = overlay.querySelector<HTMLElement>(".overlay-note")!;
+  const capabilityUpsell = overlay.querySelector<HTMLElement>(".capability-upsell")!;
+  const capabilityUpsellCopy = overlay.querySelector<HTMLElement>(".capability-upsell-copy")!;
+  const capabilityUpsellOptions = overlay.querySelector<HTMLElement>(".capability-upsell-options")!;
+  const capabilityClear = overlay.querySelector<HTMLButtonElement>(".capability-clear")!;
+  const attachmentInput = document.getElementById("pf-attachments") as HTMLInputElement;
+  const humanInput = document.getElementById("pf-human") as HTMLInputElement;
+  const humanQuestion = overlay.querySelector<HTMLElement>(".human-question")!;
+  const projectCapabilities = JSON.parse(capabilityUpsell.dataset.capabilities ?? "[]") as Array<{
+    mark: string;
+    label: string;
+    tone: string;
+    recommends: string[];
+  }>;
+  const capabilityInputs = Array.from(
+    overlay.querySelectorAll<HTMLInputElement>('input[name="type"]'),
+  );
+  let lastFocused: HTMLElement | null = null;
+  let recommendationAccepted = false;
+  let addingRecommendation = false;
+  let humanAnswer = 0;
+
+  const setHumanCheck = () => {
+    const first = Math.floor(Math.random() * 7) + 2;
+    const second = Math.floor(Math.random() * 7) + 2;
+    humanAnswer = first + second;
+    humanQuestion.textContent = `— what is ${first} + ${second}? *`;
+    humanInput.value = "";
+    humanInput.setCustomValidity("");
+  };
+
+  setHumanCheck();
+
+  const capabilityByLabel = new Map(projectCapabilities.map((capability) => [capability.label, capability]));
+
+  const updateCapabilityUpsell = () => {
+    const selected = new Set(capabilityInputs.filter((input) => input.checked).map((input) => input.value));
+    capabilityClear.hidden = selected.size === 0;
+    const recommended = [...selected]
+      .flatMap((label) => capabilityByLabel.get(label)?.recommends ?? [])
+      .filter((label, index, list) => !selected.has(label) && list.indexOf(label) === index)
+      .slice(0, 2);
+
+    overlay.querySelectorAll<HTMLElement>(".capability-option").forEach((option) => {
+      const input = option.querySelector<HTMLInputElement>('input[name="type"]');
+      option.classList.toggle("is-recommended", input !== null && recommended.includes(input.value));
+    });
+
+    if (recommendationAccepted || !recommended.length) {
+      capabilityUpsell.hidden = true;
+      overlay.querySelectorAll(".capability-option").forEach((option) => {
+        option.classList.remove("is-recommended");
+      });
+      return;
+    }
+
+    capabilityUpsell.hidden = false;
+    capabilityUpsellCopy.textContent =
+      recommended.length > 1
+        ? "These additions often make the work more coherent from first impression to launch."
+        : "This is a natural complement to the work you selected.";
+    capabilityUpsellOptions.replaceChildren(
+      ...recommended.map((label) => {
+        const capability = capabilityByLabel.get(label)!;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "capability-upsell-option";
+        button.dataset.addCapability = label;
+
+        const mark = document.createElement("span");
+        mark.className = `capability-upsell-mark capability-option--${capability.tone}`;
+        mark.textContent = capability.mark;
+        mark.setAttribute("aria-hidden", "true");
+
+        const text = document.createElement("span");
+        text.textContent = `Add ${label}`;
+        button.append(mark, text);
+        return button;
+      }),
+    );
+  };
+
+  capabilityInputs.forEach((input) =>
+    input.addEventListener("change", () => {
+      if (!addingRecommendation) recommendationAccepted = false;
+      updateCapabilityUpsell();
+    }),
+  );
+  capabilityUpsellOptions.addEventListener("click", (event) => {
+    const target = (event.target as HTMLElement).closest<HTMLButtonElement>("[data-add-capability]");
+    if (!target) return;
+    const input = capabilityInputs.find((capability) => capability.value === target.dataset.addCapability);
+    if (!input) return;
+    recommendationAccepted = true;
+    addingRecommendation = true;
+    input.checked = true;
+    input.dispatchEvent(new Event("change", { bubbles: true }));
+    addingRecommendation = false;
+    input.focus();
+  });
+  capabilityClear.addEventListener("click", () => {
+    capabilityInputs.forEach((input) => {
+      input.checked = false;
+    });
+    recommendationAccepted = false;
+    updateCapabilityUpsell();
+    capabilityInputs[0]?.focus();
+  });
+
+  const focusables = () =>
+    Array.from(
+      overlay.querySelectorAll<HTMLElement>(
+        'button, input, textarea, a[href], [tabindex]:not([tabindex="-1"])',
+      ),
+    ).filter((el) => el.offsetParent !== null);
+
+  const open = () => {
+    lastFocused = document.activeElement as HTMLElement;
+    overlay.hidden = false;
+    document.body.style.overflow = "hidden";
+    requestAnimationFrame(() => {
+      overlay.classList.add("is-open");
+      setHumanCheck();
+      overlay.querySelector<HTMLElement>("input, button")?.focus();
+    });
+  };
+
+  const close = () => {
+    overlay.classList.remove("is-open");
+    document.body.style.overflow = "";
+    window.setTimeout(() => {
+      overlay.hidden = true;
+    }, 350);
+    lastFocused?.focus();
+  };
+
+  document.querySelectorAll<HTMLElement>("[data-overlay-trigger]").forEach((el) => {
+    el.addEventListener("click", (event) => {
+      event.preventDefault();
+      open();
+    });
+  });
+
+  closeBtn.addEventListener("click", close);
+
+  document.addEventListener("keydown", (event) => {
+    if (overlay.hidden) return;
+    if (event.key === "Escape") {
+      close();
+      return;
+    }
+    // Minimal focus trap
+    if (event.key === "Tab") {
+      const els = focusables();
+      if (!els.length) return;
+      const first = els[0];
+      const last = els[els.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (Number(humanInput.value) !== humanAnswer) {
+      humanInput.setCustomValidity("Please answer the human check before sending your request.");
+      humanInput.reportValidity();
+      return;
+    }
+    humanInput.setCustomValidity("");
+    if (!form.reportValidity()) return;
+
+    const data = new FormData(form);
+    const types = data.getAll("type").join(", ") || "Not specified";
+    const attachments = Array.from(attachmentInput.files ?? []).map((file) => file.name);
+    const lines = [
+      `Name: ${data.get("name")}`,
+      `Email: ${data.get("email")}`,
+      `Company: ${data.get("company") || "—"}`,
+      "",
+      `Needs: ${types}`,
+      `Budget: ${data.get("budget") || "Not specified"}`,
+      `Timeline: ${data.get("timeline") || "Not specified"}`,
+      `Files to attach: ${attachments.length ? attachments.join(", ") : "—"}`,
+      "",
+      "Brief:",
+      `${data.get("brief")}`,
+      attachments.length
+        ? "\nReminder: please attach the files listed above before sending this email."
+        : "",
+    ];
+    const subject = `New project request — ${data.get("name")}`;
+    const mailto = `mailto:panosfilip@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+
+    note.textContent =
+      "Opening your email app with everything pre-filled — just press send. If nothing opens, copy the details into a plain email.";
+    window.location.href = mailto;
+  });
+</script>

@@ -1,0 +1,187 @@
+---
+import Base from "../../layouts/Base.astro";
+import CaseCard from "../../components/CaseCard.astro";
+import { caseStudies } from "../../data/caseStudies";
+import { site } from "../../data/site";
+import { projectTagDefinitions, type ProjectTag } from "../../data/projectTags";
+
+const featuredWork = caseStudies.find((cs) => cs.slug === "my1521-taxpayer-portal")!;
+const restWork = caseStudies.filter((cs) => cs.slug !== featuredWork.slug);
+const projectTags = Object.keys(projectTagDefinitions) as ProjectTag[];
+const filterGroups = [
+  { key: "discipline", label: "Work type" },
+  { key: "method", label: "Method" },
+  { key: "context", label: "Context" },
+].map((group) => ({
+  ...group,
+  tags: projectTags.filter((tag) => projectTagDefinitions[tag].group === group.key),
+}));
+---
+
+<Base title={`Work | ${site.name}`}>
+  <section class="hero hero-inner">
+    <div class="hero-media" aria-hidden="true" data-parallax>
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/media/work-hero-poster.jpg"
+        src="/media/work-hero-bg.mp4"></video>
+    </div>
+    <div class="container">
+      <h1 data-intro style="--intro: 1">Selected UI, web, and brand work.</h1>
+      <p class="lead" data-intro style="--intro: 2">
+        A focused view of the work I want to be hired for: freelance websites, Figma UI,
+        brand systems, WordPress-ready pages, campaign assets, product visuals,
+        AI-assisted design workflows, and design consulting.
+      </p>
+      <div class="hero-actions" data-intro style="--intro: 3">
+        <a href="/contact" class="btn" data-overlay-trigger data-magnetic>Start a project</a>
+        <a href="/docs/panagiotis-filippaios-portfolio.pdf" class="btn btn-ghost">
+          Portfolio PDF
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const heroVideo = document.querySelector<HTMLVideoElement>(".hero-media video");
+      if (heroVideo) {
+        heroVideo.removeAttribute("autoplay");
+        heroVideo.pause();
+      }
+    }
+  </script>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div>
+          <h2>The flagship: my1521.</h2>
+          <p class="section-kicker">
+            Portal UI, digital service flows, and ticketing for AADE's taxpayer service
+            platform — government-scale product design used by citizens across Greece.
+          </p>
+        </div>
+      </div>
+      <div class="case-grid">
+        <CaseCard cs={featuredWork} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div>
+          <h2>Public platforms, institutions, and brands.</h2>
+          <p class="section-kicker">
+            National service portals, government redesigns, campaign experiences, and the
+            practice work behind them — expanding as project screenshots are added.
+          </p>
+        </div>
+      </div>
+      <div class="work-filter" data-work-filter data-reveal>
+        <div class="work-filter-groups">
+          {
+            filterGroups.map((group) => (
+              <fieldset class="work-filter-group">
+                <legend>{group.label}</legend>
+                <div class="work-filter-options">
+                  {group.tags.map((tag) => {
+                    const definition = projectTagDefinitions[tag];
+                    return (
+                      <button
+                        class={`work-filter-button work-filter-button--${definition.tone}`}
+                        type="button"
+                        data-filter-group={group.key}
+                        data-filter-value={tag}
+                        aria-pressed="false">
+                        <span class="work-filter-mark" aria-hidden="true">{definition.mark}</span>
+                        <span>{definition.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </fieldset>
+            ))
+          }
+        </div>
+        <div class="work-filter-status">
+          <button class="work-filter-reset" type="button" data-filter-reset>Show all work</button>
+          <p data-filter-status aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="case-grid" data-filter-grid>
+        {
+          restWork.map((cs) => (
+            <div class="work-filter-item" data-filter-item data-tags={cs.tags.join(" ")}>
+              <CaseCard cs={cs} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const filterRoot = document.querySelector<HTMLElement>("[data-work-filter]");
+
+    if (filterRoot) {
+      const filterButtons = Array.from(
+        filterRoot.querySelectorAll<HTMLButtonElement>("[data-filter-group]"),
+      );
+      const resetButton = filterRoot.querySelector<HTMLButtonElement>("[data-filter-reset]");
+      const filterStatus = filterRoot.querySelector<HTMLParagraphElement>("[data-filter-status]");
+      const workItems = Array.from(document.querySelectorAll<HTMLElement>("[data-filter-item]"));
+      const activeFilters = new Map<string, string>();
+
+      const updateWork = () => {
+        let visibleCount = 0;
+
+        workItems.forEach((item) => {
+          const tags = item.dataset.tags?.split(" ") ?? [];
+          const matches = Array.from(activeFilters.values()).every((tag) => tags.includes(tag));
+          item.hidden = !matches;
+          if (matches) visibleCount += 1;
+        });
+
+        filterButtons.forEach((button) => {
+          button.setAttribute(
+            "aria-pressed",
+            String(activeFilters.get(button.dataset.filterGroup!) === button.dataset.filterValue),
+          );
+        });
+
+        if (filterStatus) {
+          filterStatus.textContent = `${visibleCount} ${visibleCount === 1 ? "project" : "projects"} shown`;
+        }
+      };
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const group = button.dataset.filterGroup!;
+          const value = button.dataset.filterValue!;
+
+          if (activeFilters.get(group) === value) {
+            activeFilters.delete(group);
+          } else {
+            activeFilters.set(group, value);
+          }
+
+          updateWork();
+        });
+      });
+
+      resetButton?.addEventListener("click", () => {
+        activeFilters.clear();
+        updateWork();
+      });
+
+      updateWork();
+    }
+  </script>
+</Base>

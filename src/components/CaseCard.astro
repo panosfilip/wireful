@@ -1,0 +1,48 @@
+---
+import type { CaseStudy } from "../data/caseStudies";
+import PlaceholderVisual from "./PlaceholderVisual.astro";
+import CapabilityTags from "./CapabilityTags.astro";
+
+interface Props {
+  cs: CaseStudy;
+}
+
+const { cs } = Astro.props;
+const metaBits = [cs.year, cs.clientType].filter(Boolean);
+---
+
+<article class="case-card" data-reveal>
+  <a class="case-card-inner" href={`/work/${cs.slug}/`}>
+    <div class="case-visual">
+      {
+        cs.cover.type === "image" && cs.cover.src ? (
+          <img src={cs.cover.src} alt={cs.cover.alt} loading="lazy" />
+        ) : (
+          <PlaceholderVisual motif={cs.cover.motif} alt={cs.cover.alt} />
+        )
+      }
+    </div>
+    <div class="case-body">
+      <p class="case-meta-line">
+        {metaBits.map((bit, i) => (
+          <>
+            {i > 0 && <span class="sep">/</span>}
+            <span>{bit}</span>
+          </>
+        ))}
+        {cs.status === "placeholder" && (
+          <>
+            <span class="sep">/</span>
+            <span class="flag">Coming soon</span>
+          </>
+        )}
+      </p>
+      <div class="case-title-row">
+        <h3>{cs.title}</h3>
+        <span class="case-arrow" aria-hidden="true">↗</span>
+      </div>
+      <p class="case-summary">{cs.summary}</p>
+      <CapabilityTags tags={cs.tags} />
+    </div>
+  </a>
+</article>

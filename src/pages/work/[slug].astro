@@ -1,0 +1,124 @@
+---
+import Base from "../../layouts/Base.astro";
+import PlaceholderVisual from "../../components/PlaceholderVisual.astro";
+import CapabilityTags from "../../components/CapabilityTags.astro";
+import { caseStudies } from "../../data/caseStudies";
+import { site } from "../../data/site";
+import { withPlaceholders } from "../../utils/placeholders";
+
+export function getStaticPaths() {
+  return caseStudies.map((cs) => ({
+    params: { slug: cs.slug },
+    props: { cs },
+  }));
+}
+
+const { cs } = Astro.props;
+const index = caseStudies.findIndex((c) => c.slug === cs.slug);
+const prev = index > 0 ? caseStudies[index - 1] : caseStudies[caseStudies.length - 1];
+const next = index < caseStudies.length - 1 ? caseStudies[index + 1] : caseStudies[0];
+---
+
+<Base title={`${cs.title} | ${site.name}`} description={cs.summary}>
+  <article>
+    <header class="case-hero">
+      <div class="container">
+        <h1 data-intro style="--intro: 1">{cs.title}</h1>
+        <p class="lead" data-intro style="--intro: 2">{cs.summary}</p>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="case-meta" data-reveal-group>
+        <div>
+          <h2>Role</h2>
+          <ul>{cs.role.map((r) => <li>{r}</li>)}</ul>
+        </div>
+        <div>
+          <h2>Services</h2>
+          <ul>{cs.services.map((s) => <li>{s}</li>)}</ul>
+        </div>
+        <div>
+          <h2>Tools</h2>
+          <ul>{cs.tools.map((t) => <li>{t}</li>)}</ul>
+        </div>
+        <div>
+          <h2>Capability tokens</h2>
+          <CapabilityTags tags={cs.tags} variant="detail" />
+        </div>
+        <div>
+          <h2>Details</h2>
+          {cs.year && <p set:html={withPlaceholders(cs.year)} />}
+          {cs.clientType && <p>{cs.clientType}</p>}
+          {
+            cs.status === "placeholder" && (
+              <p>
+                <span class="status-chip">Coming soon</span>
+              </p>
+            )
+          }
+        </div>
+      </div>
+
+      <figure class="case-cover" data-reveal>
+        {
+          cs.cover.type === "image" && cs.cover.src ? (
+            <img src={cs.cover.src} alt={cs.cover.alt} />
+          ) : (
+            <PlaceholderVisual motif={cs.cover.motif} alt={cs.cover.alt} />
+          )
+        }
+      </figure>
+      {
+        cs.cover.visualPrompt && (
+          <p class="visual-note" set:html={withPlaceholders(cs.cover.visualPrompt)} />
+        )
+      }
+
+      <div class="case-body-sections">
+        <section aria-label="The problem" class="case-section" data-reveal>
+          <h2>Problem</h2>
+          <p class="body" set:html={withPlaceholders(cs.problem)} />
+        </section>
+
+        {
+          cs.sections.map((section) => (
+            <section class="case-section" data-reveal>
+              <h2>{section.heading}</h2>
+              <div>
+                <p class="body" set:html={withPlaceholders(section.body)} />
+                {section.mediaPlaceholder && (
+                  <div class="media-drop" set:html={withPlaceholders(section.mediaPlaceholder)} />
+                )}
+              </div>
+            </section>
+          ))
+        }
+
+        {
+          cs.outcomes && cs.outcomes.length > 0 && (
+            <section class="case-section" data-reveal>
+              <h2>Outcomes</h2>
+              <ul class="body">
+                {cs.outcomes.map((o) => (
+                  <li set:html={withPlaceholders(o)} />
+                ))}
+              </ul>
+            </section>
+          )
+        }
+      </div>
+
+      <nav class="case-pager" aria-label="More case studies">
+        <a href={`/work/${prev.slug}/`} class="prev">
+          <span class="dir">← Previous</span>
+          <span class="name">{prev.title}</span>
+        </a>
+        <a href={`/work/${next.slug}/`} class="next">
+          <span class="dir">Next →</span>
+          <span class="name">{next.title}</span>
+        </a>
+      </nav>
+    </div>
+  </article>
+</Base>

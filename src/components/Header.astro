@@ -1,0 +1,38 @@
+---
+import ContactIcons from "./ContactIcons.astro";
+
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const links = [
+  { href: "/work", label: "Work" },
+  { href: "/approach", label: "Approach" },
+  { href: "/about", label: "About" },
+];
+const isActive = (href: string) => path === href || path.startsWith(href + "/");
+---
+
+<header class="site-header" id="site-header">
+  <div class="header-shell">
+    <div class="container header-inner">
+      <a href="/" class="wordmark" data-magnetic aria-label="WIREFUL home">
+        WIREFUL<span class="tick tick-blink">_</span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary">
+        <ul>
+          {
+            links.map((link) => (
+              <li>
+                <a href={link.href} aria-current={isActive(link.href) ? "page" : undefined}>
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <ContactIcons variant="header" />
+        <a href="/contact" class="btn btn-small" data-overlay-trigger data-magnetic><span>Start a project</span></a>
+      </div>
+    </div>
+  </div>
+</header>
