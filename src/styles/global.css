@@ -16,7 +16,7 @@
   --line-strong: #3a2e59;
   --text: #f1edf9;
   --muted: #a89fc4;
-  --faint: #6f6590;
+  --faint: #8177a4; /* ≥4.5:1 on --bg (WCAG AA) */
   --accent: #e95793;
   --accent-dim: #c94a80;
   --accent-ink: #23091a;
@@ -48,6 +48,10 @@
 
 html {
   scroll-behavior: smooth;
+  /* Anchor jumps must clear the sticky header (--header-h set by Base.astro) */
+  scroll-padding-top: calc(var(--header-h, 4.5rem) + 0.75rem);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -82,7 +86,7 @@ h4 {
 }
 
 h1 {
-  font-size: clamp(2.6rem, 7vw, 5.4rem);
+  font-size: clamp(2.25rem, 7vw, 5.4rem);
   letter-spacing: -0.028em;
 }
 
@@ -229,7 +233,7 @@ html.js .tick-blink {
   background: none;
   color: var(--accent-dim);
   font-family: var(--font-mono);
-  font-size: 0.85em;
+  font-size: max(0.85em, 0.75rem);
   border: 1px dashed var(--line-strong);
   border-radius: 3px;
   padding: 0.05em 0.35em;
@@ -428,7 +432,7 @@ html.js .tick-blink {
 .wordmark {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: clamp(1.3rem, 4vw, 1.5rem);
   letter-spacing: 0.06em;
   display: inline-block;
   will-change: transform;
@@ -446,6 +450,49 @@ html.js .tick-blink {
   display: flex;
   align-items: center;
   gap: 1.1rem;
+}
+
+/* Burger toggle — hairline square, only visible on narrow screens */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.25s var(--ease-out), color 0.25s var(--ease-out);
+}
+
+.nav-toggle span {
+  width: 1.1rem;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform 0.3s var(--ease-expo), opacity 0.2s var(--ease-out);
+}
+
+.site-header.nav-open .nav-toggle {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.site-header.nav-open .nav-toggle span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.site-header.nav-open .nav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.site-header.nav-open .nav-toggle span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
 }
 
 .header-actions .contact-icon:hover {
@@ -505,24 +552,18 @@ html.js .tick-blink {
 }
 
 @media (max-width: 620px) {
-  /* Two-row header: wordmark + CTA on top, nav underneath. The
-     "Start a project" button must always be reachable on mobile. */
+  /* Single-row header: wordmark left, CTA + burger right. Nav links live in
+     a dropdown panel under the header shell. */
   .header-inner {
-    flex-wrap: wrap;
-    gap: 0.65rem 0.9rem;
-    padding-block: 0.7rem;
+    gap: 0.6rem;
+    padding-block: 0.6rem;
   }
 
   .site-header.is-scrolled .header-inner {
-    padding-block: 0.55rem;
-  }
-
-  .wordmark {
-    order: 1;
+    padding-block: 0.5rem;
   }
 
   .header-actions {
-    order: 2;
     margin-left: auto;
     gap: 0.6rem;
   }
@@ -532,22 +573,74 @@ html.js .tick-blink {
   }
 
   .header-actions .btn {
-    padding: 0.45rem 1rem;
-    font-size: 0.82rem;
+    min-height: 2.75rem;
+    padding: 0.55rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  /* While the menu is open the shell goes solid so bar + panel read as one */
+  .site-header.nav-open .header-shell {
+    background: var(--bg);
+    border-bottom-color: var(--line);
   }
 
   .primary-nav {
-    order: 3;
-    flex-basis: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition:
+      opacity 0.25s var(--ease-out),
+      transform 0.35s var(--ease-expo),
+      visibility 0s linear 0.35s;
+  }
+
+  .site-header.nav-open .primary-nav {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition:
+      opacity 0.25s var(--ease-out),
+      transform 0.35s var(--ease-expo);
   }
 
   .primary-nav ul {
-    gap: 1.25rem;
+    flex-direction: column;
+    gap: 0;
+    padding: 0.25rem var(--gutter) 0.75rem;
   }
 
-  .primary-nav a {
-    font-size: 0.74rem;
-    padding-block: 0.15rem;
+  .primary-nav li + li {
+    border-top: 1px solid var(--line);
+  }
+
+  .primary-nav li a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 3rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+  }
+
+  .primary-nav li a::after {
+    content: none;
+  }
+
+  .primary-nav li a[aria-current="page"]::before {
+    content: "+";
+    margin-right: 0.5em;
+    color: var(--accent);
   }
 }
 
@@ -583,8 +676,10 @@ html.js .tick-blink {
 
 /* Full-viewport hero: fills the screen below the sticky header.
    --header-h is measured and set by Base.astro's script. Type and spacing
-   scale with viewport HEIGHT too, so the content stack never outgrows the fold. */
-@media (min-width: 821px) {
+   scale with viewport HEIGHT too, so the content stack never outgrows the fold.
+   Requires a reasonably tall screen — on short landscape phones the vh-based
+   type would collapse below legibility, so those fall back to the base hero. */
+@media (min-width: 821px) and (min-height: 600px) {
   .hero:not(.hero-inner) {
     min-height: calc(100vh - var(--header-h, 4.5rem));
     min-height: calc(100svh - var(--header-h, 4.5rem));
@@ -666,7 +761,7 @@ html.js .tick-blink {
 }
 
 .hero h1 {
-  font-size: clamp(2.6rem, 6vw, 4.9rem);
+  font-size: clamp(2.25rem, 6vw, 4.9rem);
   max-width: 12.5em;
   margin-bottom: 0.45em;
 }
@@ -771,32 +866,48 @@ html.js .is-loaded [data-intro] {
 }
 
 @media (max-width: 820px) {
+  /* Mobile hero is a plain document flow — headline, intro, CTAs, then the
+     portrait resting on the section's bottom rule. Nothing is absolutely
+     positioned, so copy and portrait can never overlap. */
+  body {
+    font-size: 1.0625rem;
+  }
+
   .hero:not(.hero-inner) {
-    min-height: calc(100vh - var(--header-h, 4.5rem));
-    min-height: calc(100svh - var(--header-h, 4.5rem));
-    padding-top: clamp(3rem, 7vh, 4rem);
+    padding-top: clamp(2.5rem, 6vh, 4rem);
   }
 
   .hero-grid {
-    flex: 1;
     grid-template-columns: 1fr;
-    align-content: start;
-    align-items: start;
+    gap: 0;
+  }
+
+  .hero:not(.hero-inner) h1 {
+    font-size: clamp(2.05rem, 8.4vw, 2.9rem);
   }
 
   .hero:not(.hero-inner) .hero-copy {
-    z-index: 2;
     padding-bottom: 0;
   }
 
+  .hero .lead {
+    margin-bottom: 1.9rem;
+  }
+
+  .hero:not(.hero-inner) .hero-actions {
+    gap: 0.65rem;
+  }
+
+  .hero:not(.hero-inner) .hero-actions .btn {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-inline: 1rem;
+  }
+
   .hero:not(.hero-inner) .hero-portrait {
-    position: absolute;
-    z-index: 1;
-    bottom: 0;
-    left: 50%;
-    width: min(300px, 70vw);
-    margin: 0;
-    translate: -50% 0;
+    width: min(300px, 72vw);
+    margin: 1.5rem auto 0;
+    justify-self: center;
   }
 
   .hero:not(.hero-inner) .hero-portrait img {
@@ -804,21 +915,8 @@ html.js .is-loaded [data-intro] {
     margin-left: 0;
   }
 
-  .hero:not(.hero-inner) .hero-actions {
-    position: absolute;
-    z-index: 3;
-    right: var(--gutter);
-    bottom: clamp(1rem, 2.5svh, 1.5rem);
-    left: var(--gutter);
-    flex-wrap: nowrap;
-    gap: 0.65rem;
-  }
-
-  .hero:not(.hero-inner) .hero-actions .btn {
-    flex: 1 1 0;
-    min-width: 0;
-    padding-inline: 0.75rem;
-    box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.24);
+  .hero-portrait-tag {
+    display: none;
   }
 }
 
@@ -1019,7 +1117,7 @@ html.js .marquee-track {
   background: color-mix(in srgb, var(--capability-tone) 12%, transparent);
   color: var(--text);
   font-family: var(--font-mono);
-  font-size: clamp(0.68rem, 1.1vw, 0.78rem);
+  font-size: clamp(0.72rem, 1.1vw, 0.78rem);
   letter-spacing: 0.08em;
   transition: background 0.25s var(--ease-out), color 0.25s var(--ease-out);
 }
@@ -1161,7 +1259,7 @@ html.js .marquee-track {
 
 .case-meta-line {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--faint);
@@ -1209,6 +1307,77 @@ html.js .marquee-track {
   margin: 0;
   font-size: 0.97rem;
   max-width: 38em;
+}
+
+/* ---- Case carousel ---------------------------------------------------------------------------------- */
+
+.carousel-track {
+  display: flex;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-item {
+  flex: 0 0 auto;
+  width: min(82vw, 340px);
+  scroll-snap-align: start;
+}
+
+@media (min-width: 720px) {
+  .carousel-item {
+    width: clamp(300px, 30vw, 360px);
+  }
+}
+
+.carousel-item .case-card-inner {
+  height: 100%;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+.carousel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg-raise);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition:
+    border-color 0.25s var(--ease-out),
+    color 0.25s var(--ease-out),
+    transform 0.3s var(--ease-expo);
+}
+
+.carousel-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.carousel-btn:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.carousel-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
 }
 
 /* ---- Capability tags ---------------------------------------------------------------------------------- */
@@ -1268,7 +1437,7 @@ html.js .marquee-track {
   border-radius: 50%;
   color: var(--tag-tone);
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: 0.72rem;
   letter-spacing: 0.05em;
   line-height: 1;
   transition: color 0.25s var(--ease-out), transform 0.25s var(--ease-out);
@@ -1279,7 +1448,7 @@ html.js .marquee-track {
   padding-right: 0.7rem;
   color: var(--text);
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.04em;
   line-height: 1;
   white-space: nowrap;
@@ -1334,6 +1503,18 @@ html.js .marquee-track {
   height: 2.25rem;
 }
 
+/* Detail-variant tags must still expand — these selectors outrank the
+   sizing block above. */
+.capability-tags--detail .capability-tag.is-expanded {
+  max-width: 12rem;
+}
+
+@media (hover: hover) {
+  .capability-tags--detail .capability-tag:hover {
+    max-width: 12rem;
+  }
+}
+
 /* ---- Work filters ------------------------------------------------------------------------------------ */
 
 .work-filter {
@@ -1365,7 +1546,7 @@ html.js .marquee-track {
   margin-bottom: 0.7rem;
   color: var(--faint);
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -1388,7 +1569,7 @@ html.js .marquee-track {
   color: var(--muted);
   cursor: pointer;
   font-family: var(--font-display);
-  font-size: 0.76rem;
+  font-size: 0.8rem;
   font-weight: 600;
   line-height: 1;
   transition: border-color 0.25s var(--ease-out), background 0.25s var(--ease-out), color 0.25s var(--ease-out);
@@ -1428,7 +1609,7 @@ html.js .marquee-track {
   background: color-mix(in srgb, var(--filter-tone) 9%, transparent);
   color: var(--filter-tone);
   font-family: var(--font-mono);
-  font-size: 0.5rem;
+  font-size: 0.68rem;
   letter-spacing: 0.04em;
   transition: background 0.25s var(--ease-out), color 0.25s var(--ease-out);
 }
@@ -1464,7 +1645,7 @@ html.js .marquee-track {
   margin: 0;
   color: var(--faint);
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -1489,7 +1670,7 @@ html.js .marquee-track {
 
 .status-chip {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-dim);
@@ -1697,7 +1878,7 @@ html.js .marquee-track {
 
 .process-step-marker span {
   font-family: var(--font-mono);
-  font-size: clamp(0.68rem, 1vw, 0.8rem);
+  font-size: clamp(0.72rem, 1vw, 0.8rem);
   letter-spacing: 0.1em;
   color: var(--accent);
 }
@@ -1736,7 +1917,7 @@ html.js .marquee-track {
 .process-outcome-label {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.67rem;
+  font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--faint);
@@ -1816,7 +1997,7 @@ html.js .marquee-track {
 
 .process-artifact-name {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -1826,7 +2007,7 @@ html.js .marquee-track {
   max-width: 42rem;
   padding: 0 1rem 1rem 2.25rem;
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   line-height: 1.45;
   letter-spacing: 0;
   text-transform: none;
@@ -2013,7 +2194,7 @@ html.js .marquee-track {
   padding: 0 1.5rem 0.9rem 0;
   color: var(--faint);
   font-family: var(--font-body);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 400;
   line-height: 1.45;
 }
@@ -2035,7 +2216,7 @@ html.js .marquee-track {
 }
 
 .skill-group h3 {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-family: var(--font-mono);
   font-weight: 500;
   letter-spacing: 0.14em;
@@ -2079,7 +2260,7 @@ html.js .marquee-track {
   margin: 0;
   color: var(--faint);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   line-height: 1.5;
 }
 
@@ -2169,7 +2350,7 @@ html.js .marquee-track {
   border-radius: 50%;
   color: var(--text);
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   letter-spacing: 0.05em;
 }
 
@@ -2177,7 +2358,7 @@ html.js .marquee-track {
   margin-top: clamp(2.5rem, 5vw, 4.5rem);
   color: var(--faint);
   font-family: var(--font-mono);
-  font-size: 0.63rem;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -2276,7 +2457,7 @@ html.js .marquee-track {
 
 .fact-list .fact-label {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--faint);
@@ -2393,14 +2574,14 @@ a.contact-line:hover {
 
 .contact-line .label {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--faint);
 }
 
 a.contact-line .label::after {
-  content: " ↗";
+  content: " ↗\FE0E";
   color: var(--accent);
   opacity: 0;
   transition: opacity 0.25s var(--ease-out);
@@ -2431,7 +2612,7 @@ a.contact-line:hover .label::after {
 
 .case-meta h2 {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -2514,7 +2695,7 @@ a.contact-line:hover .label::after {
 .case-section h2::before {
   content: "0" counter(casesec);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 0.1em;
   color: var(--accent);
@@ -2581,7 +2762,7 @@ a.contact-line:hover .label::after {
 
 .case-pager .dir {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--faint);
@@ -2695,7 +2876,7 @@ a.contact-line:hover .label::after {
   box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.25);
   color: var(--text);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   transition: border-color 0.25s var(--ease-out), background 0.25s var(--ease-out), color 0.25s var(--ease-out), transform 0.3s var(--ease-expo);
@@ -2726,7 +2907,7 @@ a.contact-line:hover .label::after {
 
 .footer-grid .col h3 {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -2762,7 +2943,7 @@ a.contact-line:hover .label::after {
   justify-content: space-between;
   gap: 0.5rem 2rem;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   letter-spacing: 0.04em;
   color: var(--faint);
 }
@@ -2907,7 +3088,7 @@ a.contact-line:hover .label::after {
 
 .overlay-close .esc {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   letter-spacing: 0.12em;
   color: var(--faint);
 }
@@ -2990,7 +3171,7 @@ a.contact-line:hover .label::after {
   background: color-mix(in srgb, var(--capability-tone) 12%, transparent);
   color: var(--capability-tone);
   font-family: var(--font-mono);
-  font-size: 0.64rem;
+  font-size: 0.7rem;
   letter-spacing: 0.04em;
   transition: background 0.25s var(--ease-out), color 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
 }
@@ -3038,7 +3219,7 @@ a.contact-line:hover .label::after {
 .capability-upsell-label {
   margin: 0;
   font-family: var(--font-mono);
-  font-size: 0.67rem;
+  font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
@@ -3067,7 +3248,7 @@ a.contact-line:hover .label::after {
   background: transparent;
   color: var(--text);
   font-family: var(--font-body);
-  font-size: 0.77rem;
+  font-size: 0.8rem;
   cursor: pointer;
   transition: border-color 0.2s var(--ease-out), background 0.2s var(--ease-out);
 }
@@ -3087,7 +3268,7 @@ a.contact-line:hover .label::after {
   background: color-mix(in srgb, var(--capability-tone) 16%, transparent);
   color: var(--capability-tone);
   font-family: var(--font-mono);
-  font-size: 0.52rem;
+  font-size: 0.68rem;
 }
 
 .capability-upsell-mark.capability-option--violet { --capability-tone: #a98bf4; }
@@ -3106,7 +3287,7 @@ a.contact-line:hover .label::after {
   background: transparent;
   color: var(--faint);
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: 0.72rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
@@ -3244,7 +3425,7 @@ a.contact-line:hover .label::after {
 .field label {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--faint);
@@ -3303,7 +3484,7 @@ a.contact-line:hover .label::after {
   background: transparent;
   color: var(--text);
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   letter-spacing: 0.07em;
   text-transform: uppercase;
   cursor: pointer;
@@ -3324,7 +3505,7 @@ a.contact-line:hover .label::after {
   background: transparent;
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   letter-spacing: 0.07em;
   line-height: 1.2;
   text-transform: uppercase;
@@ -3363,7 +3544,7 @@ a.contact-line:hover .label::after {
   background: color-mix(in srgb, var(--accent) 13%, transparent);
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.68rem;
   letter-spacing: 0.04em;
   line-height: 1;
 }
@@ -3379,7 +3560,7 @@ a.contact-line:hover .label::after {
 .attachment-item-size {
   color: var(--faint);
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   letter-spacing: 0.04em;
   white-space: nowrap;
 }
@@ -3444,6 +3625,145 @@ a.contact-line:hover .label::after {
 
   .overlay-media {
     display: none;
+  }
+}
+
+/* ---- Touch ergonomics -------------------------------------------------------------------------------------------------- */
+/* Apple HIG: interactive targets need at least 44×44pt on touch screens.
+   These rules enlarge hit areas on coarse pointers only, so the desktop
+   presentation is untouched. 2.75rem = 44px. */
+
+@media (pointer: coarse) {
+  .btn {
+    min-height: 2.75rem;
+  }
+
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+
+  .mail-link {
+    padding-block: 0.5rem;
+  }
+
+  .primary-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding-block: 0;
+  }
+
+  .primary-nav a::after {
+    bottom: 0.6rem;
+  }
+
+  .section-link {
+    align-items: center;
+    min-height: 2.75rem;
+    padding-bottom: 0;
+  }
+
+  .section-link::before,
+  .section-link::after {
+    bottom: 0.45rem;
+  }
+
+  .contact-icon {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    justify-content: center;
+  }
+
+  .footer-grid li {
+    padding-block: 0;
+  }
+
+  .footer-grid li a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+
+  .back-to-top {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+
+  .sticky-back-to-top {
+    min-height: 2.75rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .work-filter-button {
+    min-height: 2.75rem;
+  }
+
+  .work-filter-reset {
+    min-height: 2.75rem;
+  }
+
+  .carousel-btn {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .capability-tag,
+  .capability-tags--detail .capability-tag {
+    height: 2.75rem;
+    max-width: 2.75rem;
+  }
+
+  .capability-tag-mark,
+  .capability-tags--detail .capability-tag-mark {
+    width: calc(2.75rem - 2px);
+  }
+
+  .capability-tag.is-expanded {
+    max-width: 14rem;
+  }
+
+  .process-artifact-list summary {
+    padding-block: 1rem;
+  }
+
+  .toolkit-list summary {
+    padding-block: 0.95rem;
+  }
+
+  .skill-list summary {
+    padding-block: 1rem;
+  }
+
+  .option {
+    padding-block: 0.9rem;
+  }
+
+  .overlay-close {
+    min-height: 2.75rem;
+    padding: 0.5rem 0.6rem;
+  }
+
+  .field input,
+  .field textarea {
+    padding-block: 0.8rem;
+  }
+
+  .attachment-field input[type="file"]::file-selector-button,
+  .attachment-clear {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .capability-upsell-option {
+    min-height: 2.75rem;
+    padding: 0.35rem 0.8rem 0.35rem 0.5rem;
+  }
+
+  .capability-clear {
+    min-height: 2.75rem;
+    align-items: center;
   }
 }
 

@@ -1,10 +1,19 @@
 ---
 import Base from "../layouts/Base.astro";
-import CaseCard from "../components/CaseCard.astro";
+import CaseCarousel from "../components/CaseCarousel.astro";
 import { approachPillars, principles, site } from "../data/site";
 import { caseStudies } from "../data/caseStudies";
 
-const featuredWork = caseStudies.find((cs) => cs.slug === "my1521-taxpayer-portal")!;
+const proofWorkSlugs = [
+  "my1521-taxpayer-portal",
+  "aade-signage-system",
+  "teka-ui-redesign",
+  "growthfund-microsite",
+  "ekapy-web-design",
+  "kifissia-municipality-redesign",
+  "eu-regions-week-2025",
+];
+const proofWork = proofWorkSlugs.map((slug) => caseStudies.find((cs) => cs.slug === slug)!);
 const toolkit = [
   {
     label: "Core workspace",
@@ -253,13 +262,11 @@ const toolkit = [
     <div class="container">
       <div class="section-head" data-reveal>
         <div>
-          <h2 id="proof-heading">The process at <span class="title-keyword">national scale</span>.</h2>
+          <h2 id="proof-heading">The process, in <span class="title-keyword">practice</span>.</h2>
         </div>
-        <a href="work" class="section-link">All work <span class="arrow">↗</span></a>
+        <a href="work" class="section-link">All work <span class="arrow">↗&#xFE0E;</span></a>
       </div>
-      <div class="case-grid">
-        <CaseCard cs={featuredWork} />
-      </div>
+      <CaseCarousel items={proofWork} label="Public-sector and institutional projects" />
     </div>
   </section>
 

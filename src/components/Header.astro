@@ -20,7 +20,7 @@ const isActive = (href: string) => {
       <a href={base} class="wordmark" data-magnetic aria-label="WIREFUL home">
         WIREFUL<span class="tick tick-blink">_</span>
       </a>
-      <nav class="primary-nav" aria-label="Primary">
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
         <ul>
           {
             links.map((link) => (
@@ -36,7 +36,49 @@ const isActive = (href: string) => {
       <div class="header-actions">
         <ContactIcons variant="header" />
         <a href="contact" class="btn btn-small" data-overlay-trigger data-magnetic><span>Start a project</span></a>
+        <button
+          type="button"
+          class="nav-toggle"
+          aria-expanded="false"
+          aria-controls="primary-nav"
+          aria-label="Menu"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
       </div>
     </div>
   </div>
 </header>
+
+<script>
+  const header = document.getElementById("site-header")!;
+  const toggle = header.querySelector<HTMLButtonElement>(".nav-toggle")!;
+  const nav = header.querySelector<HTMLElement>(".primary-nav")!;
+
+  const setOpen = (open: boolean) => {
+    header.classList.toggle("nav-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+  };
+
+  toggle.addEventListener("click", () => {
+    setOpen(!header.classList.contains("nav-open"));
+  });
+
+  // Close when a link is chosen, on Escape, or when tapping outside the header
+  nav.addEventListener("click", (event) => {
+    if ((event.target as HTMLElement).closest("a")) setOpen(false);
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && header.classList.contains("nav-open")) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+  document.addEventListener("click", (event) => {
+    if (header.classList.contains("nav-open") && !header.contains(event.target as Node)) {
+      setOpen(false);
+    }
+  });
+</script>

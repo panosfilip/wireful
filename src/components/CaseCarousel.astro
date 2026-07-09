@@ -1,0 +1,77 @@
+---
+import type { CaseStudy } from "../data/caseStudies";
+import CaseCard from "./CaseCard.astro";
+
+interface Props {
+  items: CaseStudy[];
+  label?: string;
+}
+
+const { items, label = "Case studies" } = Astro.props;
+---
+
+<div class="carousel" data-carousel>
+  <div class="carousel-track" data-carousel-track role="list" aria-label={label}>
+    {
+      items.map((cs) => (
+        <div class="carousel-item" role="listitem">
+          <CaseCard cs={cs} />
+        </div>
+      ))
+    }
+  </div>
+  <div class="carousel-controls">
+    <button type="button" class="carousel-btn" data-carousel-prev aria-label="Previous project" disabled>
+      <span aria-hidden="true">←</span>
+    </button>
+    <button type="button" class="carousel-btn" data-carousel-next aria-label="Next project">
+      <span aria-hidden="true">→</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((carousel) => {
+    const track = carousel.querySelector<HTMLElement>("[data-carousel-track]");
+    const prevBtn = carousel.querySelector<HTMLButtonElement>("[data-carousel-prev]");
+    const nextBtn = carousel.querySelector<HTMLButtonElement>("[data-carousel-next]");
+    if (!track || !prevBtn || !nextBtn) return;
+
+    const step = () => {
+      const item = track.querySelector<HTMLElement>(".carousel-item");
+      const gap = parseFloat(getComputedStyle(track).columnGap || "0");
+      return (item?.getBoundingClientRect().width ?? track.clientWidth) + gap;
+    };
+
+    const scrollByCard = (dir: number) => {
+      track.scrollBy({ left: dir * step(), behavior: reducedMotion ? "auto" : "smooth" });
+    };
+
+    prevBtn.addEventListener("click", () => scrollByCard(-1));
+    nextBtn.addEventListener("click", () => scrollByCard(1));
+
+    // Let vertical wheel gestures drive the carousel for mouse users without
+    // a horizontal scroll wheel.
+    track.addEventListener(
+      "wheel",
+      (event) => {
+        if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+        event.preventDefault();
+        track.scrollBy({ left: event.deltaY, behavior: "auto" });
+      },
+      { passive: false },
+    );
+
+    const updateControls = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      prevBtn.disabled = track.scrollLeft <= 1;
+      nextBtn.disabled = track.scrollLeft >= max - 1;
+    };
+
+    track.addEventListener("scroll", updateControls, { passive: true });
+    window.addEventListener("resize", updateControls, { passive: true });
+    updateControls();
+  });
+</script>
