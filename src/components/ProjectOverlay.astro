@@ -115,7 +115,10 @@ const timelines = ["As soon as possible", "1–3 months", "Flexible"];
             projectCapabilities.map((capability) => (
               <label class={`capability-option capability-option--${capability.tone}`}>
                 <input type="checkbox" name="type" value={capability.label} />
-                <span class="capability-option-mark" aria-hidden="true">{capability.mark}</span>
+                <span class="capability-option-mark" aria-hidden="true">
+                  <span class="capability-option-mark-text">{capability.mark}</span>
+                  <span class="capability-option-mark-remove">✕</span>
+                </span>
                 <span class="capability-option-label">{capability.label}</span>
               </label>
             ))

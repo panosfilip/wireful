@@ -3212,6 +3212,25 @@ a.contact-line:hover .label::after {
   color: var(--bg);
 }
 
+.capability-option-mark-text,
+.capability-option-mark-remove {
+  grid-area: 1 / 1;
+  transition: opacity 0.2s var(--ease-out);
+}
+
+.capability-option-mark-remove {
+  opacity: 0;
+  font-size: 0.8rem;
+}
+
+.capability-option input:checked ~ .capability-option-mark .capability-option-mark-text {
+  opacity: 0;
+}
+
+.capability-option input:checked ~ .capability-option-mark .capability-option-mark-remove {
+  opacity: 1;
+}
+
 .capability-option:has(input:focus-visible) {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
