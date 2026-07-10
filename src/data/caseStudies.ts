@@ -1170,6 +1170,95 @@ export const caseStudies: CaseStudy[] = ([
     ],
   },
   {
+    slug: "ekapy-afternoon-surgeries",
+    title: "EKAPY Afternoon Surgeries",
+    status: "published",
+    clientType: "EKAPY / Ministry of Health: the Afternoon Surgeries programme",
+    liveUrl: "https://soliddop.github.io/ekapy/",
+    summary:
+      "A public information website for EKAPY's Afternoon Surgeries programme, which funds free afternoon operations for patients who have waited too long on the public surgery list. Built as a working, animated site, it explains who qualifies, how the process runs, and where to get help.",
+    problem:
+      "Patients waiting months for surgery need to understand a programme with strict rules, without being misled about what it can promise. The earlier government page set out the scheme but did little to explain the steps, reassure anxious patients, or make clear that people do not sign up through the site itself.",
+    role: ["Website UI design", "Brand direction", "Motion design", "Front-end build"],
+    services: ["Website design", "Art direction", "Front-end build"],
+    tools: ["Figma", "GSAP"],
+    tags: ["web", "landing", "public"],
+    cover: {
+      type: "video",
+      motif: "landing",
+      alt: "The Afternoon Surgeries homepage: the headline \"Health doesn't wait\" over duotone patient portraits with citizen and service entry buttons, scrolling into the programme summary.",
+      src: "media/work/ekapy-hero.mp4",
+      poster: "media/work/ekapy-hero-poster.webp",
+      caption: "Homepage",
+    },
+    gallery: [
+      {
+        type: "video",
+        src: "media/work/ekapy-process.mp4",
+        poster: "media/work/ekapy-process-poster.webp",
+        caption: "The process",
+        alt: "The four-step participation guide revealing in sequence beside a hospital image: joining the list, checks and contact, scheduling, and tracking.",
+      },
+      {
+        src: "media/work/ekapy-intro.webp",
+        full: "media/work/ekapy-full.webp",
+        caption: "What the programme offers",
+        alt: "Three cards summarising the programme: free afternoon surgeries, operations beyond regular hours, and digital support through EKAPY's application.",
+      },
+      {
+        type: "video",
+        src: "media/work/ekapy-data.mp4",
+        poster: "media/work/ekapy-data-poster.webp",
+        caption: "Data & transparency",
+        alt: "The data-and-transparency panel counting figures up as it enters view: operations performed, priority cases, public investment, and the waiting-time threshold.",
+      },
+      {
+        src: "media/work/ekapy-drasi.webp",
+        full: "media/work/ekapy-full.webp",
+        caption: "The action",
+        alt: "The 'action' section setting out the roles of the Ministry of Health, EKAPY, and EOPYY, with cards on how it works, where it takes place, and what applies to the patient.",
+      },
+      {
+        src: "media/work/ekapy-faq.webp",
+        full: "media/work/ekapy-full.webp",
+        caption: "FAQ",
+        alt: "The frequently-asked-questions accordion covering eligibility, registration, cost, timing, and facilities.",
+      },
+      {
+        src: "media/work/ekapy-contact.webp",
+        full: "media/work/ekapy-full.webp",
+        caption: "Contact & help",
+        alt: "The contact and footer section with the EKAPY helpdesk, the 1566 health line, and the Greece 2.0 and NextGenerationEU funding marks.",
+      },
+    ],
+    sections: [
+      {
+        heading: "Context",
+        body: "Απογευματινά Χειρουργεία (\"Afternoon Surgeries\") is a Greek public-health programme under the line \"Health doesn't wait\". It funds operations carried out beyond regular hospital hours, free of charge, for patients already on the official surgery list who have waited more than four months. The Ministry of Health owns the programme, EKAPY, the National Central Authority for Health Procurement, runs it, and EOPYY takes part for the private-clinic side. It is financed through Greece 2.0 and NextGenerationEU.",
+      },
+      {
+        heading: "Challenge",
+        body: "This is sensitive, high-stakes information. The site had to stay calm and clear for worried patients while remaining precise about eligibility, and it had to manage expectations: being eligible does not guarantee a date, and registration happens through the hospital, not the website. It also needed a credible government identity and a data section that could be updated as official figures are confirmed.",
+      },
+      {
+        heading: "Process",
+        body: "I designed the identity and the single-page structure in Figma, then built it as a working website in HTML, CSS, and JavaScript. The page moves from the programme and what it offers, through the four-step patient journey, the roles of each body, a data-and-transparency panel, frequently asked questions, and the routes to help. A blue Ministry-of-Health palette, the EKAPY mark, and duotone patient photography carry the identity.",
+      },
+      {
+        heading: "Motion",
+        body: "GSAP animates the page throughout, kept subtle so it never competes with the health information. The hero and section headings reveal as they enter, the four participation steps appear in sequence beside a supporting image, and the data panel counts its figures up as it comes into view. The copy marks which numbers are confirmed and which are indicative until officially updated.",
+      },
+      {
+        heading: "Output",
+        body: "A responsive, animated single-page site with a hero, a summary of what the programme offers, a step-by-step participation guide, the roles of the Ministry, EKAPY, and EOPYY, a data-and-transparency panel, an FAQ, and contact and help routes, alongside entry points to EKAPY's citizen and service logins. It runs as static HTML, CSS, and JavaScript.",
+      },
+      {
+        heading: "Result",
+        body: "A clearer, more reassuring home for the programme that sets out the rules, the steps, and the limits in plain terms, and points patients to the right channel rather than implying they can enrol on the page. It is built to replace the programme's earlier government website.",
+      },
+    ],
+  },
+  {
     slug: "kifissia-municipality-redesign",
     title: "Municipality of Kifissia Website Redesign",
     status: "published",
