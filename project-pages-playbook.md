@@ -365,6 +365,43 @@ reveal transitions leave elements "not stable" — inject `*{transition:none}` a
     Close, use `await page.locator("#lightbox[hidden]").waitFor({ state: "attached" })`
     (or assert the `hidden` attribute), rather than a default `waitFor()`.
 
+16. **Video is supported on the case page (added for Pino).** For a heavily animated
+    site, a static tile undersells it. The template now renders motion:
+    - `cover.type: "video"` with `src` (mp4) + `poster` (webp) → the cover and the
+      listing/carousel card both render a muted autoplay loop. `CaseCard.astro`,
+      `work/[slug].astro`, and `.case-visual/.case-cover__media video` in `global.css`
+      all handle it.
+    - `gallery[]` items take an optional `type: "video"` + `poster`. Video tiles render
+      inline (autoplay muted loop, a small "Motion" badge, `.case-shot__media`) and are
+      **not** lightbox triggers. Static tiles keep the click-to-open button. Mixing both
+      in one gallery is fine; the grid maps the whole array so >2 tiles works (Pino uses 6).
+    - Keep the video count small (Pino: cover + 2 tiles). Posters + `preload="metadata"`
+      keep it light; browsers only fetch/play video when it scrolls into view.
+
+17. **Capturing GSAP/ScrollSmoother animations as video.** These sites (GSAP
+    ScrollTrigger + ScrollSmoother, `#smooth-wrapper`/`#smooth-content`) can't be
+    driven with `window.scrollTo`. Drive the real thing from `page.evaluate`:
+    `ScrollSmoother.get().scrollTo(y, true)` (animated) or `scrollTo(el, true, "top top")`.
+    Record with a Playwright context `recordVideo: { dir, size }` (one context per clip
+    → one clean webm), then trim + encode with ffmpeg:
+    `libx264 -profile:v high -crf 24 -preset veryslow -movflags +faststart -an`,
+    `-vf scale=1280:-2,format=yuv420p`. Result ≈ 0.5–0.8 MB for ~4–8 s.
+    - **Pinning shifts absolute offsets.** `getBoundingClientRect`-based section `y`s
+      (from a probe) do not match real scroll positions once ScrollTrigger pins a section.
+      Target the *element* (`scrollTo(el, ...)`) rather than a hardcoded `y`, or probe,
+      capture, eyeball frames, and adjust.
+    - **Playwright records ~0.5–1 s of black before first paint.** Trim the intro
+      (`-ss ≈1.0`) so the clip and its poster start on content, not a blank frame.
+    - **Poster must match the clip's resting/end state, not its start.** A poster pulled
+      from the trim *start* can duplicate another tile (Pino's scatter clip started on the
+      MANGIA/BEVI menu, doubling the Menu tile). Pull the poster from the frame that reads
+      as the tile at rest (`ffmpeg -sseof -0.25 …` for the end frame).
+
+18. **GitHub-Pages prototypes need no cookie wall** and serve over plain https, so the
+    consent-dismissal dance (gotcha 4/9) is unnecessary. But do set the context
+    `reducedMotion: "no-preference"` so the site's `prefers-reduced-motion` branch does
+    not disable the animations you came to record.
+
 ---
 
 ## Quick checklist per project

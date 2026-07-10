@@ -1217,7 +1217,8 @@ html.js .marquee-track {
   color: var(--accent);
 }
 
-.case-visual img {
+.case-visual img,
+.case-visual video {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
@@ -1227,7 +1228,12 @@ html.js .marquee-track {
   filter: saturate(0.92);
 }
 
-.case-card:hover .case-visual img {
+.case-visual video {
+  display: block;
+}
+
+.case-card:hover .case-visual img,
+.case-card:hover .case-visual video {
   transform: scale(1.05);
   filter: saturate(1);
 }
@@ -2670,7 +2676,8 @@ a.contact-line:hover .label::after {
   padding: clamp(1.5rem, 5vw, 3.5rem);
 }
 
-.case-cover__media img {
+.case-cover__media img,
+.case-cover__media video {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -2772,6 +2779,37 @@ a.contact-line:hover .label::after {
 .case-shot__trigger:hover .case-shot__zoom,
 .case-shot__trigger:focus-visible .case-shot__zoom {
   opacity: 1;
+}
+
+.case-shot__media {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-raise);
+}
+
+.case-shot__media video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.case-shot__badge {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  padding: 0.2rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  background: color-mix(in srgb, #000 55%, transparent);
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
 }
 
 .case-shot__caption {

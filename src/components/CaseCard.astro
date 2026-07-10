@@ -15,7 +15,18 @@ const metaBits = [cs.year, cs.clientType].filter(Boolean);
   <a class="case-card-inner" href={`work/${cs.slug}/`}>
     <div class="case-visual">
       {
-        cs.cover.type === "image" && cs.cover.src ? (
+        cs.cover.type === "video" && cs.cover.src ? (
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster={cs.cover.poster}
+            src={cs.cover.src}
+            aria-label={cs.cover.alt}
+          />
+        ) : cs.cover.type === "image" && cs.cover.src ? (
           <img src={cs.cover.src} alt={cs.cover.alt} loading="lazy" />
         ) : (
           <PlaceholderVisual motif={cs.cover.motif} alt={cs.cover.alt} />

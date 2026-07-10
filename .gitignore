@@ -16,3 +16,6 @@ prompt.md
 refs/
 sitemap.md
 stuff/
+
+# Session scratch (temporary capture/verify files)
+scratchpad/

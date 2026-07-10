@@ -40,6 +40,7 @@ export type CaseStudy = {
     src?: string;
     full?: string;
     caption?: string;
+    poster?: string;
     visualPrompt?: string;
   };
   sections: Array<{
@@ -47,7 +48,14 @@ export type CaseStudy = {
     body: string;
     mediaPlaceholder?: string;
   }>;
-  gallery?: Array<{ src: string; alt: string; full?: string; caption?: string }>;
+  gallery?: Array<{
+    type?: "image" | "video";
+    src: string;
+    alt: string;
+    full?: string;
+    caption?: string;
+    poster?: string;
+  }>;
   outcomes?: string[];
   nextSteps?: string[];
 };
@@ -503,42 +511,177 @@ const namedUiUxProjects: CaseStudy[] = [
   {
     slug: "pino-pizzeria-website",
     title: "Pino Pizzeria",
-    status: "draft",
-    clientType: "Restaurant",
+    status: "published",
+    clientType: "Pino by Luca Piscazzi: Roman pizzeria in Glyfada",
+    liveUrl: "https://soliddop.github.io/pino/",
     summary:
-      "Website UI work for Pino, a Roman pizzeria in Glyfada, bringing together the restaurant's character, menu, and visit information.",
+      "A modernised website concept for Pino, the Roman pizzeria in Glyfada, built as a working front-end prototype. The design carries the restaurant's story from Luca Piscazzi's kitchen to the Athens Riviera across one scroll-led page.",
     problem:
-      "The site needed to reflect the restaurant while making the menu, location, and booking information easy to find.",
-    role: ["Website UI design", "Visual direction", "Figma prototype"],
-    services: ["Website design", "Visual direction"],
-    tools: ["Figma"],
+      "Pino's original website read like a stock restaurant template. The menu, the story, and the visit details were all there, but none of the character the pizzeria has in the room or on its Instagram came through on screen.",
+    role: ["Website UI design", "Brand direction", "Motion design", "Front-end build"],
+    services: ["Website design", "Art direction", "Front-end prototype"],
+    tools: ["Figma", "GSAP", "Claude Code", "Codex"],
     tags: ["web", "prototype", "hospitality"],
-    cover: { type: "placeholder", motif: "homepage", alt: "Restaurant website interface for Pino Pizzeria" },
+    cover: {
+      type: "video",
+      motif: "homepage",
+      alt: "The Pino homepage: an Eat. Drink. Roma. hero on a forest-green field that resolves into the story section as the page scrolls.",
+      src: "media/work/pino-hero.mp4",
+      poster: "media/work/pino-hero-poster.webp",
+      caption: "Homepage",
+    },
+    gallery: [
+      {
+        type: "video",
+        src: "media/work/pino-table.mp4",
+        poster: "media/work/pino-table-poster.webp",
+        caption: "Signature dishes",
+        alt: "The signature-dish sequence sliding dish photographs past a large Pizza Romana outline.",
+      },
+      {
+        src: "media/work/pino-story.webp",
+        caption: "The story",
+        alt: "The story section, with a portrait of chef Luca Piscazzi beside his grandmother's photo and the tiled restaurant interior.",
+      },
+      {
+        src: "media/work/pino-menu.webp",
+        full: "media/work/pino-menu-full.webp",
+        caption: "Menu",
+        alt: "The menu section split into Mangia and Bevi across mustard and cream panels.",
+      },
+      {
+        type: "video",
+        src: "media/work/pino-scatter.mp4",
+        poster: "media/work/pino-scatter-poster.webp",
+        caption: "A night at Pino",
+        alt: "The gallery section scattering a stack of restaurant and dish photos into place under the heading A night at Pino.",
+      },
+      {
+        src: "media/work/pino-reserve.webp",
+        full: "media/work/pino-reserve-full.webp",
+        caption: "Reservations",
+        alt: "The reservations section with the headline Reserve your Roman table, the opening hours, and the Glyfada address.",
+      },
+      {
+        src: "media/work/pino-insta.webp",
+        full: "media/work/pino-insta-full.webp",
+        caption: "Instagram",
+        alt: "The Instagram section showing the @pino_athens photo grid.",
+      },
+    ],
     sections: [
       {
+        heading: "Context",
+        body: "Pino is a Roman pizzeria in Glyfada, on the Athens Riviera, run by chef Luca Piscazzi and his wife Charlotte Luykx. The kitchen keeps to Roman tradition: thin-crust Roman pizza, cacio e pepe, carciofo, aperitivo, and dolci. Its voice moves between Italian and English, from \"Tradizione Romana\" to \"Mangia. Bevi.\", and that mix is part of the brand.",
+      },
+      {
+        heading: "Challenge",
+        body: "A restaurant site has a short list of jobs: show the food, tell the story, and make it easy to book a table and find the door. The redesign had to keep those quick to reach while giving the page enough movement to feel like an evening at Pino, without letting the animation get between a visitor and the reservation button.",
+      },
+      {
+        heading: "Process",
+        body: "The identity and layout came first in Figma: a cream, forest-green, and terracotta palette, the hand-drawn Pino wordmark, and a single page that scrolls from the hero into the story, the signature dishes, the room, reservations, and the Instagram feed. I then built it as a real front-end prototype in HTML, CSS, and JavaScript, using Claude Code and Codex to turn the design into working code rather than a static mockup.",
+      },
+      {
+        heading: "Motion",
+        body: "Movement carries the story. GSAP runs the scroll: the hero headline splits line by line, dish photographs slide past an oversized \"Pizza Romana\" outline, the menu breaks into \"Mangia\" and \"Bevi\", and the closing gallery scatters a stack of photos into place under \"A night at Pino\". ScrollSmoother ties the sequence together so it reads as one continuous move down the page.",
+      },
+      {
         heading: "Output",
-        body: "A responsive restaurant website direction with menu discovery, visit information, and booking routes.",
+        body: "A responsive single-page site with an English and Greek toggle. It runs through the hero, the story of Luca and the restaurant, a signature-dish sequence, the food and drink menu, a photo gallery, reservations with hours and location, and the Instagram feed, all as static HTML, CSS, and JavaScript.",
+      },
+      {
+        heading: "Result",
+        body: "A working prototype that puts Pino's character on screen: Roman, warm, and a little playful. The motion supports the story instead of decorating it, and the menu and reservation routes stay in reach the whole way down.",
       },
     ],
   },
   {
     slug: "marios-detsis-paediatrician",
     title: "Dr. Marios Detsis",
-    status: "draft",
-    clientType: "Paediatric healthcare",
+    status: "published",
+    clientType: "Dr. Marios Detsis: paediatrician in Zografou and Vrilissia",
+    liveUrl: "https://pfilippaios.github.io/detsis-paidiatros/",
     summary:
-      "Website design for Dr. Marios Detsis, organising medical information for patients and parents.",
+      "A modernised website concept for Dr. Marios Detsis, a paediatrician with clinics in Zografou and Vrilissia. Built as a working front-end prototype, it gives parents a calm, readable path to the doctor's background, the services, and a booking.",
     problem:
-      "Families needed to find the doctor's background, services, and contact information without ambiguity.",
-    role: ["Website UI design", "Content structure", "Figma prototype"],
-    services: ["Website design", "UX design"],
-    tools: ["Figma"],
+      "The doctor's existing site was dated and hard to read on a phone, which is where most parents look for a paediatrician. Parents arrive with a specific worry and a young child in tow, so they need the essentials, who the doctor is, what he treats, where the clinics are, and how to book, without digging for them.",
+    role: ["Website UI design", "Brand direction", "Motion design", "Front-end build"],
+    services: ["Website design", "Art direction", "Front-end prototype"],
+    tools: ["Figma", "GSAP", "Claude Code", "Codex"],
     tags: ["web", "prototype", "healthcare"],
-    cover: { type: "placeholder", motif: "homepage", alt: "Healthcare website interface for Dr. Marios Detsis" },
+    cover: {
+      type: "video",
+      motif: "homepage",
+      alt: "The Dr. Marios Detsis homepage: a hero with the doctor's name and portrait, soft floating shapes, and a Book an appointment call to action.",
+      src: "media/work/detsis-hero.mp4",
+      poster: "media/work/detsis-hero-poster.webp",
+      caption: "Homepage",
+    },
+    gallery: [
+      {
+        type: "video",
+        src: "media/work/detsis-services.mp4",
+        poster: "media/work/detsis-services-poster.webp",
+        caption: "Services",
+        alt: "The six paediatric service cards rising and staggering into view as the sections stack over one another.",
+      },
+      {
+        src: "media/work/detsis-doctor.webp",
+        full: "media/work/detsis-doctor-full.webp",
+        caption: "The doctor",
+        alt: "The doctor's profile with a portrait, a short biography, and a timeline of qualifications from 2007 through the Brown Hasbro Children's Hospital.",
+      },
+      {
+        src: "media/work/detsis-clinics.webp",
+        full: "media/work/detsis-clinics-full.webp",
+        caption: "Two clinics",
+        alt: "The clinics section presenting the Zografou and Vrilissia practices with interior photos.",
+      },
+      {
+        type: "video",
+        src: "media/work/detsis-parents.mp4",
+        poster: "media/work/detsis-parents-poster.webp",
+        caption: "Parents & partners",
+        alt: "The parent-reviews section followed by a scrolling strip of professional affiliation logos.",
+      },
+      {
+        src: "media/work/detsis-articles.webp",
+        full: "media/work/detsis-articles-full.webp",
+        caption: "Articles",
+        alt: "The recent-articles section with cards on children's sleep, seasonal allergies, and oral hygiene.",
+      },
+      {
+        src: "media/work/detsis-cta.webp",
+        full: "media/work/detsis-cta-full.webp",
+        caption: "Contact",
+        alt: "The contact section with the appointment call to action and the Zografou and Vrilissia clinic phone numbers.",
+      },
+    ],
     sections: [
       {
+        heading: "Context",
+        body: "Marios Detsis is a paediatrician who cares for infants, children, and adolescents at two clinics, in Zografou and Vrilissia. Alongside his practice he teaches at the Medical School of the European University of Cyprus and publishes on public health, epidemiology, and the prevention of infectious diseases. He is also a certified breastfeeding instructor.",
+      },
+      {
+        heading: "Challenge",
+        body: "A paediatric site has to reassure before it does anything else. It needed to feel warm and calm for a worried parent while still reading as a serious medical practice, and it had to keep the booking and the clinic phone numbers within reach on every screen.",
+      },
+      {
+        heading: "Process",
+        body: "I designed the identity and page in Figma around a soft palette, rounded cards, and playful but restrained detail, then built it as a front-end prototype in HTML, CSS, and JavaScript with Claude Code and Codex. The single page moves from the doctor and his background to the services, the two clinics, recent articles, parent reviews, and the contact details.",
+      },
+      {
+        heading: "Motion",
+        body: "GSAP handles the movement, kept gentle so it reassures rather than distracts. The hero headline splits into lines as small shapes drift behind the doctor's portrait, the service cards rise and stagger into view, and the doctor, services, and clinics sections stack and recede as each one slides over the last. A strip of the doctor's professional affiliations scrolls quietly near the foot of the page.",
+      },
+      {
         heading: "Output",
-        body: "A patient-focused website structure for medical background, services, and contact information.",
+        body: "A responsive single-page site covering the doctor's profile and qualifications, six paediatric services, the two clinics with photos and addresses, recent articles, parent reviews, professional affiliations, and a contact section with a booking form and the clinic phone numbers. It runs as static HTML, CSS, and JavaScript.",
+      },
+      {
+        heading: "Result",
+        body: "A calm, current site for a paediatric practice, with the doctor's background and the route to a booking both easy to find. The motion is there to reassure, and the clinic details stay one tap away the whole way down.",
       },
     ],
   },
@@ -604,21 +747,73 @@ const namedUiUxProjects: CaseStudy[] = [
   {
     slug: "dtk-law-firm-website",
     title: "DTK Law Firm",
-    status: "draft",
-    clientType: "Legal services",
+    status: "published",
+    clientType: "DTK Law Firm: environmental, planning and investment law",
+    liveUrl: "https://dtk.choosead.eu/",
     summary:
-      "Website design for DTK Law Firm, presenting its work in environmental law, investment, planning, and sustainability.",
+      "Website design and build for DTK Law Firm, a specialist environmental, planning, and investment practice. The new WordPress site replaces the firm's previous one with a clearer structure, a refreshed identity, and its research and publications brought to the front.",
     problem:
-      "The firm needed to organise specialist legal knowledge, publications, and practice areas for prospective clients.",
-    role: ["Website UI design", "Content structure", "Visual direction"],
-    services: ["Website design", "Brand support"],
-    tools: ["Figma"],
-    tags: ["web", "commercial"],
-    cover: { type: "placeholder", motif: "search", alt: "Law firm website interface for DTK" },
+      "The firm's previous site did not reflect how DTK actually works. Its practice areas, its team, and above all its research and publications were hard to navigate, and the design did not read as the specialist, academically grounded firm that DTK is.",
+    role: ["Website UI design", "Information architecture", "Visual direction", "WordPress design"],
+    services: ["Website design", "UI design", "WordPress"],
+    tools: ["Figma", "WordPress"],
+    tags: ["web", "wordpress", "commercial"],
+    cover: {
+      type: "video",
+      motif: "homepage",
+      alt: "The DTK Law homepage: the navy DTK wordmark and a headline on specialised legal support in environment and planning, resolving into the practice-area band as the page scrolls.",
+      src: "media/work/dtk-hero.mp4",
+      poster: "media/work/dtk-hero-poster.webp",
+      caption: "Homepage",
+    },
+    gallery: [
+      {
+        type: "video",
+        src: "media/work/dtk-services.mp4",
+        poster: "media/work/dtk-services-poster.webp",
+        caption: "Practice areas",
+        alt: "The services page revealing DTK's practice areas as numbered cards, from spatial and urban planning to specialised legal research.",
+      },
+      {
+        type: "video",
+        src: "media/work/dtk-team.mp4",
+        poster: "media/work/dtk-team-poster.webp",
+        caption: "The team",
+        alt: "The 'Our team' page with black-and-white portraits of the firm's lawyers staggering into view.",
+      },
+      {
+        src: "media/work/dtk-articles.webp",
+        full: "media/work/dtk-articles-full.webp",
+        caption: "Publications",
+        alt: "The publications hub split into scientific articles, legal news, and newsletters, above a list of recent publications.",
+      },
+      {
+        src: "media/work/dtk-contact.webp",
+        full: "media/work/dtk-contact-full.webp",
+        caption: "Contact",
+        alt: "The contact page with an enquiry form and a photograph of a statue of Justice.",
+      },
+    ],
     sections: [
       {
+        heading: "Context",
+        body: "DTK Law Firm (K. Karatsolis, E. Tsianti & Associates) is an Athens practice led by Dr. Konstantinos Karatsolis. It works in a specific set of fields: spatial and urban planning, environmental law, the framework for building permits, investments and tourism developments, and sustainability and ESG. What sets the firm apart is that its legal work is tied to continuous scientific research, with studies, publications, and newsletters that track Greek and European regulation.",
+      },
+      {
+        heading: "Challenge",
+        body: "The site had to serve two audiences at once: prospective clients weighing up a specialist firm, and a professional readership following the firm's legal analysis. It also needed to carry a large and growing body of publications, work in Greek and English, and be something the firm could keep updated itself.",
+      },
+      {
+        heading: "Process",
+        body: "I designed the site in Figma, then built it on WordPress so the team can publish articles, newsletters, and publications without a developer. The information architecture is organised around five clear areas: the firm, the practice areas, the publications, careers, and contact. The identity pairs a navy and warm-sand palette with a distinctive display type and an olive-branch motif, applied consistently across every page. Headlines split into view and cards reveal as you scroll, so the pages feel considered without the motion getting in the way of the content.",
+      },
+      {
         heading: "Output",
-        body: "A website system for practice areas, publications, and firm information.",
+        body: "A bilingual WordPress site covering the firm and its team, the practice areas as individual services, a publications hub split into scientific articles, legal news, and newsletters, a publications library, careers, and contact. The firm can maintain all of it, in Greek and English, on its own.",
+      },
+      {
+        heading: "Result",
+        body: "A current, better-organised site that presents DTK as the specialist, research-led firm it is, and gives its publications a proper home. It replaces the firm's previous website and gives the team a platform they can keep up to date.",
       },
     ],
   },
