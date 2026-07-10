@@ -15,6 +15,7 @@ export const projectTagDefinitions = {
   systems: { label: "Design system", mark: "DS", tone: "green", group: "method" },
   wordpress: { label: "WordPress", mark: "WP", tone: "violet", group: "method" },
   commerce: { label: "E-commerce", mark: "EC", tone: "amber", group: "method" },
+  landing: { label: "Landing pages", mark: "LP", tone: "cyan", group: "method" },
   audit: { label: "Design audit", mark: "AU", tone: "rose", group: "method" },
 
   public: { label: "Public sector", mark: "PS", tone: "blue", group: "context" },

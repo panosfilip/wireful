@@ -14,6 +14,8 @@ export function getStaticPaths() {
 }
 
 const { cs } = Astro.props;
+const hasLightbox =
+  (cs.gallery?.length ?? 0) > 0 || (cs.cover.type === "image" && !!cs.cover.full);
 const index = caseStudies.findIndex((c) => c.slug === cs.slug);
 const prev = index > 0 ? caseStudies[index - 1] : caseStudies[caseStudies.length - 1];
 const next = index < caseStudies.length - 1 ? caseStudies[index + 1] : caseStudies[0];
@@ -51,6 +53,15 @@ const next = index < caseStudies.length - 1 ? caseStudies[index + 1] : caseStudi
           {cs.year && <p set:html={withPlaceholders(cs.year)} />}
           {cs.clientType && <p>{cs.clientType}</p>}
           {
+            cs.liveUrl && (
+              <p>
+                <a class="case-live-link" href={cs.liveUrl} target="_blank" rel="noopener">
+                  Visit live site ↗
+                </a>
+              </p>
+            )
+          }
+          {
             cs.status === "placeholder" && (
               <p>
                 <span class="status-chip">Coming soon</span>
@@ -61,17 +72,57 @@ const next = index < caseStudies.length - 1 ? caseStudies[index + 1] : caseStudi
       </div>
 
       <figure class="case-cover" data-reveal>
-        {
-          cs.cover.type === "image" && cs.cover.src ? (
-            <img src={cs.cover.src} alt={cs.cover.alt} />
-          ) : (
-            <PlaceholderVisual motif={cs.cover.motif} alt={cs.cover.alt} />
-          )
-        }
+        <div class="case-cover__media">
+          {
+            cs.cover.type === "image" && cs.cover.src ? (
+              cs.cover.full ? (
+                <button
+                  type="button"
+                  class="case-cover__trigger"
+                  data-lightbox={cs.cover.full}
+                  data-lightbox-alt={cs.cover.caption ? `${cs.cover.caption}: full page` : cs.cover.alt}
+                  aria-label={`Open full page: ${cs.cover.caption ?? cs.cover.alt}`}
+                >
+                  <img src={cs.cover.src} alt={cs.cover.alt} />
+                  <span class="case-shot__zoom" aria-hidden="true">Open full page ↗</span>
+                </button>
+              ) : (
+                <img src={cs.cover.src} alt={cs.cover.alt} />
+              )
+            ) : (
+              <PlaceholderVisual motif={cs.cover.motif} alt={cs.cover.alt} />
+            )
+          }
+        </div>
+        {cs.cover.type === "image" && cs.cover.caption && (
+          <figcaption class="case-shot__caption">{cs.cover.caption}</figcaption>
+        )}
       </figure>
       {
         cs.cover.visualPrompt && (
           <p class="visual-note" set:html={withPlaceholders(cs.cover.visualPrompt)} />
+        )
+      }
+
+      {
+        cs.gallery && cs.gallery.length > 0 && (
+          <div class="case-gallery" data-reveal-group>
+            {cs.gallery.map((shot) => (
+              <figure class="case-shot" data-reveal>
+                <button
+                  type="button"
+                  class="case-shot__trigger"
+                  data-lightbox={shot.full ?? shot.src}
+                  data-lightbox-alt={shot.caption ? `${shot.caption}: full page` : shot.alt}
+                  aria-label={`Open full page: ${shot.caption ?? shot.alt}`}
+                >
+                  <img src={shot.src} alt={shot.alt} loading="lazy" />
+                  <span class="case-shot__zoom" aria-hidden="true">Open full page ↗</span>
+                </button>
+                {shot.caption && <figcaption class="case-shot__caption">{shot.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
         )
       }
 
@@ -121,4 +172,67 @@ const next = index < caseStudies.length - 1 ? caseStudies[index + 1] : caseStudi
       </nav>
     </div>
   </article>
+
+  {
+    hasLightbox && (
+      <div class="lightbox" id="lightbox" hidden>
+        <div class="lightbox__backdrop" data-lightbox-close />
+        <div class="lightbox__dialog" role="dialog" aria-modal="true" aria-label="Full page preview">
+          <button type="button" class="lightbox__close" data-lightbox-close aria-label="Close">
+            Close ✕
+          </button>
+          <div class="lightbox__scroll">
+            <img class="lightbox__img" id="lightbox-img" src="" alt="" />
+          </div>
+        </div>
+      </div>
+    )
+  }
 </Base>
+
+<script>
+  const lightbox = document.getElementById("lightbox");
+  if (lightbox) {
+    const img = document.getElementById("lightbox-img") as HTMLImageElement;
+    const scroll = lightbox.querySelector(".lightbox__scroll");
+    let lastTrigger: HTMLElement | null = null;
+
+    const open = (src: string, alt: string, trigger: HTMLElement) => {
+      lastTrigger = trigger;
+      img.src = src;
+      img.alt = alt;
+      lightbox.hidden = false;
+      document.body.style.overflow = "hidden";
+      if (scroll) scroll.scrollTop = 0;
+      requestAnimationFrame(() => lightbox.classList.add("is-open"));
+    };
+
+    const close = () => {
+      lightbox.classList.remove("is-open");
+      document.body.style.overflow = "";
+      window.setTimeout(() => {
+        lightbox.hidden = true;
+        img.src = "";
+      }, 200);
+      if (lastTrigger) lastTrigger.focus();
+    };
+
+    document.querySelectorAll<HTMLElement>("[data-lightbox]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        open(
+          btn.dataset.lightbox || "",
+          btn.dataset.lightboxAlt || "",
+          btn,
+        );
+      });
+    });
+
+    lightbox.querySelectorAll("[data-lightbox-close]").forEach((el) => {
+      el.addEventListener("click", close);
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !lightbox.hidden) close();
+    });
+  }
+</script>

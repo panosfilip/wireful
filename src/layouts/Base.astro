@@ -49,7 +49,7 @@ const { title, description = site.description } = Astro.props;
       // Kick off hero intro staggers once styles are applied
       requestAnimationFrame(() => document.body.classList.add("is-loaded"));
 
-      // Scroll reveals — single elements and staggered groups
+      // Scroll reveals: single elements and staggered groups
       const revealEls = document.querySelectorAll("[data-reveal], [data-reveal-group]");
       if (reducedMotion || !("IntersectionObserver" in window)) {
         revealEls.forEach((el) => el.classList.add("is-visible"));
@@ -143,6 +143,27 @@ const { title, description = site.description } = Astro.props;
       setHeaderHeight();
       window.addEventListener("resize", setHeaderHeight, { passive: true });
 
+      // The <base href="/wireful/"> tag makes bare fragment links ("#top", "#main")
+      // resolve against the base URL, i.e. the homepage, instead of the current
+      // page, so clicking them navigates away. Handle same-page anchors in JS.
+      document
+        .querySelectorAll<HTMLAnchorElement>(".sticky-back-to-top, .back-to-top")
+        .forEach((a) =>
+          a.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
+          }),
+        );
+      document.querySelector<HTMLAnchorElement>(".skip-link")?.addEventListener("click", (e) => {
+        e.preventDefault();
+        const main = document.getElementById("main");
+        if (main) {
+          main.setAttribute("tabindex", "-1");
+          main.focus();
+          main.scrollIntoView();
+        }
+      });
+
       // Header convergence: at the top of the page the wordmark and CTA sit
       // near the viewport edges; over the first ~450px of scroll they glide
       // inward to their natural container positions. A lerp loop smooths the
@@ -183,7 +204,7 @@ const { title, description = site.description } = Astro.props;
         const c = headerCta.getBoundingClientRect();
         wordmarkOut = Math.max(0, w.left - gutter);
         ctaOut = Math.max(0, window.innerWidth - gutter - c.right);
-        // Snap to the correct state for the current scroll position — no
+        // Snap to the correct state for the current scroll position: no
         // fly-in on page load or resize.
         const target = convergenceTargets();
         wordmarkCur = target.wm;

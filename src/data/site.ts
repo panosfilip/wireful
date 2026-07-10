@@ -10,9 +10,9 @@ export const site = {
   fullName: "Panagiotis Filippaios",
   role: "Senior UI/UX Engineer and Freelance Web Designer",
   headline:
-    "Digital products and brands, shaped with clarity from idea to launch.",
+    "Digital products and brands, made clear enough to build.",
   intro:
-    "I'm Panagiotis Filippaios, a senior UI/UX engineer and designer in Athens who turns rough briefs into interfaces, websites, and brand systems teams can actually ship.",
+    "I'm Panagiotis Filippaios, a senior UI/UX engineer and designer in Athens. I turn rough briefs into interfaces, websites, and brand systems that teams can build and maintain.",
   location: "Athens, Greece",
   email: "panosfilip@gmail.com",
   emailHref: "mailto:panosfilip@gmail.com",
@@ -33,7 +33,7 @@ export const site = {
     },
   ],
   description:
-    "WIREFUL is the portfolio of Panagiotis Filippaios, a senior UI/UX engineer and graphic designer in Athens working across Figma, AI-assisted websites, WordPress, brand systems, digital products, and design consulting.",
+    "WIREFUL is the portfolio of Panagiotis Filippaios, a UI/UX engineer and graphic designer in Athens working on Figma, WordPress, websites, product UI, brand systems, and design consulting.",
 };
 
 /** Capability ticker shown in the homepage marquee. */
@@ -52,12 +52,12 @@ export const capabilities = [
 export const offerAreas = [
   {
     title: "Website design and redesign",
-    body: "Figma website concepts, landing pages, microsites, and WordPress or Elementor-ready page systems shaped around real content, responsive behavior, and clear conversion paths.",
+    body: "Figma website concepts, landing pages, microsites, and page systems for WordPress or Elementor. The work accounts for real content, responsive behaviour, and the actions a page needs to support.",
     tags: ["Websites", "WordPress", "Responsive"],
   },
   {
     title: "Product UI and prototypes",
-    body: "App screens, dashboards, portals, internal tools, user flows, component logic, and handoff-ready Figma files for teams that need interface quality before build.",
+    body: "App screens, dashboards, portals, internal tools, user flows, component logic, and Figma files prepared for handoff before development begins.",
     tags: ["Product UI", "Figma", "Handoff"],
   },
   {
@@ -67,12 +67,12 @@ export const offerAreas = [
   },
   {
     title: "AI-assisted design process",
-    body: "LLMs and generative tools used inside a serious design workflow: research synthesis, content structure, UX writing routes, visual exploration, and prototype planning.",
+    body: "LLMs and generative tools used for research synthesis, content structure, UX writing options, visual exploration, and prototype planning. Design decisions stay with the brief, evidence, and final review.",
     tags: ["AI workflow", "Research", "Content"],
   },
   {
     title: "Design consulting",
-    body: "Independent UX and visual audits, second opinions before a build starts, and hands-on advisory for founders and teams who want senior design judgment without a full engagement.",
+    body: "UX and visual audits, second opinions before a build starts, and practical advice for founders and teams who need senior design input without a full project.",
     tags: ["Consulting", "UX audits", "Advisory"],
   },
 ];
@@ -88,57 +88,57 @@ export const approachPillars = [
   {
     number: "01",
     title: "Frame",
-    body: "Turn a loose brief into a clear product, website, or brand problem.",
+    body: "Turn a loose brief into a defined product, website, or brand problem.",
     detail:
-      "I start by getting the business goal, audience, content, and constraints into plain language. That might mean a stakeholder workshop, a quick audit, competitor review, or AI-assisted research synthesis. The point is simple: agree what we are solving before the work turns into screens.",
+      "I put the business goal, audience, content, and constraints into plain language. Depending on the project, that can mean a workshop, a quick audit, a competitor review, or research synthesis. We agree on the problem before moving into screens.",
     artifacts: [
       { name: "Stakeholder input", description: "The context, priorities, and constraints from the people closest to the work." },
-      { name: "Brief & goals audit", description: "A focused check that turns the brief into clear, useful objectives." },
-      { name: "Competitor review", description: "A view of category patterns, gaps, and the quality bar to meet." },
-      { name: "AI-assisted research synthesis", description: "A faster way to organise inputs and surface the signals worth acting on." },
-      { name: "Problem statement", description: "One shared definition of the challenge the project is here to solve." },
+      { name: "Brief & goals audit", description: "A focused review that turns the brief into specific objectives." },
+      { name: "Competitor review", description: "A review of category patterns, gaps, and comparable products or sites." },
+      { name: "AI-assisted research synthesis", description: "A way to organise inputs and identify the findings that need a design response." },
+      { name: "Problem statement", description: "A shared definition of the problem the project needs to solve." },
     ],
   },
   {
     number: "02",
     title: "Structure",
-    body: "Shape content, navigation, and flows so the interface has a spine.",
+    body: "Set the content, navigation, and flows before designing the interface.",
     detail:
-      "Sitemaps, user flows, wireframes, content grouping, and interaction logic come before the polished UI. For web projects, this is where WordPress structure, reusable page patterns, and maintainable content rules are decided.",
+      "Sitemaps, user flows, wireframes, content grouping, and interaction logic come before the visual design. For web projects, this is where I set the WordPress structure, reusable page patterns, and content rules.",
     artifacts: [
       { name: "Sitemap", description: "A map of the pages and how the content is organised." },
       { name: "User flows", description: "The key paths people take to complete a task or reach a goal." },
       { name: "Wireframes", description: "Low-fidelity layouts that settle hierarchy before visual polish." },
-      { name: "Content model", description: "The content types and rules that keep pages coherent as they grow." },
-      { name: "Reusable page patterns", description: "Flexible building blocks that make future pages easier to create." },
+      { name: "Content model", description: "The content types and rules that keep pages consistent as the site grows." },
+      { name: "Reusable page patterns", description: "Building blocks that make new pages quicker to produce." },
     ],
   },
   {
     number: "03",
     title: "Design",
-    body: "Create the visual system, prototype, and brand language in Figma.",
+    body: "Create the visual system, prototype, and interface in Figma.",
     detail:
-      "I design with real content, responsive states, components, and the kind of edge cases that show up after launch. Figma is the working space for UI, prototypes, visual systems, and handoff. AI tools help me explore directions faster, but the final decisions stay grounded in usability, typography, and brand fit.",
+      "I design with real content, responsive states, components, and the edge cases that appear in use. Figma is where I create the UI, prototypes, visual system, and handoff. AI tools can speed up exploration, but the final choices are tested against usability, typography, and the brand.",
     artifacts: [
-      { name: "Figma UI system", description: "The foundations that keep the interface consistent from screen to screen." },
+      { name: "Figma UI system", description: "The rules and components that keep the interface consistent from screen to screen." },
       { name: "Interactive prototype", description: "A realistic way to review important journeys before development starts." },
       { name: "Components & states", description: "Reusable UI parts, including the states people encounter in real use." },
-      { name: "Responsive layouts", description: "Layouts designed to work deliberately across viewport sizes." },
-      { name: "Visual identity fit", description: "A visual direction that feels distinctive while serving the product's purpose." },
+      { name: "Responsive layouts", description: "Layouts designed for the viewport sizes people actually use." },
+      { name: "Visual identity fit", description: "A visual direction that fits the brand and the job the product needs to do." },
     ],
   },
   {
     number: "04",
     title: "Deliver",
-    body: "Prepare designs, assets, and documentation that teams can actually use.",
+    body: "Prepare designs, assets, and documentation for the people who will build and run them.",
     detail:
-      "The work is not finished when the mockup looks good. I prepare assets, component notes, WordPress or Elementor guidance, QA notes, and design documentation so the site or product can keep its quality after handoff.",
+      "I prepare assets, component notes, WordPress or Elementor guidance, QA notes, and documentation so the site or product can be built without losing the decisions made in design.",
     artifacts: [
-      { name: "Handoff-ready files", description: "Organised source files that make the intended build easy to understand." },
-      { name: "Design documentation", description: "The decisions, rules, and rationale that should carry into production." },
+      { name: "Handoff-ready files", description: "Organised source files that make the intended build clear." },
+      { name: "Design documentation", description: "The decisions and rules that need to carry into production." },
       { name: "Production assets", description: "Prepared visuals, exports, and files ready for the final environment." },
       { name: "WordPress / Elementor guidance", description: "Practical direction for translating the system into a manageable site." },
-      { name: "QA notes", description: "A final set of checks to protect quality as the work goes live." },
+      { name: "QA notes", description: "Checks for the final build before it goes live." },
     ],
   },
 ];
@@ -147,39 +147,39 @@ export const approachPillars = [
 export const principles = [
   {
     title: "Solve the right problem first",
-    body: "Most design fails by confidently polishing the wrong thing. Framing comes before screens: goal, audience, content, constraints — agreed in plain language.",
+    body: "Polishing the wrong thing is still wasted work. Before screens, I define the goal, audience, content, and constraints in plain language.",
   },
   {
     title: "Real content, real constraints",
-    body: "I design with actual content, responsive states, and the edge cases that show up after launch — not lorem ipsum and best-case mockups.",
+    body: "I use actual content, responsive states, and the edge cases that show up in use, not lorem ipsum and best-case mockups.",
   },
   {
     title: "Built to be maintained",
-    body: "A design is only as good as its second year. Systems, documentation, and WordPress-aware decisions keep the quality alive after handoff.",
+    body: "A design has to survive updates. Systems, documentation, and WordPress-aware decisions help teams maintain it after handoff.",
   },
 ];
 
 export const skills = {
   design: [
-    { title: "Product UI & user journeys", description: "Clear interfaces and flows that help people complete important tasks with confidence." },
-    { title: "Websites & e-commerce experiences", description: "Content-led sites and shopping journeys built around real goals, not just page templates." },
-    { title: "Brand identity & visual systems", description: "Distinctive identity work that carries consistently across digital and campaign touchpoints." },
-    { title: "Information architecture & content structure", description: "Navigation, hierarchy, and content rules that make complex information feel simple." },
-    { title: "Figma prototypes & design systems", description: "Reusable components and realistic prototypes that bring the intended experience into focus." },
-    { title: "Visual audits & interface refinement", description: "A practical view of what is getting in the way, and where the greatest design gains are." },
+    { title: "Product UI & user journeys", description: "Interfaces and flows for the tasks people need to complete." },
+    { title: "Websites & e-commerce", description: "Content-led sites and shopping flows built around real user and business goals." },
+    { title: "Brand identity & visual systems", description: "Identity work applied consistently across digital and campaign materials." },
+    { title: "Information architecture & content structure", description: "Navigation, hierarchy, and content rules for complex information." },
+    { title: "Figma prototypes & design systems", description: "Reusable components and prototypes that show how the product should behave." },
+    { title: "Visual audits & interface refinement", description: "A review of what is getting in the way and what to change first." },
   ],
   tools: [
     { title: "Figma, FigJam & Dev Mode", description: "The main workspace for interface design, collaboration, prototypes, and handoff." },
-    { title: "WordPress, Elementor & WooCommerce", description: "Design decisions shaped for editable, maintainable sites and online stores." },
-    { title: "Adobe Illustrator, Photoshop & InDesign", description: "The tools behind production-ready visual assets, identity work, and print materials." },
-    { title: "AI-assisted research, ideation & prototyping", description: "Faster exploration and synthesis, always filtered through design judgement." },
-    { title: "Campaign, social & email design", description: "Supporting assets that make a launch feel considered wherever people encounter it." },
+    { title: "WordPress, Elementor & WooCommerce", description: "Design decisions for editable sites and online stores." },
+    { title: "Adobe Illustrator, Photoshop & InDesign", description: "Visual assets, identity work, and print materials prepared for production." },
+    { title: "AI-assisted research, ideation & prototyping", description: "Research synthesis and early exploration reviewed through design judgement." },
+    { title: "Campaign, social & email design", description: "Supporting assets for launches, social channels, and email." },
   ],
   research: [
-    { title: "UX discovery & user-centred design", description: "Early research that replaces assumptions with a clearer view of users and context." },
+    { title: "UX discovery & user-centred design", description: "Early research that tests assumptions against users and their context." },
     { title: "Usability testing & Think Aloud sessions", description: "Direct evidence of where people hesitate, misunderstand, or lose momentum." },
-    { title: "Interviews, focus groups & stakeholder input", description: "The perspectives that help align business knowledge with real user needs." },
-    { title: "Competitor analysis & category research", description: "A sharper read on familiar patterns, opportunities, and the expected quality bar." },
-    { title: "Design rationale & documentation", description: "Clear reasoning that helps the work stay coherent as it moves into delivery." },
+    { title: "Interviews, focus groups & stakeholder input", description: "Input from users and the people who know the business and service." },
+    { title: "Competitor analysis & category research", description: "A review of familiar patterns and gaps in comparable products." },
+    { title: "Design rationale & documentation", description: "The reasoning that needs to stay with the work during delivery." },
   ],
 };

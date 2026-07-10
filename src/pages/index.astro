@@ -7,14 +7,14 @@ import { site, approachPillars, proofPoints, capabilities } from "../data/site";
 const featuredWork = caseStudies.find((cs) => cs.slug === "my1521-taxpayer-portal")!;
 const homeWorkSlugs = [
   "teka-ui-redesign",
-  "growthfund-microsite",
+  "ppf-growthfund",
   "ekapy-web-design",
   "kifissia-municipality-redesign",
   "eu-regions-week-2025",
   "fysiko-aerio-campaigns",
 ];
 const homeWork = homeWorkSlugs.map((slug) => caseStudies.find((cs) => cs.slug === slug)!);
-const [headlineBefore, headlineAfter] = site.headline.split("clarity");
+const [headlineBefore, headlineAfter] = site.headline.split("clear");
 const marqueeItems = [...capabilities, ...capabilities];
 const capabilityDirectory = [
   { mark: "WD", label: "Website design", tone: "violet" },
@@ -45,7 +45,7 @@ const capabilityDirectory = [
     <div class="container hero-grid">
       <div class="hero-copy">
         <h1 data-intro style="--intro: 0">
-          {headlineBefore}<span class="title-keyword">clarity</span>{headlineAfter}
+          {headlineBefore}<span class="title-keyword">clear</span>{headlineAfter}
         </h1>
         <p class="lead" data-intro style="--intro: 1">{site.intro}</p>
         <div class="hero-actions" data-intro style="--intro: 2">
@@ -104,9 +104,9 @@ const capabilityDirectory = [
     <div class="container">
       <div class="section-head" data-reveal>
         <div>
-          <h2 id="services-heading">What I can help you <span class="title-keyword">shape</span>.</h2>
+          <h2 id="services-heading">What I can help you <span class="title-keyword">make</span>.</h2>
           <p class="section-kicker">
-            Freelance-first, with senior UI/UX depth behind the work.
+            Freelance design for websites, products, and brands.
           </p>
         </div>
       </div>
@@ -128,10 +128,10 @@ const capabilityDirectory = [
     <div class="container">
       <div class="section-head" data-reveal>
         <div>
-          <h2 id="work-heading">Work that ships at <span class="title-keyword">national scale</span>.</h2>
+          <h2 id="work-heading">Work for <span class="title-keyword">public services</span>, institutions, and brands.</h2>
           <p class="section-kicker">
-            Government platforms, institutional redesigns, and national brand campaigns —
-            led by my1521, AADE's taxpayer service portal used by citizens across Greece.
+            Government platforms, institutional redesigns, and national brand campaigns, including
+            my1521, AADE's taxpayer service portal.
           </p>
         </div>
         <a href="work" class="section-link">All work <span class="arrow">↗&#xFE0E;</span></a>
@@ -148,7 +148,7 @@ const capabilityDirectory = [
     <div class="container">
       <div class="section-head" data-reveal>
         <div>
-          <h2 id="approach-heading">How I move from <span class="title-keyword">brief to build</span>.</h2>
+          <h2 id="approach-heading">How a brief becomes something <span class="title-keyword">buildable</span>.</h2>
         </div>
         <a href="approach" class="section-link">Full approach <span class="arrow">↗&#xFE0E;</span></a>
       </div>
@@ -170,19 +170,22 @@ const capabilityDirectory = [
   <section class="section project-fit" id="project-fit" aria-labelledby="project-fit-heading">
     <div class="container">
       <div class="project-fit-intro" data-reveal>
-        <h2 id="project-fit-heading">
-          Bring me in when the work has become <span class="title-keyword">harder</span> than it needs to be.
-        </h2>
+        <div class="project-fit-head">
+          <h2 id="project-fit-heading">
+            Bring me in when the work has become <span class="title-keyword">hard to untangle</span>.
+          </h2>
+          <a href="about" class="section-link">About me <span class="arrow">↗&#xFE0E;</span></a>
+        </div>
         <p class="lead">
-          A rough brief, a messy current state, or a clear ambition is enough to start.
-          We can find the useful next move from there.
+          A rough brief, a messy current site, or a clear objective is enough to start.
+          We can work out what needs to change first.
         </p>
       </div>
       <ul class="project-fit-list" data-reveal-group>
-        <li>A <span class="title-keyword">product flow</span> is hard to use or explain.</li>
+        <li>A <span class="title-keyword">product flow</span> is difficult to use or explain.</li>
         <li>A website has <span class="title-keyword">outgrown</span> its structure or visual direction.</li>
         <li>Your team needs a <span class="title-keyword">Figma system</span> that holds up after handoff.</li>
-        <li>A campaign or brand needs <span class="title-keyword">one clear visual language</span>.</li>
+        <li>A campaign or brand needs <span class="title-keyword">a consistent visual language</span>.</li>
       </ul>
     </div>
   </section>
@@ -201,14 +204,14 @@ const capabilityDirectory = [
     </div>
     <div class="container">
       <h2 id="contact-heading" data-reveal>
-        Have a website, product, or brand system that needs <span class="title-keyword">sharper direction</span>?
+        Need to improve a website, product, or <span class="title-keyword">brand system</span>?
       </h2>
       <p class="lead" data-reveal style="--reveal-delay: 1">
-        Send the rough version. I can help turn it into a clear interface, a better web
-        experience, or a visual system your team can keep using.
+        Send the rough version. I can help define the interface, website, or visual system and
+        prepare it for the people who will use and maintain it.
       </p>
       <div class="hero-actions" data-reveal style="--reveal-delay: 2">
-        <a href="contact" class="btn" data-overlay-trigger data-magnetic>Start a conversation</a>
+        <a href="contact" class="btn" data-overlay-trigger data-magnetic>Discuss a project</a>
       </div>
     </div>
   </section>

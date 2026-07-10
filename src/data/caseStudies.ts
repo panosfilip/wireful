@@ -26,6 +26,7 @@ export type CaseStudy = {
   status: CaseStudyStatus;
   year?: string;
   clientType?: string;
+  liveUrl?: string;
   summary: string;
   problem: string;
   role: string[];
@@ -37,6 +38,8 @@ export type CaseStudy = {
     motif: CoverMotif;
     alt: string;
     src?: string;
+    full?: string;
+    caption?: string;
     visualPrompt?: string;
   };
   sections: Array<{
@@ -44,6 +47,7 @@ export type CaseStudy = {
     body: string;
     mediaPlaceholder?: string;
   }>;
+  gallery?: Array<{ src: string; alt: string; full?: string; caption?: string }>;
   outcomes?: string[];
   nextSteps?: string[];
 };
@@ -54,140 +58,426 @@ const namedUiUxProjects: CaseStudy[] = [
     title: "Spiritual Living Corfu",
     status: "draft",
     clientType: "Hospitality website",
-    summary: "UXPin website prototype for Spiritual Living Corfu, designed to present a calm, clear digital journey for a hospitality experience.",
-    problem: "The website needed to communicate a distinctive retreat offering while making the practical information easy to browse.",
+    summary: "UXPin website prototype for Spiritual Living Corfu, presenting the retreat, accommodation, and enquiry route.",
+    problem: "Visitors needed to understand the retreat offering and find practical information without losing the character of the destination.",
     role: ["Website UI design", "UX prototype", "Visual direction"],
     services: ["Website design", "UX design"],
     tools: ["UXPin"],
     tags: ["web", "prototype", "hospitality"],
     cover: { type: "placeholder", motif: "homepage", alt: "Website interface concept for Spiritual Living Corfu" },
-    sections: [{ heading: "Output", body: "A website prototype structured around the experience, accommodation information, and a clear path to enquiry." }],
+    sections: [{ heading: "Output", body: "A website prototype with sections for the retreat, accommodation, and enquiries." }],
   },
   {
     slug: "holiways-crete",
     title: "Holiways Crete",
     status: "draft",
     clientType: "Hospitality website",
-    summary: "UXPin website prototype for Holiways Crete, balancing destination storytelling with a practical, easy-to-navigate web experience.",
-    problem: "Visitors needed to understand the offer quickly while still feeling the character of the destination.",
+    summary: "UXPin website prototype for Holiways Crete, combining destination content with the information visitors need to plan a stay.",
+    problem: "Visitors needed to understand the offer quickly and find their way to the relevant accommodation and booking information.",
     role: ["Website UI design", "UX prototype", "Visual direction"],
     services: ["Website design", "UX design"],
     tools: ["UXPin"],
     tags: ["web", "prototype", "hospitality"],
     cover: { type: "placeholder", motif: "homepage", alt: "Website interface concept for Holiways Crete" },
-    sections: [{ heading: "Output", body: "A responsive website prototype that combines editorial presentation with clear navigation and conversion paths." }],
+    sections: [{ heading: "Output", body: "A responsive website prototype with destination content, clear navigation, and booking routes." }],
   },
   {
     slug: "oasa-telematics-redesign",
     title: "OASA Telematics App Redesign",
     status: "draft",
     clientType: "University of Athens dissertation project",
-    summary: "Figma redesign concept for the OASA Telematics app, focused on making public-transport information clearer and easier to act on.",
-    problem: "Transport information has to work under time pressure, with routes, arrivals, and decisions visible at a glance.",
+    summary: "Figma redesign concept for the OASA Telematics app, focused on routes, arrivals, and the next travel decision.",
+    problem: "People use transport information under time pressure. Routes, arrivals, and next steps need to be easy to see.",
     role: ["UX research", "App UI redesign", "Figma prototype"],
     services: ["Product UI", "UX design", "Prototype"],
     tools: ["Figma"],
     tags: ["product", "research", "public"],
     cover: { type: "placeholder", motif: "portal", alt: "Public transport app interface redesign" },
-    sections: [{ heading: "Output", body: "A Figma prototype for a clearer, more task-focused public-transport app experience." }],
+    sections: [{ heading: "Output", body: "A Figma prototype for a more task-focused public-transport app." }],
   },
   {
-    slug: "sfera-music-radio-platforms",
-    title: "Sfera 102.2 & Music 89.2",
-    status: "draft",
-    clientType: "Radio platforms",
-    summary: "Figma website concepts for music radio brands, designed around program discovery, live listening, and editorial content.",
-    problem: "The platforms needed to make live listening and station content immediate without losing each brand's personality.",
-    role: ["Website UI design", "Figma prototype", "Visual direction"],
-    services: ["Website design", "UI design"],
-    tools: ["Figma"],
-    tags: ["web", "culture"],
-    cover: { type: "placeholder", motif: "homepage", alt: "Music radio platform interface concept" },
-    sections: [{ heading: "Output", body: "Website prototypes that bring live radio, programming, and editorial content into one clear interface." }],
+    slug: "sfera-radio-website",
+    title: "Sfera 102.2",
+    status: "published",
+    clientType: "Sfera 102.2: music radio station",
+    liveUrl: "https://sfera.gr",
+    summary:
+      "Website design for Sfera 102.2. The work replaced a heavy web-app-style site with a WordPress platform for live listening, programme information, and daily music news.",
+    problem:
+      "The old site was slow, awkward on mobile, and difficult for the station team to update. Sfera publishes premieres, news, contests, and the Top 30 every day, so editors needed to manage the site while keeping the live stream close at hand.",
+    role: ["Website UI design", "Information architecture", "Visual direction", "WordPress design"],
+    services: ["Website design", "UI design", "WordPress"],
+    tools: ["Figma", "WordPress"],
+    tags: ["web", "wordpress", "culture"],
+    cover: {
+      type: "image",
+      motif: "homepage",
+      alt: "Sfera 102.2 homepage with the live-listen call to action and rotating show feature",
+      src: "media/work/sfera-home.webp",
+    },
+    gallery: [
+      { src: "media/work/sfera-top30.webp", alt: "The Sfera Top 30 chart page" },
+      { src: "media/work/sfera-program.webp", alt: "The Sfera program and schedule page" },
+    ],
+    sections: [
+      {
+        heading: "Context",
+        body: "Sfera 102.2 is a Greek-music radio station in the Politis Group. Alongside live radio, it publishes first plays, the Top 30, presenter information, events, and contests. It runs on the group's shared WordPress platform, which also supports Music 89.2.",
+      },
+      {
+        heading: "Challenge",
+        body: "The site needed to support an always-available live player and programme schedule alongside an editorial feed that changes every day. The old build made both harder to use and update.",
+      },
+      {
+        heading: "Process",
+        body: "I structured the site around the main listener tasks: listen live, see what is playing, and find the latest premieres. I designed the UI system and moved the site to the shared Politis Group WordPress platform. Editors can publish news, contests, and schedule changes without a developer.",
+      },
+      {
+        heading: "Output",
+        body: "A live, responsive site with streaming, a programme schedule, presenter pages, music news, the Top 30, events, and contests.",
+      },
+      {
+        heading: "Result",
+        body: "A site the station team can update day to day, with live listening and new music easy to reach.",
+      },
+    ],
+  },
+  {
+    slug: "music-892-radio-website",
+    title: "Music 89.2",
+    status: "published",
+    clientType: "Music 89.2: music radio station (Politis Group)",
+    liveUrl: "https://music892.gr",
+    summary:
+      "Website design for Music 89.2, a Politis Group music radio station. The WordPress site shares a platform with Sfera 102.2 while keeping Music 89.2's own identity.",
+    problem:
+      "Music 89.2 needed a live player, programme schedule, and editorial feed that the newsroom could update. It also had to share a platform and layout with Sfera while remaining recognisably Music 89.2.",
+    role: ["Website UI design", "Information architecture", "Visual direction", "WordPress design"],
+    services: ["Website design", "UI design", "WordPress"],
+    tools: ["Figma", "WordPress"],
+    tags: ["web", "wordpress", "culture"],
+    cover: {
+      type: "image",
+      motif: "homepage",
+      alt: "The Music 89.2 homepage with a bold black hero, the station wordmark, a producers feature, and a yellow Listen Now call to action",
+      src: "media/work/music-home.webp",
+      full: "media/work/music-home-full.webp",
+      caption: "Homepage",
+    },
+    gallery: [
+      {
+        src: "media/work/music-program.webp",
+        full: "media/work/music-program-full.webp",
+        caption: "Program",
+        alt: "The Music 89.2 program schedule with day tabs, show cards, and a Live Now card",
+      },
+      {
+        src: "media/work/music-world.webp",
+        full: "media/work/music-world-full.webp",
+        caption: "Music World",
+        alt: "The Music 89.2 Music World feed with a grid of music-news and events cards",
+      },
+    ],
+    sections: [
+      {
+        heading: "Context",
+        body: "Music 89.2 is a music radio station in the Politis Group, alongside Sfera 102.2. Its site covers the programme and presenters, Music World news and events, contests, videos, and the station's \"Κουνάβι\" community. It uses the group's shared WordPress platform.",
+      },
+      {
+        heading: "Challenge",
+        body: "The site needed an always-available live player and programme schedule, plus an editorial feed updated daily. Music 89.2 and Sfera also needed a common platform and layout, without making the two stations look the same.",
+      },
+      {
+        heading: "Process",
+        body: "I used the same structure, components, and publishing model as Sfera, then gave Music 89.2 a separate identity through black and acid yellow, oversized type, and its marquee wordmark. The site centres on listening live, checking the programme, and following music news and events.",
+      },
+      {
+        heading: "Output",
+        body: "A responsive site with streaming, a day-by-day programme and \"Live Now\" card, producer and show pages, a Music World feed, contests, and videos. The group can manage it on the same WordPress platform as Sfera.",
+      },
+      {
+        heading: "Result",
+        body: "A station site that keeps listening and music news close at hand while sharing a maintainable platform with Sfera. [ADD REAL OUTCOME: listener response or a metric]",
+      },
+    ],
+  },
+  {
+    slug: "ellinikos-932-radio-website",
+    title: "Ellinikos 93.2",
+    status: "published",
+    clientType: "Ellinikos 93.2: Greek-music radio station (Politis Group)",
+    liveUrl: "https://ellinikos932.gr",
+    summary:
+      "First website for Ellinikos 93.2, a Greek-music radio station in the Politis Group. It provides live listening, programme information, and editorial content on the shared platform used by Sfera 102.2 and Music 89.2.",
+    problem:
+      "Ellinikos 93.2 had no website for its live stream, programme, or editorial content. Its first site needed to be easy for the team to run and share a platform and layout with its sister stations without losing its own identity.",
+    role: ["Website UI design", "Information architecture", "Visual direction", "WordPress design"],
+    services: ["Website design", "UI design", "WordPress"],
+    tools: ["Figma", "WordPress"],
+    tags: ["web", "wordpress", "culture"],
+    cover: {
+      type: "image",
+      motif: "homepage",
+      alt: "The Ellinikos 93.2 homepage with a navy Greek-sea hero, the hand-drawn station wordmark, a live-play button, and a producers section",
+      src: "media/work/ellinikos-home.webp",
+      full: "media/work/ellinikos-home-full.webp",
+      caption: "Homepage",
+    },
+    gallery: [
+      {
+        src: "media/work/ellinikos-program.webp",
+        full: "media/work/ellinikos-program-full.webp",
+        caption: "Program",
+        alt: "The Ellinikos 93.2 program schedule with day tabs, show cards, and an on-air-now card",
+      },
+      {
+        src: "media/work/ellinikos-news.webp",
+        full: "media/work/ellinikos-news-full.webp",
+        caption: "Τα Νέα Μας",
+        alt: "The Ellinikos 93.2 editorial feed with a category filter and grids of soundtrack and contest cards",
+      },
+    ],
+    sections: [
+      {
+        heading: "Context",
+        body: "Ελληνικός 93.2 is a radio station for Greek music, with a strong focus on έντεχνο and new releases. It is part of the Politis Group alongside Sfera 102.2 and Music 89.2, and uses the group's shared WordPress platform.",
+      },
+      {
+        heading: "Challenge",
+        body: "Unlike its sister stations, Ellinikos started without a website. The first site had to include a live player, programme schedule, news, soundtracks, the \"Νέα Σκηνή\" new-artist strand, events, and interviews. It also needed to share the Politis Group platform while looking distinctly Ellinikos.",
+      },
+      {
+        heading: "Process",
+        body: "I used the shared Politis Group structure, components, and publishing model, then created a separate identity with a navy palette, hand-drawn wordmark, and Greek-music imagery. The site centres on listening live, seeing the programme and presenters, and browsing news, soundtracks, and \"Νέα Σκηνή\".",
+      },
+      {
+        heading: "Output",
+        body: "A responsive website with streaming, a day-by-day programme and on-air card, presenter pages, and an editorial hub for news, soundtracks, \"Νέα Σκηνή\", events, interviews, contests, and videos. It runs on the same WordPress platform as Sfera and Music 89.2.",
+      },
+      {
+        heading: "Result",
+        body: "Ellinikos now has a digital home for live music and editorial content that the group can maintain alongside its sister stations. [ADD REAL OUTCOME: launch or listener response, or a metric]",
+      },
+    ],
   },
   {
     slug: "iq-media-hub",
     title: "IQ Media Hub",
     status: "draft",
     clientType: "University of Athens & Nice Matin Media Group",
-    summary: "Figma prototype for IQ Media Hub, a digital platform connecting media-focused content and collaboration.",
-    problem: "A multi-partner media initiative needed a digital structure that made its content and purpose easier to understand.",
+    summary: "Figma prototype for IQ Media Hub, a platform for media content and collaboration.",
+    problem: "The multi-partner initiative needed a structure that explained its purpose and organised its content for a public audience.",
     role: ["Information architecture", "Website UI design", "Figma prototype"],
     services: ["Web design", "UI design"],
     tools: ["Figma"],
     tags: ["web", "research", "education"],
     cover: { type: "placeholder", motif: "search", alt: "Media hub website interface concept" },
-    sections: [{ heading: "Output", body: "A Figma prototype for a media hub with a clearer content structure and public-facing interface." }],
+    sections: [{ heading: "Output", body: "A Figma prototype for a media hub with an organised content structure and public-facing interface." }],
   },
   {
     slug: "analysis-platform",
     title: "Analysis",
-    status: "draft",
-    clientType: "University of Athens",
-    summary: "Figma prototype for Analysis, an academic digital platform shaped around clear content hierarchy and discoverability.",
-    problem: "Research-led content needed an interface that was credible, readable, and straightforward to navigate.",
-    role: ["Information architecture", "Website UI design", "Figma prototype"],
-    services: ["Web design", "UI design"],
-    tools: ["Figma"],
-    tags: ["web", "research", "education"],
-    cover: { type: "placeholder", motif: "search", alt: "Academic content platform interface concept" },
-    sections: [{ heading: "Output", body: "A website prototype that brings an academic content platform into a more legible digital experience." }],
+    status: "published",
+    clientType: "Analysis: media training against disinformation",
+    liveUrl: "https://analysis.ntlab.gr",
+    summary:
+      "Website and UI design for Analysis, a media-literacy project that trains journalists and news organisations in verification and fact-checking. The site explains the research project and gives people access to its free academy.",
+    problem:
+      "The site had to explain an EU research project to funders and partners while also serving journalists who wanted to enrol in the academy. Courses and resources needed to be easy to find without making the project information disappear.",
+    role: ["Website UI design", "Information architecture", "Visual direction", "WordPress design"],
+    services: ["Website design", "UI design", "WordPress"],
+    tools: ["Figma", "WordPress"],
+    tags: ["web", "wordpress", "education"],
+    cover: {
+      type: "image",
+      motif: "search",
+      alt: "Analysis homepage with the iridescent logo hero and the media-training tagline",
+      src: "media/work/analysis-home.webp",
+      full: "media/work/analysis-home-full.webp",
+      caption: "Homepage",
+    },
+    gallery: [
+      {
+        src: "media/work/analysis-about.webp",
+        full: "media/work/analysis-about-full.webp",
+        caption: "About the project",
+        alt: "The Analysis about page with a bold mission statement over a newsroom photo",
+      },
+      {
+        src: "media/work/analysis-courses.webp",
+        full: "media/work/analysis-courses-full.webp",
+        caption: "The Academy",
+        alt: "The Analysis Academy courses page listing the fact-checking training modules",
+      },
+    ],
+    sections: [
+      {
+        heading: "Context",
+        body: "Analysis is a media-training project that helps journalists and news organisations learn news verification and fact-checking. Its centrepiece is the Analysis Academy, a free six-week public programme covering fact-checking methodology, digital verification tools, advanced search, source tracking, and social-media and bot analysis. Partners are based in Greece, Austria, and Portugal.",
+      },
+      {
+        heading: "Challenge",
+        body: "This is EU-facing research on disinformation, so the site needed to be credible without reading like an academic report. It also had to separate the project story, including the mission, partners, and results, from the academy's courses, resources, and news.",
+      },
+      {
+        heading: "Process",
+        body: "I structured the site around its two audiences: funders and partners reading the project information, and journalists enrolling in the academy. The UI uses generous space, iridescent imagery, display type, and a hot-pink accent. The ANALYSIS acronym appears in the copy and identity.",
+      },
+      {
+        heading: "Output",
+        body: "A responsive WordPress site with a mission and results homepage, an about section, a self-serve academy with searchable course modules, a resources library, and a news feed.",
+      },
+      {
+        heading: "Result",
+        body: "A site for the media-literacy initiative that gives the academy a clear route from discovery to enrolment. [ADD REAL OUTCOME: enrolment numbers, partner or funder response, or a metric]",
+      },
+    ],
   },
   {
     slug: "demo-pharmaceutical",
-    title: "DEMO Pharmaceutical",
-    status: "draft",
-    clientType: "Pharmaceutical company",
-    summary: "Figma website prototype for DEMO Pharmaceutical, designed to give complex corporate and product information a clear visual hierarchy.",
-    problem: "The interface had to communicate trust and scale while helping distinct audiences find the right information quickly.",
-    role: ["Website UI design", "Information architecture", "Figma prototype"],
-    services: ["Web design", "UI design"],
-    tools: ["Figma"],
-    tags: ["web", "healthcare"],
-    cover: { type: "placeholder", motif: "homepage", alt: "Pharmaceutical company website interface concept" },
-    sections: [{ heading: "Output", body: "A Figma website prototype with a clear structure for corporate and product communication." }],
+    title: "DEMO Pharmaceuticals",
+    status: "published",
+    clientType: "DEMO S.A.: pharmaceutical industry",
+    liveUrl: "https://demo.gr",
+    summary:
+      "A corporate website concept for DEMO, one of Greece's largest pharmaceutical companies. It uses the company's existing brand system and presents its work before its organisational structure.",
+    problem:
+      "DEMO's previous site was organised around the company rather than what it does. It relied on a dense \"who we are\" grid, autoplay video, and sparse brochure pages. The concept needed to show the company's international work while retaining its established identity.",
+    role: ["Website UI design", "Visual direction", "Information architecture", "WordPress design"],
+    services: ["Website design", "UI design", "WordPress"],
+    tools: ["Figma", "WordPress"],
+    tags: ["web", "wordpress", "healthcare"],
+    cover: {
+      type: "image",
+      motif: "homepage",
+      alt: "The DEMO Pharmaceuticals homepage with a bold blue hero, the headline \"Bringing Global Access to Quality Medicines\", and an \"Always Forward, With Purpose and Integrity\" statement",
+      src: "media/work/demo-home.webp",
+      full: "media/work/demo-home-full.webp",
+      caption: "Homepage",
+    },
+    gallery: [
+      {
+        src: "media/work/demo-what.webp",
+        full: "media/work/demo-what-full.webp",
+        caption: "What we do",
+        alt: "The DEMO 'What we do' page headed \"Stronger, Healthier Communities\", framing research, development, and manufacturing",
+      },
+      {
+        src: "media/work/demo-news.webp",
+        full: "media/work/demo-news-full.webp",
+        caption: "News & media",
+        alt: "The DEMO News & Media hub with a rich grid of story cards, video, and report tiles",
+      },
+    ],
+    sections: [
+      {
+        heading: "Context",
+        body: "DEMO S.A. is one of Greece's largest pharmaceutical manufacturers. Established in 1965, it exports to markets around the world. Its corporate site speaks to patients and healthcare systems, prospective talent, partners, and the press.",
+      },
+      {
+        heading: "Challenge",
+        body: "The concept needed to feel appropriate for an international pharmaceutical company without inventing a new identity. It retains DEMO's triangle mark, corporate blue, and typographic voice while reorganising the site around the company's work, products, and news.",
+      },
+      {
+        heading: "Process",
+        body: "I kept DEMO's brand system and added a full-bleed blue hero, display type, and headlines about access to medicines. The information architecture groups content under Who we are, What we do, Talent management, and News & media. The News & Media hub uses story cards, video, and reports.",
+      },
+      {
+        heading: "Output",
+        body: "A corporate site built on DEMO's design system, with a homepage, sections for R&D and manufacturing, company information, talent and careers content, and a News & Media hub.",
+      },
+      {
+        heading: "Result",
+        body: "A concept that reorganises a corporate brochure around DEMO's work and uses the company's established brand. [ADD REAL OUTCOME: client or stakeholder response, or clarify whether this was commissioned or self-initiated]",
+      },
+    ],
   },
   {
     slug: "cymoid-productions",
     title: "Cymoid",
-    status: "draft",
-    clientType: "Cymoid Productions",
-    summary: "Figma website prototype for Cymoid Productions, creating a distinctive digital presentation for a creative production company.",
-    problem: "The website needed to foreground the work while keeping the experience focused and easy to explore.",
-    role: ["Website UI design", "Figma prototype", "Visual direction"],
-    services: ["Website design", "UI design"],
+    status: "published",
+    clientType: "Cymoid: media production, AI, training & events company",
+    liveUrl: "https://cymoid.eu",
+    summary:
+      "Website and visual direction for Cymoid, a new media company covering film production, AI tools, media training, and event management.",
+    problem:
+      "Cymoid launched with four different offerings: film production, AI tools, training, and events. The site needed to connect them under one identity and reflect the company's focus on AI and media.",
+    role: ["Website UI design", "Visual direction", "Art direction", "Figma design"],
+    services: ["Website design", "UI design", "Visual direction"],
     tools: ["Figma"],
-    tags: ["web", "culture"],
-    cover: { type: "placeholder", motif: "landing", alt: "Creative production company website interface concept" },
-    sections: [{ heading: "Output", body: "A Figma prototype that frames production work in a focused, visually expressive website experience." }],
+    tags: ["web", "brand", "culture"],
+    cover: {
+      type: "image",
+      motif: "landing",
+      alt: "Cymoid homepage hero with an iridescent 3D render and the bold display headline",
+      src: "media/work/cymoid-home.webp",
+      full: "media/work/cymoid-home-full.webp",
+      caption: "Homepage",
+    },
+    gallery: [
+      {
+        src: "media/work/cymoid-production.webp",
+        full: "media/work/cymoid-production-full.webp",
+        caption: "Production page",
+        alt: "The Cymoid film production page with a cinematic still",
+      },
+      {
+        src: "media/work/cymoid-ai.webp",
+        full: "media/work/cymoid-ai-full.webp",
+        caption: "The Power of AI page",
+        alt: "The Cymoid AI page with a chrome iridescent hero visual",
+      },
+    ],
+    sections: [
+      {
+        heading: "Context",
+        body: "Cymoid is a new media company working in film and animation production, AI tools for newsrooms and production teams, media training, and event management. Its team includes academics, researchers, and media professionals.",
+      },
+      {
+        heading: "Challenge",
+        body: "One brand had to bring together four services without making them appear unrelated. The visual design also needed to show the company's AI and media focus from the first screen.",
+      },
+      {
+        heading: "Process",
+        body: "I used generative iridescent 3D imagery, display type, and a rounded bento layout. Production, AI, Training, and Events each have a dedicated page with their own imagery while sharing the same overall system.",
+      },
+      {
+        heading: "Output",
+        body: "A responsive website with a bento-style homepage and dedicated pages for production, AI, training, and event management. Each page has its own generative hero image and a project-enquiry route.",
+      },
+      {
+        heading: "Result",
+        body: "A site that presents Cymoid's four services under one visual system. [ADD REAL OUTCOME: launch response, client feedback, or a metric]",
+      },
+    ],
   },
   {
     slug: "aftersalespro-redesign",
     title: "AftersalesPro Redesign Concept",
     status: "draft",
     clientType: "AftersalesPro",
-    summary: "Figma redesign concept for AftersalesPro, exploring a clearer product interface for a future platform refresh.",
-    problem: "The concept needed to clarify product structure and interaction patterns before a future redesign moved into delivery.",
+    summary: "Figma redesign concept for AftersalesPro, setting out a clearer product interface before a platform refresh.",
+    problem: "The product structure and interaction patterns needed to be resolved before the redesign moved into delivery.",
     role: ["Product UI design", "UX audit", "Figma prototype"],
     services: ["Product UI", "UI redesign", "Prototype"],
     tools: ["Figma"],
     tags: ["product", "audit", "commercial"],
     cover: { type: "placeholder", motif: "audit", alt: "Product interface redesign concept" },
-    sections: [{ heading: "Output", body: "A Figma redesign concept that establishes a clearer foundation for a future product refresh." }],
+    sections: [{ heading: "Output", body: "A Figma redesign concept that defines the interface for a future product refresh." }],
   },
   {
     slug: "synapsync-netcompany-intrasoft",
     title: "SynapSync",
     status: "draft",
     clientType: "Netcompany Intrasoft",
-    summary: "Figma prototype for SynapSync, created for Netcompany Intrasoft as a concept presentation for a connected digital product.",
-    problem: "The concept needed to express a complex product idea through a coherent interface and presentation-ready user flows.",
+    summary: "Figma prototype for SynapSync, created for Netcompany Intrasoft to present a connected digital product concept.",
+    problem: "The concept needed interface flows that could explain a complex product idea in a presentation.",
     role: ["Product UI design", "UX flows", "Figma prototype"],
     services: ["Product UI", "UX design", "Prototype"],
     tools: ["Figma"],
     tags: ["product", "prototype", "commercial"],
     cover: { type: "placeholder", motif: "portal", alt: "Enterprise product interface concept" },
-    sections: [{ heading: "Output", body: "A Figma prototype and concept presentation for a connected enterprise product experience." }],
+    sections: [{ heading: "Output", body: "A Figma prototype and concept presentation for a connected enterprise product." }],
   },
   {
     slug: "choose-website-redesign",
@@ -195,9 +485,9 @@ const namedUiUxProjects: CaseStudy[] = [
     status: "draft",
     clientType: "Digital service",
     summary:
-      "Website redesign work for Choose, focused on giving the offer a clearer digital structure and presentation.",
+      "Website redesign work for Choose, reorganising the offer and its next steps.",
     problem:
-      "The digital presence needed a more deliberate hierarchy so visitors could understand the offer and find the next step without unnecessary friction.",
+      "Visitors needed to understand the offer and find the relevant next step without working through unnecessary content.",
     role: ["Website UI redesign", "Information architecture", "Figma prototype"],
     services: ["Website design", "UX design"],
     tools: ["Figma"],
@@ -206,7 +496,7 @@ const namedUiUxProjects: CaseStudy[] = [
     sections: [
       {
         heading: "Output",
-        body: "A clearer website direction with responsive page layouts and a prototype-ready design system.",
+        body: "Responsive page layouts and a design system ready for prototyping.",
       },
     ],
   },
@@ -216,9 +506,9 @@ const namedUiUxProjects: CaseStudy[] = [
     status: "draft",
     clientType: "Restaurant",
     summary:
-      "Website UI work for Pino, a Roman pizzeria in Glyfada, designed to bring the restaurant's character, menu, and practical visit information into one clear experience.",
+      "Website UI work for Pino, a Roman pizzeria in Glyfada, bringing together the restaurant's character, menu, and visit information.",
     problem:
-      "The website needed to carry the warmth and craft of the restaurant while making the menu, location, and booking journey easy to reach.",
+      "The site needed to reflect the restaurant while making the menu, location, and booking information easy to find.",
     role: ["Website UI design", "Visual direction", "Figma prototype"],
     services: ["Website design", "Visual direction"],
     tools: ["Figma"],
@@ -227,7 +517,7 @@ const namedUiUxProjects: CaseStudy[] = [
     sections: [
       {
         heading: "Output",
-        body: "A responsive restaurant website direction built around atmosphere, menu discovery, and an easy route to visit or book.",
+        body: "A responsive restaurant website direction with menu discovery, visit information, and booking routes.",
       },
     ],
   },
@@ -237,9 +527,9 @@ const namedUiUxProjects: CaseStudy[] = [
     status: "draft",
     clientType: "Paediatric healthcare",
     summary:
-      "Website design for Dr. Marios Detsis, organising medical information into a calm, clear digital presence for patients and parents.",
+      "Website design for Dr. Marios Detsis, organising medical information for patients and parents.",
     problem:
-      "The experience needed to make professional background, services, and contact information easy to understand for families seeking reliable care.",
+      "Families needed to find the doctor's background, services, and contact information without ambiguity.",
     role: ["Website UI design", "Content structure", "Figma prototype"],
     services: ["Website design", "UX design"],
     tools: ["Figma"],
@@ -248,28 +538,66 @@ const namedUiUxProjects: CaseStudy[] = [
     sections: [
       {
         heading: "Output",
-        body: "A patient-focused website structure that balances medical credibility with clear, approachable information.",
+        body: "A patient-focused website structure for medical background, services, and contact information.",
       },
     ],
   },
   {
     slug: "repower-eu",
     title: "REPower.eu",
-    status: "draft",
-    clientType: "Energy initiative",
+    status: "published",
+    clientType: "Public energy-upgrade initiative",
+    liveUrl: "https://repowereu.gr/",
     summary:
-      "Digital design work for REPower.eu, presenting an energy-focused initiative through a clear, accessible web experience.",
+      "A landing page for REPower.eu, bringing two energy-upgrade programmes, their deadlines, and the next action into one place.",
     problem:
-      "The platform needed to turn a complex energy message into a focused digital journey with clear calls to action and content hierarchy.",
+      "The programmes have different rules, timings, and routes. Once someone has an approval or voucher, they need to know which path applies and what remains to be done without working through a maze of official information.",
     role: ["Website UI design", "Campaign design", "Figma prototype"],
-    services: ["Website design", "Campaign design"],
+    services: ["Landing-page design", "Campaign design"],
     tools: ["Figma"],
-    tags: ["campaign", "prototype", "public"],
-    cover: { type: "placeholder", motif: "landing", alt: "Energy initiative landing page for REPower.eu" },
+    tags: ["web", "landing", "public"],
+    cover: {
+      type: "image",
+      motif: "landing",
+      alt: "REPower.eu homepage with a Greek energy-agreement hero and links to programme information",
+      src: "media/work/repower-eu-home.webp",
+      full: "media/work/repower-eu-home-full.webp",
+      caption: "Homepage",
+    },
+    gallery: [
+      {
+        src: "media/work/repower-eu-deadlines.webp",
+        full: "media/work/repower-eu-home-full.webp",
+        caption: "Deadlines overview",
+        alt: "REPower.eu deadlines overview for the active energy-upgrade programmes",
+      },
+      {
+        src: "media/work/repower-eu-exoikonomo.webp",
+        full: "media/work/repower-eu-home-full.webp",
+        caption: "Εξοικονομώ 2025",
+        alt: "REPower.eu programme section for Εξοικονομώ 2025",
+      },
+    ],
     sections: [
       {
+        heading: "Context",
+        body: "REPower.eu is the public-facing hub for «Εξοικονομώ 2025» and «Αλλάζω Σύστημα Θέρμανσης και Θερμοσίφωνα». It is aimed at people who have already been approved or received a voucher, and need to find the deadline, steps, and official service that apply to them.",
+      },
+      {
+        heading: "Challenge",
+        body: "This needed to behave like a practical guide, not a campaign splash page. The two programmes had to be distinct at a glance, deadlines had to be difficult to miss, and the route to the right official platform had to be obvious when someone needed more detail or needed to sign in.",
+      },
+      {
+        heading: "Process",
+        body: "The page is built around the decisions people need to make: find your programme, check the date, see what needs to happen next, then continue to the relevant official service. A single navigation and a repeated set of calls to action keep those routes available throughout the page, while the detailed guidance sits below the overview rather than competing with it at the start.",
+      },
+      {
         heading: "Output",
-        body: "A landing-page direction that makes an energy initiative easier to explore and act on.",
+        body: "A live, single-page information hub organised around the active programmes, a deadline overview, detailed next steps, frequently asked questions, and links to the official programme platforms.",
+      },
+      {
+        heading: "Result",
+        body: "A focused public landing page that gives two separate programme routes a shared starting point. It answers the first question, “Which programme am I in?”, then keeps the next step close at hand.",
       },
     ],
   },
@@ -279,9 +607,9 @@ const namedUiUxProjects: CaseStudy[] = [
     status: "draft",
     clientType: "Legal services",
     summary:
-      "Website design for DTK Law Firm, shaping a credible digital presence around environmental law, investment, planning, and sustainability expertise.",
+      "Website design for DTK Law Firm, presenting its work in environmental law, investment, planning, and sustainability.",
     problem:
-      "The firm needed an editorial, trustworthy structure for specialist legal knowledge, publications, and areas of expertise.",
+      "The firm needed to organise specialist legal knowledge, publications, and practice areas for prospective clients.",
     role: ["Website UI design", "Content structure", "Visual direction"],
     services: ["Website design", "Brand support"],
     tools: ["Figma"],
@@ -290,7 +618,7 @@ const namedUiUxProjects: CaseStudy[] = [
     sections: [
       {
         heading: "Output",
-        body: "A professional website system for communicating specialist practice areas, publications, and firm expertise.",
+        body: "A website system for practice areas, publications, and firm information.",
       },
     ],
   },
@@ -300,9 +628,9 @@ const namedUiUxProjects: CaseStudy[] = [
     status: "draft",
     clientType: "E-commerce",
     summary:
-      "E-commerce website design for Capitano, focused on product clarity, visual consistency, and a straightforward path from browsing to purchase.",
+      "E-commerce website design for Capitano, with product information and purchase steps set out clearly.",
     problem:
-      "The shop needed a clearer product experience that supports discovery and purchasing without losing brand character.",
+      "The shop needed to support product discovery and purchasing without losing the brand's character.",
     role: ["E-commerce UI design", "Product-page design", "Figma prototype"],
     services: ["E-commerce design", "Website design"],
     tools: ["Figma"],
@@ -311,40 +639,78 @@ const namedUiUxProjects: CaseStudy[] = [
     sections: [
       {
         heading: "Output",
-        body: "A responsive shop interface with clearer product presentation and purchase paths.",
+        body: "A responsive shop interface with product pages and purchase routes.",
       },
     ],
   },
   {
     slug: "edae-acne-awareness-campaign",
-    title: "ΕΔΑΕ — Acne Awareness Campaign",
-    status: "draft",
-    clientType: "Hellenic Society of Dermatology and Venereology",
+    title: "EDAE Acne Awareness Campaign",
+    status: "published",
+    clientType: "EDAE — Hellenic Dermatology and Venereology Society",
+    liveUrl: "https://www.edae.gr/acne2026/",
     summary:
-      "Campaign landing page for ΕΔΑΕ, designed to help young people and families find clear, dermatologist-led information about acne.",
+      "Landing page for EDAE's acne-awareness campaign, aimed at teens and their parents.",
     problem:
-      "The campaign needed to make medical guidance approachable while helping people distinguish evidence-based care from common misconceptions.",
-    role: ["Campaign landing page", "UI design", "Visual direction"],
-    services: ["Campaign design", "Website design"],
+      "Acne can be obscured by myths and home remedies. EDAE needed a campaign page that gives teens and parents clear dermatology guidance and a direct route to a specialist.",
+    role: ["Landing page design", "Brand application"],
+    services: ["Website design", "UI design"],
     tools: ["Figma"],
-    tags: ["campaign", "healthcare"],
-    cover: { type: "placeholder", motif: "landing", alt: "Acne awareness campaign landing page for EDAE" },
+    tags: ["web", "landing", "healthcare"],
+    cover: {
+      type: "image",
+      motif: "landing",
+      alt: "EDAE acne-awareness campaign homepage with a teenager and a dermatologist finder call to action",
+      src: "media/work/edae-acne2026-home.webp",
+      full: "media/work/edae-acne2026-full.webp",
+      caption: "Homepage",
+    },
+    gallery: [
+      {
+        src: "media/work/edae-acne2026-types.webp",
+        full: "media/work/edae-acne2026-full.webp",
+        caption: "Acne types",
+        alt: "The EDAE campaign's acne-types section, with an illustrated explanatory list",
+      },
+      {
+        src: "media/work/edae-acne2026-tips.webp",
+        full: "media/work/edae-acne2026-full.webp",
+        caption: "Advice for teens and parents",
+        alt: "The EDAE campaign's advice section for teens and parents",
+      },
+    ],
     sections: [
       {
+        heading: "Context",
+        body: "A single-page information campaign with sections for acne, types and causes, myths and truths, practical advice, and a route to find a dermatologist.",
+      },
+      {
+        heading: "Challenge",
+        body: "The page had to make medical information approachable for teens without losing the authority of a dermatology society. It also had to carry the creative team's established campaign identity through a long, single-page journey, from the opening message to the dermatologist finder.",
+      },
+      {
+        heading: "Process",
+        body: "I applied the creative team's established campaign branding to the page layout, typography, colour blocks, content cards, navigation, and calls to action. Anchor links let visitors move directly to information about acne, types and causes, myths and truths, or advice.",
+      },
+      {
         heading: "Output",
-        body: "An educational campaign experience combining accessible health information, myth-busting content, and a route to specialist support.",
+        body: "A responsive landing page that brings acne information, myth-busting content, advice for teens and parents, and the dermatologist finder into one campaign experience.",
+      },
+      {
+        heading: "Result",
+        body: "EDAE has a focused destination for its acne guidance. Visitors can move from the campaign message and myth-busting content to practical advice and the dermatologist finder without leaving the page.",
       },
     ],
   },
   {
     slug: "kyverneio-palataki",
-    title: "Kyverneio — Palataki",
+    title: "Kyverneio: Palataki",
     status: "draft",
     clientType: "Hellenic Public Properties Company / ETAD",
     summary:
-      "Digital concept work for Kyverneio — Palataki, framing the landmark's next chapter as an open cultural destination in Thessaloniki.",
+      "Digital concept work for Kyverneio: Palataki, presenting the landmark as a cultural destination in Thessaloniki.",
     problem:
-      "A historic landmark needed a public-facing digital presence that could honour its identity while communicating its future as a cultural and visitor destination.",
+      "The landmark needed a public-facing site that explained its history and its planned role as a cultural and visitor destination.",
     role: ["Website UI design", "Content structure", "Visual direction"],
     services: ["Website design", "Cultural communication"],
     tools: ["Figma"],
@@ -353,7 +719,7 @@ const namedUiUxProjects: CaseStudy[] = [
     sections: [
       {
         heading: "Output",
-        body: "A digital direction for presenting the landmark, its history, and its future cultural programme to the public.",
+        body: "A digital direction for the landmark, its history, and its cultural programme.",
       },
     ],
   },
@@ -392,11 +758,11 @@ export const caseStudies: CaseStudy[] = ([
     slug: "my1521-taxpayer-portal",
     title: "my1521 Taxpayer Service Portal",
     status: "draft",
-    clientType: "AADE — Independent Authority for Public Revenue",
+    clientType: "AADE: Independent Authority for Public Revenue",
     summary:
-      "UI design for my1521, AADE's taxpayer service platform — portal screens, digital service flows, and ticketing designed so any citizen can get help without knowing the system.",
+      "UI design for my1521, AADE's taxpayer service platform. The work covers portal screens, digital service flows, and ticketing so citizens can get help without knowing the system.",
     problem:
-      "Taxpayer support runs through many channels and departments. The platform had to turn that complexity into one clear digital entry point: submit a request, follow its progress, get an answer.",
+      "Taxpayer support runs through many channels and departments. The platform needed one digital entry point where people can submit a request, follow its progress, and receive an answer.",
     role: ["Product UI design", "UX flows", "Figma production", "Public-sector design"],
     services: ["Product UI", "Service design", "Design system"],
     tools: ["Figma"],
@@ -409,7 +775,7 @@ export const caseStudies: CaseStudy[] = ([
     sections: [
       {
         heading: "Context",
-        body: "UI work for my1521, the digital face of AADE's taxpayer service line — the portal, digital service journeys, and the ticketing flows behind them.",
+        body: "UI work for my1521, AADE's taxpayer service portal, including digital service and ticketing flows.",
       },
       {
         heading: "Challenge",
@@ -417,8 +783,8 @@ export const caseStudies: CaseStudy[] = ([
       },
       {
         heading: "Process",
-        body: "I worked from the service journeys into portal structure, request and ticketing flows, form patterns, and status communication — designed and iterated as a component-driven Figma system.",
-        mediaPlaceholder: "[ADD SCREENSHOTS — my1521 portal and ticketing screens]",
+        body: "I worked from the service journeys into the portal structure, request and ticketing flows, form patterns, and status communication. The work was designed and iterated as a component-driven Figma system.",
+        mediaPlaceholder: "[ADD SCREENSHOTS: my1521 portal and ticketing screens]",
       },
       {
         heading: "Output",
@@ -433,9 +799,9 @@ export const caseStudies: CaseStudy[] = ([
     year: "2026",
     clientType: "Independent Authority for Public Revenue (government)",
     summary:
-      "Wayfinding and signage direction for AADE, Greece's tax authority — a nationwide, government-scale system built for absolute clarity.",
+      "Wayfinding and signage direction for AADE, Greece's tax authority, for use across offices nationwide.",
     problem:
-      "A national tax authority needed signage and wayfinding clear enough for every citizen entering an AADE office, regardless of how familiar they are with government buildings or procedures.",
+      "AADE needed signage that could help people find the right place in an office, whether or not they knew the building or procedure.",
     role: [
       "Signage design",
       "Wayfinding UX",
@@ -453,7 +819,7 @@ export const caseStudies: CaseStudy[] = ([
     sections: [
       {
         heading: "Context",
-        body: "Signage and wayfinding work for AADE, the Independent Authority for Public Revenue — the government body citizens and businesses across Greece interact with for tax matters.",
+        body: "Signage and wayfinding work for AADE, the Independent Authority for Public Revenue. Citizens and businesses across Greece interact with the authority for tax matters.",
       },
       {
         heading: "Challenge",
@@ -469,7 +835,7 @@ export const caseStudies: CaseStudy[] = ([
       },
       {
         heading: "Result",
-        body: "A calmer, clearer arrival experience for citizens and staff, at national government scale.",
+        body: "A signage system for citizens and staff across AADE offices.",
       },
     ],
   },
@@ -477,11 +843,11 @@ export const caseStudies: CaseStudy[] = ([
     slug: "teka-ui-redesign",
     title: "TEKA Pension Fund UI Redesign",
     status: "draft",
-    clientType: "TEKA — Hellenic Auxiliary Pensions Defined Contributions Fund",
+    clientType: "TEKA: Hellenic Auxiliary Pensions Defined Contributions Fund",
     summary:
-      "UI redesign for TEKA, the national auxiliary pension fund — bringing clarity and trust to a digital presence citizens rely on for their retirement savings.",
+      "UI redesign for TEKA, the national auxiliary pension fund, focused on making pension information easier to read and use.",
     problem:
-      "A pension fund's interface has to earn trust on sight. The redesign had to make dense institutional content legible and reassuring for members of every age group.",
+      "The redesign had to make dense institutional information readable for members at different stages of their working lives.",
     role: ["UI redesign", "Information architecture", "Figma production"],
     services: ["UI design", "Web design", "Public-sector design"],
     tools: ["Figma"],
@@ -498,12 +864,12 @@ export const caseStudies: CaseStudy[] = ([
       },
       {
         heading: "Challenge",
-        body: "Members range from young workers enrolling for the first time to people approaching retirement. Content is regulatory and dense, but the experience still had to feel calm, modern, and trustworthy.",
+        body: "Members range from people enrolling for the first time to people approaching retirement. The regulatory content needed a readable hierarchy across devices.",
       },
       {
         heading: "Process",
-        body: "I restructured the content hierarchy, then redesigned the UI language — typography, components, and page patterns — so institutional information reads clearly across devices.",
-        mediaPlaceholder: "[ADD SCREENSHOTS — TEKA redesign screens]",
+        body: "I restructured the content hierarchy, then redesigned the typography, components, and page patterns for use across devices.",
+        mediaPlaceholder: "[ADD SCREENSHOTS: TEKA redesign screens]",
       },
       {
         heading: "Output",
@@ -512,40 +878,61 @@ export const caseStudies: CaseStudy[] = ([
     ],
   },
   {
-    slug: "growthfund-microsite",
-    title: "Growthfund (Υπερταμείο) Microsite",
-    status: "draft",
-    clientType: "Growthfund — the National Fund of Greece",
+    slug: "ppf-growthfund",
+    title: "PPF: Project Preparation Facility",
+    status: "published",
+    clientType: "PPF: Growthfund's Strategic Contracts Unit",
+    liveUrl: "https://ppf.growthfund.gr",
     summary:
-      "Microsite design for Growthfund, Greece's sovereign wealth fund — presenting a national investment story with editorial clarity.",
+      "Website and UI design for PPF (Project Preparation Facility), Growthfund's operationally independent Strategic Contracts Unit. The site gives the unit its own presence while retaining the Hellenic Growth Fund connection.",
     problem:
-      "The fund needed a focused microsite that communicates its mandate and initiatives to the public, press, and institutional audiences without drowning them in corporate density.",
-    role: ["Web design", "UI design", "Content structure", "Figma production"],
-    services: ["Web design", "Microsite", "Editorial design"],
-    tools: ["Figma"],
-    tags: ["web", "public"],
+      "PPF matures and tenders strategically important projects for Growthfund. Its site needed separate projects, tenders, and press content while retaining the connection to Growthfund. Procurement information also needed to be easy for contractors, institutions, and citizens to find.",
+    role: ["Website UI design", "Information architecture", "Visual direction", "WordPress design"],
+    services: ["Website design", "UI design", "WordPress"],
+    tools: ["Figma", "WordPress"],
+    tags: ["web", "wordpress", "public"],
     cover: {
-      type: "placeholder",
-      motif: "landing",
-      alt: "Wireframe of a corporate microsite landing page",
+      type: "image",
+      motif: "homepage",
+      alt: "The PPF homepage with the co-branded PPF / Hellenic Growth Fund lockup and the strategic-contracts mission statement over an aerial hero",
+      src: "media/work/ppf-home.webp",
+      full: "media/work/ppf-home-full.webp",
+      caption: "Homepage",
     },
+    gallery: [
+      {
+        src: "media/work/ppf-projects.webp",
+        full: "media/work/ppf-projects-full.webp",
+        caption: "Projects portfolio",
+        alt: "The PPF projects page with category filters and a grid of strategic-project cards",
+      },
+      {
+        src: "media/work/ppf-tenders.webp",
+        full: "media/work/ppf-tenders-full.webp",
+        caption: "Tenders",
+        alt: "The PPF tenders page with a search field, category filter, and a list of public tender notices",
+      },
+    ],
     sections: [
       {
         heading: "Context",
-        body: "Microsite design for Growthfund (Υπερταμείο), the national fund overseeing major Greek public assets.",
+        body: "PPF, the Project Preparation Facility (Μονάδα Στρατηγικών Συμβάσεων), was established in 2021 as an operationally independent unit of Growthfund. It matures, tenders, and monitors strategically important projects assigned by the Governmental Committee for Strategic Contracts. Its remit includes concessions and PPPs, procurement and services, infrastructure, and activity abroad.",
       },
       {
         heading: "Challenge",
-        body: "Institutional credibility with editorial readability — a site that works for journalists, policy audiences, and citizens at the same time.",
+        body: "The site had to give PPF its own projects portfolio, live tenders, and press room while clearly showing its relationship with Growthfund. Public procurement content is dense and legalistic, so contractors, institutions, and citizens also needed to find tenders and projects easily.",
       },
       {
         heading: "Process",
-        body: "I shaped the narrative structure first, then designed a restrained UI system — clear typography, strong hierarchy, and content modules that keep the story in front.",
-        mediaPlaceholder: "[ADD SCREENSHOTS — Growthfund microsite screens]",
+        body: "I retained the parent identity's palette and co-branded lockup, then gave PPF its own structure and voice. The site includes a filterable projects portfolio, a searchable tenders section, and a press room. WordPress lets the unit publish tenders, projects, and announcements in Greek and English.",
       },
       {
         heading: "Output",
-        body: "A complete microsite design in Figma, structured for straightforward implementation.",
+        body: "A bilingual WordPress site with a mission-led homepage, an about section, a filterable projects portfolio, a searchable tenders listing, a press-release feed, and careers and contact pages.",
+      },
+      {
+        heading: "Result",
+        body: "A PPF site that retains the Growthfund connection and gives people direct routes to strategic projects and public tenders. [ADD REAL OUTCOME: launch response, stakeholder feedback, or a metric]",
       },
     ],
   },
@@ -553,9 +940,9 @@ export const caseStudies: CaseStudy[] = ([
     slug: "ekapy-web-design",
     title: "EKAPY Health Procurement Web Design",
     status: "draft",
-    clientType: "EKAPY — National Central Authority for Health Procurement",
+    clientType: "EKAPY: National Central Authority for Health Procurement",
     summary:
-      "Web and UI design for EKAPY, the national authority coordinating health procurement — making operational, data-heavy content navigable.",
+      "Web and UI design for EKAPY, the national authority coordinating health procurement. The work organises operational, data-heavy content.",
     problem:
       "Procurement content is dense: tenders, documents, deadlines, and regulation. The site had to make that material findable and scannable for suppliers, hospitals, and the public.",
     role: ["Web design", "UI design", "Information architecture"],
@@ -574,12 +961,12 @@ export const caseStudies: CaseStudy[] = ([
       },
       {
         heading: "Challenge",
-        body: "Users arrive with a task — find a tender, a document, a deadline. The design had to privilege findability and scannability over decoration.",
+        body: "Users arrive to find a tender, document, or deadline. The design prioritised those tasks over decoration.",
       },
       {
         heading: "Process",
         body: "I organized the content model around user tasks, then designed listing, search, and document patterns that keep dense operational content legible.",
-        mediaPlaceholder: "[ADD SCREENSHOTS — EKAPY web design screens]",
+        mediaPlaceholder: "[ADD SCREENSHOTS: EKAPY web design screens]",
       },
       {
         heading: "Output",
@@ -590,38 +977,59 @@ export const caseStudies: CaseStudy[] = ([
   {
     slug: "kifissia-municipality-redesign",
     title: "Municipality of Kifissia Website Redesign",
-    status: "draft",
-    clientType: "Municipality of Kifissia",
+    status: "published",
+    clientType: "Municipality of Kifissia (Δήμος Κηφισιάς)",
+    liveUrl: "https://kifissia.gr",
     summary:
-      "Website redesign for the Municipality of Kifissia — turning a civic content archive into a service-first experience for residents.",
+      "Website and UI design for the Municipality of Kifissia, replacing a legacy civic site with a WordPress platform organised around resident services.",
     problem:
-      "Municipal sites accumulate announcements, documents, and departments faster than structure. Residents needed services and information first, organizational charts second.",
-    role: ["Web design", "Information architecture", "UI design"],
-    services: ["Web design", "Redesign", "Civic design"],
-    tools: ["Figma"],
-    tags: ["web", "research", "public"],
+      "The previous site was a deep archive of announcements, documents, and departments. Finding a service often required knowing which office ran it. The redesign needed to centre resident tasks and give the municipal team a site it could update without a developer.",
+    role: ["Website UI design", "Information architecture", "Visual direction", "WordPress design"],
+    services: ["Website design", "UI design", "WordPress"],
+    tools: ["Figma", "WordPress"],
+    tags: ["web", "wordpress", "public"],
     cover: {
-      type: "placeholder",
+      type: "image",
       motif: "sitemap",
-      alt: "Wireframe sitemap of a municipal website restructure",
+      alt: "The Municipality of Kifissia homepage with a large search field over an aerial photo of the town centre and a clear top-level navigation",
+      src: "media/work/kifissia-home.webp",
+      full: "media/work/kifissia-home-full.webp",
+      caption: "Homepage",
     },
+    gallery: [
+      {
+        src: "media/work/kifissia-services.webp",
+        full: "media/work/kifissia-services-full.webp",
+        caption: "Services",
+        alt: "The Kifissia Services page leading with electronic services and listing the municipality's directorates and departments",
+      },
+      {
+        src: "media/work/kifissia-dimos.webp",
+        full: "media/work/kifissia-dimos-full.webp",
+        caption: "Our Municipality",
+        alt: "The 'Our Municipality' section covering the town's identity, history, and governance, with a side navigation of departments",
+      },
+    ],
     sections: [
       {
         heading: "Context",
-        body: "Redesign work for the website of the Municipality of Kifissia.",
+        body: "The Municipality of Kifissia serves three municipal units and roughly 73,000 residents in an area long known as Attica's \"garden city\". People use its website to issue certificates, report everyday problems, follow local news and events, and contact municipal departments. The redesign moved the site from a legacy platform to WordPress.",
       },
       {
         heading: "Challenge",
-        body: "Reorganize years of civic content around what residents actually come to do — services, requests, news, and contact — without losing institutional completeness.",
+        body: "Municipal sites need to retain every department, notice, and document while helping residents complete routine tasks. The work reorganised years of civic content around those tasks and a clearer sitemap, on a platform the municipal team could maintain.",
       },
       {
         heading: "Process",
-        body: "Content audit and restructure first, then a redesigned page system: clear service entry points, readable news and announcement patterns, and consistent department pages.",
-        mediaPlaceholder: "[ADD SCREENSHOTS — Kifissia redesign screens]",
+        body: "I structured the site around resident tasks rather than the municipal organisation. The top-level sitemap covers Services, Our Municipality, News & Events, and Contact, with prominent search and an \"apply online\" route on the homepage. The Services section leads with electronic services, including certificate issuance through Taxisnet codes and everyday-issue reporting through novoville, alongside the full directorate structure. WordPress lets the team publish announcements, events, and press releases themselves.",
       },
       {
         heading: "Output",
-        body: "A resident-first redesign of the municipal web presence.",
+        body: "A responsive WordPress site with a search-led homepage, e-services, urgent announcements, and news. It also includes a Services section, an \"Our Municipality\" section, a news and events calendar, and contact information.",
+      },
+      {
+        heading: "Result",
+        body: "A municipal site organised around resident services, on a platform the team can update themselves. [ADD REAL OUTCOME: launch response, resident or stakeholder feedback, or a metric]",
       },
     ],
   },
@@ -629,9 +1037,9 @@ export const caseStudies: CaseStudy[] = ([
     slug: "eu-regions-week-2025",
     title: "EU Regions Week 2025 Web Presence",
     status: "draft",
-    clientType: "Regional authority — EU Regions Week 2025",
+    clientType: "Regional authority: EU Regions Week 2025",
     summary:
-      "Web design for a regional authority's presence at EU Regions Week 2025 — a focused, event-driven experience with a European audience.",
+      "Web design for a regional authority's presence at EU Regions Week 2025, for a European audience.",
     problem:
       "An event presence has a short life and a wide audience. The design had to communicate the region's agenda quickly, in an EU-institutional context, on any device.",
     role: ["Web design", "UI design", "Campaign design"],
@@ -650,12 +1058,12 @@ export const caseStudies: CaseStudy[] = ([
       },
       {
         heading: "Challenge",
-        body: "Communicate a regional agenda to an international, institutional audience — fast to scan, credible in tone, consistent with EU event contexts.",
+        body: "Communicate a regional agenda to an international institutional audience in a format that is easy to scan and appropriate for an EU event.",
       },
       {
         heading: "Process",
-        body: "I designed an event-first structure — agenda, themes, participation — with a visual language that balances regional identity and EU-institutional credibility.",
-        mediaPlaceholder: "[ADD SCREENSHOTS — EU Regions Week screens]",
+        body: "I designed an event-first structure covering the agenda, themes, and participation, with a visual system that combines regional identity and EU institutional conventions.",
+        mediaPlaceholder: "[ADD SCREENSHOTS: EU Regions Week screens]",
       },
       {
         heading: "Output",
@@ -667,11 +1075,11 @@ export const caseStudies: CaseStudy[] = ([
     slug: "fysiko-aerio-campaigns",
     title: "Fysiko Aerio Campaign Experiences",
     status: "draft",
-    clientType: "Fysiko Aerio — Hellenic Energy Company",
+    clientType: "Fysiko Aerio: Hellenic Energy Company",
     summary:
-      "Campaign landings and interactive experiences for a national energy brand — Park Your Cinema, a basketball shoot-and-win game, and Village Cinemas collaborations.",
+      "Campaign landing pages and interactive work for a national energy brand, including Park Your Cinema, a basketball shoot-and-win game, and Village Cinemas collaborations.",
     problem:
-      "Energy is a low-engagement category. The campaigns had to make the brand genuinely fun to interact with — games, cinema tie-ins, seasonal landings — while staying on-brand and conversion-aware.",
+      "Energy is a low-engagement category. The campaigns used games, cinema tie-ins, and seasonal landing pages while retaining the brand and a clear conversion route.",
     role: ["Campaign design", "Landing pages", "Interactive concepts", "UI design"],
     services: ["Campaign design", "Web design", "Interactive"],
     tools: ["Figma", "Adobe Creative Suite"],
@@ -684,16 +1092,16 @@ export const caseStudies: CaseStudy[] = ([
     sections: [
       {
         heading: "Context",
-        body: "A series of campaign experiences for Fysiko Aerio, the Hellenic Energy Company — including Park Your Cinema landings, a basketball shoot-and-win game, and Village Cinemas collaborations.",
+        body: "A series of campaign projects for Fysiko Aerio, the Hellenic Energy Company, including Park Your Cinema landing pages, a basketball shoot-and-win game, and Village Cinemas collaborations.",
       },
       {
         heading: "Challenge",
-        body: "Each activation needed its own energy while remaining recognizably one brand — and every experience had to work as well on a phone in a queue as on a desktop.",
+        body: "Each activation needed its own character while remaining recognisably part of the same brand. Every experience also had to work on a phone as well as a desktop.",
       },
       {
         heading: "Process",
         body: "I designed the landing structures, game entry flows, and visual systems per campaign, keeping components reusable across activations and seasons.",
-        mediaPlaceholder: "[ADD SCREENSHOTS — Fysiko Aerio campaign screens]",
+        mediaPlaceholder: "[ADD SCREENSHOTS: Fysiko Aerio campaign screens]",
       },
       {
         heading: "Output",
