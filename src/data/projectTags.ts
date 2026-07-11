@@ -16,6 +16,8 @@ export const projectTagDefinitions = {
   wordpress: { label: "WordPress", mark: "WP", tone: "violet", group: "method" },
   commerce: { label: "E-commerce", mark: "EC", tone: "amber", group: "method" },
   landing: { label: "Landing pages", mark: "LP", tone: "cyan", group: "method" },
+  motion: { label: "Motion build", mark: "MO", tone: "amber", group: "method" },
+  ai: { label: "AI-assisted", mark: "AI", tone: "green", group: "method" },
   audit: { label: "Design audit", mark: "AU", tone: "rose", group: "method" },
 
   public: { label: "Public sector", mark: "PS", tone: "blue", group: "context" },

@@ -5,7 +5,22 @@ import { caseStudies } from "../../data/caseStudies";
 import { site } from "../../data/site";
 import { projectTagDefinitions, type ProjectTag } from "../../data/projectTags";
 
-const allWork = caseStudies;
+// Editorial ordering: featured first, then live/published work with real media,
+// then drafts, then the long tail. Array order breaks ties (stable sort).
+const rank = (status: string) => (status === "published" ? 0 : status === "draft" ? 1 : 2);
+const hasMedia = (cs: (typeof caseStudies)[number]) =>
+  cs.cover.type === "video" || (cs.cover.type === "image" && !!cs.cover.src) ? 0 : 1;
+
+const allWork = [...caseStudies].sort((a, b) => {
+  const fa = a.featured ?? Infinity;
+  const fb = b.featured ?? Infinity;
+  if (fa !== fb) return fa - fb;
+  if (rank(a.status) !== rank(b.status)) return rank(a.status) - rank(b.status);
+  return hasMedia(a) - hasMedia(b);
+});
+
+const featuredWork = allWork.filter((cs) => cs.featured != null).slice(0, 3);
+
 const projectTags = Object.keys(projectTagDefinitions) as ProjectTag[];
 const filterGroups = [
   { key: "discipline", label: "Work type" },
@@ -54,14 +69,38 @@ const filterGroups = [
     }
   </script>
 
+  {
+    featuredWork.length > 0 && (
+      <section class="section section--featured">
+        <div class="container">
+          <div class="section-head" data-reveal>
+            <div>
+              <h2>Featured <span class="title-keyword">case studies</span>.</h2>
+              <p class="section-kicker">
+                A few recent, live projects — public-sector redesigns, animated front-end
+                builds, and brand work. The full archive, with filters, is below.
+              </p>
+            </div>
+          </div>
+          <div class="work-featured-grid" data-reveal>
+            {featuredWork.map((cs) => (
+              <CaseCard cs={cs} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   <section class="section">
     <div class="container">
       <div class="section-head" data-reveal>
         <div>
-          <h2>Public platforms, <span class="title-keyword">institutions</span>, and brands.</h2>
+          <h2>All <span class="title-keyword">work</span>.</h2>
           <p class="section-kicker">
             National service portals, government redesigns, campaign work, and independent
-            concepts. More screenshots will be added as they are cleared for publication.
+            concepts. Filter by type, method, or context. More screenshots are added as they
+            are cleared for publication.
           </p>
         </div>
       </div>
@@ -69,17 +108,45 @@ const filterGroups = [
         <div class="work-filter-groups">
           {
             filterGroups.map((group) => (
-              <fieldset class="work-filter-group">
-                <legend>{group.label}</legend>
-                <div class="work-filter-options">
+              <div class="work-filter-group" data-dropdown>
+                <button
+                  class="work-filter-trigger"
+                  type="button"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  data-dropdown-trigger
+                  data-group={group.key}>
+                  <span class="work-filter-trigger__group">{group.label}</span>
+                  <span class="work-filter-trigger__value" data-trigger-value />
+                  <span class="work-filter-trigger__chevron" aria-hidden="true">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
+                      <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </span>
+                </button>
+                <button
+                  class="work-filter-clear"
+                  type="button"
+                  data-dropdown-clear
+                  data-group={group.key}
+                  aria-label={`Clear ${group.label} filter`}
+                  hidden>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+                  </svg>
+                </button>
+                <div class="work-filter-menu" role="listbox" aria-label={group.label} data-dropdown-menu hidden>
                   {group.tags.map((tag) => {
                     const definition = projectTagDefinitions[tag];
                     return (
                       <button
                         class={`work-filter-button work-filter-button--${definition.tone}`}
                         type="button"
+                        role="option"
+                        aria-selected="false"
                         data-filter-group={group.key}
                         data-filter-value={tag}
+                        data-tone={definition.tone}
                         aria-pressed="false">
                         <span class="work-filter-mark" aria-hidden="true">{definition.mark}</span>
                         <span>{definition.label}</span>
@@ -87,7 +154,7 @@ const filterGroups = [
                     );
                   })}
                 </div>
-              </fieldset>
+              </div>
             ))
           }
         </div>
@@ -105,6 +172,10 @@ const filterGroups = [
           ))
         }
       </div>
+      <p class="work-empty" data-filter-empty hidden>
+        No projects match those filters yet.
+        <button type="button" data-filter-reset>Clear filters</button>
+      </p>
     </div>
   </section>
 
@@ -115,11 +186,92 @@ const filterGroups = [
       const filterButtons = Array.from(
         filterRoot.querySelectorAll<HTMLButtonElement>("[data-filter-group]"),
       );
-      const resetButton = filterRoot.querySelector<HTMLButtonElement>("[data-filter-reset]");
+      const resetButtons = Array.from(
+        document.querySelectorAll<HTMLButtonElement>("[data-filter-reset]"),
+      );
+      const dropdowns = Array.from(filterRoot.querySelectorAll<HTMLElement>("[data-dropdown]"));
       const filterStatus = filterRoot.querySelector<HTMLParagraphElement>("[data-filter-status]");
+      const emptyState = document.querySelector<HTMLElement>("[data-filter-empty]");
       const workItems = Array.from(document.querySelectorAll<HTMLElement>("[data-filter-item]"));
       const activeFilters = new Map<string, string>();
-      const initialTag = new URLSearchParams(window.location.search).get("tag");
+
+      // Map every filter value to its group so a shared ?tag= URL can be restored.
+      const groupForValue = new Map<string, string>();
+      filterButtons.forEach((button) => {
+        groupForValue.set(button.dataset.filterValue!, button.dataset.filterGroup!);
+      });
+
+      const closeDropdowns = (except?: HTMLElement) => {
+        dropdowns.forEach((dd) => {
+          if (dd === except) return;
+          dd.querySelector<HTMLElement>("[data-dropdown-menu]")!.hidden = true;
+          dd.querySelector<HTMLElement>("[data-dropdown-trigger]")!.setAttribute("aria-expanded", "false");
+        });
+      };
+
+      // Reflect each group's selection in its trigger: swap the group label for
+      // the chosen token (circle + name) so the brand mark stays visible.
+      const refreshTriggers = () => {
+        dropdowns.forEach((dd) => {
+          const trigger = dd.querySelector<HTMLElement>("[data-dropdown-trigger]")!;
+          const valueEl = dd.querySelector<HTMLElement>("[data-trigger-value]")!;
+          const clear = dd.querySelector<HTMLButtonElement>("[data-dropdown-clear]")!;
+          const value = activeFilters.get(trigger.dataset.group!);
+          const option = value
+            ? dd.querySelector<HTMLElement>(`[data-filter-value="${value}"]`)
+            : null;
+
+          if (option) {
+            valueEl.innerHTML = option.innerHTML;
+            valueEl.className = `work-filter-trigger__value work-filter-button--${option.dataset.tone}`;
+            trigger.classList.add("is-active");
+            clear.hidden = false;
+          } else {
+            valueEl.innerHTML = "";
+            valueEl.className = "work-filter-trigger__value";
+            trigger.classList.remove("is-active");
+            clear.hidden = true;
+          }
+        });
+      };
+
+      dropdowns.forEach((dd) => {
+        const trigger = dd.querySelector<HTMLButtonElement>("[data-dropdown-trigger]")!;
+        const menu = dd.querySelector<HTMLElement>("[data-dropdown-menu]")!;
+        trigger.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const willOpen = menu.hidden;
+          closeDropdowns(dd);
+          menu.hidden = !willOpen;
+          trigger.setAttribute("aria-expanded", String(willOpen));
+        });
+      });
+
+      filterRoot.querySelectorAll<HTMLButtonElement>("[data-dropdown-clear]").forEach((clear) => {
+        clear.addEventListener("click", (event) => {
+          event.stopPropagation();
+          activeFilters.delete(clear.dataset.group!);
+          closeDropdowns();
+          updateWork();
+          syncUrl();
+        });
+      });
+
+      document.addEventListener("click", () => closeDropdowns());
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeDropdowns();
+      });
+
+      const syncUrl = () => {
+        const url = new URL(window.location.href);
+        const values = Array.from(activeFilters.values());
+        if (values.length) {
+          url.searchParams.set("tag", values.join(","));
+        } else {
+          url.searchParams.delete("tag");
+        }
+        window.history.replaceState({}, "", url);
+      };
 
       const updateWork = () => {
         let visibleCount = 0;
@@ -132,15 +284,18 @@ const filterGroups = [
         });
 
         filterButtons.forEach((button) => {
-          button.setAttribute(
-            "aria-pressed",
-            String(activeFilters.get(button.dataset.filterGroup!) === button.dataset.filterValue),
-          );
+          const pressed =
+            activeFilters.get(button.dataset.filterGroup!) === button.dataset.filterValue;
+          button.setAttribute("aria-pressed", String(pressed));
+          button.setAttribute("aria-selected", String(pressed));
         });
+
+        refreshTriggers();
 
         if (filterStatus) {
           filterStatus.textContent = `${visibleCount} ${visibleCount === 1 ? "project" : "projects"} shown`;
         }
+        if (emptyState) emptyState.hidden = visibleCount !== 0;
       };
 
       filterButtons.forEach((button) => {
@@ -155,19 +310,25 @@ const filterGroups = [
           }
 
           updateWork();
+          syncUrl();
         });
       });
 
-      resetButton?.addEventListener("click", () => {
-        activeFilters.clear();
-        updateWork();
+      resetButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          activeFilters.clear();
+          updateWork();
+          syncUrl();
+        });
       });
 
-      if (initialTag) {
-        const matchingButton = filterButtons.find((button) => button.dataset.filterValue === initialTag);
-        if (matchingButton) {
-          activeFilters.set(matchingButton.dataset.filterGroup!, initialTag);
-        }
+      // Restore filter state from a shared URL (?tag=web,motion or a single ?tag=web).
+      const initialTags = new URLSearchParams(window.location.search).get("tag");
+      if (initialTags) {
+        initialTags.split(",").forEach((value) => {
+          const group = groupForValue.get(value.trim());
+          if (group) activeFilters.set(group, value.trim());
+        });
       }
 
       updateWork();

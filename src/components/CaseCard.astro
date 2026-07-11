@@ -41,12 +41,22 @@ const metaBits = [cs.year, cs.clientType].filter(Boolean);
             <span>{bit}</span>
           </>
         ))}
-        {cs.status === "placeholder" && (
+        {cs.status === "placeholder" ? (
           <>
             <span class="sep">/</span>
             <span class="flag">Coming soon</span>
           </>
-        )}
+        ) : cs.liveUrl ? (
+          <>
+            {metaBits.length > 0 && <span class="sep">/</span>}
+            <span class="flag flag--live">Live site</span>
+          </>
+        ) : cs.status === "draft" ? (
+          <>
+            {metaBits.length > 0 && <span class="sep">/</span>}
+            <span class="flag flag--concept">Concept</span>
+          </>
+        ) : null}
       </p>
       <div class="case-title-row">
         <h3>{cs.title}</h3>

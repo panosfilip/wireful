@@ -367,6 +367,14 @@ html.js .tick-blink {
   align-items: center;
   gap: 0.9rem;
   list-style: none;
+  line-height: 1;
+}
+
+/* Center each icon inside its <li> so the inherited body line-height doesn't
+   baseline-align the icons and float the cluster above the button/nav. */
+.contact-icons li {
+  display: flex;
+  align-items: center;
 }
 
 .contact-icon {
@@ -444,6 +452,17 @@ html.js .tick-blink {
 .site-header .header-actions .btn {
   transform: translate(calc(var(--slide-x, 0px) + var(--mx, 0px)), var(--my, 0px));
   will-change: transform;
+}
+
+/* Before JS measures the spread, --slide-x defaults to 0 (the converged
+   position). Hide the sliding items until measured so navigation never flashes
+   that end-state. Only where convergence runs — mobile/reduced-motion keep
+   --slide-x at 0, matching the default, so there is nothing to hide. */
+@media (min-width: 821px) and (prefers-reduced-motion: no-preference) {
+  .header-premeasure .site-header .wordmark,
+  .header-premeasure .site-header .header-actions .btn {
+    opacity: 0;
+  }
 }
 
 .header-actions {
@@ -549,6 +568,56 @@ html.js .tick-blink {
 
 .primary-nav a[aria-current="page"]::after {
   transform: scaleX(1);
+}
+
+@media (min-width: 821px) {
+  .header-inner {
+    gap: 1.5rem 2rem;
+    padding-block: clamp(0.7rem, 1vw, 1rem);
+  }
+
+  .site-header.is-scrolled .header-inner {
+    padding-block: 0.6rem;
+  }
+
+  .wordmark {
+    font-size: clamp(1.55rem, 2.1vw, 2rem);
+    line-height: 1;
+  }
+
+  .primary-nav ul {
+    gap: clamp(1.4rem, 2.5vw, 2.75rem);
+  }
+
+  .primary-nav a {
+    font-size: clamp(0.9rem, 1vw, 1.05rem);
+    line-height: 1.15;
+    padding-block: 0.25rem;
+  }
+
+  .header-actions {
+    gap: clamp(1.2rem, 1.8vw, 1.75rem);
+  }
+
+  .header-actions .contact-icons {
+    gap: clamp(1rem, 1.5vw, 1.4rem);
+  }
+
+  .header-actions .contact-icon svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .header-actions .contact-icon-label {
+    font-size: 0.9rem;
+    line-height: 1.2;
+  }
+
+  .header-actions .btn-small {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.95rem;
+    line-height: 1.2;
+  }
 }
 
 @media (max-width: 620px) {
@@ -711,6 +780,27 @@ html.js .tick-blink {
 /* Inner pages reuse .hero without media/portrait */
 .hero.hero-inner {
   padding-block: clamp(5rem, 11vw, 9rem) clamp(3rem, 7vw, 5rem);
+}
+
+/* About hero runs the two-column copy + portrait layout. The portrait stands
+   on the hero's bottom rule (like home), so the bottom padding is dropped here
+   and the copy lifts off the rule instead. Narrower than the full-bleed home
+   portrait — this is a smaller hero. */
+.hero.hero-about {
+  padding-bottom: 0;
+}
+
+.hero.hero-about .hero-grid {
+  grid-template-columns: minmax(0, 1.25fr) minmax(220px, 300px);
+  align-items: end;
+}
+
+.hero.hero-about .hero-copy {
+  padding-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.hero.hero-about .hero-portrait img {
+  width: 100%;
 }
 
 .hero-media {
@@ -921,6 +1011,23 @@ html.js .is-loaded [data-intro] {
   .hero:not(.hero-inner) .hero-portrait img {
     width: 100%;
     margin-left: 0;
+  }
+
+  /* Collapse the About hero to a single column — this needs to override the
+     desktop .hero.hero-about .hero-grid rule, which out-specifies the generic
+     .hero-grid mobile reset. Copy stacks full width, portrait rests below it. */
+  .hero.hero-about .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero.hero-about .hero-copy {
+    padding-bottom: 0;
+  }
+
+  .hero.hero-about .hero-portrait {
+    width: min(240px, 60vw);
+    margin: 1.75rem auto 0;
+    justify-self: center;
   }
 
   .hero-portrait-tag {
@@ -1289,6 +1396,25 @@ html.js .marquee-track {
   color: var(--accent-dim);
 }
 
+.case-meta-line .flag--live {
+  color: #79bd91;
+}
+
+.case-meta-line .flag--live::before {
+  content: "";
+  display: inline-block;
+  width: 0.42em;
+  height: 0.42em;
+  margin-right: 0.5em;
+  border-radius: 50%;
+  background: #79bd91;
+  vertical-align: 0.08em;
+}
+
+.case-meta-line .flag--concept {
+  color: var(--muted);
+}
+
 .case-title-row {
   display: flex;
   align-items: baseline;
@@ -1407,20 +1533,16 @@ html.js .marquee-track {
 
 .capability-tag {
   --tag-tone: #a98bf4;
-  /* The in-flow footprint stays a fixed circle, so any number of tokens can
-     wrap onto multiple rows and hovering never reflows the row. The visible
-     pill (.capability-tag__pill) expands as an absolute overlay instead. */
+  /* The pill sits in normal flow, so when it expands on hover it widens the
+     token's box and pushes its neighbours along the row (wrapping onto the next
+     line as needed) rather than floating over them. Collapsed, the box is a
+     2rem circle. */
   position: relative;
   flex: 0 0 auto;
-  width: 2rem;
   height: 2rem;
 }
 
 .capability-tag__pill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
   display: flex;
   align-items: center;
   width: max-content;
@@ -1473,27 +1595,34 @@ html.js .marquee-track {
 }
 
 .capability-tag-label {
-  display: block;
+  /* Centre with the exact same mechanism as .capability-tag-mark (grid +
+     place-items) so the label glyphs and the circle glyphs sit on the same
+     line. Mixing flex/grid centring here left them 1-2px apart. */
+  display: grid;
+  place-items: center start;
+  height: 100%;
   padding-right: 0.7rem;
   color: var(--text);
   font-family: var(--font-mono);
   font-size: 0.75rem;
   letter-spacing: 0.04em;
   line-height: 1;
+  /* The mono face renders the circle marks ~0.83px above their box centre;
+     lift the label the same amount so its glyphs sit on the marks' line. */
+  position: relative;
+  top: -0.83px;
   white-space: nowrap;
   opacity: 0;
   transform: translateX(-0.35rem);
   transition: opacity 0.18s var(--ease-out) 0.12s, transform 0.32s var(--ease-expo) 0.08s;
 }
 
-/* Expanding the overlay pill does not change the token's in-flow box, so the
-   row never reflows (no hover flicker) no matter how many tokens wrap. The
-   pill floats above its neighbours and the next column on a raised z-index,
-   with an opaque background so any spill cleanly covers what is underneath. */
+/* Expanding the pill grows the token's in-flow box, so the label reveal pushes
+   the neighbouring tokens along the row. max-content keeps the width to just the
+   label, and the box wraps to the next line when it no longer fits. */
 @media (hover: hover) {
   .capability-tag:hover .capability-tag__pill {
     max-width: 12rem;
-    z-index: 5;
     background: color-mix(in srgb, var(--tag-tone) 19%, var(--bg-raise));
   }
 
@@ -1510,7 +1639,6 @@ html.js .marquee-track {
 
 .capability-tag.is-expanded .capability-tag__pill {
   max-width: 12rem;
-  z-index: 5;
   background: color-mix(in srgb, var(--tag-tone) 19%, var(--bg-raise));
 }
 
@@ -1559,6 +1687,32 @@ html.js .marquee-track {
   max-width: none;
 }
 
+/* RULE: On the case-study meta, capability tokens render exactly like the Work
+   cards — collapsed marks that reveal their label on hover — but pinned to TWO
+   PER ROW (CapabilityTags perRow={2}). Do not switch this to the detail
+   (always-expanded) variant, and do not use a single shared grid: shared
+   column tracks would couple the rows, so hovering the bottom row would shove
+   the top row sideways. Each row is its own no-wrap flex track instead — a
+   hover reveal grows only its own row (pushing that row's sibling), never
+   wraps the hovered token (no flicker), and leaves the other rows untouched. */
+.case-meta .capability-tags--rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: max-content;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.case-meta .capability-tags-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 /* ---- Work filters ------------------------------------------------------------------------------------ */
 
 .work-filter {
@@ -1568,37 +1722,139 @@ html.js .marquee-track {
 }
 
 .work-filter-groups {
-  display: grid;
-  gap: 1.35rem;
-}
-
-@media (min-width: 860px) {
-  .work-filter-groups {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(1rem, 3vw, 3rem);
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
 }
 
 .work-filter-group {
+  position: relative;
   min-width: 0;
-  margin: 0;
+}
+
+/* Compact trigger: shows the group name, or the chosen token once selected. */
+.work-filter-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.4rem;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--bg-raise);
+  color: var(--muted);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1;
+  transition: border-color 0.25s var(--ease-out), color 0.25s var(--ease-out), background 0.25s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .work-filter-trigger:hover {
+    border-color: var(--line-strong);
+    color: var(--text);
+  }
+}
+
+.work-filter-trigger[aria-expanded="true"] {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line-strong));
+  color: var(--text);
+}
+
+.work-filter-trigger.is-active {
+  color: var(--text);
+  padding-left: 0.4rem;
+  padding-right: 2rem;
+}
+
+.work-filter-trigger.is-active .work-filter-trigger__group {
+  display: none;
+}
+
+.work-filter-trigger.is-active .work-filter-trigger__chevron {
+  display: none;
+}
+
+/* Per-group clear, revealed once that dropdown has a selection. Sits over the
+   trigger's right edge as a sibling (a button can't nest inside the trigger). */
+.work-filter-clear {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.45rem;
+  height: 1.45rem;
   padding: 0;
   border: 0;
-}
-
-.work-filter-group legend {
-  margin-bottom: 0.7rem;
+  border-radius: 50%;
+  background: transparent;
   color: var(--faint);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s var(--ease-out), background 0.2s var(--ease-out);
 }
 
-.work-filter-options {
+.work-filter-clear[hidden] {
+  display: none;
+}
+
+@media (hover: hover) {
+  .work-filter-clear:hover {
+    color: var(--text);
+    background: color-mix(in srgb, var(--text) 12%, transparent);
+  }
+}
+
+.work-filter-trigger__value {
+  display: none;
+  align-items: center;
+  gap: 0.42rem;
+}
+
+.work-filter-trigger.is-active .work-filter-trigger__value {
+  display: inline-flex;
+}
+
+.work-filter-trigger__chevron {
+  display: inline-flex;
+  color: var(--faint);
+  transition: transform 0.25s var(--ease-out);
+}
+
+.work-filter-trigger[aria-expanded="true"] .work-filter-trigger__chevron {
+  transform: rotate(180deg);
+}
+
+/* Popover menu holding the branded option pills. */
+.work-filter-menu {
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  left: 0;
+  z-index: 20;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: max(100%, 12rem);
+  max-width: min(16rem, 80vw);
+  padding: 0.4rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.9rem;
+  background: var(--bg-raise);
+  box-shadow: 0 20px 45px -22px rgba(0, 0, 0, 0.65);
+}
+
+.work-filter-menu[hidden] {
+  display: none;
+}
+
+.work-filter-menu .work-filter-button {
+  width: 100%;
+  justify-content: flex-start;
 }
 
 .work-filter-button {
@@ -1617,6 +1873,10 @@ html.js .marquee-track {
   font-weight: 600;
   line-height: 1;
   transition: border-color 0.25s var(--ease-out), background 0.25s var(--ease-out), color 0.25s var(--ease-out);
+}
+
+.work-filter-button--violet {
+  --filter-tone: #a98bf4;
 }
 
 .work-filter-button--rose {
@@ -1710,6 +1970,93 @@ html.js .marquee-track {
 
 .work-filter-item[hidden] {
   display: none;
+}
+
+/* Featured row above the filterable archive */
+.section--featured {
+  padding-bottom: 0;
+}
+
+.work-featured-grid {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .work-featured-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.work-empty {
+  margin-top: 2rem;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+}
+
+.work-empty[hidden] {
+  display: none;
+}
+
+.work-empty button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Related work at the foot of a case study */
+.case-related {
+  margin-top: clamp(3rem, 7vw, 5.5rem);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--line);
+}
+
+.case-related__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.case-related__head h2 {
+  margin: 0;
+}
+
+.case-related__all {
+  flex: none;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.25s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .case-related__all:hover {
+    color: var(--accent);
+  }
+}
+
+.case-related__grid {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .case-related__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .status-chip {
@@ -2654,11 +3001,20 @@ a.contact-line:hover .label::after {
 
 .case-meta {
   display: grid;
-  gap: 1.75rem 2.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.75rem 1.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
   padding-block: 2rem;
   border-block: 1px solid var(--line);
   margin-block: clamp(2rem, 5vw, 3rem);
+}
+
+/* On desktop the meta stays a single row. The capability column holds two
+   full-label pills per row, so it needs more width than the others — size the
+   first five columns to their content and let Details take the remainder. */
+@media (min-width: 821px) {
+  .case-meta {
+    grid-template-columns: repeat(5, max-content) minmax(150px, 1fr);
+  }
 }
 
 .case-meta h2 {
@@ -4118,7 +4474,6 @@ a.contact-line:hover .label::after {
   }
 
   .capability-tags--card .capability-tag {
-    width: 2.75rem;
     height: 2.75rem;
   }
 

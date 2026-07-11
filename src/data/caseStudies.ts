@@ -24,9 +24,19 @@ export type CaseStudy = {
   slug: string;
   title: string;
   status: CaseStudyStatus;
+  /**
+   * Editorial priority. Lower numbers surface first in the Work grid and feed
+   * the "Featured" row on the index. Leave unset for the long tail.
+   */
+  featured?: number;
   year?: string;
   clientType?: string;
   liveUrl?: string;
+  /**
+   * Where the work was done: an employer/agency name (e.g. "Choose") or
+   * "Freelance". Leave unset to show a flagged placeholder on the page.
+   */
+  engagement?: string;
   summary: string;
   problem: string;
   role: string[];
@@ -271,16 +281,62 @@ const namedUiUxProjects: CaseStudy[] = [
   {
     slug: "iq-media-hub",
     title: "IQ Media Hub",
-    status: "draft",
-    clientType: "University of Athens & Nice Matin Media Group",
-    summary: "Figma prototype for IQ Media Hub, a platform for media content and collaboration.",
-    problem: "The multi-partner initiative needed a structure that explained its purpose and organised its content for a public audience.",
-    role: ["Information architecture", "Website UI design", "Figma prototype"],
-    services: ["Web design", "UI design"],
+    status: "published",
+    featured: 6,
+    clientType: "IQ Media Hub: media innovation and knowledge-transfer platform",
+    liveUrl: "https://iqmediahub.com/",
+    summary:
+      "Website design for IQ Media Hub, a cross-border media initiative that brings its Academy, Collaborations, R&D Lab, events, and editorial work into one public-facing platform.",
+    problem:
+      "IQ Media Hub needed a website that could explain a research-led media initiative quickly, then give journalists, publishers, and partners clear routes into learning, collaboration, research, events, and news.",
+    role: ["Information architecture", "Website UI design", "Visual direction", "Figma prototype"],
+    services: ["Web design", "UI design", "Visual identity"],
     tools: ["Figma"],
-    tags: ["web", "research", "education"],
-    cover: { type: "placeholder", motif: "search", alt: "Media hub website interface concept" },
-    sections: [{ heading: "Output", body: "A Figma prototype for a media hub with an organised content structure and public-facing interface." }],
+    tags: ["web", "prototype", "education"],
+    cover: {
+      type: "image",
+      motif: "search",
+      alt: "IQ Media Hub homepage with the circular IQ Media mark, three-pillar navigation, featured courses, Lab News, and a Join Us form",
+      src: "media/work/iqmedia-home.webp",
+      full: "media/work/iqmedia-home-full.webp",
+      caption: "Homepage",
+    },
+    gallery: [
+      {
+        src: "media/work/iqmedia-rd.webp",
+        full: "media/work/iqmedia-rd-full.webp",
+        caption: "R&D Lab",
+        alt: "IQ Media Hub R&D Lab page with oversized editorial type, coloured line motifs, focus-area cards, and Lab News stories",
+      },
+      {
+        src: "media/work/iqmedia-academy.webp",
+        full: "media/work/iqmedia-academy-full.webp",
+        caption: "The Academy",
+        alt: "IQ Media Hub Academy page with a large editorial introduction, featured events, and course listings",
+      },
+    ],
+    sections: [
+      {
+        heading: "Context",
+        body: "IQ Media Hub is a consortium led by the Faculty of Communication and Mass Media of the National and Kapodistrian University of Athens, with partners from Greece, Cyprus, France, and Portugal. The site is organised around three pillars: The Academy, Collaborations, and the R&D Lab. It also publishes events, courses, and Lab News.",
+      },
+      {
+        heading: "Challenge",
+        body: "The content moves between public explanation, professional learning, research, partner activity, and editorial publishing. The interface needed to make those routes easy to see without turning a knowledge-transfer project into a dense institutional directory.",
+      },
+      {
+        heading: "Process",
+        body: "I built a typographic editorial system rather than a conventional institutional template. A pale blush ground and black serif display type carry most of the hierarchy, while the spaced sans wordmark keeps the navigation and section labels precise. Thin rules divide long-form content, and pink, cyan, orange, and green line motifs mark the pillars, people, and feature areas. I paired the narrative sections with repeatable blocks for pillar links, course and event rows, article cards, portrait profiles, and a recurring Join Us form. The same patterns carry across the homepage, Academy, R&D, Collaborations, and About pages.",
+      },
+      {
+        heading: "Output",
+        body: "A responsive Figma website prototype with a public homepage, Academy and Learn sections, Collaborations, R&D Lab, Events, Blog, About Us, article and event templates, partner and team content, and a consistent route into the IQ Media Hub community.",
+      },
+      {
+        heading: "Result",
+        body: "A public-facing hub that reads as a media innovation project first and an institutional site second. The homepage makes the three-pillar structure visible immediately, while the interior pages keep the same editorial language for learning, research, collaboration, events, and people.",
+      },
+    ],
   },
   {
     slug: "analysis-platform",
@@ -512,6 +568,7 @@ const namedUiUxProjects: CaseStudy[] = [
     slug: "pino-pizzeria-website",
     title: "Pino Pizzeria",
     status: "published",
+    featured: 5,
     clientType: "Pino by Luca Piscazzi: Roman pizzeria in Glyfada",
     liveUrl: "https://soliddop.github.io/pino/",
     summary:
@@ -521,7 +578,7 @@ const namedUiUxProjects: CaseStudy[] = [
     role: ["Website UI design", "Brand direction", "Motion design", "Front-end build"],
     services: ["Website design", "Art direction", "Front-end prototype"],
     tools: ["Figma", "GSAP", "Claude Code", "Codex"],
-    tags: ["web", "prototype", "hospitality"],
+    tags: ["web", "prototype", "hospitality", "motion", "ai"],
     cover: {
       type: "video",
       motif: "homepage",
@@ -600,6 +657,7 @@ const namedUiUxProjects: CaseStudy[] = [
     slug: "marios-detsis-paediatrician",
     title: "Dr. Marios Detsis",
     status: "published",
+    featured: 3,
     clientType: "Dr. Marios Detsis: paediatrician in Zografou and Vrilissia",
     liveUrl: "https://pfilippaios.github.io/detsis-paidiatros/",
     summary:
@@ -609,7 +667,7 @@ const namedUiUxProjects: CaseStudy[] = [
     role: ["Website UI design", "Brand direction", "Motion design", "Front-end build"],
     services: ["Website design", "Art direction", "Front-end prototype"],
     tools: ["Figma", "GSAP", "Claude Code", "Codex"],
-    tags: ["web", "prototype", "healthcare"],
+    tags: ["web", "prototype", "healthcare", "motion", "ai"],
     cover: {
       type: "video",
       motif: "homepage",
@@ -748,6 +806,7 @@ const namedUiUxProjects: CaseStudy[] = [
     slug: "dtk-law-firm-website",
     title: "DTK Law Firm",
     status: "published",
+    featured: 2,
     clientType: "DTK Law Firm: environmental, planning and investment law",
     liveUrl: "https://dtk.choosead.eu/",
     summary:
@@ -757,7 +816,7 @@ const namedUiUxProjects: CaseStudy[] = [
     role: ["Website UI design", "Information architecture", "Visual direction", "WordPress design"],
     services: ["Website design", "UI design", "WordPress"],
     tools: ["Figma", "WordPress"],
-    tags: ["web", "wordpress", "commercial"],
+    tags: ["web", "wordpress", "commercial", "motion"],
     cover: {
       type: "video",
       motif: "homepage",
@@ -1036,39 +1095,61 @@ export const caseStudies: CaseStudy[] = ([
   },
   {
     slug: "teka-ui-redesign",
-    title: "TEKA Pension Fund UI Redesign",
-    status: "draft",
+    title: "TEKA Website Redesign",
+    status: "published",
+    featured: 1,
     clientType: "TEKA: Hellenic Auxiliary Pensions Defined Contributions Fund",
+    liveUrl: "https://teka.choosenet.gr/",
     summary:
-      "UI redesign for TEKA, the national auxiliary pension fund, focused on making pension information easier to read and use.",
+      "Website redesign for TEKA, the national auxiliary pension fund, replacing the former teka.gov.gr with a clearer route through insurance, online services, investments, and updates.",
     problem:
-      "The redesign had to make dense institutional information readable for members at different stages of their working lives.",
-    role: ["UI redesign", "Information architecture", "Figma production"],
-    services: ["UI design", "Web design", "Public-sector design"],
+      "People arrive at TEKA with different questions: whether the fund applies to them, how contributions work, where to see their personal account, or which document answers a specific case. The redesign had to make those routes visible before the institutional detail became a barrier.",
+    role: ["Website UI design", "Information architecture", "Content hierarchy", "Public-sector design"],
+    services: ["Website design", "UI design", "Content structure", "Public-sector design"],
     tools: ["Figma"],
-    tags: ["product", "public"],
+    tags: ["web", "systems", "public"],
     cover: {
-      type: "placeholder",
+      type: "image",
       motif: "homepage",
-      alt: "Wireframe of an institutional website homepage with clear content hierarchy",
+      alt: "TEKA homepage with the auxiliary insurance introduction, employer and insured access, myTEKA and beTEKA cards, and a reserves chart",
+      src: "media/work/teka-home.webp",
+      full: "media/work/teka-home-full.webp",
+      caption: "Homepage",
     },
+    gallery: [
+      {
+        src: "media/work/teka-services.webp",
+        full: "media/work/teka-services-full.webp",
+        caption: "Insured services",
+        alt: "TEKA electronic services page grouping myTEKA, beTEKA, insurance history, and credit-balance transfer",
+      },
+      {
+        src: "media/work/teka-myteka.webp",
+        full: "media/work/teka-myteka-full.webp",
+        caption: "myTEKA account",
+        alt: "TEKA myTEKA account page explaining the personal supplementary-insurance account and contribution history",
+      },
+    ],
     sections: [
       {
         heading: "Context",
-        body: "UI redesign work for TEKA, the government fund managing auxiliary pensions under the defined-contributions system.",
+        body: "TEKA manages supplementary pensions under the defined-contribution system. The site speaks to new and existing insured people, non-salaried workers considering optional enrolment, employers, and anyone looking for institutional or financial information. Its homepage introduces eligibility from 01.01.2004 and 01.01.2022, then routes people to employer and insured services, myTEKA, beTEKA, reserves and insured figures, and current updates.",
       },
       {
         heading: "Challenge",
-        body: "Members range from people enrolling for the first time to people approaching retirement. The regulatory content needed a readable hierarchy across devices.",
+        body: "The former teka.gov.gr needed a retake that made a new pension system easier to understand without flattening the detail people need later. The main decisions are not the same for everyone, so the interface had to separate insured services, employer access, optional insurance, investments, FAQs, institutional information, and news without making the home page feel like a directory.",
       },
       {
         heading: "Process",
-        body: "I restructured the content hierarchy, then redesigned the typography, components, and page patterns for use across devices.",
-        mediaPlaceholder: "[ADD SCREENSHOTS: TEKA redesign screens]",
+        body: "I organised the homepage around actions instead of departments. The first screen explains who TEKA is for and puts employer and insured access together. Two large cards lead to myTEKA and beTEKA, while the chart turns fund figures into a quick visual read. The main navigation then expands into insurance, investments, FAQs, information about TEKA, and updates.",
       },
       {
         heading: "Output",
-        body: "A redesigned UI system and page set ready for review and implementation.",
+        body: "A responsive website with dedicated paths for insurance, contributions, benefits, the insurance glossary, investment management, the TEKA portfolio, FAQs, institutional documents, announcements, and press information. The electronic-services page gathers myTEKA, beTEKA, insurance history, and the transfer of credit balances into one place, with practical guides below.",
+      },
+      {
+        heading: "Result",
+        body: "The retake gives TEKA a public-facing starting point that explains eligibility, puts the relevant digital service near the top, and keeps detailed guidance and institutional material within the same structure.",
       },
     ],
   },
@@ -1131,7 +1212,7 @@ export const caseStudies: CaseStudy[] = ([
       },
     ],
   },
-  {
+  /* {
     slug: "ekapy-web-design",
     title: "EKAPY Health Procurement Web Design",
     status: "draft",
@@ -1168,11 +1249,12 @@ export const caseStudies: CaseStudy[] = ([
         body: "A task-first web design system for a national operational authority.",
       },
     ],
-  },
+  }, */
   {
     slug: "ekapy-afternoon-surgeries",
     title: "EKAPY Afternoon Surgeries",
     status: "published",
+    featured: 4,
     clientType: "EKAPY / Ministry of Health: the Afternoon Surgeries programme",
     liveUrl: "https://soliddop.github.io/ekapy/",
     summary:
@@ -1182,7 +1264,7 @@ export const caseStudies: CaseStudy[] = ([
     role: ["Website UI design", "Brand direction", "Motion design", "Front-end build"],
     services: ["Website design", "Art direction", "Front-end build"],
     tools: ["Figma", "GSAP"],
-    tags: ["web", "landing", "public"],
+    tags: ["web", "landing", "public", "motion"],
     cover: {
       type: "video",
       motif: "landing",

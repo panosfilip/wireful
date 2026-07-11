@@ -420,6 +420,22 @@ reveal transitions leave elements "not stable" — inject `*{transition:none}` a
     (`.lightbox__hint`, id `lightbox-hint`): it shows "SCROLL ⌄" when the full-page image
     overflows the frame and the viewer is near the top, and hides once they scroll down.
 
+21. **Figma exports may already be full-page portrait screenshots.** The gallery grid
+    expects landscape tiles, so crop a top-aligned viewport tile from each supplied export
+    and keep the original full-page export as the lightbox asset. Do not use the tall source
+    image directly as a gallery tile: `object-fit: cover` will reduce it to an unreadable
+    strip.
+
+22. **`sips` crop offsets can be surprising on macOS.** On this setup,
+    `--cropToHeightWidth 900 1440 --cropOffset 0 0` produced a centered crop, while a
+    nonzero top-left offset produced the expected top crop. Inspect the generated tile
+    before encoding it, especially when the header or hero needs to remain visible.
+
+23. **Replacing a case-study entry can leave stale hardcoded slugs.** Search the whole
+    `src/` tree for the old slug after removing, renaming, or commenting out an entry.
+    Static `find(...)!` references can pass `astro check` but resolve to `undefined` during
+    the production build, breaking cards on the homepage or approach page.
+
 ---
 
 ## Quick checklist per project

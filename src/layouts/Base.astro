@@ -10,9 +10,17 @@ import { site } from "../data/site";
 interface Props {
   title: string;
   description?: string;
+  /** Page-relative image path (e.g. "media/work/foo.webp") for link previews. */
+  image?: string;
 }
 
-const { title, description = site.description } = Astro.props;
+const { title, description = site.description, image } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(
+  `${import.meta.env.BASE_URL}/${image ?? "media/work-hero-poster.jpg"}`,
+  Astro.site,
+).href;
 ---
 
 <!doctype html>
@@ -24,10 +32,27 @@ const { title, description = site.description } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <base href={`${import.meta.env.BASE_URL}/`} />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="canonical" href={canonical} />
     <title>{title}</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <slot name="head" />
     <script is:inline>
       // Marks JS availability so reveal animations never hide content without JS.
       document.documentElement.classList.add("js");
+      // Hide the header wordmark/CTA until convergence is measured, so the first
+      // paint never flashes the converged (centered) end-state before JS pushes
+      // them out to the top-of-page spread. Removed after measureConvergence().
+      document.documentElement.classList.add("header-premeasure");
     </script>
   </head>
   <body id="top">
@@ -44,6 +69,13 @@ const { title, description = site.description } = Astro.props;
     </a>
     <ProjectOverlay />
     <script>
+      // Full-page menu navigation should always start at the top. Prevent the
+      // browser from restoring the previous page's scroll position while the
+      // header convergence state is being measured on the new page.
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       // Kick off hero intro staggers once styles are applied
@@ -213,6 +245,9 @@ const { title, description = site.description } = Astro.props;
       };
 
       measureConvergence();
+      // Convergence is now applied for the current scroll position; reveal the
+      // header items in their correct spread so no converged flash is seen.
+      document.documentElement.classList.remove("header-premeasure");
       window.addEventListener("resize", measureConvergence, { passive: true });
 
       if (!reducedMotion) {

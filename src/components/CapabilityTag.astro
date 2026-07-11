@@ -1,0 +1,23 @@
+---
+import { projectTagDefinitions, type ProjectTag } from "../data/projectTags";
+
+interface Props {
+  tag: ProjectTag;
+}
+
+const { tag } = Astro.props;
+const definition = projectTagDefinitions[tag];
+---
+
+<li
+  class={`capability-tag capability-tag--${definition.tone}`}
+  data-capability-tag={tag}
+  aria-expanded="false"
+  aria-label={`${definition.label}: tap once to reveal, tap again to view related projects`}
+  title={definition.label}
+>
+  <span class="capability-tag__pill">
+    <span class="capability-tag-mark" aria-hidden="true">{definition.mark}</span>
+    <span class="capability-tag-label">{definition.label}</span>
+  </span>
+</li>

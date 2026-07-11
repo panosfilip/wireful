@@ -26,7 +26,7 @@ const facts = [
 ---
 
 <Base title={`About | ${site.name}`}>
-  <section class="hero hero-inner">
+  <section class="hero hero-inner hero-about">
     <div class="hero-media" aria-hidden="true" data-parallax>
       <video
         autoplay
@@ -37,16 +37,28 @@ const facts = [
         poster="media/about-hero-poster.jpg"
         src="media/about-hero-bg.mp4"></video>
     </div>
-    <div class="container">
-      <h1 data-intro style="--intro: 1">{site.fullName}.</h1>
-      <p class="lead" data-intro style="--intro: 2">
-        I'm behind <strong>WIREFUL<span class="tick tick-blink">_</span>, my personal
-        brand and story as a designer.</strong>. 
-      </p>
-       <p class="lead" data-intro style="--intro: 2">
-     I design  interfaces, websites, visual systems, and the supporting assets a business needs to
-        put them into use.
-      </p>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h1 data-intro style="--intro: 1">{site.fullName}.</h1>
+        <p class="lead" data-intro style="--intro: 2">
+          I'm behind <strong>WIREFUL<span class="tick tick-blink">_</span>, my personal
+          brand and story as a designer.</strong>
+        </p>
+        <p class="lead" data-intro style="--intro: 2">
+          I design interfaces, websites, visual systems, and the supporting assets a business needs to
+          put them into use. I collaborate with senior professionals to provide high quality services and materials
+        </p>
+      </div>
+      <div class="hero-portrait" data-intro style="--intro: 1">
+        <img
+          src="media/filippaios.webp"
+          alt={`Portrait of ${site.fullName}`}
+          width="585"
+          height="856"
+          fetchpriority="high"
+        />
+        <span class="hero-portrait-tag" aria-hidden="true">me again</span>
+      </div>
     </div>
   </section>
 
