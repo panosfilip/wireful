@@ -1407,11 +1407,25 @@ html.js .marquee-track {
 
 .capability-tag {
   --tag-tone: #a98bf4;
+  /* The in-flow footprint stays a fixed circle, so any number of tokens can
+     wrap onto multiple rows and hovering never reflows the row. The visible
+     pill (.capability-tag__pill) expands as an absolute overlay instead. */
+  position: relative;
+  flex: 0 0 auto;
+  width: 2rem;
+  height: 2rem;
+}
+
+.capability-tag__pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
   display: flex;
   align-items: center;
   width: max-content;
   max-width: 2rem;
-  height: 2rem;
+  height: 100%;
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--tag-tone) 50%, var(--line-strong));
   border-radius: 999px;
@@ -1472,9 +1486,14 @@ html.js .marquee-track {
   transition: opacity 0.18s var(--ease-out) 0.12s, transform 0.32s var(--ease-expo) 0.08s;
 }
 
+/* Expanding the overlay pill does not change the token's in-flow box, so the
+   row never reflows (no hover flicker) no matter how many tokens wrap. The
+   pill floats above its neighbours and the next column on a raised z-index,
+   with an opaque background so any spill cleanly covers what is underneath. */
 @media (hover: hover) {
-  .capability-tag:hover {
+  .capability-tag:hover .capability-tag__pill {
     max-width: 12rem;
+    z-index: 5;
     background: color-mix(in srgb, var(--tag-tone) 19%, var(--bg-raise));
   }
 
@@ -1489,8 +1508,9 @@ html.js .marquee-track {
   }
 }
 
-.capability-tag.is-expanded {
+.capability-tag.is-expanded .capability-tag__pill {
   max-width: 12rem;
+  z-index: 5;
   background: color-mix(in srgb, var(--tag-tone) 19%, var(--bg-raise));
 }
 
@@ -1504,30 +1524,39 @@ html.js .marquee-track {
   transform: translateX(0);
 }
 
+/* Detail pages show every token's full label by default and let the pills wrap
+   to as many rows as needed. Nothing expands on hover, so any number of tokens
+   fits without ever overflowing into the Details column. */
 .capability-tags--detail {
   margin: 0;
   padding: 0;
+  gap: 0.5rem;
+}
+
+.capability-tags--detail .capability-tag {
+  width: auto;
+  height: 2.25rem;
+}
+
+.capability-tags--detail .capability-tag__pill {
+  position: static;
+  max-width: none;
+  background: color-mix(in srgb, var(--tag-tone) 14%, var(--bg-raise));
 }
 
 .capability-tags--detail .capability-tag-mark {
   width: calc(2.25rem - 2px);
 }
 
-.capability-tags--detail .capability-tag {
-  max-width: 2.25rem;
-  height: 2.25rem;
+.capability-tags--detail .capability-tag-label {
+  opacity: 1;
+  transform: none;
 }
 
-/* Detail-variant tags must still expand — these selectors outrank the
-   sizing block above. */
-.capability-tags--detail .capability-tag.is-expanded {
-  max-width: 12rem;
-}
-
-@media (hover: hover) {
-  .capability-tags--detail .capability-tag:hover {
-    max-width: 12rem;
-  }
+/* No hover reveal on detail pills; keep them at full width if hovered. */
+.capability-tags--detail .capability-tag:hover .capability-tag__pill,
+.capability-tags--detail .capability-tag.is-expanded .capability-tag__pill {
+  max-width: none;
 }
 
 /* ---- Work filters ------------------------------------------------------------------------------------ */
@@ -2896,12 +2925,58 @@ a.contact-line:hover .label::after {
   height: auto;
 }
 
+.lightbox__hint {
+  position: absolute;
+  left: 50%;
+  bottom: 0.9rem;
+  transform: translateX(-50%) translateY(0.4rem);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+}
+
+.lightbox__hint.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.lightbox__hint svg {
+  animation: lightbox-hint-bob 1.5s ease-in-out infinite;
+}
+
+@keyframes lightbox-hint-bob {
+  0%,
+  100% {
+    transform: translateY(-1px);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .lightbox,
   .case-shot__trigger img,
   .case-cover__media img,
   .case-shot__zoom {
     transition: none;
+  }
+
+  .lightbox__hint svg {
+    animation: none;
   }
 }
 
@@ -4042,18 +4117,20 @@ a.contact-line:hover .label::after {
     height: 3rem;
   }
 
-  .capability-tag,
-  .capability-tags--detail .capability-tag {
+  .capability-tags--card .capability-tag {
+    width: 2.75rem;
     height: 2.75rem;
+  }
+
+  .capability-tags--card .capability-tag__pill {
     max-width: 2.75rem;
   }
 
-  .capability-tag-mark,
-  .capability-tags--detail .capability-tag-mark {
+  .capability-tags--card .capability-tag-mark {
     width: calc(2.75rem - 2px);
   }
 
-  .capability-tag.is-expanded {
+  .capability-tags--card .capability-tag.is-expanded .capability-tag__pill {
     max-width: 14rem;
   }
 

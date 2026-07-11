@@ -5,8 +5,7 @@ import { caseStudies } from "../../data/caseStudies";
 import { site } from "../../data/site";
 import { projectTagDefinitions, type ProjectTag } from "../../data/projectTags";
 
-const featuredWork = caseStudies.find((cs) => cs.slug === "my1521-taxpayer-portal")!;
-const restWork = caseStudies.filter((cs) => cs.slug !== featuredWork.slug);
+const allWork = caseStudies;
 const projectTags = Object.keys(projectTagDefinitions) as ProjectTag[];
 const filterGroups = [
   { key: "discipline", label: "Work type" },
@@ -59,22 +58,6 @@ const filterGroups = [
     <div class="container">
       <div class="section-head" data-reveal>
         <div>
-          <h2>Featured project: <span class="title-keyword">my1521</span>.</h2>
-          <p class="section-kicker">
-            Portal UI, digital service flows, and ticketing for AADE's taxpayer service platform.
-          </p>
-        </div>
-      </div>
-      <div class="case-grid">
-        <CaseCard cs={featuredWork} />
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-head" data-reveal>
-        <div>
           <h2>Public platforms, <span class="title-keyword">institutions</span>, and brands.</h2>
           <p class="section-kicker">
             National service portals, government redesigns, campaign work, and independent
@@ -115,7 +98,7 @@ const filterGroups = [
       </div>
       <div class="case-grid" data-filter-grid>
         {
-          restWork.map((cs) => (
+          allWork.map((cs) => (
             <div class="work-filter-item" data-filter-item data-tags={cs.tags.join(" ")}>
               <CaseCard cs={cs} />
             </div>

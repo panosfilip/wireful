@@ -214,6 +214,18 @@ const next = index < caseStudies.length - 1 ? caseStudies[index + 1] : caseStudi
           <div class="lightbox__scroll">
             <img class="lightbox__img" id="lightbox-img" src="" alt="" />
           </div>
+          <div class="lightbox__hint" id="lightbox-hint" aria-hidden="true">
+            <span>Scroll</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M6 9l6 6 6-6"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
         </div>
       </div>
     )
@@ -224,8 +236,18 @@ const next = index < caseStudies.length - 1 ? caseStudies[index + 1] : caseStudi
   const lightbox = document.getElementById("lightbox");
   if (lightbox) {
     const img = document.getElementById("lightbox-img") as HTMLImageElement;
-    const scroll = lightbox.querySelector(".lightbox__scroll");
+    const scroll = lightbox.querySelector(".lightbox__scroll") as HTMLElement | null;
+    const hint = document.getElementById("lightbox-hint");
     let lastTrigger: HTMLElement | null = null;
+
+    // Show the "Scroll" hint only when the image overflows the frame and the
+    // viewer is still near the top; hide it as soon as they scroll down.
+    const updateHint = () => {
+      if (!scroll || !hint) return;
+      const overflows = scroll.scrollHeight - scroll.clientHeight > 24;
+      const atTop = scroll.scrollTop < 24;
+      hint.classList.toggle("is-visible", overflows && atTop);
+    };
 
     const open = (src: string, alt: string, trigger: HTMLElement) => {
       lastTrigger = trigger;
@@ -234,18 +256,24 @@ const next = index < caseStudies.length - 1 ? caseStudies[index + 1] : caseStudi
       lightbox.hidden = false;
       document.body.style.overflow = "hidden";
       if (scroll) scroll.scrollTop = 0;
+      hint?.classList.remove("is-visible");
       requestAnimationFrame(() => lightbox.classList.add("is-open"));
     };
 
     const close = () => {
       lightbox.classList.remove("is-open");
       document.body.style.overflow = "";
+      hint?.classList.remove("is-visible");
       window.setTimeout(() => {
         lightbox.hidden = true;
         img.src = "";
       }, 200);
       if (lastTrigger) lastTrigger.focus();
     };
+
+    img.addEventListener("load", updateHint);
+    scroll?.addEventListener("scroll", updateHint, { passive: true });
+    window.addEventListener("resize", updateHint);
 
     document.querySelectorAll<HTMLElement>("[data-lightbox]").forEach((btn) => {
       btn.addEventListener("click", () => {

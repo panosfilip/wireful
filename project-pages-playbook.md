@@ -402,6 +402,24 @@ reveal transitions leave elements "not stable" — inject `*{transition:none}` a
     `reducedMotion: "no-preference"` so the site's `prefers-reduced-motion` branch does
     not disable the animations you came to record.
 
+19. **WordPress/Elementor sites: force entrance animations, and check for an `/en/`
+    mirror.** Elementor hides not-yet-animated blocks with `.elementor-invisible`
+    (`visibility: hidden`); a static shot before scroll is blank. REVEAL by removing that
+    class and setting `visibility: visible; opacity: 1` (baked into `shoot-attica.mjs`),
+    plus the generic inline opacity/transform reset. Bilingual sites (e.g.
+    attica-euregions.gr) often mirror every page under `/en/` — shoot the language that
+    matches the case-study copy (English here), discovered by rendering `/en/` and reading
+    its internal links. These sites have entrance animations but not GSAP ScrollSmoother,
+    so static tiles are fine; no video pipeline needed.
+
+20. **Do NOT inject `*{animation:none}` when verifying the rendered case page.** It was
+    added for Playwright click-stability, but it suppresses the hero intro reveal, so the
+    H1 + summary capture as a blank band at the top and look like a bug. Force reveals with
+    the `is-visible` class only (`[data-reveal],[data-reveal-group],[data-intro]`), no
+    anim-kill, and the title shows. The lightbox also now has a built-in **scroll hint**
+    (`.lightbox__hint`, id `lightbox-hint`): it shows "SCROLL ⌄" when the full-page image
+    overflows the frame and the viewer is near the top, and hides once they scroll down.
+
 ---
 
 ## Quick checklist per project
