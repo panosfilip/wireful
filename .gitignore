@@ -5,17 +5,9 @@ dist/
 
 # Local notes, agent settings, and source/reference material
 .claude/
-AGENTS.md
-brief.md
-casestudies.md
-design.md
-implementation.md
-iteration.md
-manual.md
-prompt.md
+*.md
 refs/
 figma-refs/
-sitemap.md
 stuff/
 
 # Session scratch (temporary capture/verify files)
