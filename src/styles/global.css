@@ -3707,7 +3707,7 @@ a.contact-line:hover .label::after {
 
 .overlay-form-panel {
   overflow-y: auto;
-  padding: clamp(1.5rem, 3.5vw, 3rem) clamp(1.5rem, 4vw, 4rem) clamp(2.5rem, 5vw, 4rem);
+  padding: 0 clamp(1.5rem, 4vw, 4rem) clamp(2.5rem, 5vw, 4rem);
   transform: translateY(20px);
   opacity: 0;
   transition: transform 0.6s var(--ease-expo) 0.15s, opacity 0.6s var(--ease-expo) 0.15s;
@@ -3719,13 +3719,27 @@ a.contact-line:hover .label::after {
 }
 
 .overlay-form-head {
+  position: sticky;
+  top: 0;
+  z-index: 3;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  padding-bottom: 1.25rem;
+  /* Full-bleed background so the pinned header hides content scrolling beneath
+     it; negative inline margins cancel the panel's horizontal padding. */
+  margin-inline: calc(-1 * clamp(1.5rem, 4vw, 4rem));
+  padding: clamp(1.5rem, 3.5vw, 3rem) clamp(1.5rem, 4vw, 4rem) 1.25rem;
   border-bottom: 1px solid var(--line);
   margin-bottom: clamp(1.75rem, 3.5vw, 2.5rem);
+  background: var(--bg);
+  transition: padding-block 0.3s var(--ease-out);
+}
+
+/* Condense the pinned header once the form scrolls, mirroring the site navbar. */
+.overlay-form-panel.is-scrolled .overlay-form-head {
+  padding-top: clamp(0.85rem, 2vw, 1.15rem);
+  padding-bottom: 0.85rem;
 }
 
 .overlay-form-label {
@@ -3738,6 +3752,10 @@ a.contact-line:hover .label::after {
 
 .title-keyword {
   color: var(--accent);
+}
+
+.overlay-media-title .title-keyword {
+  color: var(--magenta);
 }
 
 .overlay-close {
