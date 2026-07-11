@@ -6,7 +6,9 @@ const path = Astro.url.pathname.replace(/\/$/, "") || base;
 const links = [
   { href: `${base}approach`, label: "Approach" },
   { href: `${base}work`, label: "Work" },
+  { href: `${base}services`, label: "Services" },
   { href: `${base}about`, label: "About" },
+  { href: `${base}contact`, label: "Contact" },
 ];
 const isActive = (href: string) => {
   const normalizedHref = href.replace(/\/$/, "");

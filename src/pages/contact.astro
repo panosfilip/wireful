@@ -1,37 +1,142 @@
 ---
 import Base from "../layouts/Base.astro";
 import { site } from "../data/site";
-import { withPlaceholders } from "../utils/placeholders";
+
+const enquiryTypes = [
+  "Freelance availability",
+  "Agency or studio collaboration",
+  "Speaking or teaching",
+  "Press or interview",
+  "General question",
+  "Other",
+];
 ---
 
-<Base title={`Contact | ${site.name}`}>
-  <section class="hero hero-inner contact-cta">
-    <div class="container">
-      <h1 data-intro style="--intro: 1">Tell me what you want to <span class="title-keyword">improve</span>.</h1>
-      <p class="lead" data-intro style="--intro: 2">
-        I work on new websites, WordPress redesigns, Figma prototypes, brand systems, campaign
-        assets, and product UI. Send a short outline and I will reply with the next practical
-        step. Hiring enquiries are welcome too.
-      </p>
+<Base
+  title={`Contact | ${site.name}`}
+  description={`Contact ${site.owner} about freelance availability, collaboration, speaking, teaching, press, or general questions.`}
+>
+  <section class="contact-page">
+    <div class="contact-page-media" aria-hidden="true">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata">
+        <source src="media/contact-bg.webm" type="video/webm" />
+        <source src="media/contact-bg.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="container contact-page-grid">
+      <div class="contact-intro">
+        <div data-intro style="--intro: 1">
+          <h1>Get in <span class="title-keyword">touch</span>.</h1>
+          <p class="lead">
+            Use this page for freelance availability, collaboration, speaking, teaching, press, or a general
+            question. I usually reply within two working days.
+          </p>
+        </div>
 
-      <a class="mail-link" href={site.emailHref} data-intro style="--intro: 3">
-        {site.email}
-      </a>
+        <a class="mail-link" href={site.emailHref} data-intro style="--intro: 2">
+          {site.email}
+        </a>
 
-      <div class="contact-lines" data-reveal-group>
-        {
-          site.socials.map((s) => (
-            <a class="contact-line" href={s.href}>
-              <span class="label">{s.label}</span>
-              <span set:html={withPlaceholders(s.note)} />
+        <div class="contact-facts" data-reveal>
+          <div>
+            <span>Based in</span>
+            <p>{site.location}</p>
+          </div>
+          <div>
+            <span>Available for</span>
+            <p>Freelance work, agency collaboration, speaking, and teaching</p>
+          </div>
+          <div>
+            <span>Elsewhere</span>
+            <p><a href={site.linkedinHref}>LinkedIn <span aria-hidden="true">↗&#xFE0E;</span></a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-column">
+        <div class="contact-form-wrap" data-intro style="--intro: 2">
+          <div class="contact-form-head">
+            <h2>Send a message</h2>
+            <p>For messages that do not need a project quote.</p>
+          </div>
+
+          <form class="contact-form" aria-describedby="contact-form-status">
+            <div class="contact-form-row">
+              <div class="contact-field">
+                <label for="contact-name">Name <span aria-hidden="true">*</span></label>
+                <input id="contact-name" name="name" type="text" autocomplete="name" required />
+              </div>
+              <div class="contact-field">
+                <label for="contact-email">Email <span aria-hidden="true">*</span></label>
+                <input id="contact-email" name="email" type="email" autocomplete="email" required />
+              </div>
+            </div>
+
+            <div class="contact-form-row">
+              <div class="contact-field">
+                <label for="contact-company">Company or organisation</label>
+                <input id="contact-company" name="company" type="text" autocomplete="organization" />
+              </div>
+              <div class="contact-field">
+                <label for="contact-type">Reason for contact <span aria-hidden="true">*</span></label>
+                <div class="contact-select">
+                  <select id="contact-type" name="type" required>
+                    <option value="" selected disabled>Choose one</option>
+                    {enquiryTypes.map((type) => <option value={type}>{type}</option>)}
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-field">
+              <label for="contact-message">Message <span aria-hidden="true">*</span></label>
+              <textarea
+                id="contact-message"
+                name="message"
+                rows="5"
+                required
+                placeholder="Write the context, question, and any useful links."></textarea>
+            </div>
+
+            <div class="contact-form-actions">
+              <button type="button" class="btn contact-form-submit" aria-disabled="true">
+                Send message ↗&#xFE0E;
+              </button>
+              <p id="contact-form-status">
+                Form delivery is not connected yet. <a href={site.emailHref}>Email works now.</a>
+              </p>
+            </div>
+          </form>
+        </div>
+
+        <div class="contact-project-bridge" data-reveal>
+          <div class="contact-or" aria-hidden="true"><span>or</span></div>
+          <div class="contact-project-bridge-content">
+            <div>
+              <h2>Start a project</h2>
+              <p>Use the guided brief when you want to discuss scope, budget, and timing.</p>
+            </div>
+            <a href="contact" class="btn btn-ghost" data-overlay-trigger data-magnetic>
+              Open project brief
             </a>
-          ))
-        }
-        <div class="contact-line">
-          <span class="label">Location</span>
-          <span>{site.location}</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <script>
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const backgroundVideo = document.querySelector<HTMLVideoElement>(".contact-page-media video");
+      if (backgroundVideo) {
+        backgroundVideo.removeAttribute("autoplay");
+        backgroundVideo.pause();
+      }
+    }
+  </script>
 </Base>

@@ -265,27 +265,6 @@ const ogImage = new URL(
         requestAnimationFrame(lerpLoop);
       }
 
-      // Sticky card stacks: while the next card slides over a pinned one,
-      // --stack-p (0 = uncovered, 1 = fully covered) drives the covered
-      // card's scale-back and dim (see .service-card). Sticky tops are
-      // measured from computed style so CSS stays the source of truth.
-      const stackMedia = window.matchMedia("(min-width: 860px)");
-      const stackGroups = reducedMotion
-        ? []
-        : Array.from(document.querySelectorAll<HTMLElement>("[data-stack]")).map((group) => ({
-            cards: Array.from(group.children) as HTMLElement[],
-            tops: [] as number[],
-          }));
-      const measureStacks = () => {
-        for (const group of stackGroups) {
-          group.tops = group.cards.map((card) =>
-            stackMedia.matches ? parseFloat(getComputedStyle(card).top) || 0 : 0,
-          );
-        }
-      };
-      measureStacks();
-      window.addEventListener("resize", measureStacks, { passive: true });
-
       const update = () => {
         const doc = document.documentElement;
         if (bar) {
@@ -300,16 +279,6 @@ const ogImage = new URL(
         }
         if (parallaxEl && doc.scrollTop < window.innerHeight * 1.2) {
           parallaxEl.style.transform = `translateY(${(doc.scrollTop * 0.16).toFixed(1)}px)`;
-        }
-        if (stackMedia.matches) {
-          const travel = window.innerHeight * 0.55;
-          for (const group of stackGroups) {
-            for (let i = 0; i < group.cards.length - 1; i++) {
-              const nextTop = group.cards[i + 1].getBoundingClientRect().top;
-              const p = Math.min(Math.max(1 - (nextTop - group.tops[i + 1]) / travel, 0), 1);
-              group.cards[i].style.setProperty("--stack-p", p.toFixed(3));
-            }
-          }
         }
       };
       window.addEventListener("scroll", update, { passive: true });

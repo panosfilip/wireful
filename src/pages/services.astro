@@ -1,0 +1,318 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../data/site";
+import { caseStudies } from "../data/caseStudies";
+
+const caseBySlug = (slug: string) => {
+  const cs = caseStudies.find((item) => item.slug === slug);
+  if (!cs || cs.status !== "published") {
+    throw new Error(`Services proof must reference a published case study: ${slug}`);
+  }
+  const image = cs.cover.poster ?? cs.cover.src;
+  if (!image) throw new Error(`Services proof needs real cover media: ${slug}`);
+  return { title: cs.title, href: `work/${cs.slug}/`, image, alt: cs.cover.alt };
+};
+
+const services = [
+  {
+    id: "websites",
+    shortTitle: "Websites",
+    title: "Website design and redesign",
+    problem:
+      "For organisations with a site that has become difficult to navigate, explain, update, or extend.",
+    description:
+      "I work from the content and visitor tasks through to responsive page design. The final system accounts for the CMS, the people maintaining it, and the developers building it.",
+    work: [
+      "Information architecture and content hierarchy",
+      "Responsive website UI",
+      "WordPress and Elementor-aware design",
+      "Landing pages and campaign sites",
+      "E-commerce structure",
+      "Design review during development",
+    ],
+    outputs: "Sitemaps, wireframes, Figma page designs, reusable components, production assets, and handoff notes.",
+    proof: [
+      caseBySlug("teka-ui-redesign"),
+      caseBySlug("kifissia-municipality-redesign"),
+      caseBySlug("dtk-law-firm-website"),
+    ],
+    workLink: { href: "work?tag=web#taxonomy", label: "Browse website work" },
+  },
+  {
+    id: "audits",
+    shortTitle: "Design audits",
+    title: "UX audits and design consulting",
+    problem:
+      "For teams that know an interface is underperforming but need to decide what deserves attention first.",
+    description:
+      "I review the current site, product, or prototype and trace the problems back to structure, interaction, content, and visual hierarchy. Findings are ranked so the team can separate urgent fixes from later improvements.",
+    work: [
+      "UX and interface review",
+      "Information-architecture review",
+      "Navigation and content hierarchy",
+      "Figma and component-system review",
+      "Second opinion before development",
+    ],
+    outputs: "Annotated findings, severity-ranked recommendations, example redesigns where they help, and a review session with the team.",
+    proof: [],
+    workLink: { href: "contact", label: "Discuss a focused review" },
+  },
+  {
+    id: "products",
+    shortTitle: "Product UI",
+    title: "Product UI and prototypes",
+    problem:
+      "For portals, dashboards, and internal tools that need to be worked through before development starts.",
+    description:
+      "I turn requirements into flows, screens, states, and testable prototypes. This is useful when a team needs to resolve how the product behaves before committing engineering time.",
+    work: [
+      "Task flows and interface structure",
+      "Product UI and dashboard design",
+      "Portals and digital-service interfaces",
+      "Interactive Figma prototypes",
+      "Components and interaction states",
+      "Design review with developers",
+    ],
+    outputs: "Flows, wireframes, interactive prototypes, responsive interface designs, component specifications, and developer-ready Figma files.",
+    proof: [],
+    workLink: { href: "contact", label: "Ask for relevant product work" },
+  },
+  {
+    id: "brand",
+    shortTitle: "Brand systems",
+    title: "Brand and campaign systems",
+    problem:
+      "For brands that need to stay recognisable across a website, campaign, social feed, email, and print.",
+    description:
+      "I define the visual rules and make the core material the team needs now. The aim is a system that can produce the next asset without starting the design again.",
+    work: [
+      "Visual identity and art direction",
+      "Campaign concepts and key visuals",
+      "Social, email, and advertising assets",
+      "Landing-page visual systems",
+      "Print and outdoor material",
+    ],
+    outputs: "Identity direction, campaign toolkits, reusable templates, usage rules, and production-ready files.",
+    proof: [caseBySlug("cymoid-productions")],
+    workLink: { href: "work?tag=brand#taxonomy", label: "Browse brand work" },
+  },
+];
+
+const description =
+  "Website design, product UI, brand systems, and UX audits by Panagiotis Filippaios.";
+---
+
+<Base title={`Services | ${site.name}`} description={description}>
+  <section class="hero hero-inner services-hero">
+    <div class="hero-media" aria-hidden="true">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata">
+        <source src="media/services-hero-bg.webm" type="video/webm" />
+        <source src="media/services-hero-bg.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="container">
+      <h1 data-intro style="--intro: 1">
+        Design for websites, products, and <span class="title-keyword">brand systems</span>.
+      </h1>
+      <p class="lead" data-intro style="--intro: 2">
+        I help organisations untangle difficult content, improve interfaces, and turn rough
+        requirements into work a team can build and maintain.
+      </p>
+      <div class="hero-actions" data-intro style="--intro: 3">
+        <a href="contact" class="btn" data-magnetic>Discuss a project</a>
+        <a href="work" class="btn btn-ghost">See relevant work</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const heroVideo = document.querySelector<HTMLVideoElement>(".services-hero .hero-media video");
+      if (heroVideo) {
+        heroVideo.removeAttribute("autoplay");
+        heroVideo.pause();
+      }
+    }
+  </script>
+
+  <nav class="services-jump" aria-label="Services on this page">
+    <div class="container">
+      {services.map((service) => (
+        <a href={`#${service.id}`} data-service-link={service.id}>{service.shortTitle}</a>
+      ))}
+    </div>
+  </nav>
+
+  <section class="section services-offer" aria-labelledby="services-heading">
+    <div class="container">
+      <div class="services-intro" data-reveal>
+        <h2 id="services-heading">Where I can <span class="title-keyword">help</span>.</h2>
+        <p>
+          The scope changes from project to project. These are the four jobs I am most often brought
+          in to do.
+        </p>
+      </div>
+
+      <div class="services-list">
+        {services.map((service) => (
+          <article class="service-offer" id={service.id} data-service-section>
+            <header class="service-offer-head" data-reveal>
+              <h3>{service.title}</h3>
+              <p class="service-offer-problem">{service.problem}</p>
+            </header>
+
+            <div class:list={["service-offer-content", !service.proof.length && "service-offer-content--no-proof"]}>
+              <div class="service-offer-copy" data-reveal>
+                <p class="service-offer-description">{service.description}</p>
+                <div class="service-offer-details">
+                  <div>
+                    <h4>Typical work</h4>
+                    <ul>
+                      {service.work.map((item) => <li>{item}</li>)}
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>What you receive</h4>
+                    <p>{service.outputs}</p>
+                  </div>
+                </div>
+                <a class="service-offer-link" href={service.workLink.href}>
+                  {service.workLink.label} <span class="arrow">↗&#xFE0E;</span>
+                </a>
+              </div>
+
+              {service.proof.length > 0 ? (
+                <aside class="service-cases" aria-label={`${service.title}: selected work`} data-reveal>
+                  <h4>Selected case studies</h4>
+                  <div class="service-case-list">
+                    {service.proof.map((item) => (
+                      <a class="service-case-row" href={item.href}>
+                        <span class="service-case-thumb">
+                          <img src={item.image} alt="" loading="lazy" decoding="async" />
+                        </span>
+                        <strong>{item.title}</strong>
+                        <span class="arrow" aria-hidden="true">↗&#xFE0E;</span>
+                      </a>
+                    ))}
+                  </div>
+                </aside>
+              ) : null}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section services-working" aria-labelledby="working-heading">
+    <div class="container">
+      <div class="services-working-layout">
+        <header class="services-working-head" data-reveal>
+          <h2 id="working-heading">Start with what you <span class="title-keyword">have</span>.</h2>
+          <p>
+            A live site, an early prototype, or a rough brief is enough. We can decide the useful
+            first step after looking at the work.
+          </p>
+        </header>
+
+        <div class="services-working-options" data-reveal-group>
+          <article>
+            <h3>Focused review</h3>
+            <p>
+              I review an existing site, interface, or prototype. You receive annotated findings,
+              a ranked fix list, and a session to work through it.
+            </p>
+          </article>
+          <article>
+            <h3>Defined project</h3>
+            <p>
+              We agree the problem, scope, deliverables, and review points before design begins.
+              Most of the work shown on this site followed this model.
+            </p>
+          </article>
+          <article>
+            <h3>Ongoing support</h3>
+            <p>
+              I join your team for a longer period and cover design work across a product, website,
+              campaign, or implementation.
+            </p>
+          </article>
+          <p class="services-working-scope">
+            I lead the design work and stay involved through handoff. When needed, I work alongside
+            your developers, writers, photographers, or production partners.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact-cta services-cta" aria-labelledby="services-cta-heading">
+    <div class="container">
+      <h2 id="services-cta-heading" data-reveal>
+        Not sure what needs <span class="title-keyword">fixing yet</span>?
+      </h2>
+      <p class="lead" data-reveal style="--reveal-delay: 1">
+        Send the current site, prototype, or brief. A description of what is not working is enough to
+        begin.
+      </p>
+      <div class="hero-actions" data-reveal style="--reveal-delay: 2">
+        <a href="contact" class="btn" data-magnetic>Tell me about the problem</a>
+        <a href={site.emailHref} class="btn btn-ghost">Email me directly</a>
+        <a href="work" class="section-link">Browse all work <span class="arrow">↗&#xFE0E;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const serviceSections = Array.from(document.querySelectorAll<HTMLElement>("[data-service-section]"));
+    const serviceLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-service-link]"));
+    const serviceJump = document.querySelector<HTMLElement>(".services-jump");
+
+    serviceLinks.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const section = document.getElementById(link.dataset.serviceLink!);
+        if (!section) return;
+        event.preventDefault();
+        section.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
+      });
+    });
+
+    const updateServices = () => {
+      const focusLine = window.innerHeight * 0.42;
+      let active = serviceSections[0]?.id;
+
+      serviceSections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        const progress = Math.min(Math.max((window.innerHeight - rect.top) / (window.innerHeight + rect.height), 0), 1);
+        section.style.setProperty("--service-p", progress.toFixed(4));
+        if (rect.top <= focusLine) active = section.id;
+      });
+
+      serviceLinks.forEach((link) => {
+        const isActive = link.dataset.serviceLink === active;
+        link.classList.toggle("is-active", isActive);
+        if (isActive) link.setAttribute("aria-current", "true");
+        else link.removeAttribute("aria-current");
+      });
+
+      const lastSection = serviceSections.at(-1);
+      if (serviceJump && lastSection) {
+        const jumpBottom = serviceJump.getBoundingClientRect().bottom;
+        serviceJump.classList.toggle(
+          "is-past-services",
+          lastSection.getBoundingClientRect().bottom <= jumpBottom,
+        );
+      }
+    };
+
+    updateServices();
+    window.addEventListener("scroll", updateServices, { passive: true });
+    window.addEventListener("resize", updateServices, { passive: true });
+  </script>
+</Base>
