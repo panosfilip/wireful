@@ -98,6 +98,9 @@ const services = [
   },
 ];
 
+/** Phrases cycled in the hero headline, in page order. */
+const scramblePhrases = ["websites", "design audits", "product UI", "brand systems"];
+
 const description =
   "Website design, product UI, brand systems, and UX audits by Panagiotis Filippaios.";
 ---
@@ -117,7 +120,14 @@ const description =
     </div>
     <div class="container">
       <h1 data-intro style="--intro: 1">
-        Design for websites, products, and <span class="title-keyword">brand systems</span>.
+        Design for
+        <span class="sr-only">websites, product UI, brand systems, and design audits</span>
+        <span
+          class="title-keyword"
+          aria-hidden="true"
+          data-cycle-phrases={JSON.stringify(scramblePhrases)}
+          >websites, products, and brand systems</span
+        >.
       </h1>
       <p class="lead" data-intro style="--intro: 2">
         I help organisations untangle difficult content, improve interfaces, and turn rough
@@ -131,12 +141,43 @@ const description =
   </section>
 
   <script>
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const heroReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (heroReducedMotion) {
       const heroVideo = document.querySelector<HTMLVideoElement>(".services-hero .hero-media video");
       if (heroVideo) {
         heroVideo.removeAttribute("autoplay");
         heroVideo.pause();
       }
+    }
+
+    // Headline blur flip: the active phrase lifts up and blurs away while
+    // the next rises into place, sharp. All phrases share one grid cell so
+    // the block sizes to the widest one. Without JS or with reduced motion
+    // the static phrase in the markup stays; screen readers get sr-only copy.
+    const cycleEl = document.querySelector<HTMLElement>("[data-cycle-phrases]");
+    if (cycleEl && !heroReducedMotion) {
+      const phrases: string[] = JSON.parse(cycleEl.dataset.cyclePhrases!);
+      cycleEl.classList.add("cycle-words");
+      cycleEl.innerHTML = phrases
+        .map((phrase, i) => `<span class="cycle-word${i === 0 ? " is-active" : ""}">${phrase}</span>`)
+        .join("");
+      const words = Array.from(cycleEl.querySelectorAll<HTMLElement>(".cycle-word"));
+      let active = 0;
+      // The container hugs the active word so the sentence period stays snug;
+      // the width change itself is transitioned in CSS.
+      const fitWidth = () => cycleEl.style.setProperty("width", `${words[active].offsetWidth}px`);
+      fitWidth();
+      window.addEventListener("resize", fitWidth, { passive: true });
+      setInterval(() => {
+        words[active].classList.remove("is-active");
+        words[active].classList.add("is-leaving");
+        const leaving = active;
+        setTimeout(() => words[leaving].classList.remove("is-leaving"), 700);
+        active = (active + 1) % words.length;
+        words[active].classList.add("is-active");
+        fitWidth();
+      }, 2600);
     }
   </script>
 

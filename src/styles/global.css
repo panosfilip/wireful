@@ -767,6 +767,14 @@ html.js .tick-blink {
   border-bottom: 1px solid var(--line);
 }
 
+/* Inside the hero's flex column, the container's auto margins disable
+   cross-axis stretching, so it shrink-wraps and floats toward the centre —
+   misaligning hero copy from the body sections below. Force full width so
+   the max-width + auto margins behave like they do outside flex. */
+.hero > .container {
+  width: 100%;
+}
+
 /* Full-viewport hero: fills the screen below the sticky header.
    --header-h is measured and set by Base.astro's script. Type and spacing
    scale with viewport HEIGHT too, so the content stack never outgrows the fold.
@@ -4988,8 +4996,55 @@ html.js [data-reveal-group].is-visible > *:nth-child(n + 7) { transition-delay: 
 
 /* ---- Services page ------------------------------------------------------------------------------------------------------- */
 
+/* Visually hidden but announced by screen readers (stable copy behind the
+   scrambling headline word) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 .services-hero {
   overflow: hidden;
+}
+
+/* Headline blur flip: all phrases stack in one grid cell (the widest sets
+   the size); the active one is sharp, the leaving one lifts up and blurs */
+.cycle-words {
+  display: inline-grid;
+  vertical-align: baseline;
+  justify-items: start;
+  transition: width 0.6s var(--ease-expo);
+}
+
+.cycle-words .cycle-word {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(0.55em);
+  filter: blur(8px);
+  transition:
+    opacity 0.45s var(--ease-out),
+    transform 0.65s var(--ease-expo),
+    filter 0.45s var(--ease-out);
+}
+
+.cycle-words .cycle-word.is-active {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+.cycle-words .cycle-word.is-leaving {
+  opacity: 0;
+  transform: translateY(-0.5em);
+  filter: blur(8px);
 }
 
 .services-hero .lead {
