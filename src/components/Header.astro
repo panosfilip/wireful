@@ -36,6 +36,21 @@ const isActive = (href: string) => {
         </ul>
       </nav>
       <div class="header-actions">
+        <button
+          type="button"
+          class="theme-toggle"
+          aria-label="Switch to light mode"
+          aria-pressed="false"
+          title="Switch to light mode"
+        >
+          <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3.5"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.2 15.1A8.7 8.7 0 0 1 8.9 3.8 8.7 8.7 0 1 0 20.2 15.1Z"></path>
+          </svg>
+        </button>
         <ContactIcons variant="header" />
         <a href="contact" class="btn btn-small" data-overlay-trigger data-magnetic><span>Start a project</span></a>
         <button
@@ -58,6 +73,32 @@ const isActive = (href: string) => {
   const header = document.getElementById("site-header")!;
   const toggle = header.querySelector<HTMLButtonElement>(".nav-toggle")!;
   const nav = header.querySelector<HTMLElement>(".primary-nav")!;
+  const themeToggle = header.querySelector<HTMLButtonElement>(".theme-toggle")!;
+
+  const updateThemeControl = () => {
+    const isLight = document.documentElement.dataset.theme === "light";
+    const label = `Switch to ${isLight ? "dark" : "light"} mode`;
+    themeToggle.setAttribute("aria-label", label);
+    themeToggle.setAttribute("aria-pressed", String(isLight));
+    themeToggle.title = label;
+  };
+
+  updateThemeControl();
+  themeToggle.addEventListener("click", () => {
+    const theme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    document.querySelector("#theme-color")?.setAttribute(
+      "content",
+      theme === "light" ? "#f6f1f7" : "#0b0712",
+    );
+    try {
+      localStorage.setItem("wireful-theme", theme);
+    } catch {
+      // The theme still works for this page when storage is unavailable.
+    }
+    updateThemeControl();
+  });
 
   const setOpen = (open: boolean) => {
     header.classList.toggle("nav-open", open);

@@ -8,6 +8,7 @@
 --------------------------------------------------------------------------- */
 
 :root {
+  color-scheme: dark;
   --bg: #0b0712;
   --bg-raise: #110b1c;
   --surface: #160e25;
@@ -22,6 +23,8 @@
   --accent-ink: #23091a;
   --magenta: #da0c81;
   --plum: #610c9f;
+  --button-ink: #140c20;
+  --page-gradient: none;
 
   --font-display: "Space Grotesk Variable", "Space Grotesk", "Helvetica Neue",
     Arial, sans-serif;
@@ -36,6 +39,29 @@
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f6f1f7;
+  --bg-raise: #f1eaf3;
+  --surface: #ece3ef;
+  --surface-hover: #e5dae9;
+  --line: #ded1e3;
+  --line-strong: #bba8c4;
+  --text: #1c1423;
+  --muted: #5f5368;
+  --faint: #706378;
+  --accent: #b41f60;
+  --accent-dim: #94184f;
+  --accent-ink: #fff8fb;
+  --magenta: #b80a6c;
+  --plum: #6f2998;
+  --button-ink: #fffafd;
+  --page-gradient:
+    radial-gradient(circle at 88% 8%, rgba(180, 31, 96, 0.055), transparent 32%),
+    radial-gradient(circle at 7% 58%, rgba(111, 41, 152, 0.05), transparent 36%),
+    linear-gradient(180deg, #faf7fa 0%, #f6f1f7 48%, #f1eaf3 100%);
 }
 
 /* ---- Reset ---------------------------------------------------------------- */
@@ -56,13 +82,16 @@ html {
 
 body {
   margin: 0;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image: var(--page-gradient);
+  background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-body);
   font-size: 1rem;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  transition: background-color 0.3s var(--ease-out), color 0.3s var(--ease-out);
 }
 
 img,
@@ -257,7 +286,7 @@ html.js .tick-blink {
   background-repeat: no-repeat;
   background-position: bottom left;
   background-size: 100% 0%;
-  color: #140c20;
+  color: var(--button-ink);
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.95rem;
@@ -471,6 +500,70 @@ html.js .tick-blink {
   gap: 1.1rem;
 }
 
+.theme-toggle {
+  position: relative;
+  display: inline-grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 auto;
+  place-items: center;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--bg-raise) 72%, transparent);
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    border-color 0.25s var(--ease-out),
+    background 0.25s var(--ease-out),
+    color 0.25s var(--ease-out),
+    transform 0.3s var(--ease-expo);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 9%, var(--bg-raise));
+  color: var(--accent);
+  transform: rotate(8deg);
+}
+
+.theme-toggle:active {
+  transform: scale(0.92);
+}
+
+.theme-icon {
+  position: absolute;
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: opacity 0.25s var(--ease-out), transform 0.4s var(--ease-expo);
+}
+
+.theme-icon--sun {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+.theme-icon--moon {
+  opacity: 0;
+  transform: rotate(-35deg) scale(0.55);
+}
+
+:root[data-theme="light"] .theme-icon--sun {
+  opacity: 0;
+  transform: rotate(35deg) scale(0.55);
+}
+
+:root[data-theme="light"] .theme-icon--moon {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
 .header-actions .btn {
   flex: 0 0 auto;
   white-space: nowrap;
@@ -597,7 +690,7 @@ html.js .tick-blink {
   }
 
   .primary-nav ul {
-    gap: clamp(1.4rem, 2.5vw, 2.75rem);
+    gap: clamp(1rem, 1.6vw, 1.5rem);
   }
 
   .primary-nav a {
@@ -652,6 +745,11 @@ html.js .tick-blink {
   .header-actions {
     margin-left: auto;
     gap: 0.6rem;
+  }
+
+  .theme-toggle {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 
   .header-actions .contact-icons {
@@ -731,6 +829,11 @@ html.js .tick-blink {
 }
 
 @media (max-width: 360px) {
+  .theme-toggle {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
   .header-actions .btn {
     padding-inline: 0.65rem;
     font-size: 0.78rem;
@@ -799,6 +902,13 @@ html.js .tick-blink {
     padding-bottom: 0;
   }
 
+  /* Optical rather than mathematical centering: the portrait and button row
+     carry more visual weight below the headline, so lift the home copy gently.
+     The vh component scales through large desktop and 4K displays. */
+  .hero-home .hero-copy {
+    transform: translateY(clamp(-3.25rem, -2.4vh, -1.25rem));
+  }
+
   .hero:not(.hero-inner) h1 {
     font-size: min(4.3rem, 4.3vw, 8vh);
   }
@@ -864,6 +974,19 @@ html.js .tick-blink {
   background:
     linear-gradient(180deg, rgba(11, 7, 18, 0.4) 0%, rgba(11, 7, 18, 0.2) 45%, var(--bg) 96%),
     linear-gradient(90deg, rgba(11, 7, 18, 0.92), rgba(11, 7, 18, 0.55) 52%, rgba(11, 7, 18, 0.2));
+}
+
+/* Let the homepage video participate more strongly in the portrait composition
+   while retaining a focused dark field directly behind the headline. */
+:root[data-theme="dark"] .hero-home .hero-media video {
+  filter: brightness(0.9) saturate(0.98);
+  opacity: 0.76;
+}
+
+:root[data-theme="dark"] .hero-home .hero-media::after {
+  background:
+    linear-gradient(180deg, rgba(11, 7, 18, 0.26) 0%, rgba(11, 7, 18, 0.1) 45%, var(--bg) 96%),
+    linear-gradient(90deg, rgba(11, 7, 18, 0.82), rgba(11, 7, 18, 0.4) 52%, rgba(11, 7, 18, 0.08));
 }
 
 /* Fine noise so video/gradients don't band — filmic, not glassy */
@@ -4083,6 +4206,7 @@ a.contact-line:hover .label::after {
   transform: translateX(-24px);
   opacity: 0;
   transition: transform 0.6s var(--ease-expo) 0.1s, opacity 0.6s var(--ease-expo) 0.1s;
+  color: #f1edf9;
 }
 
 .project-overlay.is-open .overlay-media-copy {
@@ -4107,7 +4231,7 @@ a.contact-line:hover .label::after {
 }
 
 .overlay-media-sub {
-  color: var(--muted);
+  color: #c2b9d5;
   max-width: 26em;
   margin: 0;
 }
@@ -4955,6 +5079,176 @@ a.contact-line:hover .label::after {
     align-items: center;
   }
 }
+
+/* ---- Light theme refinements ---------------------------------------------------
+   Media-heavy areas need more than inverted tokens: a pale violet veil keeps
+   photography atmospheric while preserving dark text and the blueprint rules. */
+
+:root[data-theme="light"] .hero-media video {
+  filter: brightness(1.02) saturate(0.82);
+  opacity: 0.32;
+}
+
+:root[data-theme="light"] .hero-media::after {
+  background:
+    linear-gradient(180deg, rgba(252, 250, 252, 0.18) 0%, rgba(252, 250, 252, 0.34) 45%, var(--bg) 96%),
+    linear-gradient(90deg, rgba(252, 250, 252, 0.87), rgba(252, 250, 252, 0.6) 52%, rgba(252, 250, 252, 0.22));
+}
+
+/* The homepage video is a key part of the portrait composition, so it stays
+   notably more present than the atmospheric videos on inner-page heroes. */
+:root[data-theme="light"] .hero-home .hero-media video {
+  filter: brightness(0.98) saturate(0.95);
+  opacity: 0.52;
+}
+
+:root[data-theme="light"] .hero-home .hero-media::after {
+  background:
+    linear-gradient(180deg, rgba(252, 250, 252, 0.1) 0%, rgba(252, 250, 252, 0.22) 45%, var(--bg) 96%),
+    linear-gradient(90deg, rgba(252, 250, 252, 0.76), rgba(252, 250, 252, 0.38) 52%, rgba(252, 250, 252, 0.1));
+}
+
+:root[data-theme="light"] .hero-portrait::before {
+  opacity: 0.34;
+}
+
+:root[data-theme="light"] .hero-portrait img {
+  filter: grayscale(1) contrast(1.02) drop-shadow(0 28px 42px rgba(67, 40, 79, 0.2));
+}
+
+@media (hover: hover) {
+  :root[data-theme="light"] .hero-portrait:hover img {
+    filter: grayscale(0) contrast(1) drop-shadow(0 28px 42px rgba(67, 40, 79, 0.22));
+  }
+}
+
+:root[data-theme="light"] .cta-media video {
+  filter: brightness(1.02) saturate(0.82);
+  opacity: 0.3;
+}
+
+:root[data-theme="light"] .cta-media::after {
+  background:
+    linear-gradient(180deg, var(--bg), rgba(252, 250, 252, 0.48) 30%, rgba(252, 250, 252, 0.48) 70%, var(--bg)),
+    linear-gradient(90deg, rgba(252, 250, 252, 0.87), rgba(252, 250, 252, 0.5) 60%, rgba(252, 250, 252, 0.24));
+}
+
+:root[data-theme="light"] .contact-page-media video {
+  filter: brightness(1.02) saturate(0.82);
+  opacity: 0.3;
+}
+
+:root[data-theme="light"] .contact-page-media::after {
+  background:
+    linear-gradient(180deg, rgba(252, 250, 252, 0.42), rgba(252, 250, 252, 0.66)),
+    linear-gradient(90deg, rgba(252, 250, 252, 0.84), rgba(252, 250, 252, 0.34) 70%, rgba(252, 250, 252, 0.52));
+}
+
+/* Keep the project brief's split-screen drama in light mode, but lift the
+   media panel out of near-black into a restrained plum-gray range. */
+:root[data-theme="light"] .overlay-media video {
+  filter: brightness(1.05) saturate(0.78);
+}
+
+:root[data-theme="light"] .overlay-media::after {
+  background:
+    linear-gradient(180deg, rgba(247, 240, 247, 0.2), rgba(170, 145, 174, 0.1) 45%, rgba(35, 25, 40, 0.48)),
+    linear-gradient(90deg, rgba(127, 103, 132, 0.12), rgba(42, 30, 47, 0.28));
+}
+
+:root[data-theme="light"] .contact-form-wrap {
+  box-shadow: 0 2rem 5rem rgba(67, 40, 79, 0.12);
+}
+
+@media (max-width: 620px) {
+  :root[data-theme="light"] .primary-nav {
+    box-shadow: 0 1.5rem 3rem rgba(67, 40, 79, 0.14);
+  }
+}
+
+:root[data-theme="light"] .work-filter-menu,
+:root[data-theme="light"] .career-card,
+:root[data-theme="light"] .toolkit-card {
+  box-shadow: 0 1rem 2.5rem rgba(67, 40, 79, 0.14);
+}
+
+/* The original capability palette is intentionally pastel for the dark canvas.
+   These deeper equivalents retain each category's identity on white. */
+:root[data-theme="light"] .capability-directory-item--violet,
+:root[data-theme="light"] .capability-tag,
+:root[data-theme="light"] .work-filter-button--violet,
+:root[data-theme="light"] .capability-option--violet {
+  --capability-tone: #7047b8;
+  --tag-tone: #7047b8;
+  --filter-tone: #7047b8;
+}
+
+:root[data-theme="light"] .capability-directory-item--rose,
+:root[data-theme="light"] .capability-tag--rose,
+:root[data-theme="light"] .work-filter-button--rose,
+:root[data-theme="light"] .capability-option--rose {
+  --capability-tone: #a92f62;
+  --tag-tone: #a92f62;
+  --filter-tone: #a92f62;
+}
+
+:root[data-theme="light"] .capability-directory-item--amber,
+:root[data-theme="light"] .capability-tag--amber,
+:root[data-theme="light"] .work-filter-button--amber,
+:root[data-theme="light"] .capability-option--amber {
+  --capability-tone: #93541c;
+  --tag-tone: #93541c;
+  --filter-tone: #93541c;
+}
+
+:root[data-theme="light"] .capability-directory-item--lime,
+:root[data-theme="light"] .capability-tag--lime,
+:root[data-theme="light"] .work-filter-button--lime,
+:root[data-theme="light"] .capability-option--lime {
+  --capability-tone: #5d711d;
+  --tag-tone: #5d711d;
+  --filter-tone: #5d711d;
+}
+
+:root[data-theme="light"] .capability-directory-item--green,
+:root[data-theme="light"] .capability-tag--green,
+:root[data-theme="light"] .work-filter-button--green,
+:root[data-theme="light"] .capability-option--green {
+  --capability-tone: #276d45;
+  --tag-tone: #276d45;
+  --filter-tone: #276d45;
+}
+
+:root[data-theme="light"] .capability-directory-item--cyan,
+:root[data-theme="light"] .capability-tag--cyan,
+:root[data-theme="light"] .work-filter-button--cyan,
+:root[data-theme="light"] .capability-option--cyan {
+  --capability-tone: #176d7b;
+  --tag-tone: #176d7b;
+  --filter-tone: #176d7b;
+}
+
+:root[data-theme="light"] .capability-directory-item--blue,
+:root[data-theme="light"] .capability-tag--blue,
+:root[data-theme="light"] .work-filter-button--blue,
+:root[data-theme="light"] .capability-option--blue {
+  --capability-tone: #365d98;
+  --tag-tone: #365d98;
+  --filter-tone: #365d98;
+}
+
+:root[data-theme="light"] .case-meta-line .flag--live {
+  color: #276d45;
+}
+
+:root[data-theme="light"] .case-meta-line .flag--live::before {
+  background: #276d45;
+}
+
+:root[data-theme="light"] .service-offer:nth-child(1) { --service-tone: #7047b8; }
+:root[data-theme="light"] .service-offer:nth-child(2) { --service-tone: #176d7b; }
+:root[data-theme="light"] .service-offer:nth-child(3) { --service-tone: #a92f62; }
+:root[data-theme="light"] .service-offer:nth-child(4) { --service-tone: #93541c; }
 
 /* ---- Reveal system ----------------------------------------------------------------------------------------------------- */
 
