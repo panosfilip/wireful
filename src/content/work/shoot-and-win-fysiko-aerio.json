@@ -2,35 +2,82 @@
   "order": 29,
   "slug": "shoot-and-win-fysiko-aerio",
   "title": "Shoot & Win",
-  "status": "draft",
-  "clientType": "Fysiko Aerio campaign",
-  "summary": "Interactive campaign experience for Fysiko Aerio, designed to turn a promotional mechanic into a clear, energetic digital journey.",
-  "problem": "The campaign needed to make entry, participation, and reward information immediately understandable across desktop and mobile.",
+  "status": "published",
+  "clientType": "Fysiko Aerio Hellenic Energy Company: promotional campaign game",
+  "liveUrl": "https://www.shootandwin.gr/",
+  "summary": "A browser basketball game for the Fysiko Aerio Shoot & Win campaign. Designed in Figma, then built in plain HTML, CSS, and JavaScript on a custom game engine, with Claude Code assisting the development.",
+  "problem": "The campaign gates its prize draw behind play: you enter only after sinking three of five shots. That makes the game itself the conversion path, so it has to be winnable within a five-minute round, on a phone, by someone shooting a basketball on a screen for the first time.",
   "role": [
     "Campaign UI design",
-    "Interactive flow design",
-    "Visual direction"
+    "Game design",
+    "Visual direction",
+    "Front-end build"
   ],
   "services": [
     "Campaign design",
-    "Interactive design"
+    "Interactive design",
+    "Game development"
   ],
   "tools": [
-    "Figma"
+    "Figma",
+    "Claude Code"
   ],
   "tags": [
     "campaign",
+    "ai",
     "commercial"
   ],
   "cover": {
-    "type": "placeholder",
+    "type": "video",
     "motif": "landing",
-    "alt": "Interactive campaign landing page for Shoot and Win"
+    "alt": "The Shoot & Win court: a basketball is swiped from the free-throw line, arcs into the hoop, and the scoreboard counts the basket.",
+    "src": "media/work/shootwin-cover.mp4",
+    "poster": "media/work/shootwin-cover-poster.webp",
+    "caption": "Gameplay"
   },
+  "gallery": [
+    {
+      "type": "video",
+      "src": "media/work/shootwin-intro.mp4",
+      "poster": "media/work/shootwin-intro-poster.webp",
+      "caption": "Campaign intro",
+      "alt": "The intro card scrolling through the Shoot & Win logo, the three-basket challenge, and the prize before the game starts."
+    },
+    {
+      "type": "video",
+      "src": "media/work/shootwin-win.mp4",
+      "poster": "media/work/shootwin-win-poster.webp",
+      "caption": "Win flow",
+      "alt": "The final basket dropping, the 3 out of 3 win overlay, and the entry form with name, email, and phone fields."
+    },
+    {
+      "type": "video",
+      "src": "media/work/shootwin-modals.mp4",
+      "poster": "media/work/shootwin-modals-poster.webp",
+      "caption": "Game system",
+      "alt": "The help instructions, the aim-assist explainer, and the restart confirmation opening over the court."
+    }
+  ],
   "sections": [
     {
-      "heading": "Output",
-      "body": "A campaign flow that brings entry, interaction, and prize communication into one coherent experience."
+      "heading": "Context",
+      "body": "Fysiko Aerio Hellenic Energy Company ran Shoot & Win as a standalone campaign site at shootandwin.gr. The offer is a draw for the Year's Electricity, and the entry ticket is performance: five shots, three baskets, a five-minute clock. Everything on the page serves that loop, from the scoreboard that counts ΚΑΛΑΘΙΑ and ΒΟΛΕΣ to the terms overlay reachable from the intro card and the entry form."
+    },
+    {
+      "heading": "Process",
+      "body": "The screens came first in Figma: the intro card with the prize, the arena court, the scoreboard, and every overlay the game can show. I then built the game in plain HTML, CSS, and JavaScript with Claude Code assisting, writing the engine for this game instead of adapting a physics library. The layout is a phone-shaped stage, since a campaign like this is opened from a social link on a phone far more often than on a desktop."
+    },
+    {
+      "heading": "The engine",
+      "body": "The court runs in a fixed 420 by 760 game space on canvas, simulated at a locked 60 steps per second so a shot behaves the same on a fast laptop and a mid-range phone. Depth is the trick that makes a flat screen read as a court: the ball carries a third, z-axis velocity toward the hoop and shrinks as it travels, which is what gives the game its 2.5D feel. A shot is one gesture. Drag up on the ball and the swipe vector sets power, direction, and spin, while the engine estimates where the arc will descend and paces the depth so a clean vertical swipe drops at the rim instead of sailing past it. Air drag bends long shots, and the rim, net, and backboard each have their own collision zones, so near misses rattle out instead of passing through."
+    },
+    {
+      "heading": "The system around it",
+      "body": "Losing a player to confusion costs an entry, so the game explains itself in place. A help modal shows the gesture, an aim-assist toggle softens the launch profile and opens a short explainer the first time it is switched on, and restarting asks for confirmation before it wipes a round. Sinking three baskets raises the win overlay, and claiming the prize opens the entry form: name, email, phone, and a consent checkbox tied to the contest terms. A missed round ends in a replay prompt instead of a dead end."
+    },
+    {
+      "heading": "Result",
+      "body": "A campaign entry that people play rather than fill in. The shot is learnable in one or two attempts, assist mode keeps weaker throws in the game, and the form appears only at the moment a player has just won something, which is the point in the loop where they are most willing to type."
     }
   ]
 }
