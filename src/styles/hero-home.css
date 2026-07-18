@@ -25,6 +25,30 @@
   height: 100%;
 }
 
+/* The homepage hero allows vertical overflow so the video reaches up behind
+   the navbar — which also lets content leak BELOW the hero: the portrait glow
+   (.hero-portrait::before, 30% bottom bleed) and, on scroll, the parallax
+   video whose bottom edge slides past the boundary and flickers over the
+   marquee. Clip only the bottom: open above (navbar atmosphere intact),
+   sealed at the hero's bottom edge. */
+.hero-home {
+  clip-path: inset(-100vh 0 0);
+}
+
+/* The portrait rests on the hero's bottom edge and paints over the section's
+   border-bottom, cutting the separator line under the photo. Repaint the
+   hairline above the content so it runs the full width of the boundary. */
+.hero-home::after,
+.hero-about::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  background: var(--line);
+  z-index: 3;
+  pointer-events: none;
+}
+
 /* Inside the hero's flex column, the container's auto margins disable
    cross-axis stretching, so it shrink-wraps and floats toward the centre —
    misaligning hero copy from the body sections below. Force full width so
