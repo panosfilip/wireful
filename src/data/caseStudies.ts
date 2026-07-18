@@ -65,6 +65,11 @@ export type CaseStudy = {
     full?: string;
     caption?: string;
     poster?: string;
+    /**
+     * Optional group label. Consecutive shots sharing a label render as their
+     * own grid with a small heading above it (e.g. "Web portal" / "Ticketing").
+     */
+    group?: string;
   }>;
   outcomes?: string[];
   nextSteps?: string[];
@@ -1011,85 +1016,146 @@ export const caseStudies: CaseStudy[] = ([
   {
     slug: "my1521-taxpayer-portal",
     title: "my1521 Taxpayer Service Portal",
-    status: "draft",
+    status: "published",
     clientType: "AADE: Independent Authority for Public Revenue",
     summary:
-      "UI design for my1521, AADE's taxpayer service platform. The work covers portal screens, digital service flows, and ticketing so citizens can get help without knowing the system.",
+      "UI design for my1521, the taxpayer service system of AADE, Greece's public revenue authority. The work covers the public web portal that presents the phone and digital channels, and an in-progress redesign of the internal ticketing portal.",
     problem:
-      "Taxpayer support runs through many channels and departments. The platform needed one digital entry point where people can submit a request, follow its progress, and receive an answer.",
+      "Getting help from AADE used to depend on knowing which office or phone line to contact. my1521 gathers those channels into one system, so the public portal had to explain the new model to every taxpayer, and the ticketing tool behind it had to give staff a clear view of requests routed across the authority's structure.",
     role: ["Product UI design", "UX flows", "Figma production", "Public-sector design"],
     services: ["Product UI", "Service design", "Design system"],
     tools: ["Figma"],
     tags: ["product", "systems", "public"],
     cover: {
-      type: "placeholder",
+      type: "image",
       motif: "portal",
-      alt: "Wireframe of a citizen service portal with request tracking and ticketing",
+      src: "media/work/my1521-home.webp",
+      full: "media/work/my1521-home-full.webp",
+      caption: "Homepage",
+      alt: "my1521 portal homepage introducing AADE's new taxpayer service model",
     },
+    gallery: [
+      {
+        src: "media/work/my1521-phone.webp",
+        group: "Web portal",
+        full: "media/work/my1521-phone-full.webp",
+        caption: "Phone service",
+        alt: "Phone service page documenting the 1521 line, its hours, and the redesigned IVR menu",
+      },
+      {
+        src: "media/work/my1521-digital.webp",
+        group: "Web portal",
+        full: "media/work/my1521-digital-full.webp",
+        caption: "Digital service",
+        alt: "Digital service page explaining what taxpayers can do on the 1521.aade.gr platform",
+      },
+      {
+        src: "media/work/my1521-stats.webp",
+        group: "Web portal",
+        full: "media/work/my1521-stats-full.webp",
+        caption: "Statistics",
+        alt: "Statistics page presenting phone and digital service volumes with KPI cards and charts",
+      },
+      {
+        src: "media/work/my1521-ticketing-groups.webp",
+        group: "Ticketing portal",
+        caption: "Answer-group search",
+        alt: "Ticketing portal screen for finding answer groups through the thematic tree",
+      },
+      {
+        src: "media/work/my1521-ticketing-services.webp",
+        group: "Ticketing portal",
+        caption: "Service administration",
+        alt: "Ticketing portal screen for managing AADE services across the authority's organizational tree",
+      },
+      {
+        src: "media/work/my1521-ticketing-admin.webp",
+        group: "Ticketing portal",
+        caption: "Admin panel",
+        alt: "Ticketing portal admin panel with card-based tools for users, groups, and external systems",
+      },
+    ],
     sections: [
       {
         heading: "Context",
-        body: "UI work for my1521, AADE's taxpayer service portal, including digital service and ticketing flows.",
+        body: "my1521 is AADE's multichannel taxpayer service system, funded under Greece 2.0 and NextGenerationEU. It runs on two channels, the 1521 phone line and the digital platform at 1521.aade.gr, with a three-level support model behind both: front-line agents answer first, specialized staff take over harder cases, and the competent AADE services resolve the rest. I designed the public web portal in Figma and started a UI redesign of the ticketing portal that AADE staff use to manage the requests.",
       },
       {
-        heading: "Challenge",
-        body: "The audience is every taxpayer in Greece, from digital natives to people filing their first request. Every screen had to assume zero familiarity with tax procedures while staying efficient for repeat users.",
+        heading: "Web portal",
+        body: "The portal explains the service in four page types. The homepage introduces the model and its two channels. The phone service page documents the redesigned IVR, its nine thematic menu options, opening hours, and call cost. The digital service page walks through what the platform offers and the three steps of submitting a question. The statistics page presents call and request volumes as KPI cards and charts, giving the authority a public place to report how the service performs. The audience is every taxpayer in Greece, so each page assumes no familiarity with tax procedures or AADE's internal structure.",
       },
       {
-        heading: "Process",
-        body: "I worked from the service journeys into the portal structure, request and ticketing flows, form patterns, and status communication. The work was designed and iterated as a component-driven Figma system.",
-        mediaPlaceholder: "[ADD SCREENSHOTS: my1521 portal and ticketing screens]",
+        heading: "Ticketing redesign",
+        body: "The ticketing portal is where staff handle what comes in: ticket creation and lists, internal tickets, tickets arriving from RMS, reports, user availability, a knowledge base, and an administrator panel. I started a UI transition of these screens: a persistent sidebar for the main areas, an answer-group search built around the thematic tree, service administration mapped onto AADE's organizational structure, and card-based admin tools for users, groups, and external systems. This part of the work is ongoing.",
       },
       {
         heading: "Output",
-        body: "Portal UI, digital service flows, and ticketing screens designed for national-scale rollout.",
+        body: "The web portal design is complete across its four page types. The ticketing work continues screen by screen, replacing the interface while keeping the flows staff already use.",
       },
     ],
   },
   {
-    slug: "aade-signage-system",
-    title: "AADE Wayfinding and Signage System",
-    status: "draft",
-    year: "2026",
-    clientType: "Independent Authority for Public Revenue (government)",
+    slug: "aade-mypoint-customer-service",
+    title: "AADE myPoint Customer Service Screens",
+    status: "published",
+    clientType: "AADE: Independent Authority for Public Revenue",
     summary:
-      "Wayfinding and signage direction for AADE, Greece's tax authority, for use across offices nationwide.",
+      "I designed the two moments in AADE's myPoint priority system: choosing a service at the entrance and catching your number from the waiting room. The work connects a portrait touch kiosk with a wall-mounted queue screen.",
     problem:
-      "AADE needed signage that could help people find the right place in an office, whether or not they knew the building or procedure.",
-    role: [
-      "Signage design",
-      "Wayfinding UX",
-      "Public-sector design",
-      "Figma production",
-    ],
-    services: ["Signage systems", "Wayfinding", "Public-sector design"],
-    tools: ["Figma", "Print production specs"],
-    tags: ["brand", "systems", "public"],
+      "A visitor may be standing at the kiosk with other people waiting behind them, then looking across a room while holding a paper ticket or checking a phone. I had to make six tax services easy to distinguish, keep Greek and English close at hand, and carry the chosen service through to the correct desk without asking the visitor to learn two different interfaces.",
+    role: ["Product UI design", "Kiosk UI", "Digital signage design", "Figma production"],
+    services: ["Kiosk UI", "Digital signage", "Design system"],
+    tools: ["Figma"],
+    tags: ["product", "systems", "public"],
     cover: {
-      type: "placeholder",
+      type: "image",
       motif: "signage",
-      alt: "Wireframe of a directional signage and wayfinding board for a government building",
+      src: "media/work/mypoint-cover.webp",
+      caption: "Kiosk at a myPoint office",
+      alt: "Touch kiosk with ticket printer running the priority system in an AADE office lobby",
     },
+    gallery: [
+      {
+        src: "media/work/mypoint-kiosk-flow-1.webp",
+        group: "Touch kiosk",
+        caption: "Service selection and ticket method",
+        alt: "Kiosk screens for choosing one of six services and picking a QR code or printed ticket",
+      },
+      {
+        src: "media/work/mypoint-kiosk-flow-2.webp",
+        group: "Touch kiosk",
+        caption: "Printed and QR confirmation",
+        alt: "Kiosk confirmation screens showing the assigned priority number and the scannable QR variant",
+      },
+      {
+        src: "media/work/mypoint-queue-screen.webp",
+        group: "Queue screen",
+        caption: "Queue announcement layout",
+        alt: "Waiting-room screen listing each service with the number being served and its service desk",
+      },
+      {
+        src: "media/work/mypoint-queue-context.webp",
+        group: "Queue screen",
+        caption: "In the waiting room",
+        alt: "Queue announcement screen wall-mounted over the waiting area of an AADE office",
+      },
+    ],
     sections: [
       {
         heading: "Context",
-        body: "Signage and wayfinding work for AADE, the Independent Authority for Public Revenue. Citizens and businesses across Greece interact with the authority for tax matters.",
+        body: "AADE, Greece's Independent Authority for Public Revenue, uses the myPoint priority system for in-person service. I designed the entrance and waiting-room interfaces around one continuous task: choose why you came, take a number, then recognize your call. For the Cholargos example, I carried AADE's navy, light blue, and ray motif across both screens. Each service also keeps its own color, giving visitors something familiar to follow after they leave the kiosk.",
       },
       {
-        heading: "Challenge",
-        body: "Government buildings see visitors under stress, in a hurry, or unfamiliar with the process. The signage had to remove doubt at every decision point, not add to it.",
+        heading: "Touch kiosk",
+        body: "At the kiosk, speed matters. I gave each of the six services a large target and kept the Greek and English controls visible, so visitors can make the first decision without searching around the screen. Next, they choose between a paper ticket from the thermal printer and a QR code for their phone. The confirmation screen makes the assigned number the main event, explains where to wait, and counts down before returning to the start. The QR route notes the paper-saving option.",
       },
       {
-        heading: "Process",
-        body: "I mapped the physical wayfinding journey, then designed a directory and signage language that stays legible and consistent across departments, floors, and building types.",
+        heading: "Queue screen",
+        body: "Once seated, the visitor is no longer reading at arm's length. I turned the service categories into a table built for quick glances across the room, pairing each current number with its destination desk. The category colors help the eye return to the right row. Branch, waiting-room, date, and time details establish where and when the information applies, while the side panel handles practical reminders, real-time updates, appointments, and the myAADEapp promotion.",
       },
       {
         heading: "Output",
-        body: "A signage and wayfinding system ready for production and rollout across AADE locations.",
-      },
-      {
-        heading: "Result",
-        body: "A signage system for citizens and staff across AADE offices.",
+        body: "I built the full kiosk sequence and its companion television layout in Figma, then placed both into mockups of their intended settings. The OCG 360 kiosk covers service selection, ticket format, printed confirmation, and QR confirmation. On the television, the same labels and colors reappear beside desk assignments and waiting-room instructions. One choice carries through the whole visit, from the first tap to the call for a number.",
       },
     ],
   },

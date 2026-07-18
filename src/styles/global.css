@@ -442,15 +442,31 @@ html.js .tick-blink {
   backdrop-filter: blur(18px) saturate(1.5);
   -webkit-backdrop-filter: blur(18px) saturate(1.5);
   border-bottom: 1px solid transparent;
+  box-shadow: none;
   transition:
     border-color 0.3s var(--ease-out),
     background 0.3s var(--ease-out),
-    backdrop-filter 0.3s var(--ease-out);
+    backdrop-filter 0.3s var(--ease-out),
+    box-shadow 0.3s var(--ease-out);
 }
 
 .site-header.is-scrolled .header-shell {
   border-bottom-color: var(--line);
   background: color-mix(in srgb, var(--bg) 88%, transparent);
+}
+
+:root[data-theme="light"] .site-header:not(.is-scrolled) .header-shell {
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  border-bottom-color: var(--line);
+  box-shadow:
+    0 0.75rem 2rem rgba(67, 40, 79, 0.035),
+    inset 0 -1px 0 rgba(187, 168, 196, 0.14);
+  backdrop-filter: blur(26px) saturate(1.35);
+  -webkit-backdrop-filter: blur(26px) saturate(1.35);
+}
+
+:root[data-theme="light"] .site-header.is-scrolled .header-shell {
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
 }
 
 .header-inner {
@@ -868,6 +884,21 @@ html.js .tick-blink {
   justify-content: flex-end;
   padding-block: clamp(4rem, 9vw, 7rem) 0;
   border-bottom: 1px solid var(--line);
+}
+
+/* Let the homepage atmosphere continue behind the sticky navbar. The hero
+   keeps its normal document position; only the media layer reaches upward. */
+.hero-home {
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+.hero-home .hero-media {
+  inset: calc(var(--header-h, 4.5rem) * -1) 0 0;
+}
+
+.hero-home .hero-media video {
+  height: 100%;
 }
 
 /* Inside the hero's flex column, the container's auto margins disable
@@ -1611,6 +1642,8 @@ html.js .marquee-track {
   display: flex;
   gap: clamp(1.25rem, 2.5vw, 2rem);
   overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   padding-bottom: 0.5rem;
   scrollbar-width: none;
@@ -2380,30 +2413,48 @@ html.js .marquee-track {
 /* Approach page process journey */
 .process-journey {
   --process-rail: clamp(3.4rem, 9vw, 6.25rem);
+  --process-marker-size: clamp(2.6rem, 6vw, 4.25rem);
+  --process-step-pad: clamp(2rem, 5vw, 4rem);
+  --process-marker-offset: 0.05rem;
+  --process-line: color-mix(in srgb, var(--accent) 58%, var(--line-strong));
   position: relative;
   display: grid;
   margin: clamp(2.75rem, 6vw, 4.5rem) 0 0;
+  padding: 0;
+  list-style: none;
   border-top: 1px solid var(--line);
 }
 
-.process-journey::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: calc(var(--process-rail) / 2);
-  width: 1px;
-  background: linear-gradient(var(--line-strong), var(--accent), var(--line-strong));
-  opacity: 0.72;
-}
-
 .process-step {
+  --process-marker-start: calc(var(--process-step-pad) + var(--process-marker-offset) - 3px);
+  --process-marker-end: calc(var(--process-step-pad) + var(--process-marker-offset) + var(--process-marker-size) + 3px);
   position: relative;
   display: grid;
   grid-template-columns: var(--process-rail) minmax(0, 1fr);
   gap: 0 clamp(1.15rem, 3vw, 2.5rem);
-  padding: clamp(2rem, 5vw, 4rem) 0;
+  padding: var(--process-step-pad) 0;
   border-bottom: 1px solid var(--line);
+}
+
+/* Draw the rail in two clean segments per row, leaving a true transparent gap
+   around each marker. This avoids background masks cutting into the circle. */
+.process-step::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: calc(var(--process-rail) / 2);
+  width: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    var(--process-line) 0,
+    var(--process-line) var(--process-marker-start),
+    transparent var(--process-marker-start),
+    transparent var(--process-marker-end),
+    var(--process-line) var(--process-marker-end),
+    var(--process-line) 100%
+  );
+  opacity: 0.72;
 }
 
 .process-step-marker {
@@ -2411,15 +2462,16 @@ html.js .marquee-track {
   z-index: 1;
   grid-row: 1 / span 2;
   align-self: start;
+  justify-self: center;
   display: grid;
   place-items: center;
-  width: clamp(2.6rem, 6vw, 4.25rem);
+  width: var(--process-marker-size);
   aspect-ratio: 1;
   margin-top: 0.05rem;
   border: 1px solid var(--line-strong);
   border-radius: 50%;
-  background: var(--bg);
-  box-shadow: 0 0 0 0.45rem var(--bg);
+  background: transparent;
+  transition: border-color 0.3s var(--ease-out);
 }
 
 .process-step-marker span {
@@ -2613,7 +2665,6 @@ html.js .marquee-track {
 
   .process-step:hover .process-step-marker {
     border-color: var(--accent);
-    background: var(--accent-ink);
   }
 }
 
@@ -3188,8 +3239,10 @@ a.contact-line:hover .label::after {
   }
 
   .contact-intro {
+    --contact-intro-lift: clamp(6rem, 7.5vw, 9rem);
     position: sticky;
-    top: calc(var(--header-h, 4.5rem) + 3.5rem);
+    top: calc(var(--header-h, 4.5rem) + 3.5rem + var(--contact-intro-lift));
+    transform: translateY(calc(-1 * var(--contact-intro-lift)));
   }
 }
 
@@ -3642,6 +3695,13 @@ a.contact-line:hover .label::after {
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.case-gallery__heading {
+  margin: 0 0 1.1rem;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  color: var(--text);
 }
 
 .case-shot {
@@ -4215,7 +4275,8 @@ a.contact-line:hover .label::after {
 }
 
 .overlay-media-copy .wordmark {
-  font-size: 1.3rem;
+  font-size: clamp(1.55rem, 2.1vw, 2rem);
+  line-height: 1;
   margin: 0;
 }
 

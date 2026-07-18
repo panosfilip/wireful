@@ -18,6 +18,16 @@ const { cs } = Astro.props;
 const hasLightbox =
   (cs.gallery?.length ?? 0) > 0 || (cs.cover.type === "image" && !!cs.cover.full);
 
+// Consecutive gallery shots sharing a `group` label render as separate grids,
+// each under its own small heading. Ungrouped shots form unlabeled grids.
+type GalleryShot = NonNullable<typeof cs.gallery>[number];
+const galleryGroups: Array<{ label?: string; items: GalleryShot[] }> = [];
+for (const shot of cs.gallery ?? []) {
+  const last = galleryGroups[galleryGroups.length - 1];
+  if (last && last.label === shot.group) last.items.push(shot);
+  else galleryGroups.push({ label: shot.group, items: [shot] });
+}
+
 // Related work: the projects that share the most tags, so the footer keeps
 // people inside relevant work instead of walking the array in order.
 const rank = (status: string) => (status === "published" ? 0 : status === "draft" ? 1 : 2);
@@ -163,10 +173,11 @@ const jsonLd = {
         )
       }
 
-      {
-        cs.gallery && cs.gallery.length > 0 && (
+      {galleryGroups.map((group) => (
+        <section class="case-gallery-group">
+          {group.label && <h2 class="case-gallery__heading" data-reveal>{group.label}</h2>}
           <div class="case-gallery" data-reveal-group>
-            {cs.gallery.map((shot) =>
+            {group.items.map((shot) =>
               shot.type === "video" ? (
                 <figure class="case-shot" data-reveal>
                   <div class="case-shot__media">
@@ -201,8 +212,8 @@ const jsonLd = {
               )
             )}
           </div>
-        )
-      }
+        </section>
+      ))}
 
       <div class="case-body-sections">
         <section aria-label="The problem" class="case-section" data-reveal>
