@@ -6,6 +6,7 @@ import CaseCard from "../../components/CaseCard.astro";
 import { caseStudies } from "../../data/caseStudies";
 import { site } from "../../data/site";
 import { withPlaceholders } from "../../utils/placeholders";
+import { byFeaturedThenStatus } from "../../utils/workOrder";
 
 export function getStaticPaths() {
   return caseStudies.map((cs) => ({
@@ -30,18 +31,11 @@ for (const shot of cs.gallery ?? []) {
 
 // Related work: the projects that share the most tags, so the footer keeps
 // people inside relevant work instead of walking the array in order.
-const rank = (status: string) => (status === "published" ? 0 : status === "draft" ? 1 : 2);
 const related = caseStudies
   .filter((c) => c.slug !== cs.slug)
   .map((c) => ({ c, shared: c.tags.filter((t) => cs.tags.includes(t)).length }))
   .filter((x) => x.shared > 0)
-  .sort((a, b) => {
-    if (b.shared !== a.shared) return b.shared - a.shared;
-    const fa = a.c.featured ?? Infinity;
-    const fb = b.c.featured ?? Infinity;
-    if (fa !== fb) return fa - fb;
-    return rank(a.c.status) - rank(b.c.status);
-  })
+  .sort((a, b) => b.shared - a.shared || byFeaturedThenStatus(a.c, b.c))
   .slice(0, 3)
   .map((x) => x.c);
 

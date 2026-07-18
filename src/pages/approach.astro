@@ -135,16 +135,6 @@ const toolkit = [
     </div>
   </section>
 
-  <script>
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      const heroVideo = document.querySelector<HTMLVideoElement>(".hero-media video");
-      if (heroVideo) {
-        heroVideo.removeAttribute("autoplay");
-        heroVideo.pause();
-      }
-    }
-  </script>
-
   <!-- Principles -->
   <section class="section" aria-labelledby="principles-heading">
     <div class="container">

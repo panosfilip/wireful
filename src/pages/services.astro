@@ -143,14 +143,6 @@ const description =
   <script>
     const heroReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (heroReducedMotion) {
-      const heroVideo = document.querySelector<HTMLVideoElement>(".services-hero .hero-media video");
-      if (heroVideo) {
-        heroVideo.removeAttribute("autoplay");
-        heroVideo.pause();
-      }
-    }
-
     // Headline blur flip: the active phrase lifts up and blurs away while
     // the next rises into place, sharp. All phrases share one grid cell so
     // the block sizes to the widest one. Without JS or with reduced motion

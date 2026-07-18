@@ -4,20 +4,16 @@ import CaseCard from "../../components/CaseCard.astro";
 import { caseStudies } from "../../data/caseStudies";
 import { site } from "../../data/site";
 import { projectTagDefinitions, type ProjectTag } from "../../data/projectTags";
+import { byFeaturedThenStatus } from "../../utils/workOrder";
 
 // Editorial ordering: featured first, then live/published work with real media,
 // then drafts, then the long tail. Array order breaks ties (stable sort).
-const rank = (status: string) => (status === "published" ? 0 : status === "draft" ? 1 : 2);
 const hasMedia = (cs: (typeof caseStudies)[number]) =>
   cs.cover.type === "video" || (cs.cover.type === "image" && !!cs.cover.src) ? 0 : 1;
 
-const allWork = [...caseStudies].sort((a, b) => {
-  const fa = a.featured ?? Infinity;
-  const fb = b.featured ?? Infinity;
-  if (fa !== fb) return fa - fb;
-  if (rank(a.status) !== rank(b.status)) return rank(a.status) - rank(b.status);
-  return hasMedia(a) - hasMedia(b);
-});
+const allWork = [...caseStudies].sort(
+  (a, b) => byFeaturedThenStatus(a, b) || hasMedia(a) - hasMedia(b),
+);
 
 const featuredWork = allWork.filter((cs) => cs.featured != null).slice(0, 3);
 
@@ -58,16 +54,6 @@ const filterGroups = [
       </div>
     </div>
   </section>
-
-  <script>
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      const heroVideo = document.querySelector<HTMLVideoElement>(".hero-media video");
-      if (heroVideo) {
-        heroVideo.removeAttribute("autoplay");
-        heroVideo.pause();
-      }
-    }
-  </script>
 
   {
     featuredWork.length > 0 && (

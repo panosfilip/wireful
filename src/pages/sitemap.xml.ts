@@ -1,11 +1,12 @@
 import type { APIRoute } from "astro";
 import { caseStudies } from "../data/caseStudies";
+import { requireSite } from "../utils/siteOrigin";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const staticPaths = ["", "about/", "approach/", "services/", "work/", "contact/"];
 
 export const GET: APIRoute = ({ site }) => {
-  const origin = site ?? new URL("https://panosfilip.github.io");
+  const origin = requireSite(site);
   const abs = (path: string) => new URL(`${base}/${path}`, origin).href;
 
   const urls = [

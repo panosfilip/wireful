@@ -88,10 +88,10 @@ const isActive = (href: string) => {
     const theme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
-    document.querySelector("#theme-color")?.setAttribute(
-      "content",
-      theme === "light" ? "#f6f1f7" : "#0b0712",
-    );
+    // The hex values live in data attributes on the meta tag (src/data/theme.ts).
+    const themeMeta = document.querySelector<HTMLMetaElement>("#theme-color");
+    const color = themeMeta?.dataset[theme];
+    if (themeMeta && color) themeMeta.setAttribute("content", color);
     try {
       localStorage.setItem("wireful-theme", theme);
     } catch {

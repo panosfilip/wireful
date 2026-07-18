@@ -129,14 +129,4 @@ const enquiryTypes = [
       </div>
     </div>
   </section>
-
-  <script>
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      const backgroundVideo = document.querySelector<HTMLVideoElement>(".contact-page-media video");
-      if (backgroundVideo) {
-        backgroundVideo.removeAttribute("autoplay");
-        backgroundVideo.pause();
-      }
-    }
-  </script>
 </Base>

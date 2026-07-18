@@ -66,16 +66,6 @@ const capabilityDirectory = [
     </div>
   </section>
 
-  <script>
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      const heroVideo = document.querySelector<HTMLVideoElement>(".hero-media video");
-      if (heroVideo) {
-        heroVideo.removeAttribute("autoplay");
-        heroVideo.pause();
-      }
-    }
-  </script>
-
   <!-- Capability marquee -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track">

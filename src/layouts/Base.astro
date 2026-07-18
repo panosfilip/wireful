@@ -6,6 +6,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import ProjectOverlay from "../components/ProjectOverlay.astro";
 import { site } from "../data/site";
+import { themeColors } from "../data/theme";
 
 interface Props {
   title: string;
@@ -30,7 +31,13 @@ const ogImage = new URL(
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" id="theme-color" content="#0b0712" />
+    <meta
+      name="theme-color"
+      id="theme-color"
+      content={themeColors.dark}
+      data-light={themeColors.light}
+      data-dark={themeColors.dark}
+    />
     <base href={`${import.meta.env.BASE_URL}/`} />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="canonical" href={canonical} />
@@ -56,10 +63,9 @@ const ogImage = new URL(
         const theme = savedTheme === "light" || savedTheme === "dark" ? savedTheme : "dark";
         document.documentElement.dataset.theme = theme;
         document.documentElement.style.colorScheme = theme;
-        document.querySelector("#theme-color")?.setAttribute(
-          "content",
-          theme === "light" ? "#f6f1f7" : "#0b0712",
-        );
+        const themeMeta = document.querySelector("#theme-color");
+        const color = themeMeta && themeMeta.dataset[theme];
+        if (color) themeMeta.setAttribute("content", color);
       } catch {
         document.documentElement.dataset.theme = "dark";
       }
@@ -93,6 +99,18 @@ const ogImage = new URL(
       }
 
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Ambient background videos (page heroes, contact backdrop) stay still
+      // under reduced motion. The overlay video is excluded on purpose: it only
+      // appears behind the explicitly opened project dialog.
+      if (reducedMotion) {
+        document
+          .querySelectorAll<HTMLVideoElement>(".hero-media video, .contact-page-media video")
+          .forEach((video) => {
+            video.removeAttribute("autoplay");
+            video.pause();
+          });
+      }
 
       // Kick off hero intro staggers once styles are applied
       requestAnimationFrame(() => document.body.classList.add("is-loaded"));
