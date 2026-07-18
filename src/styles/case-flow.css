@@ -1,0 +1,431 @@
+/* Flow-focused case studies, expressed through the Wireful design system. */
+
+.flow-case {
+  margin-top: clamp(3.5rem, 8vw, 7rem);
+}
+
+.flow-case h2 {
+  max-width: 16em;
+  margin: 0;
+  font-size: clamp(1.65rem, 3vw, 2.65rem);
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.flow-case p {
+  margin: 0;
+  font-size: clamp(1rem, 1.5vw, 1.16rem);
+  line-height: 1.7;
+}
+
+.flow-case__opening {
+  display: grid;
+  gap: clamp(2rem, 6vw, 6rem);
+  padding-block: clamp(2.5rem, 6vw, 5.5rem);
+  border-top: 1px solid var(--line);
+}
+
+.flow-case__opening > div,
+.flow-copy,
+.flow-group__copy {
+  display: grid;
+  gap: 1.2rem;
+  align-content: start;
+}
+
+.flow-case__opening p,
+.flow-copy p,
+.flow-group__copy p,
+.flow-output p {
+  max-width: 43rem;
+  color: var(--muted);
+}
+
+.flow-band,
+.flow-group {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+}
+
+.flow-band__inner,
+.flow-group__inner {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.flow-band {
+  color: var(--text);
+  background: var(--bg-raise);
+  border-block: 1px solid var(--line);
+}
+
+.flow-band__inner {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  padding-block: clamp(4rem, 9vw, 8rem);
+}
+
+.flow-copy {
+  max-width: 48rem;
+}
+
+.flow-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  overflow: hidden;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.flow-stats > div {
+  min-height: 9.5rem;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  background: var(--bg);
+}
+
+.flow-stats dt {
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 4.7rem);
+  font-weight: 650;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.flow-stats dd {
+  max-width: 18rem;
+  margin: 0.85rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.flow-structure {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  padding-block: clamp(4.5rem, 10vw, 9rem);
+}
+
+.flow-boards {
+  display: grid;
+  gap: 1rem;
+}
+
+.flow-boards figure,
+.flow-screens figure {
+  margin: 0;
+}
+
+.flow-boards button {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  color: inherit;
+  background: var(--bg-raise);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.flow-boards img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.flow-boards button:hover img,
+.flow-boards button:focus-visible img {
+  transform: scale(1.015);
+}
+
+.flow-boards button span {
+  position: absolute;
+  right: 0.8rem;
+  bottom: 0.8rem;
+  padding: 0.45rem 0.7rem;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+}
+
+.flow-boards figcaption,
+.flow-screens figcaption {
+  margin-top: 0.75rem;
+  color: var(--faint);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+}
+
+.flow-group {
+  padding-block: clamp(4.5rem, 10vw, 9rem);
+  color: var(--text);
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  overflow: clip;
+}
+
+.flow-group--alternate {
+  background: var(--bg-raise);
+}
+
+.flow-group__inner {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4.5rem);
+}
+
+.flow-group__copy p {
+  max-width: 34rem;
+}
+
+.flow-group__hint {
+  color: var(--faint) !important;
+  font-family: var(--font-mono);
+  font-size: 0.72rem !important;
+  letter-spacing: 0.04em;
+}
+
+.flow-group__rail {
+  min-width: 0;
+}
+
+.flow-rail__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.flow-rail__position {
+  color: var(--faint);
+  font-family: var(--font-mono);
+  font-size: 0.72rem !important;
+  letter-spacing: 0.12em;
+}
+
+.flow-rail__position [data-flow-current] {
+  color: var(--accent);
+}
+
+.flow-rail__controls {
+  display: flex;
+  gap: 0.55rem;
+}
+
+.flow-rail__controls button {
+  min-height: 2.4rem;
+  padding: 0.45rem 0.75rem;
+  color: var(--text);
+  background: var(--bg-raise);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition:
+    color 0.2s var(--ease-out),
+    border-color 0.2s var(--ease-out),
+    background-color 0.2s var(--ease-out);
+}
+
+.flow-group--alternate .flow-rail__controls button {
+  background: var(--bg);
+}
+
+.flow-rail__controls button:hover:not(:disabled),
+.flow-rail__controls button:focus-visible:not(:disabled) {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.flow-rail__controls button:disabled {
+  color: var(--faint);
+  border-color: var(--line);
+  cursor: default;
+  opacity: 0.45;
+}
+
+.flow-screens {
+  display: flex;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  min-width: 0;
+  margin: 0;
+  padding: 1.25rem 0 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1px;
+  overscroll-behavior-inline: contain;
+  scrollbar-color: var(--accent) var(--surface);
+  scrollbar-width: auto;
+}
+
+.flow-screens::-webkit-scrollbar {
+  height: 12px;
+}
+
+.flow-screens::-webkit-scrollbar-track {
+  background: var(--surface);
+  border-radius: var(--radius);
+}
+
+.flow-screens::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border: 3px solid var(--surface);
+  border-radius: var(--radius);
+}
+
+.flow-screens li {
+  flex: 0 0 clamp(220px, 24vw, 270px);
+  min-width: 0;
+  list-style: none;
+  scroll-snap-align: start;
+}
+
+.flow-screens button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  cursor: zoom-in;
+}
+
+.flow-screens img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.35s var(--ease-out);
+}
+
+.flow-screens button:hover img,
+.flow-screens button:focus-visible img {
+  transform: scale(1.015);
+}
+
+.flow-screens figcaption {
+  display: flex;
+  gap: 0.65rem;
+  align-items: baseline;
+}
+
+.flow-screens figcaption span {
+  color: var(--accent);
+}
+
+.flow-band--evaluation {
+  background: var(--surface);
+}
+
+.flow-stats--evaluation > div {
+  background: var(--bg-raise);
+}
+
+.flow-changes {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.flow-changes li {
+  position: relative;
+  min-height: 6rem;
+  padding: 1.3rem 1.3rem 1.3rem 2.6rem;
+  color: var(--muted);
+  background: var(--bg-raise);
+  list-style: none;
+  line-height: 1.5;
+}
+
+.flow-changes li::before {
+  position: absolute;
+  top: 1.55rem;
+  left: 1.3rem;
+  color: var(--accent);
+  content: "↳";
+}
+
+.flow-output {
+  display: grid;
+  gap: 1.4rem 5rem;
+  padding-block: clamp(4.5rem, 10vw, 9rem);
+}
+
+@media (min-width: 760px) {
+  .flow-case__opening,
+  .flow-output {
+    grid-template-columns: minmax(220px, 0.65fr) 1.35fr;
+  }
+
+  .flow-boards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .flow-group__inner {
+    grid-template-columns: minmax(220px, 0.65fr) minmax(0, 1.8fr);
+  }
+
+  .flow-group__copy {
+    position: sticky;
+    top: 8rem;
+    align-self: start;
+  }
+}
+
+@media (min-width: 1050px) {
+  .flow-screens li {
+    flex-basis: calc((100% - 2 * clamp(1rem, 2vw, 1.5rem)) / 3);
+  }
+}
+
+@media (min-width: 900px) {
+  .flow-stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .flow-stats,
+  .flow-changes {
+    grid-template-columns: 1fr;
+  }
+
+  .flow-stats > div {
+    min-height: 7.5rem;
+  }
+
+  .flow-screens li {
+    flex-basis: min(72vw, 270px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-boards img,
+  .flow-screens img {
+    transition: none;
+  }
+}

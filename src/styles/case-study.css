@@ -264,6 +264,10 @@
   max-height: 100%;
 }
 
+.lightbox__dialog--portrait {
+  width: min(480px, 100%);
+}
+
 .lightbox__close {
   align-self: flex-end;
   padding: 0.5rem 0.9rem;
@@ -477,4 +481,3 @@
     align-items: flex-start;
   }
 }
-

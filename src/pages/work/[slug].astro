@@ -3,6 +3,7 @@ import Base from "../../layouts/Base.astro";
 import PlaceholderVisual from "../../components/PlaceholderVisual.astro";
 import CapabilityTags from "../../components/CapabilityTags.astro";
 import CaseCard from "../../components/CaseCard.astro";
+import CaseFlowShowcase from "../../components/CaseFlowShowcase.astro";
 import { caseStudies } from "../../data/caseStudies";
 import { site } from "../../data/site";
 import { withPlaceholders } from "../../utils/placeholders";
@@ -17,7 +18,9 @@ export function getStaticPaths() {
 
 const { cs } = Astro.props;
 const hasLightbox =
-  (cs.gallery?.length ?? 0) > 0 || (cs.cover.type === "image" && !!cs.cover.full);
+  (cs.gallery?.length ?? 0) > 0 ||
+  (cs.cover.type === "image" && !!cs.cover.full) ||
+  !!cs.flowShowcase;
 
 // Consecutive gallery shots sharing a `group` label render as separate grids,
 // each under its own small heading. Ungrouped shots form unlabeled grids.
@@ -167,7 +170,7 @@ const jsonLd = {
         )
       }
 
-      {galleryGroups.map((group) => (
+      {!cs.flowShowcase && galleryGroups.map((group) => (
         <section class="case-gallery-group">
           {group.label && <h2 class="case-gallery__heading" data-reveal>{group.label}</h2>}
           <div class="case-gallery" data-reveal-group>
@@ -209,7 +212,7 @@ const jsonLd = {
         </section>
       ))}
 
-      <div class="case-body-sections">
+      {cs.flowShowcase ? <CaseFlowShowcase cs={cs} /> : <div class="case-body-sections">
         <section aria-label="The problem" class="case-section" data-reveal>
           <h2>Problem</h2>
           <p class="body" set:html={withPlaceholders(cs.problem)} />
@@ -241,7 +244,7 @@ const jsonLd = {
             </section>
           )
         }
-      </div>
+      </div>}
 
       {
         related.length > 0 && (
@@ -296,6 +299,7 @@ const jsonLd = {
   const lightbox = document.getElementById("lightbox");
   if (lightbox) {
     const img = document.getElementById("lightbox-img") as HTMLImageElement;
+    const dialog = lightbox.querySelector(".lightbox__dialog") as HTMLElement | null;
     const scroll = lightbox.querySelector(".lightbox__scroll") as HTMLElement | null;
     const hint = document.getElementById("lightbox-hint");
     let lastTrigger: HTMLElement | null = null;
@@ -313,6 +317,10 @@ const jsonLd = {
       lastTrigger = trigger;
       img.src = src;
       img.alt = alt;
+      dialog?.classList.toggle(
+        "lightbox__dialog--portrait",
+        trigger.dataset.lightboxOrientation === "portrait",
+      );
       lightbox.hidden = false;
       document.body.style.overflow = "hidden";
       if (scroll) scroll.scrollTop = 0;
@@ -327,6 +335,7 @@ const jsonLd = {
       window.setTimeout(() => {
         lightbox.hidden = true;
         img.src = "";
+        dialog?.classList.remove("lightbox__dialog--portrait");
       }, 200);
       if (lastTrigger) lastTrigger.focus();
     };

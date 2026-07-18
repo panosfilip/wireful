@@ -11,6 +11,7 @@
 @import "./about.css"; /* About strip, approach toolkit, fact list */
 @import "./contact.css"; /* Contact page, giant mail link, enquiry form */
 @import "./case-study.css"; /* Case-study pages and full-page lightbox */
+@import "./case-flow.css"; /* Flow-based mobile product case studies */
 @import "./footer.css"; /* Footer */
 @import "./overlay.css"; /* Start-a-project overlay and its form */
 @import "./touch.css"; /* Touch ergonomics (44pt targets) */

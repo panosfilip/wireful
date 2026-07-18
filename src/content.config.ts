@@ -84,6 +84,67 @@ const work = defineCollection({
         }),
       )
       .optional(),
+    /**
+     * Optional long-form mobile product walkthrough. This keeps flow-based
+     * case studies out of the landscape gallery treatment used by websites.
+     */
+    flowShowcase: z
+      .object({
+        context: z.object({
+          heading: z.string(),
+          body: z.string(),
+        }),
+        research: z.object({
+          heading: z.string(),
+          body: z.string(),
+          stats: z.array(
+            z.object({
+              value: z.string(),
+              label: z.string(),
+            }),
+          ),
+        }),
+        structure: z.object({
+          heading: z.string(),
+          body: z.string(),
+          boards: z.array(
+            z.object({
+              src: z.string(),
+              alt: z.string(),
+              caption: z.string(),
+            }),
+          ),
+        }),
+        groups: z.array(
+          z.object({
+            heading: z.string(),
+            body: z.string(),
+            screens: z.array(
+              z.object({
+                src: z.string(),
+                alt: z.string(),
+                caption: z.string(),
+              }),
+            ),
+          }),
+        ),
+        evaluation: z.object({
+          heading: z.string(),
+          body: z.string(),
+          stats: z.array(
+            z.object({
+              value: z.string(),
+              label: z.string(),
+            }),
+          ),
+          changes: z.array(z.string()),
+        }),
+        output: z.object({
+          heading: z.string(),
+          body: z.string(),
+        }),
+      })
+      .optional(),
     outcomes: z.array(z.string()).optional(),
     nextSteps: z.array(z.string()).optional(),
   }),

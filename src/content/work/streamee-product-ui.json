@@ -2,59 +2,100 @@
   "order": 8,
   "slug": "streamee-product-ui",
   "title": "Streamee Website",
-  "status": "draft",
-  "year": "2022-2024",
-  "clientType": "Digital product",
-  "summary": "UI/UX and visual work for the Streamee web platform, covering interface design, branded assets, campaigns, and developer-ready production files.",
-  "problem": "The product needed a consistent visual language across app touchpoints and marketing without slowing down release work.",
+  "status": "published",
+  "clientType": "Streamee: radio, music, and podcast platform",
+  "liveUrl": "https://streamee.com/",
+  "engagement": "Politis Group",
+  "summary": "I redesigned Streamee's web app in Figma around the moment you press play: browse a station, find a show, save something for later, or spend coins on a contest.",
+  "problem": "Streamee brings radio, podcasts, moods, and contests into the same app. The interface needed to feel like a place to listen, not a pile of separate destinations.",
   "role": [
-    "Product graphic design",
-    "UI/UX design",
-    "Campaign visuals",
-    "Icon and illustration work",
-    "Developer collaboration"
+    "Product UI design",
+    "UX and interaction design",
+    "Information architecture",
+    "Visual direction"
   ],
   "services": [
     "Product UI",
-    "Graphic design",
-    "Brand assets"
+    "UX design",
+    "Figma prototyping",
+    "Visual design"
   ],
   "tools": [
     "Figma",
-    "Adobe Illustrator",
-    "Adobe Photoshop"
+    "Adobe Photoshop",
+    "Adobe Illustrator"
   ],
   "tags": [
     "product",
-    "campaign",
-    "commercial"
+    "prototype",
+    "culture"
   ],
   "cover": {
     "type": "image",
-    "motif": "search",
-    "alt": "Wireframe of a music app interface with branded content modules",
-    "src": "media/work/figma-projects-products.png"
+    "motif": "homepage",
+    "alt": "Streamee home screen with sidebar navigation, a Greek Hits hero, content shelves, and a persistent audio player",
+    "src": "media/work/streamee/home.webp",
+    "full": "media/work/streamee/home.webp",
+    "caption": "Home"
   },
+  "gallery": [
+    {
+      "src": "media/work/streamee/streamee-radios.webp",
+      "full": "media/work/streamee/streamee-radios.webp",
+      "caption": "Streamee Radios",
+      "alt": "Streamee Radios screen with a featured station, radio cards, sidebar navigation, and persistent audio controls"
+    },
+    {
+      "src": "media/work/streamee/fm-radios.webp",
+      "full": "media/work/streamee/fm-radios.webp",
+      "caption": "FM Radios",
+      "alt": "FM Radios screen with search, popular searches, a featured station, and recent results"
+    },
+    {
+      "src": "media/work/streamee/podcasts.webp",
+      "full": "media/work/streamee/podcasts.webp",
+      "caption": "Podcasts",
+      "alt": "Podcasts screen with search, popular searches, recent podcasts, and a library shelf"
+    },
+    {
+      "src": "media/work/streamee/podcast-detail.webp",
+      "full": "media/work/streamee/podcast-detail.webp",
+      "caption": "Podcast detail",
+      "alt": "Podcast detail screen for MIC2 with artwork, description, follow action, and episode list"
+    },
+    {
+      "src": "media/work/streamee/moods.webp",
+      "full": "media/work/streamee/moods.webp",
+      "caption": "Moods",
+      "alt": "Moods screen with a featured Entenxo Mood hero and mood cards for different listening contexts"
+    },
+    {
+      "src": "media/work/streamee/contests.webp",
+      "full": "media/work/streamee/contests.webp",
+      "caption": "Contests",
+      "alt": "Contests screen with coin balances, a featured Google Chromecast prize, and active contests"
+    }
+  ],
   "sections": [
     {
       "heading": "Context",
-      "body": "Work from the Streamee period at Politis Group."
+      "body": "Streamee sits between a radio directory and an on-demand player. The live site carries radio stations and podcasts, while moods and contests add more ways to decide what to play or how to spend time."
     },
     {
       "heading": "Challenge",
-      "body": "Keep product screens, promotional material, and social content aligned while supporting active marketing and product needs."
+      "body": "The hard part was keeping the catalogue from taking over. Home needs to get you into a stream quickly. Podcasts needs to support browsing and episode detail. Contests needs to explain the prize and the coin balance. They share the same chrome, but they cannot all behave like the same page."
     },
     {
       "heading": "Process",
-      "body": "I translated product and marketing needs into UI assets, visual guidelines, original images, illustrations, motion pieces, and handoff-ready files for developers."
+      "body": "I kept the player pinned to the bottom and put the main routes in a left rail. The Home screen starts with a featured mood, then moves into rows of favourites and Originals. Search and collection pages use large hit areas and short search chips. Detail screens give the artwork room, then put play, follow, save, and share beside the thing you are looking at."
     },
     {
       "heading": "Output",
-      "body": "A consistent set of app visuals, campaign assets, presentation material, and production-ready design files."
+      "body": "The Figma file grew into a full set of product screens: home, radio discovery, station detail, podcasts, podcast detail, moods, search, library empty and populated states, accounts, settings, and contests. I chose the screens here because they show how the same player and navigation carry across the app."
     },
     {
       "heading": "Result",
-      "body": "Design support across product, marketing, and leadership needs, keeping the app and campaign ecosystem visually connected while work moved quickly."
+      "body": "The redesign makes Streamee read as one listening product. Move from a mood to a show, from a station to something saved, or from the home feed to a contest without leaving the same frame. The player stays put. The page does the explaining."
     }
   ]
 }

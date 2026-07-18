@@ -1,23 +1,30 @@
 {
   "order": 11,
   "slug": "oasa-telematics-redesign",
-  "title": "OASA Telematics App Redesign",
-  "status": "draft",
-  "clientType": "University of Athens dissertation project",
-  "summary": "Figma redesign concept for the OASA Telematics app, focused on routes, arrivals, and the next travel decision.",
-  "problem": "People use transport information under time pressure. Routes, arrivals, and next steps need to be easy to see.",
+  "title": "OASA Telematics Redesign",
+  "status": "published",
+  "clientType": "MSc dissertation project",
+  "engagement": "National and Kapodistrian University of Athens",
+  "summary": "I redesigned OASA Telematics around the question a passenger actually has at a stop: should I wait, walk, or take another route? The work moved from user research and task analysis to a tested Android prototype in Figma.",
+  "problem": "The original app had the data, but getting to an answer still meant moving between arrivals, vehicle positions, route details, and announcements. The redesign had to bring those clues into one decision path on a small screen, often checked outdoors and in a hurry.",
   "role": [
     "UX research",
-    "App UI redesign",
-    "Figma prototype"
+    "Information architecture",
+    "Interaction design",
+    "Product UI design",
+    "Usability testing"
   ],
   "services": [
-    "Product UI",
-    "UX design",
-    "Prototype"
+    "UX research",
+    "Mobile product design",
+    "Interactive prototyping",
+    "Usability evaluation"
   ],
   "tools": [
-    "Figma"
+    "Figma",
+    "Whimsical",
+    "UXtweak",
+    "Google Forms"
   ],
   "tags": [
     "product",
@@ -25,14 +32,252 @@
     "public"
   ],
   "cover": {
-    "type": "placeholder",
+    "type": "image",
     "motif": "portal",
-    "alt": "Public transport app interface redesign"
+    "alt": "OASA Telematics mobile app redesign shown on a phone beside the project title",
+    "src": "media/work/oasa/cover.webp",
+    "full": "media/work/oasa/cover.webp",
+    "caption": "OASA Telematics mobile app redesign"
   },
-  "sections": [
-    {
-      "heading": "Output",
-      "body": "A Figma prototype for a more task-focused public-transport app."
+  "sections": [],
+  "flowShowcase": {
+    "context": {
+      "heading": "An independent redesign of a public-service app",
+      "body": "This was my MSc dissertation at the National and Kapodistrian University of Athens, not a project commissioned by OASA. I treated the app as a service used by daily commuters, occasional riders, older passengers, and people with accessibility needs. The scope covered the Android experience from first entry to live journey updates."
+    },
+    "research": {
+      "heading": "The research pointed to decisions, not more features",
+      "body": "Arrivals were the most-used part of the existing app, followed by vehicle positions. People wanted stronger live tracking, clearer maps, visible service notices, fewer taps, and a reliable way to use core information when connectivity drops. A six-person focus group added the practical details: show nearby stops, keep arrivals prominent, remember recent trips, and reduce the amount of information competing on each screen.",
+      "stats": [
+        {
+          "value": "100",
+          "label": "people responded to the initial transport-app survey"
+        },
+        {
+          "value": "71%",
+          "label": "wanted an offline mode for essential journey information"
+        },
+        {
+          "value": "53%",
+          "label": "asked for better live bus and trolley tracking"
+        },
+        {
+          "value": "47%",
+          "label": "prioritised accessibility improvements"
+        }
+      ]
+    },
+    "structure": {
+      "heading": "Less navigation, more continuity",
+      "body": "The answer was not to keep adding destinations. In fact, 52% of survey participants felt the existing app already had the right number of functions. I used scenarios, hierarchical task analysis, essential use cases, and a closed card sort with ten participants to reorganise those functions around five jobs: plan a trip, locate a vehicle, inspect a route, manage tickets, and control personal settings. Low-fidelity flows in Whimsical came first; the high-fidelity system was then built and linked in Figma.",
+      "boards": [
+        {
+          "src": "media/work/oasa/figma-board-planner.webp",
+          "alt": "Figma canvas showing authentication and route-planning screens for OASA Telematics",
+          "caption": "Authentication and journey-planning flows"
+        },
+        {
+          "src": "media/work/oasa/figma-board-support.webp",
+          "alt": "Figma canvas showing ticket, profile, settings, and support screens for OASA Telematics",
+          "caption": "Tickets, profile, settings, and support"
+        }
+      ]
+    },
+    "groups": [
+      {
+        "heading": "Enter the app on your terms",
+        "body": "First use has three paths: sign in, create an account, or continue as a guest when an arrival time matters more than registration. The account branch keeps the work in a short sequence: enter the essential details, decide whether to add a profile photo, then move straight into journey planning.",
+        "screens": [
+          {
+            "src": "media/work/oasa/welcome.webp",
+            "alt": "OASA Telematics welcome screen with login, registration, and guest access",
+            "caption": "Choose how to enter"
+          },
+          {
+            "src": "media/work/oasa/login.webp",
+            "alt": "OASA Telematics login form with username, password, remember-me, and password recovery",
+            "caption": "Sign in to an account"
+          },
+          {
+            "src": "media/work/oasa/register-details.webp",
+            "alt": "Registration form for email, username, password, mobile number, and terms consent",
+            "caption": "Add account details"
+          },
+          {
+            "src": "media/work/oasa/register-photo.webp",
+            "alt": "Optional profile-photo step with camera, upload, skip, and continue controls",
+            "caption": "Add or skip a photo"
+          },
+          {
+            "src": "media/work/oasa/register-complete.webp",
+            "alt": "Registration success screen leading into journey planning",
+            "caption": "Continue to the planner"
+          }
+        ]
+      },
+      {
+        "heading": "Plan a trip, then stay with it",
+        "body": "This is the main product flow from the dissertation. The map stays present while the passenger moves from a nearby starting point to destination search, departure comparison, route selection, step-by-step directions, nearby service, live vehicle tracking, stop arrivals, and service updates. It is one continuous decision path rather than a set of disconnected map tools.",
+        "screens": [
+          {
+            "src": "media/work/oasa/planner-start.webp",
+            "alt": "Trip planner home with nearby vehicles, route fields, recent trips, and bottom navigation",
+            "caption": "Start with what is nearby"
+          },
+          {
+            "src": "media/work/oasa/planner-destination.webp",
+            "alt": "Destination selection sheet with search and recent places over the map",
+            "caption": "Choose a destination"
+          },
+          {
+            "src": "media/work/oasa/planner-departures.webp",
+            "alt": "Available route cards comparing departure times and journey options",
+            "caption": "Compare useful departures"
+          },
+          {
+            "src": "media/work/oasa/planner-selected.webp",
+            "alt": "Selected public transport route with a map and step-by-step journey timeline",
+            "caption": "Read the whole journey"
+          },
+          {
+            "src": "media/work/oasa/planner-directions.webp",
+            "alt": "Map-focused journey view with walking and bus directions",
+            "caption": "Follow the next step"
+          },
+          {
+            "src": "media/work/oasa/live-map.webp",
+            "alt": "Full transit map with nearby buses and trolleys marked around the passenger",
+            "caption": "Scan nearby service"
+          },
+          {
+            "src": "media/work/oasa/vehicle-menu.webp",
+            "alt": "Vehicle information sheet over the live map with route and next-stop details",
+            "caption": "Inspect a vehicle"
+          },
+          {
+            "src": "media/work/oasa/planner-live-tracking.webp",
+            "alt": "Live bus tracking screen showing the route line, vehicle position, and next stop",
+            "caption": "Track the vehicle live"
+          },
+          {
+            "src": "media/work/oasa/stop-details.webp",
+            "alt": "Stop information sheet listing the next buses and trolleys",
+            "caption": "Check a stop's arrivals"
+          },
+          {
+            "src": "media/work/oasa/notifications.webp",
+            "alt": "Categorised OASA service notifications with unread updates visually distinguished",
+            "caption": "Spot the service change"
+          }
+        ]
+      },
+      {
+        "heading": "Keep tickets in the travel context",
+        "body": "The ticket flow gives ATH.ENA Card information its own place in the main navigation, beside routes rather than inside settings. The available Figma export captures the overview state, where a passenger can check the card and move into fare information without leaving the transport app.",
+        "screens": [
+          {
+            "src": "media/work/oasa/tickets.webp",
+            "alt": "Tickets overview with ATH.ENA Card information and fare options",
+            "caption": "Open the ATH.ENA Card overview"
+          }
+        ]
+      },
+      {
+        "heading": "Carry familiar journeys into the profile",
+        "body": "The profile is not just an account record. It brings favourite routes and recent journeys together with personal details, then provides a focused edit state for the information the passenger can change. That keeps repeat travel useful without crowding the planner itself.",
+        "screens": [
+          {
+            "src": "media/work/oasa/profile.webp",
+            "alt": "Profile overview with personal information, favourite routes, and recent journeys",
+            "caption": "Review favourites and history"
+          },
+          {
+            "src": "media/work/oasa/profile-edit.webp",
+            "alt": "Profile editing screen for photo, username, full name, and phone number",
+            "caption": "Edit personal details"
+          }
+        ]
+      },
+      {
+        "heading": "Make settings part of the service",
+        "body": "The settings flow covers more than preferences. It introduces the app, manages permissions, supports accessible use, publishes service news, opens a direct contact route, and keeps privacy and app information readable. Showing the whole sequence matters because these are the screens that make a public-service product understandable and accountable.",
+        "screens": [
+          {
+            "src": "media/work/oasa/settings.webp",
+            "alt": "Settings overview with permissions, accessibility, route notifications, privacy, news, and app information",
+            "caption": "Find settings by purpose"
+          },
+          {
+            "src": "media/work/oasa/settings-introduction.webp",
+            "alt": "App introduction screen explaining how OASA Telematics supports journey planning",
+            "caption": "Introduce the service"
+          },
+          {
+            "src": "media/work/oasa/settings-permissions.webp",
+            "alt": "Privacy permissions for usage statistics, location, calendar, and system camera",
+            "caption": "Control app permissions"
+          },
+          {
+            "src": "media/work/oasa/accessibility.webp",
+            "alt": "Accessibility controls for text size, contrast, screen reader, text to speech, and external devices",
+            "caption": "Adjust the interface"
+          },
+          {
+            "src": "media/work/oasa/settings-news.webp",
+            "alt": "OASA Telematics news and announcements screen with service articles",
+            "caption": "Read service news"
+          },
+          {
+            "src": "media/work/oasa/contact.webp",
+            "alt": "Contact and support form with name, email, comment, and send action",
+            "caption": "Reach support directly"
+          },
+          {
+            "src": "media/work/oasa/settings-privacy.webp",
+            "alt": "OASA privacy policy screen with effective date and data-collection information",
+            "caption": "Read the privacy policy"
+          },
+          {
+            "src": "media/work/oasa/settings-about.webp",
+            "alt": "About screen with OASA Telematics version, licences, and upgrade information",
+            "caption": "Check app information"
+          }
+        ]
+      }
+    ],
+    "evaluation": {
+      "heading": "Testing changed the interface, not just the report",
+      "body": "The interactive Figma prototype was evaluated with WAMMI, think-aloud sessions, and a heuristic review. The 91.17% WAMMI score describes perceived usability of the prototype in this study, not performance of a live product. More useful than the headline score were the points of hesitation: unclear time controls, weak distinction between departure and arrival, buried nearby stops, and an account gate that slowed down first use.",
+      "stats": [
+        {
+          "value": "40",
+          "label": "participants completed the WAMMI evaluation"
+        },
+        {
+          "value": "91.17%",
+          "label": "global WAMMI usability score for the prototype"
+        },
+        {
+          "value": "5",
+          "label": "participants worked through think-aloud sessions"
+        },
+        {
+          "value": "5",
+          "label": "experts reviewed the prototype against usability heuristics"
+        }
+      ],
+      "changes": [
+        "Added guest access and moved the origin-destination swap control beside the fields.",
+        "Labelled alternate departure time instead of relying on an unfamiliar icon.",
+        "Made the current stop and nearby stops visible in the journey context.",
+        "Grouped notifications and gave unread service updates a clearer state.",
+        "Renamed saved routes as favourites and replaced the ambiguous icon with a heart.",
+        "Added voice-notification options and a direct route to support."
+      ]
+    },
+    "output": {
+      "heading": "A complete prototype, with a clear centre of gravity",
+      "body": "The final Android prototype covers onboarding, registration, trip planning, live vehicle and stop tracking, service notifications, tickets, profile, permissions, accessibility, and support. The breadth matters, but the central idea is simple: keep the passenger oriented as the question changes from where can I go, to what should I take, to where is it now."
     }
-  ]
+  }
 }

@@ -1,0 +1,199 @@
+---
+import type { CaseStudy } from "../data/caseStudies";
+
+interface Props {
+  cs: CaseStudy;
+}
+
+const { cs } = Astro.props;
+const showcase = cs.flowShowcase;
+---
+
+{
+  showcase && (
+    <div class="flow-case">
+      <section class="flow-case__opening" data-reveal>
+        <div>
+          <h2>Problem</h2>
+          <p>{cs.problem}</p>
+        </div>
+        <div>
+          <h2>{showcase.context.heading}</h2>
+          <p>{showcase.context.body}</p>
+        </div>
+      </section>
+
+      <section class="flow-band flow-band--research">
+        <div class="flow-band__inner">
+          <div class="flow-copy" data-reveal>
+            <h2>{showcase.research.heading}</h2>
+            <p>{showcase.research.body}</p>
+          </div>
+          <dl class="flow-stats" data-reveal-group>
+            {showcase.research.stats.map((stat) => (
+              <div>
+                <dt>{stat.value}</dt>
+                <dd>{stat.label}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      <section class="flow-structure">
+        <div class="flow-copy" data-reveal>
+          <h2>{showcase.structure.heading}</h2>
+          <p>{showcase.structure.body}</p>
+        </div>
+        <div class="flow-boards" data-reveal-group>
+          {showcase.structure.boards.map((board) => (
+            <figure>
+              <button
+                type="button"
+                data-lightbox={board.src}
+                data-lightbox-alt={board.alt}
+                aria-label={`Open ${board.caption}`}
+              >
+                <img src={board.src} alt={board.alt} loading="lazy" />
+                <span aria-hidden="true">Open board ↗</span>
+              </button>
+              <figcaption>{board.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      <div class="flow-groups">
+        {showcase.groups.map((group, groupIndex) => (
+          <section
+            class:list={["flow-group", groupIndex % 2 === 1 && "flow-group--alternate"]}
+            data-flow-carousel
+          >
+            <div class="flow-group__inner">
+              <div class="flow-group__copy" data-reveal>
+                <h2>{group.heading}</h2>
+                <p>{group.body}</p>
+                {group.screens.length > 1 && (
+                  <p class="flow-group__hint">Swipe or use the rail controls →</p>
+                )}
+              </div>
+              <div class="flow-group__rail">
+                <div class="flow-rail__head">
+                  <p class="flow-rail__position" aria-live="polite">
+                    <span data-flow-current>01</span>
+                    <span aria-hidden="true"> / </span>
+                    <span class="sr-only">of</span>
+                    {String(group.screens.length).padStart(2, "0")}
+                  </p>
+                  {group.screens.length > 1 && (
+                    <div class="flow-rail__controls">
+                      <button type="button" data-flow-prev aria-label={`Previous screen in ${group.heading}`}>
+                        ← Previous
+                      </button>
+                      <button type="button" data-flow-next aria-label={`Next screen in ${group.heading}`}>
+                        Next →
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <ol
+                  class="flow-screens"
+                  aria-label={`${group.heading} screens`}
+                  data-flow-track
+                  data-reveal-group
+                >
+                  {group.screens.map((screen, screenIndex) => (
+                    <li>
+                      <figure>
+                        <button
+                          type="button"
+                          data-lightbox={screen.src}
+                          data-lightbox-alt={screen.alt}
+                          data-lightbox-orientation="portrait"
+                          aria-label={`Open ${screen.caption}`}
+                        >
+                          <img src={screen.src} alt={screen.alt} loading="lazy" />
+                        </button>
+                        <figcaption>
+                          <span aria-hidden="true">{String(screenIndex + 1).padStart(2, "0")}</span>
+                          {screen.caption}
+                        </figcaption>
+                      </figure>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <section class="flow-band flow-band--evaluation">
+        <div class="flow-band__inner">
+          <div class="flow-copy" data-reveal>
+            <h2>{showcase.evaluation.heading}</h2>
+            <p>{showcase.evaluation.body}</p>
+          </div>
+          <dl class="flow-stats flow-stats--evaluation" data-reveal-group>
+            {showcase.evaluation.stats.map((stat) => (
+              <div>
+                <dt>{stat.value}</dt>
+                <dd>{stat.label}</dd>
+              </div>
+            ))}
+          </dl>
+          <ul class="flow-changes" data-reveal-group>
+            {showcase.evaluation.changes.map((change) => <li>{change}</li>)}
+          </ul>
+        </div>
+      </section>
+
+      <section class="flow-output" data-reveal>
+        <h2>{showcase.output.heading}</h2>
+        <p>{showcase.output.body}</p>
+      </section>
+    </div>
+  )
+}
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-flow-carousel]").forEach((carousel) => {
+    const track = carousel.querySelector<HTMLElement>("[data-flow-track]");
+    const previous = carousel.querySelector<HTMLButtonElement>("[data-flow-prev]");
+    const next = carousel.querySelector<HTMLButtonElement>("[data-flow-next]");
+    const current = carousel.querySelector<HTMLElement>("[data-flow-current]");
+    if (!track || !previous || !next || !current) return;
+
+    const items = Array.from(track.children) as HTMLElement[];
+
+    const stepSize = () => {
+      const first = items[0];
+      if (!first) return track.clientWidth;
+      const gap = Number.parseFloat(getComputedStyle(track).columnGap || "0");
+      return first.getBoundingClientRect().width + gap;
+    };
+
+    const update = () => {
+      const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
+      const firstVisible = Math.min(
+        items.length - 1,
+        Math.max(0, Math.round(track.scrollLeft / Math.max(stepSize(), 1))),
+      );
+      current.textContent = String(firstVisible + 1).padStart(2, "0");
+      previous.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= maxScroll - 2;
+    };
+
+    previous.addEventListener("click", () => {
+      track.scrollBy({ left: -stepSize(), behavior: "smooth" });
+    });
+
+    next.addEventListener("click", () => {
+      track.scrollBy({ left: stepSize(), behavior: "smooth" });
+    });
+
+    track.addEventListener("scroll", update, { passive: true });
+    if ("ResizeObserver" in window) new ResizeObserver(update).observe(track);
+    update();
+  });
+</script>
