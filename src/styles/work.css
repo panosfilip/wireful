@@ -1,0 +1,812 @@
+/* ---- Case cards -------------------------------------------------------------------------------------- */
+
+.case-grid {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .case-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .case-grid > .case-card:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+.case-card {
+  position: relative;
+}
+
+.case-card-inner {
+  display: block;
+  height: 100%;
+}
+
+.case-visual {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-raise);
+  /* Crosshair corner ticks — blueprint device */
+}
+
+.case-visual::before,
+.case-visual::after {
+  content: "+";
+  position: absolute;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--faint);
+  line-height: 1;
+  transition: color 0.3s var(--ease-out);
+}
+
+.case-visual::before {
+  top: 0.6rem;
+  left: 0.75rem;
+}
+
+.case-visual::after {
+  bottom: 0.6rem;
+  right: 0.75rem;
+}
+
+.case-card:hover .case-visual::before,
+.case-card:hover .case-visual::after {
+  color: var(--accent);
+}
+
+.case-visual img,
+.case-visual video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: top center;
+  transform: scale(1.01);
+  transition: transform 0.9s var(--ease-expo), filter 0.6s var(--ease-out);
+  filter: saturate(0.92);
+}
+
+.case-visual video {
+  display: block;
+}
+
+.case-card:hover .case-visual img,
+.case-card:hover .case-visual video {
+  transform: scale(1.05);
+  filter: saturate(1);
+}
+
+.case-visual svg {
+  width: 100%;
+  color: var(--faint);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  transition: color 0.4s var(--ease-out), transform 0.9s var(--ease-expo);
+}
+
+.case-card:hover .case-visual svg {
+  color: var(--muted);
+  transform: scale(1.02);
+}
+
+/* Featured (first) card: media + text side by side */
+@media (min-width: 720px) {
+  .case-grid > .case-card:first-child .case-card-inner {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: center;
+  }
+
+  .case-grid > .case-card:first-child .case-visual img,
+  .case-grid > .case-card:first-child .case-visual svg {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+.case-body {
+  padding-top: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.case-meta-line {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.case-meta-line .sep {
+  margin-inline: 0.6rem;
+  color: var(--line-strong);
+}
+
+.case-meta-line .flag {
+  color: var(--accent-dim);
+}
+
+.case-meta-line .flag--live {
+  color: #79bd91;
+}
+
+.case-meta-line .flag--live::before {
+  content: "";
+  display: inline-block;
+  width: 0.42em;
+  height: 0.42em;
+  margin-right: 0.5em;
+  border-radius: 50%;
+  background: #79bd91;
+  vertical-align: 0.08em;
+}
+
+.case-meta-line .flag--concept {
+  color: var(--muted);
+}
+
+.case-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.case-title-row h3 {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+}
+
+.case-grid > .case-card:first-child .case-title-row h3 {
+  font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+}
+
+.case-arrow {
+  color: var(--faint);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  transition: color 0.25s var(--ease-out), transform 0.35s var(--ease-expo);
+}
+
+.case-card:hover .case-arrow {
+  color: var(--accent);
+  transform: translate(4px, -4px);
+}
+
+.case-summary {
+  color: var(--muted);
+  margin: 0;
+  font-size: 0.97rem;
+  max-width: 38em;
+}
+
+/* ---- Case carousel ---------------------------------------------------------------------------------- */
+
+.carousel-track {
+  display: flex;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-item {
+  flex: 0 0 auto;
+  width: min(82vw, 340px);
+  scroll-snap-align: start;
+}
+
+@media (min-width: 720px) {
+  .carousel-item {
+    width: clamp(300px, 30vw, 360px);
+  }
+}
+
+.carousel-item .case-card-inner {
+  height: 100%;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+.carousel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg-raise);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition:
+    border-color 0.25s var(--ease-out),
+    color 0.25s var(--ease-out),
+    transform 0.3s var(--ease-expo);
+}
+
+.carousel-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.carousel-btn:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.carousel-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* ---- Capability tags ---------------------------------------------------------------------------------- */
+
+.capability-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+  margin-top: auto;
+  padding-top: 0.45rem;
+}
+
+.capability-tag {
+  --tag-tone: #a98bf4;
+  /* The pill sits in normal flow, so when it expands on hover it widens the
+     token's box and pushes its neighbours along the row (wrapping onto the next
+     line as needed) rather than floating over them. Collapsed, the box is a
+     2rem circle. */
+  position: relative;
+  flex: 0 0 auto;
+  height: 2rem;
+}
+
+.capability-tag__pill {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  max-width: 2rem;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--tag-tone) 50%, var(--line-strong));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--tag-tone) 10%, transparent);
+  transition: max-width 0.4s var(--ease-expo), background 0.25s var(--ease-out);
+}
+
+.capability-tag--rose {
+  --tag-tone: #e884ae;
+}
+
+.capability-tag--cyan {
+  --tag-tone: #71bdc9;
+}
+
+.capability-tag--lime {
+  --tag-tone: #b4cb6b;
+}
+
+.capability-tag--amber {
+  --tag-tone: #e3a777;
+}
+
+.capability-tag--green {
+  --tag-tone: #79bd91;
+}
+
+.capability-tag--blue {
+  --tag-tone: #8aa6df;
+}
+
+.capability-tag-mark {
+  display: grid;
+  flex: 0 0 auto;
+  width: calc(2rem - 2px);
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--tag-tone);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  transition: color 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+}
+
+.capability-tag-label {
+  /* Centre with the exact same mechanism as .capability-tag-mark (grid +
+     place-items) so the label glyphs and the circle glyphs sit on the same
+     line. Mixing flex/grid centring here left them 1-2px apart. */
+  display: grid;
+  place-items: center start;
+  height: 100%;
+  padding-right: 0.7rem;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  /* The mono face renders the circle marks ~0.83px above their box centre;
+     lift the label the same amount so its glyphs sit on the marks' line. */
+  position: relative;
+  top: -0.83px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-0.35rem);
+  transition: opacity 0.18s var(--ease-out) 0.12s, transform 0.32s var(--ease-expo) 0.08s;
+}
+
+/* Expanding the pill grows the token's in-flow box, so the label reveal pushes
+   the neighbouring tokens along the row. max-content keeps the width to just the
+   label, and the box wraps to the next line when it no longer fits. */
+@media (hover: hover) {
+  .capability-tag:hover .capability-tag__pill {
+    max-width: 12rem;
+    background: color-mix(in srgb, var(--tag-tone) 19%, var(--bg-raise));
+  }
+
+  .capability-tag:hover .capability-tag-mark {
+    color: var(--text);
+    transform: scale(1.08);
+  }
+
+  .capability-tag:hover .capability-tag-label {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.capability-tag.is-expanded .capability-tag__pill {
+  max-width: 12rem;
+  background: color-mix(in srgb, var(--tag-tone) 19%, var(--bg-raise));
+}
+
+.capability-tag.is-expanded .capability-tag-mark {
+  color: var(--text);
+  transform: scale(1.08);
+}
+
+.capability-tag.is-expanded .capability-tag-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Detail pages show every token's full label by default and let the pills wrap
+   to as many rows as needed. Nothing expands on hover, so any number of tokens
+   fits without ever overflowing into the Details column. */
+.capability-tags--detail {
+  margin: 0;
+  padding: 0;
+  gap: 0.5rem;
+}
+
+.capability-tags--detail .capability-tag {
+  width: auto;
+  height: 2.25rem;
+}
+
+.capability-tags--detail .capability-tag__pill {
+  position: static;
+  max-width: none;
+  background: color-mix(in srgb, var(--tag-tone) 14%, var(--bg-raise));
+}
+
+.capability-tags--detail .capability-tag-mark {
+  width: calc(2.25rem - 2px);
+}
+
+.capability-tags--detail .capability-tag-label {
+  opacity: 1;
+  transform: none;
+}
+
+/* No hover reveal on detail pills; keep them at full width if hovered. */
+.capability-tags--detail .capability-tag:hover .capability-tag__pill,
+.capability-tags--detail .capability-tag.is-expanded .capability-tag__pill {
+  max-width: none;
+}
+
+/* RULE: On the case-study meta, capability tokens render exactly like the Work
+   cards — collapsed marks that reveal their label on hover — but pinned to TWO
+   PER ROW (CapabilityTags perRow={2}). Do not switch this to the detail
+   (always-expanded) variant, and do not use a single shared grid: shared
+   column tracks would couple the rows, so hovering the bottom row would shove
+   the top row sideways. Each row is its own no-wrap flex track instead — a
+   hover reveal grows only its own row (pushing that row's sibling), never
+   wraps the hovered token (no flicker), and leaves the other rows untouched. */
+.case-meta .capability-tags--rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: max-content;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.case-meta .capability-tags-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---- Work filters ------------------------------------------------------------------------------------ */
+
+.work-filter {
+  margin: calc(clamp(2.5rem, 6vw, 4.5rem) * -0.4) 0 clamp(2.75rem, 6vw, 4.5rem);
+  padding-block: 1.25rem;
+  border-block: 1px solid var(--line);
+}
+
+.work-filter-groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.work-filter-group {
+  position: relative;
+  min-width: 0;
+}
+
+/* Compact trigger: shows the group name, or the chosen token once selected. */
+.work-filter-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.4rem;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--bg-raise);
+  color: var(--muted);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1;
+  transition: border-color 0.25s var(--ease-out), color 0.25s var(--ease-out), background 0.25s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .work-filter-trigger:hover {
+    border-color: var(--line-strong);
+    color: var(--text);
+  }
+}
+
+.work-filter-trigger[aria-expanded="true"] {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line-strong));
+  color: var(--text);
+}
+
+.work-filter-trigger.is-active {
+  color: var(--text);
+  padding-left: 0.4rem;
+  padding-right: 2rem;
+}
+
+.work-filter-trigger.is-active .work-filter-trigger__group {
+  display: none;
+}
+
+.work-filter-trigger.is-active .work-filter-trigger__chevron {
+  display: none;
+}
+
+/* Per-group clear, revealed once that dropdown has a selection. Sits over the
+   trigger's right edge as a sibling (a button can't nest inside the trigger). */
+.work-filter-clear {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.45rem;
+  height: 1.45rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--faint);
+  cursor: pointer;
+  transition: color 0.2s var(--ease-out), background 0.2s var(--ease-out);
+}
+
+.work-filter-clear[hidden] {
+  display: none;
+}
+
+@media (hover: hover) {
+  .work-filter-clear:hover {
+    color: var(--text);
+    background: color-mix(in srgb, var(--text) 12%, transparent);
+  }
+}
+
+.work-filter-trigger__value {
+  display: none;
+  align-items: center;
+  gap: 0.42rem;
+}
+
+.work-filter-trigger.is-active .work-filter-trigger__value {
+  display: inline-flex;
+}
+
+.work-filter-trigger__chevron {
+  display: inline-flex;
+  color: var(--faint);
+  transition: transform 0.25s var(--ease-out);
+}
+
+.work-filter-trigger[aria-expanded="true"] .work-filter-trigger__chevron {
+  transform: rotate(180deg);
+}
+
+/* Popover menu holding the branded option pills. */
+.work-filter-menu {
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  left: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: max(100%, 12rem);
+  max-width: min(16rem, 80vw);
+  padding: 0.4rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.9rem;
+  background: var(--bg-raise);
+  box-shadow: 0 20px 45px -22px rgba(0, 0, 0, 0.65);
+}
+
+.work-filter-menu[hidden] {
+  display: none;
+}
+
+.work-filter-menu .work-filter-button {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.work-filter-button {
+  --filter-tone: #a98bf4;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  padding: 0.22rem 0.55rem 0.22rem 0.22rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1;
+  transition: border-color 0.25s var(--ease-out), background 0.25s var(--ease-out), color 0.25s var(--ease-out);
+}
+
+.work-filter-button--violet {
+  --filter-tone: #a98bf4;
+}
+
+.work-filter-button--rose {
+  --filter-tone: #e884ae;
+}
+
+.work-filter-button--amber {
+  --filter-tone: #e3a777;
+}
+
+.work-filter-button--lime {
+  --filter-tone: #b4cb6b;
+}
+
+.work-filter-button--green {
+  --filter-tone: #79bd91;
+}
+
+.work-filter-button--cyan {
+  --filter-tone: #71bdc9;
+}
+
+.work-filter-button--blue {
+  --filter-tone: #8aa6df;
+}
+
+.work-filter-mark {
+  display: grid;
+  width: 1.55rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--filter-tone) 50%, var(--line-strong));
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--filter-tone) 9%, transparent);
+  color: var(--filter-tone);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  transition: background 0.25s var(--ease-out), color 0.25s var(--ease-out);
+}
+
+.work-filter-button[aria-pressed="true"] {
+  border-color: color-mix(in srgb, var(--filter-tone) 45%, var(--line));
+  background: color-mix(in srgb, var(--filter-tone) 10%, transparent);
+  color: var(--text);
+}
+
+.work-filter-button[aria-pressed="true"] .work-filter-mark {
+  background: var(--filter-tone);
+  color: var(--bg);
+}
+
+@media (hover: hover) {
+  .work-filter-button:hover {
+    border-color: color-mix(in srgb, var(--filter-tone) 35%, var(--line));
+    color: var(--text);
+  }
+}
+
+.work-filter-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.work-filter-reset,
+.work-filter-status p {
+  margin: 0;
+  color: var(--faint);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.work-filter-reset {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .work-filter-reset:hover {
+    color: var(--accent);
+  }
+}
+
+.work-filter-item[hidden] {
+  display: none;
+}
+
+/* Featured row above the filterable archive */
+.section--featured {
+  padding-bottom: 0;
+}
+
+.work-featured-grid {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .work-featured-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.work-empty {
+  margin-top: 2rem;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+}
+
+.work-empty[hidden] {
+  display: none;
+}
+
+.work-empty button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Related work at the foot of a case study */
+.case-related {
+  margin-top: clamp(3rem, 7vw, 5.5rem);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--line);
+}
+
+.case-related__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.case-related__head h2 {
+  margin: 0;
+}
+
+.case-related__all {
+  flex: none;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.25s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .case-related__all:hover {
+    color: var(--accent);
+  }
+}
+
+.case-related__grid {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .case-related__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.status-chip {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-dim);
+}
+
+.status-chip::before {
+  content: "+ ";
+}
+

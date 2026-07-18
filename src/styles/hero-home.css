@@ -1,0 +1,573 @@
+/* ---- Hero ---------------------------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-block: clamp(4rem, 9vw, 7rem) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Let the homepage atmosphere continue behind the sticky navbar. The hero
+   keeps its normal document position; only the media layer reaches upward. */
+.hero-home {
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+.hero-home .hero-media {
+  inset: calc(var(--header-h, 4.5rem) * -1) 0 0;
+}
+
+.hero-home .hero-media video {
+  height: 100%;
+}
+
+/* Inside the hero's flex column, the container's auto margins disable
+   cross-axis stretching, so it shrink-wraps and floats toward the centre —
+   misaligning hero copy from the body sections below. Force full width so
+   the max-width + auto margins behave like they do outside flex. */
+.hero > .container {
+  width: 100%;
+}
+
+/* Full-viewport hero: fills the screen below the sticky header.
+   --header-h is measured and set by Base.astro's script. Type and spacing
+   scale with viewport HEIGHT too, so the content stack never outgrows the fold.
+   Requires a reasonably tall screen — on short landscape phones the vh-based
+   type would collapse below legibility, so those fall back to the base hero. */
+@media (min-width: 821px) and (min-height: 600px) {
+  .hero:not(.hero-inner) {
+    min-height: calc(100vh - var(--header-h, 4.5rem));
+    min-height: calc(100svh - var(--header-h, 4.5rem));
+    padding-top: clamp(2.5rem, 6vh, 5.5rem);
+  }
+
+  /* Grid fills the fold; the copy centers vertically while the portrait keeps
+     standing on the bottom edge. Keeps the fold balanced regardless of copy
+     length. */
+  .hero:not(.hero-inner) .hero-grid {
+    flex: 1 1 auto;
+  }
+
+  .hero:not(.hero-inner) .hero-copy {
+    align-self: center;
+    padding-bottom: 0;
+  }
+
+  /* Optical rather than mathematical centering: the portrait and button row
+     carry more visual weight below the headline, so lift the home copy gently.
+     The vh component scales through large desktop and 4K displays. */
+  .hero-home .hero-copy {
+    transform: translateY(clamp(-3.25rem, -2.4vh, -1.25rem));
+  }
+
+  .hero:not(.hero-inner) h1 {
+    font-size: min(4.3rem, 4.3vw, 8vh);
+  }
+
+  .hero:not(.hero-inner) .lead {
+    font-size: min(1.35rem, 1.8vw, 2.6vh);
+    margin-bottom: min(2.4rem, 4.5vh);
+  }
+}
+
+/* Inner pages reuse .hero without media/portrait */
+.hero.hero-inner {
+  padding-block: clamp(5rem, 11vw, 9rem) clamp(3rem, 7vw, 5rem);
+}
+
+/* About hero runs the two-column copy + portrait layout. The portrait stands
+   on the hero's bottom rule (like home), so the bottom padding is dropped here
+   and the copy lifts off the rule instead. Narrower than the full-bleed home
+   portrait — this is a smaller hero. */
+.hero.hero-about {
+  padding-bottom: 0;
+}
+
+.hero.hero-about .hero-grid {
+  grid-template-columns: minmax(0, 1.25fr) minmax(220px, 300px);
+  align-items: end;
+}
+
+.hero.hero-about .hero-copy {
+  padding-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.hero.hero-about .hero-portrait img {
+  width: 100%;
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Lift hero copy above the media layer when a hero has no dedicated .hero-grid
+   (e.g. hero-inner sections that add a video background) */
+.hero-media ~ .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-media video {
+  width: 100%;
+  height: 108%;
+  object-fit: cover;
+  filter: brightness(0.75) saturate(0.9);
+  opacity: 0.5;
+  will-change: transform;
+}
+
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(11, 7, 18, 0.4) 0%, rgba(11, 7, 18, 0.2) 45%, var(--bg) 96%),
+    linear-gradient(90deg, rgba(11, 7, 18, 0.92), rgba(11, 7, 18, 0.55) 52%, rgba(11, 7, 18, 0.2));
+}
+
+/* Let the homepage video participate more strongly in the portrait composition
+   while retaining a focused dark field directly behind the headline. */
+:root[data-theme="dark"] .hero-home .hero-media video {
+  filter: brightness(0.9) saturate(0.98);
+  opacity: 0.76;
+}
+
+:root[data-theme="dark"] .hero-home .hero-media::after {
+  background:
+    linear-gradient(180deg, rgba(11, 7, 18, 0.26) 0%, rgba(11, 7, 18, 0.1) 45%, var(--bg) 96%),
+    linear-gradient(90deg, rgba(11, 7, 18, 0.82), rgba(11, 7, 18, 0.4) 52%, rgba(11, 7, 18, 0.08));
+}
+
+/* Fine noise so video/gradients don't band — filmic, not glassy */
+.hero-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 460px);
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: end;
+}
+
+.hero-copy {
+  padding-bottom: clamp(3.5rem, 7vw, 5.5rem);
+}
+
+.hero h1 {
+  font-size: clamp(2.25rem, 6vw, 4.9rem);
+  max-width: 12.5em;
+  margin-bottom: 0.45em;
+}
+
+.hero .lead {
+  margin-bottom: 2.4rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+/* Load-in stagger: hero children rise in sequence on page load */
+html.js [data-intro] {
+  opacity: 0;
+  transform: translateY(26px);
+}
+
+html.js .is-loaded [data-intro] {
+  animation: intro-rise 0.95s var(--ease-expo) forwards;
+  animation-delay: calc(var(--intro, 0) * 90ms);
+}
+
+@keyframes intro-rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- Hero portrait --------------------------------------------------------------------- */
+
+.hero-portrait {
+  position: relative;
+  align-self: end;
+}
+
+.hero-portrait::before {
+  content: "";
+  position: absolute;
+  inset: auto -15% -30% -15%;
+  aspect-ratio: 1;
+  background:
+    radial-gradient(closest-side at 35% 45%, rgba(97, 12, 159, 0.55), transparent 70%),
+    radial-gradient(closest-side at 70% 60%, rgba(218, 12, 129, 0.3), transparent 70%);
+  opacity: 0.65;
+  transition: opacity 0.6s var(--ease-out);
+  pointer-events: none;
+}
+
+.hero-portrait img {
+  position: relative;
+  width: 116%;
+  max-width: none;
+  margin-left: 0;
+  filter: grayscale(1) contrast(1.04) drop-shadow(0 30px 50px rgba(0, 0, 0, 0.55));
+  transform-origin: bottom center;
+  transition: filter 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.hero-portrait-tag {
+  position: absolute;
+  left: -1rem;
+  bottom: 22%;
+  transform: translate(-100%, 8px);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
+  pointer-events: none;
+}
+
+.hero-portrait-tag::after {
+  content: "";
+  display: inline-block;
+  width: 2.5rem;
+  height: 1px;
+  background: var(--magenta);
+  vertical-align: middle;
+  margin-left: 0.75rem;
+}
+
+@media (hover: hover) {
+  .hero-portrait:hover::before {
+    opacity: 1;
+  }
+
+  .hero-portrait:hover img {
+    filter: grayscale(0) contrast(1) drop-shadow(0 30px 50px rgba(0, 0, 0, 0.55));
+    transform: scale(1.02);
+  }
+
+  .hero-portrait:hover .hero-portrait-tag {
+    opacity: 1;
+    transform: translate(-100%, 0);
+  }
+}
+
+@media (max-width: 820px) {
+  /* Mobile hero is a plain document flow — headline, intro, CTAs, then the
+     portrait resting on the section's bottom rule. Nothing is absolutely
+     positioned, so copy and portrait can never overlap. */
+  body {
+    font-size: 1.0625rem;
+  }
+
+  .hero:not(.hero-inner) {
+    padding-top: clamp(2.5rem, 6vh, 4rem);
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .hero:not(.hero-inner) h1 {
+    font-size: clamp(2.05rem, 8.4vw, 2.9rem);
+  }
+
+  .hero:not(.hero-inner) .hero-copy {
+    padding-bottom: 0;
+  }
+
+  .hero .lead {
+    margin-bottom: 1.9rem;
+  }
+
+  .hero:not(.hero-inner) .hero-actions {
+    gap: 0.65rem;
+  }
+
+  .hero:not(.hero-inner) .hero-actions .btn {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-inline: 1rem;
+  }
+
+  .hero:not(.hero-inner) .hero-portrait {
+    width: min(300px, 72vw);
+    margin: 1.5rem auto 0;
+    justify-self: center;
+  }
+
+  .hero:not(.hero-inner) .hero-portrait img {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  /* Collapse the About hero to a single column — this needs to override the
+     desktop .hero.hero-about .hero-grid rule, which out-specifies the generic
+     .hero-grid mobile reset. Copy stacks full width, portrait rests below it. */
+  .hero.hero-about .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero.hero-about .hero-copy {
+    padding-bottom: 0;
+  }
+
+  .hero.hero-about .hero-portrait {
+    width: min(240px, 60vw);
+    margin: 1.75rem auto 0;
+    justify-self: center;
+  }
+
+  .hero-portrait-tag {
+    display: none;
+  }
+}
+
+/* ---- Stats strip --------------------------------------------------------------------------- */
+
+.stat-strip {
+  border-bottom: 1px solid var(--line);
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 860px) {
+  .stat-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stat {
+  padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 3vw, 2.5rem);
+  border-left: 1px solid var(--line);
+}
+
+.stat:first-child {
+  border-left: 0;
+  padding-left: 0;
+}
+
+@media (max-width: 859px) {
+  .stat:nth-child(3) {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .stat:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+  }
+}
+
+.stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat strong .unit {
+  color: var(--accent);
+}
+
+.stat span {
+  display: block;
+  margin-top: 0.7rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  max-width: 16em;
+}
+
+/* ---- Marquee ---------------------------------------------------------------------------------- */
+
+.marquee {
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  padding-block: clamp(1.1rem, 2.5vw, 1.6rem);
+  user-select: none;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 0;
+  width: max-content;
+}
+
+html.js .marquee-track {
+  animation: marquee-scroll 36s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  padding-right: clamp(1.5rem, 3vw, 2.5rem);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  letter-spacing: -0.01em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.marquee-item::after {
+  content: "_";
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ---- Section headers ------------------------------------------------------------------------------ */
+
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.section-head h2 {
+  margin-bottom: 0;
+  max-width: 15em;
+}
+
+.section-kicker {
+  color: var(--muted);
+  max-width: 40rem;
+  margin: 1rem 0 0;
+}
+
+/* ---- Capability directory (offer) ------------------------------------------------------------------ */
+
+.capability-directory {
+  display: grid;
+  gap: 0.9rem clamp(1.25rem, 5vw, 5rem);
+}
+
+@media (min-width: 650px) {
+  .capability-directory {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1020px) {
+  .capability-directory {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.capability-directory-item {
+  --capability-tone: var(--accent);
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 0.85rem;
+}
+
+.capability-directory-item--violet {
+  --capability-tone: #a98bf4;
+}
+
+.capability-directory-item--rose {
+  --capability-tone: #e884ae;
+}
+
+.capability-directory-item--amber {
+  --capability-tone: #e3a777;
+}
+
+.capability-directory-item--lime {
+  --capability-tone: #b4cb6b;
+}
+
+.capability-directory-item--green {
+  --capability-tone: #79bd91;
+}
+
+.capability-directory-item--cyan {
+  --capability-tone: #71bdc9;
+}
+
+.capability-directory-item--blue {
+  --capability-tone: #8aa6df;
+}
+
+.capability-directory-mark {
+  display: grid;
+  flex: 0 0 auto;
+  width: clamp(3.4rem, 5.25vw, 4.25rem);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--capability-tone) 55%, var(--line-strong));
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--capability-tone) 12%, transparent);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: clamp(0.72rem, 1.1vw, 0.78rem);
+  letter-spacing: 0.08em;
+  transition: background 0.25s var(--ease-out), color 0.25s var(--ease-out);
+}
+
+.capability-directory-label {
+  min-width: 0;
+  padding: 0.72rem 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: clamp(0.9rem, 1.35vw, 1.05rem);
+  font-weight: 600;
+  line-height: 1.25;
+  transition: border-color 0.25s var(--ease-out), color 0.25s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .capability-directory-item:hover .capability-directory-mark {
+    background: var(--capability-tone);
+    color: var(--bg);
+  }
+
+  .capability-directory-item:hover .capability-directory-label {
+    border-color: var(--capability-tone);
+    color: var(--capability-tone);
+  }
+}
+

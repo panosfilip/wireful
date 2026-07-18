@@ -1,0 +1,170 @@
+/* ---- Light theme refinements ---------------------------------------------------
+   Media-heavy areas need more than inverted tokens: a pale violet veil keeps
+   photography atmospheric while preserving dark text and the blueprint rules. */
+
+:root[data-theme="light"] .hero-media video {
+  filter: brightness(1.02) saturate(0.82);
+  opacity: 0.32;
+}
+
+:root[data-theme="light"] .hero-media::after {
+  background:
+    linear-gradient(180deg, rgba(252, 250, 252, 0.18) 0%, rgba(252, 250, 252, 0.34) 45%, var(--bg) 96%),
+    linear-gradient(90deg, rgba(252, 250, 252, 0.87), rgba(252, 250, 252, 0.6) 52%, rgba(252, 250, 252, 0.22));
+}
+
+/* The homepage video is a key part of the portrait composition, so it stays
+   notably more present than the atmospheric videos on inner-page heroes. */
+:root[data-theme="light"] .hero-home .hero-media video {
+  filter: brightness(0.98) saturate(0.95);
+  opacity: 0.52;
+}
+
+:root[data-theme="light"] .hero-home .hero-media::after {
+  background:
+    linear-gradient(180deg, rgba(252, 250, 252, 0.1) 0%, rgba(252, 250, 252, 0.22) 45%, var(--bg) 96%),
+    linear-gradient(90deg, rgba(252, 250, 252, 0.76), rgba(252, 250, 252, 0.38) 52%, rgba(252, 250, 252, 0.1));
+}
+
+:root[data-theme="light"] .hero-portrait::before {
+  opacity: 0.34;
+}
+
+:root[data-theme="light"] .hero-portrait img {
+  filter: grayscale(1) contrast(1.02) drop-shadow(0 28px 42px rgba(67, 40, 79, 0.2));
+}
+
+@media (hover: hover) {
+  :root[data-theme="light"] .hero-portrait:hover img {
+    filter: grayscale(0) contrast(1) drop-shadow(0 28px 42px rgba(67, 40, 79, 0.22));
+  }
+}
+
+:root[data-theme="light"] .cta-media video {
+  filter: brightness(1.02) saturate(0.82);
+  opacity: 0.3;
+}
+
+:root[data-theme="light"] .cta-media::after {
+  background:
+    linear-gradient(180deg, var(--bg), rgba(252, 250, 252, 0.48) 30%, rgba(252, 250, 252, 0.48) 70%, var(--bg)),
+    linear-gradient(90deg, rgba(252, 250, 252, 0.87), rgba(252, 250, 252, 0.5) 60%, rgba(252, 250, 252, 0.24));
+}
+
+:root[data-theme="light"] .contact-page-media video {
+  filter: brightness(1.02) saturate(0.82);
+  opacity: 0.3;
+}
+
+:root[data-theme="light"] .contact-page-media::after {
+  background:
+    linear-gradient(180deg, rgba(252, 250, 252, 0.42), rgba(252, 250, 252, 0.66)),
+    linear-gradient(90deg, rgba(252, 250, 252, 0.84), rgba(252, 250, 252, 0.34) 70%, rgba(252, 250, 252, 0.52));
+}
+
+/* Keep the project brief's split-screen drama in light mode, but lift the
+   media panel out of near-black into a restrained plum-gray range. */
+:root[data-theme="light"] .overlay-media video {
+  filter: brightness(1.05) saturate(0.78);
+}
+
+:root[data-theme="light"] .overlay-media::after {
+  background:
+    linear-gradient(180deg, rgba(247, 240, 247, 0.2), rgba(170, 145, 174, 0.1) 45%, rgba(35, 25, 40, 0.48)),
+    linear-gradient(90deg, rgba(127, 103, 132, 0.12), rgba(42, 30, 47, 0.28));
+}
+
+:root[data-theme="light"] .contact-form-wrap {
+  box-shadow: 0 2rem 5rem rgba(67, 40, 79, 0.12);
+}
+
+@media (max-width: 620px) {
+  :root[data-theme="light"] .primary-nav {
+    box-shadow: 0 1.5rem 3rem rgba(67, 40, 79, 0.14);
+  }
+}
+
+:root[data-theme="light"] .work-filter-menu,
+:root[data-theme="light"] .career-card,
+:root[data-theme="light"] .toolkit-card {
+  box-shadow: 0 1rem 2.5rem rgba(67, 40, 79, 0.14);
+}
+
+/* The original capability palette is intentionally pastel for the dark canvas.
+   These deeper equivalents retain each category's identity on white. */
+:root[data-theme="light"] .capability-directory-item--violet,
+:root[data-theme="light"] .capability-tag,
+:root[data-theme="light"] .work-filter-button--violet,
+:root[data-theme="light"] .capability-option--violet {
+  --capability-tone: #7047b8;
+  --tag-tone: #7047b8;
+  --filter-tone: #7047b8;
+}
+
+:root[data-theme="light"] .capability-directory-item--rose,
+:root[data-theme="light"] .capability-tag--rose,
+:root[data-theme="light"] .work-filter-button--rose,
+:root[data-theme="light"] .capability-option--rose {
+  --capability-tone: #a92f62;
+  --tag-tone: #a92f62;
+  --filter-tone: #a92f62;
+}
+
+:root[data-theme="light"] .capability-directory-item--amber,
+:root[data-theme="light"] .capability-tag--amber,
+:root[data-theme="light"] .work-filter-button--amber,
+:root[data-theme="light"] .capability-option--amber {
+  --capability-tone: #93541c;
+  --tag-tone: #93541c;
+  --filter-tone: #93541c;
+}
+
+:root[data-theme="light"] .capability-directory-item--lime,
+:root[data-theme="light"] .capability-tag--lime,
+:root[data-theme="light"] .work-filter-button--lime,
+:root[data-theme="light"] .capability-option--lime {
+  --capability-tone: #5d711d;
+  --tag-tone: #5d711d;
+  --filter-tone: #5d711d;
+}
+
+:root[data-theme="light"] .capability-directory-item--green,
+:root[data-theme="light"] .capability-tag--green,
+:root[data-theme="light"] .work-filter-button--green,
+:root[data-theme="light"] .capability-option--green {
+  --capability-tone: #276d45;
+  --tag-tone: #276d45;
+  --filter-tone: #276d45;
+}
+
+:root[data-theme="light"] .capability-directory-item--cyan,
+:root[data-theme="light"] .capability-tag--cyan,
+:root[data-theme="light"] .work-filter-button--cyan,
+:root[data-theme="light"] .capability-option--cyan {
+  --capability-tone: #176d7b;
+  --tag-tone: #176d7b;
+  --filter-tone: #176d7b;
+}
+
+:root[data-theme="light"] .capability-directory-item--blue,
+:root[data-theme="light"] .capability-tag--blue,
+:root[data-theme="light"] .work-filter-button--blue,
+:root[data-theme="light"] .capability-option--blue {
+  --capability-tone: #365d98;
+  --tag-tone: #365d98;
+  --filter-tone: #365d98;
+}
+
+:root[data-theme="light"] .case-meta-line .flag--live {
+  color: #276d45;
+}
+
+:root[data-theme="light"] .case-meta-line .flag--live::before {
+  background: #276d45;
+}
+
+:root[data-theme="light"] .service-offer:nth-child(1) { --service-tone: #7047b8; }
+:root[data-theme="light"] .service-offer:nth-child(2) { --service-tone: #176d7b; }
+:root[data-theme="light"] .service-offer:nth-child(3) { --service-tone: #a92f62; }
+:root[data-theme="light"] .service-offer:nth-child(4) { --service-tone: #93541c; }
+

@@ -1,0 +1,140 @@
+/* ---- Touch ergonomics -------------------------------------------------------------------------------------------------- */
+/* Apple HIG: interactive targets need at least 44×44pt on touch screens.
+   These rules enlarge hit areas on coarse pointers only, so the desktop
+   presentation is untouched. 2.75rem = 44px. */
+
+@media (pointer: coarse) {
+  .btn {
+    min-height: 2.75rem;
+  }
+
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+
+  .mail-link {
+    padding-block: 0.5rem;
+  }
+
+  .primary-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding-block: 0;
+  }
+
+  .primary-nav a::after {
+    bottom: 0.6rem;
+  }
+
+  .section-link {
+    align-items: center;
+    min-height: 2.75rem;
+    padding-bottom: 0;
+  }
+
+  .section-link::before,
+  .section-link::after {
+    bottom: 0.45rem;
+  }
+
+  .contact-icon {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    justify-content: center;
+  }
+
+  .footer-grid li {
+    padding-block: 0;
+  }
+
+  .footer-grid li a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+
+  .back-to-top {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+
+  .sticky-back-to-top {
+    min-height: 2.75rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .work-filter-button {
+    min-height: 2.75rem;
+  }
+
+  .work-filter-reset {
+    min-height: 2.75rem;
+  }
+
+  .carousel-btn {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .capability-tags--card .capability-tag {
+    height: 2.75rem;
+  }
+
+  .capability-tags--card .capability-tag__pill {
+    max-width: 2.75rem;
+  }
+
+  .capability-tags--card .capability-tag-mark {
+    width: calc(2.75rem - 2px);
+  }
+
+  .capability-tags--card .capability-tag.is-expanded .capability-tag__pill {
+    max-width: 14rem;
+  }
+
+  .process-artifact-list summary {
+    padding-block: 1rem;
+  }
+
+  .toolkit-list summary {
+    padding-block: 0.95rem;
+  }
+
+  .skill-list summary {
+    padding-block: 1rem;
+  }
+
+  .option {
+    padding-block: 0.9rem;
+  }
+
+  .overlay-close {
+    min-height: 2.75rem;
+    padding: 0.5rem 0.6rem;
+  }
+
+  .field input,
+  .field textarea {
+    padding-block: 0.8rem;
+  }
+
+  .attachment-field input[type="file"]::file-selector-button,
+  .attachment-clear {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .capability-upsell-option {
+    min-height: 2.75rem;
+    padding: 0.35rem 0.8rem 0.35rem 0.5rem;
+  }
+
+  .capability-clear {
+    min-height: 2.75rem;
+    align-items: center;
+  }
+}
+

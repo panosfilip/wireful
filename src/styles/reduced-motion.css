@@ -1,0 +1,28 @@
+/* ---- Reduced motion ------------------------------------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  html.js [data-reveal],
+  html.js [data-reveal-group] > *,
+  html.js [data-intro] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+
+  html.js .marquee-track,
+  html.js .tick-blink {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

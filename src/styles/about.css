@@ -1,0 +1,356 @@
+/* ---- About strip ----------------------------------------------------------------------------------------------- */
+
+.about-strip {
+  display: grid;
+  gap: 2.5rem;
+}
+
+@media (min-width: 860px) {
+  .about-strip {
+    grid-template-columns: 1.3fr 1fr;
+    gap: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .about-intro {
+    position: sticky;
+    top: calc(var(--header-h, 4.5rem) + clamp(1.5rem, 4vw, 3rem));
+    align-self: start;
+  }
+}
+
+.skill-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-list li {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  color: var(--muted);
+  position: relative;
+  display: block;
+  padding: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.skill-list details {
+  display: block;
+}
+
+.skill-list summary {
+  position: relative;
+  display: block;
+  padding: 0.85rem 1.5rem 0.9rem 0;
+  cursor: pointer;
+  list-style: none;
+  transition: color 0.25s var(--ease-out), padding-left 0.35s var(--ease-expo);
+}
+
+.skill-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.skill-list summary::after {
+  content: "+";
+  position: absolute;
+  top: 1rem;
+  right: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--line-strong);
+  transition: color 0.25s var(--ease-out), transform 0.35s var(--ease-expo);
+}
+
+.skill-list details[open] summary {
+  padding-bottom: 0.25rem;
+}
+
+.skill-list details[open] summary::after {
+  content: "−";
+  color: var(--accent);
+}
+
+.skill-title,
+.skill-description {
+  display: block;
+}
+
+.skill-description {
+  padding: 0 1.5rem 0.9rem 0;
+  color: var(--faint);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+@media (hover: hover) {
+  .skill-list summary:hover {
+    color: var(--text);
+    padding-left: 0.5rem;
+  }
+
+  .skill-list summary:hover::after {
+    color: var(--accent);
+    transform: rotate(90deg);
+  }
+}
+
+.skill-group + .skill-group {
+  margin-top: 2.25rem;
+}
+
+.skill-group h3 {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 0.4rem;
+}
+
+.skill-group h3::before {
+  content: "+ ";
+  color: var(--accent);
+}
+
+/* ---- Approach toolkit ------------------------------------------------------------------------------------------ */
+
+.toolkit-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  max-width: 59rem;
+}
+
+@media (min-width: 860px) {
+  .toolkit-intro {
+    max-width: 48rem;
+  }
+}
+
+.toolkit-intro h2 {
+  margin-bottom: 1.2rem;
+}
+
+.toolkit-intro .prose {
+  max-width: 37rem;
+}
+
+.toolkit-note {
+  display: flex;
+  gap: 0.55rem;
+  align-items: baseline;
+  margin: 0;
+  color: var(--faint);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.toolkit-note span {
+  color: var(--accent);
+}
+
+.toolkit-grid {
+  display: grid;
+  gap: 1px;
+  margin-top: clamp(2.75rem, 6vw, 5rem);
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+@media (min-width: 720px) {
+  .toolkit-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1080px) {
+  .toolkit-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.toolkit-card {
+  min-height: 28rem;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background: var(--bg-raise);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s var(--ease-out);
+}
+
+.toolkit-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 100% 0%, var(--toolkit-glow), transparent 47%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.toolkit-card--figma {
+  --toolkit-glow: color-mix(in srgb, #8b5cf6 28%, transparent);
+}
+
+.toolkit-card--adobe {
+  --toolkit-glow: color-mix(in srgb, #e95793 28%, transparent);
+}
+
+.toolkit-card--ai {
+  --toolkit-glow: color-mix(in srgb, #59d0e9 25%, transparent);
+}
+
+.toolkit-card--research {
+  --toolkit-glow: color-mix(in srgb, #b680ff 24%, transparent);
+}
+
+@media (hover: hover) {
+  .toolkit-card:hover {
+    background: var(--surface);
+  }
+}
+
+.toolkit-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.toolkit-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.toolkit-mark {
+  display: grid;
+  width: 2.5rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+}
+
+.toolkit-label {
+  margin-top: clamp(2.5rem, 5vw, 4.5rem);
+  color: var(--faint);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.toolkit-card h3 {
+  margin: 0.45rem 0 0;
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+}
+
+.toolkit-card > p {
+  margin-top: 0.45rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.toolkit-list {
+  margin-top: auto;
+  padding-top: 2.5rem;
+  position: relative;
+}
+
+.toolkit-list li {
+  border-top: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.toolkit-list details {
+  position: relative;
+}
+
+.toolkit-list summary {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  list-style: none;
+}
+
+.toolkit-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.toolkit-list summary::after {
+  content: "+";
+  flex: none;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  transition: transform 0.25s var(--ease-out);
+}
+
+.toolkit-list details[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.toolkit-list details p {
+  position: absolute;
+  z-index: 2;
+  right: -0.4rem;
+  bottom: calc(100% + 0.35rem);
+  left: -0.4rem;
+  margin: 0;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--line-strong);
+  background: var(--surface-hover);
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.25);
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* ---- Fact list (about page) --------------------------------------------------------------------------------------- */
+
+.fact-list {
+  border-top: 1px solid var(--line);
+}
+
+.fact-list > li {
+  display: grid;
+  gap: 0.25rem 2rem;
+  padding-block: 1.3rem;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.3s var(--ease-out);
+}
+
+@media (min-width: 720px) {
+  .fact-list > li {
+    grid-template-columns: 220px 1fr;
+  }
+}
+
+.fact-list .fact-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding-top: 0.3rem;
+}
+
+.fact-list .fact-value {
+  color: var(--muted);
+}
+

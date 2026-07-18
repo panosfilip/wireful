@@ -1,0 +1,66 @@
+/* ---------------------------------------------------------------------------
+   WIREFUL global design system — v2 "editorial blueprint"
+
+   Identity: the site behaves like a design canvas. Violet-black ground,
+   oversized grotesk display type, mono annotations, hairline rules,
+   crosshair ticks, and the WIREFUL_ cursor-underscore motif. One accent:
+   magenta-pink. Motion is staggered, weighted, and purposeful.
+--------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: dark;
+  --bg: #0b0712;
+  --bg-raise: #110b1c;
+  --surface: #160e25;
+  --surface-hover: #1c1230;
+  --line: #251c3b;
+  --line-strong: #3a2e59;
+  --text: #f1edf9;
+  --muted: #a89fc4;
+  --faint: #8177a4; /* ≥4.5:1 on --bg (WCAG AA) */
+  --accent: #e95793;
+  --accent-dim: #c94a80;
+  --accent-ink: #23091a;
+  --magenta: #da0c81;
+  --plum: #610c9f;
+  --button-ink: #140c20;
+  --page-gradient: none;
+
+  --font-display: "Space Grotesk Variable", "Space Grotesk", "Helvetica Neue",
+    Arial, sans-serif;
+  --font-body: "Inter Variable", "Inter", -apple-system, "Segoe UI", Roboto,
+    sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+
+  --container: 1240px;
+  --gutter: clamp(1.25rem, 4vw, 2.75rem);
+  --section-gap: clamp(5rem, 12vw, 10rem);
+  --radius: 4px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f6f1f7;
+  --bg-raise: #f1eaf3;
+  --surface: #ece3ef;
+  --surface-hover: #e5dae9;
+  --line: #ded1e3;
+  --line-strong: #bba8c4;
+  --text: #1c1423;
+  --muted: #5f5368;
+  --faint: #706378;
+  --accent: #b41f60;
+  --accent-dim: #94184f;
+  --accent-ink: #fff8fb;
+  --magenta: #b80a6c;
+  --plum: #6f2998;
+  --button-ink: #fffafd;
+  --page-gradient:
+    radial-gradient(circle at 88% 8%, rgba(180, 31, 96, 0.055), transparent 32%),
+    radial-gradient(circle at 7% 58%, rgba(111, 41, 152, 0.05), transparent 36%),
+    linear-gradient(180deg, #faf7fa 0%, #f6f1f7 48%, #f1eaf3 100%);
+}
+

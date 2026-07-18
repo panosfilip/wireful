@@ -1,0 +1,38 @@
+/* ---- Reveal system ----------------------------------------------------------------------------------------------------- */
+
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s var(--ease-expo),
+    transform 0.8s var(--ease-expo);
+  transition-delay: calc(var(--reveal-delay, 0) * 80ms);
+}
+
+html.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Children of a reveal group stagger in sequence */
+html.js [data-reveal-group] > * {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s var(--ease-expo),
+    transform 0.8s var(--ease-expo);
+}
+
+html.js [data-reveal-group].is-visible > * {
+  opacity: 1;
+  transform: none;
+}
+
+html.js [data-reveal-group].is-visible > *:nth-child(1) { transition-delay: 0ms; }
+html.js [data-reveal-group].is-visible > *:nth-child(2) { transition-delay: 90ms; }
+html.js [data-reveal-group].is-visible > *:nth-child(3) { transition-delay: 180ms; }
+html.js [data-reveal-group].is-visible > *:nth-child(4) { transition-delay: 270ms; }
+html.js [data-reveal-group].is-visible > *:nth-child(5) { transition-delay: 360ms; }
+html.js [data-reveal-group].is-visible > *:nth-child(6) { transition-delay: 450ms; }
+html.js [data-reveal-group].is-visible > *:nth-child(n + 7) { transition-delay: 540ms; }
+

@@ -1,0 +1,485 @@
+/* ---- Contact icons --------------------------------------------------------------- */
+
+.contact-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  list-style: none;
+  line-height: 1;
+}
+
+/* Center each icon inside its <li> so the inherited body line-height doesn't
+   baseline-align the icons and float the cluster above the button/nav. */
+.contact-icons li {
+  display: flex;
+  align-items: center;
+}
+
+.contact-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--muted);
+  transition: color 0.2s var(--ease-out);
+}
+
+.contact-icon svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex-shrink: 0;
+}
+
+.contact-icon-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* ---- Header --------------------------------------------------------------------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+}
+
+.header-shell {
+  width: 100%;
+  background: color-mix(in srgb, var(--bg) 32%, transparent);
+  backdrop-filter: blur(18px) saturate(1.5);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+  transition:
+    border-color 0.3s var(--ease-out),
+    background 0.3s var(--ease-out),
+    backdrop-filter 0.3s var(--ease-out),
+    box-shadow 0.3s var(--ease-out);
+}
+
+.site-header.is-scrolled .header-shell {
+  border-bottom-color: var(--line);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+}
+
+:root[data-theme="light"] .site-header:not(.is-scrolled) .header-shell {
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  border-bottom-color: var(--line);
+  box-shadow:
+    0 0.75rem 2rem rgba(67, 40, 79, 0.035),
+    inset 0 -1px 0 rgba(187, 168, 196, 0.14);
+  backdrop-filter: blur(26px) saturate(1.35);
+  -webkit-backdrop-filter: blur(26px) saturate(1.35);
+}
+
+:root[data-theme="light"] .site-header.is-scrolled .header-shell {
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  padding-block: 1.1rem;
+  transition: padding-block 0.3s var(--ease-out);
+}
+
+.site-header.is-scrolled .header-inner {
+  padding-block: 0.7rem;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 4vw, 1.5rem);
+  letter-spacing: 0.06em;
+  display: inline-block;
+  will-change: transform;
+}
+
+/* Scroll convergence: wordmark and CTA start at the far edges and slide
+   inward toward the nav as the page scrolls (--slide-x set by Base.astro). */
+.site-header .wordmark,
+.site-header .header-actions .btn {
+  transform: translate(calc(var(--slide-x, 0px) + var(--mx, 0px)), var(--my, 0px));
+  will-change: transform;
+}
+
+/* Before JS measures the spread, --slide-x defaults to 0 (the converged
+   position). Hide the sliding items until measured so navigation never flashes
+   that end-state. Only where convergence runs — mobile/reduced-motion keep
+   --slide-x at 0, matching the default, so there is nothing to hide. */
+@media (min-width: 821px) and (prefers-reduced-motion: no-preference) {
+  .header-premeasure .site-header .wordmark,
+  .header-premeasure .site-header .header-actions .btn {
+    opacity: 0;
+  }
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.theme-toggle {
+  position: relative;
+  display: inline-grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 auto;
+  place-items: center;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--bg-raise) 72%, transparent);
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    border-color 0.25s var(--ease-out),
+    background 0.25s var(--ease-out),
+    color 0.25s var(--ease-out),
+    transform 0.3s var(--ease-expo);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 9%, var(--bg-raise));
+  color: var(--accent);
+  transform: rotate(8deg);
+}
+
+.theme-toggle:active {
+  transform: scale(0.92);
+}
+
+.theme-icon {
+  position: absolute;
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: opacity 0.25s var(--ease-out), transform 0.4s var(--ease-expo);
+}
+
+.theme-icon--sun {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+.theme-icon--moon {
+  opacity: 0;
+  transform: rotate(-35deg) scale(0.55);
+}
+
+:root[data-theme="light"] .theme-icon--sun {
+  opacity: 0;
+  transform: rotate(35deg) scale(0.55);
+}
+
+:root[data-theme="light"] .theme-icon--moon {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+.header-actions .btn {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+/* Burger toggle — hairline square, only visible on narrow screens */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.25s var(--ease-out), color 0.25s var(--ease-out);
+}
+
+.nav-toggle span {
+  width: 1.1rem;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform 0.3s var(--ease-expo), opacity 0.2s var(--ease-out);
+}
+
+.site-header.nav-open .nav-toggle {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.site-header.nav-open .nav-toggle span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.site-header.nav-open .nav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.site-header.nav-open .nav-toggle span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+.header-actions .contact-icon:hover {
+  color: var(--text);
+}
+
+@media (max-width: 820px) {
+  .header-actions .contact-icon-label {
+    display: none;
+  }
+}
+
+@media (min-width: 621px) and (max-width: 1100px) {
+  .header-actions .contact-icons {
+    display: none;
+  }
+}
+
+.primary-nav ul {
+  display: flex;
+  gap: clamp(1.1rem, 3vw, 2.2rem);
+}
+
+.primary-nav a {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-block: 0.3rem;
+  transition: color 0.2s var(--ease-out);
+}
+
+.primary-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s var(--ease-expo);
+}
+
+.primary-nav a:hover {
+  color: var(--text);
+}
+
+.primary-nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.primary-nav a[aria-current="page"] {
+  color: var(--text);
+}
+
+.primary-nav a[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+@media (min-width: 821px) {
+  .header-inner {
+    gap: 1.5rem 2rem;
+    padding-block: clamp(0.7rem, 1vw, 1rem);
+  }
+
+  .site-header.is-scrolled .header-inner {
+    padding-block: 0.6rem;
+  }
+
+  .wordmark {
+    font-size: clamp(1.55rem, 2.1vw, 2rem);
+    line-height: 1;
+  }
+
+  .primary-nav ul {
+    gap: clamp(1rem, 1.6vw, 1.5rem);
+  }
+
+  .primary-nav a {
+    font-size: clamp(0.9rem, 1vw, 1.05rem);
+    line-height: 1.15;
+    padding-block: 0.25rem;
+  }
+
+  .header-actions {
+    gap: clamp(1.2rem, 1.8vw, 1.75rem);
+  }
+
+  .header-actions .contact-icons {
+    gap: clamp(1rem, 1.5vw, 1.4rem);
+  }
+
+  .header-actions .contact-icon svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .header-actions .contact-icon-label {
+    font-size: 0.9rem;
+    line-height: 1.2;
+  }
+
+  .header-actions .btn-small {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.95rem;
+    line-height: 1.2;
+  }
+}
+
+@media (min-width: 621px) and (max-width: 1100px) {
+  .primary-nav ul {
+    gap: clamp(0.8rem, 1.7vw, 1.4rem);
+  }
+}
+
+@media (max-width: 620px) {
+  /* Single-row header: wordmark left, CTA + burger right. Nav links live in
+     a dropdown panel under the header shell. */
+  .header-inner {
+    gap: 0.6rem;
+    padding-block: 0.6rem;
+  }
+
+  .site-header.is-scrolled .header-inner {
+    padding-block: 0.5rem;
+  }
+
+  .header-actions {
+    margin-left: auto;
+    gap: 0.6rem;
+  }
+
+  .theme-toggle {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .header-actions .contact-icons {
+    display: none;
+  }
+
+  .header-actions .btn {
+    min-height: 2.75rem;
+    padding: 0.55rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  /* While the menu is open the shell goes solid so bar + panel read as one */
+  .site-header.nav-open .header-shell {
+    background: var(--bg);
+    border-bottom-color: var(--line);
+  }
+
+  .primary-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition:
+      opacity 0.25s var(--ease-out),
+      transform 0.35s var(--ease-expo),
+      visibility 0s linear 0.35s;
+  }
+
+  .site-header.nav-open .primary-nav {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition:
+      opacity 0.25s var(--ease-out),
+      transform 0.35s var(--ease-expo);
+  }
+
+  .primary-nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 0.25rem var(--gutter) 0.75rem;
+  }
+
+  .primary-nav li + li {
+    border-top: 1px solid var(--line);
+  }
+
+  .primary-nav li a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 3rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+  }
+
+  .primary-nav li a::after {
+    content: none;
+  }
+
+  .primary-nav li a[aria-current="page"]::before {
+    content: "+";
+    margin-right: 0.5em;
+    color: var(--accent);
+  }
+}
+
+@media (max-width: 360px) {
+  .theme-toggle {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .header-actions .btn {
+    padding-inline: 0.65rem;
+    font-size: 0.78rem;
+  }
+}
+
+/* ---- Scroll progress --------------------------------------------------------------- */
+
+.progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 2px;
+  z-index: 60;
+  pointer-events: none;
+}
+
+.progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--magenta), var(--accent));
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
+
