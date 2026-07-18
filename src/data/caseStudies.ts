@@ -15,6 +15,12 @@ export type CoverMotif = CaseStudy["cover"]["motif"];
 
 const entries = await getCollection("work");
 
+/**
+ * Entries flagged `hidden: true` are dropped here, so every consumer (the Work
+ * grid, `getStaticPaths` for `/work/<slug>/`, related-work, and the sitemap)
+ * excludes them from one place. Use it for a project still in progress.
+ */
 export const caseStudies: CaseStudy[] = entries
   .map((entry) => entry.data)
+  .filter((cs) => !cs.hidden)
   .sort((a, b) => a.order - b.order);

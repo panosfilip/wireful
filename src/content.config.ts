@@ -32,6 +32,16 @@ const work = defineCollection({
     title: z.string(),
     status: z.enum(["placeholder", "draft", "published"]),
     /**
+     * Hide a work-in-progress project from the whole site without deleting it.
+     * When true, the entry is dropped in the access layer (src/data/caseStudies.ts),
+     * so it never appears in the Work grid, never builds a `/work/<slug>/` page,
+     * is skipped by related-work, and stays out of the sitemap. Flip to false (or
+     * remove the field) to publish it. Note: a hand-referenced slug on the home,
+     * services, or approach page will fail the build while hidden, which is
+     * intentional (it stops a dead link shipping) so unfeature it there first.
+     */
+    hidden: z.boolean().optional(),
+    /**
      * Editorial priority. Lower numbers surface first in the Work grid and
      * feed the "Featured" row on the index. Leave unset for the long tail.
      */
