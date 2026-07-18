@@ -1,0 +1,73 @@
+{
+  "order": 18,
+  "slug": "cymoid-productions",
+  "title": "Cymoid",
+  "status": "published",
+  "clientType": "Cymoid: media production, AI, training & events company",
+  "liveUrl": "https://cymoid.eu",
+  "summary": "Website and visual direction for Cymoid, a new media company covering film production, AI tools, media training, and event management.",
+  "problem": "Cymoid launched with four different offerings: film production, AI tools, training, and events. The site needed to connect them under one identity and reflect the company's focus on AI and media.",
+  "role": [
+    "Website UI design",
+    "Visual direction",
+    "Art direction",
+    "Figma design"
+  ],
+  "services": [
+    "Website design",
+    "UI design",
+    "Visual direction"
+  ],
+  "tools": [
+    "Figma"
+  ],
+  "tags": [
+    "web",
+    "brand",
+    "culture"
+  ],
+  "cover": {
+    "type": "image",
+    "motif": "landing",
+    "alt": "Cymoid homepage hero with an iridescent 3D render and the bold display headline",
+    "src": "media/work/cymoid-home.webp",
+    "full": "media/work/cymoid-home-full.webp",
+    "caption": "Homepage"
+  },
+  "gallery": [
+    {
+      "src": "media/work/cymoid-production.webp",
+      "full": "media/work/cymoid-production-full.webp",
+      "caption": "Production page",
+      "alt": "The Cymoid film production page with a cinematic still"
+    },
+    {
+      "src": "media/work/cymoid-ai.webp",
+      "full": "media/work/cymoid-ai-full.webp",
+      "caption": "The Power of AI page",
+      "alt": "The Cymoid AI page with a chrome iridescent hero visual"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "Cymoid is a new media company working in film and animation production, AI tools for newsrooms and production teams, media training, and event management. Its team includes academics, researchers, and media professionals."
+    },
+    {
+      "heading": "Challenge",
+      "body": "One brand had to bring together four services without making them appear unrelated. The visual design also needed to show the company's AI and media focus from the first screen."
+    },
+    {
+      "heading": "Process",
+      "body": "I used generative iridescent 3D imagery, display type, and a rounded bento layout. Production, AI, Training, and Events each have a dedicated page with their own imagery while sharing the same overall system."
+    },
+    {
+      "heading": "Output",
+      "body": "A responsive website with a bento-style homepage and dedicated pages for production, AI, training, and event management. Each page has its own generative hero image and a project-enquiry route."
+    },
+    {
+      "heading": "Result",
+      "body": "A site that presents Cymoid's four services under one visual system. [ADD REAL OUTCOME: launch response, client feedback, or a metric]"
+    }
+  ]
+}

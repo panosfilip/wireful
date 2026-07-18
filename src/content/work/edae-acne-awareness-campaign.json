@@ -1,0 +1,70 @@
+{
+  "order": 27,
+  "slug": "edae-acne-awareness-campaign",
+  "title": "EDAE Acne Awareness Campaign",
+  "status": "published",
+  "clientType": "EDAE — Hellenic Dermatology and Venereology Society",
+  "liveUrl": "https://www.edae.gr/acne2026/",
+  "summary": "Landing page for EDAE's acne-awareness campaign, aimed at teens and their parents.",
+  "problem": "Acne can be obscured by myths and home remedies. EDAE needed a campaign page that gives teens and parents clear dermatology guidance and a direct route to a specialist.",
+  "role": [
+    "Landing page design",
+    "Brand application"
+  ],
+  "services": [
+    "Website design",
+    "UI design"
+  ],
+  "tools": [
+    "Figma"
+  ],
+  "tags": [
+    "web",
+    "landing",
+    "healthcare"
+  ],
+  "cover": {
+    "type": "image",
+    "motif": "landing",
+    "alt": "EDAE acne-awareness campaign homepage with a teenager and a dermatologist finder call to action",
+    "src": "media/work/edae-acne2026-home.webp",
+    "full": "media/work/edae-acne2026-full.webp",
+    "caption": "Homepage"
+  },
+  "gallery": [
+    {
+      "src": "media/work/edae-acne2026-types.webp",
+      "full": "media/work/edae-acne2026-full.webp",
+      "caption": "Acne types",
+      "alt": "The EDAE campaign's acne-types section, with an illustrated explanatory list"
+    },
+    {
+      "src": "media/work/edae-acne2026-tips.webp",
+      "full": "media/work/edae-acne2026-full.webp",
+      "caption": "Advice for teens and parents",
+      "alt": "The EDAE campaign's advice section for teens and parents"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "A single-page information campaign with sections for acne, types and causes, myths and truths, practical advice, and a route to find a dermatologist."
+    },
+    {
+      "heading": "Challenge",
+      "body": "The page had to make medical information approachable for teens without losing the authority of a dermatology society. It also had to carry the creative team's established campaign identity through a long, single-page journey, from the opening message to the dermatologist finder."
+    },
+    {
+      "heading": "Process",
+      "body": "I applied the creative team's established campaign branding to the page layout, typography, colour blocks, content cards, navigation, and calls to action. Anchor links let visitors move directly to information about acne, types and causes, myths and truths, or advice."
+    },
+    {
+      "heading": "Output",
+      "body": "A responsive landing page that brings acne information, myth-busting content, advice for teens and parents, and the dermatologist finder into one campaign experience."
+    },
+    {
+      "heading": "Result",
+      "body": "EDAE has a focused destination for its acne guidance. Visitors can move from the campaign message and myth-busting content to practical advice and the dermatologist finder without leaving the page."
+    }
+  ]
+}

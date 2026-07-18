@@ -1,0 +1,74 @@
+{
+  "order": 3,
+  "slug": "ppf-growthfund",
+  "title": "PPF: Project Preparation Facility",
+  "status": "published",
+  "clientType": "PPF: Growthfund's Strategic Contracts Unit",
+  "liveUrl": "https://ppf.growthfund.gr",
+  "summary": "Website and UI design for PPF (Project Preparation Facility), Growthfund's operationally independent Strategic Contracts Unit. The site gives the unit its own presence while retaining the Hellenic Growth Fund connection.",
+  "problem": "PPF matures and tenders strategically important projects for Growthfund. Its site needed separate projects, tenders, and press content while retaining the connection to Growthfund. Procurement information also needed to be easy for contractors, institutions, and citizens to find.",
+  "role": [
+    "Website UI design",
+    "Information architecture",
+    "Visual direction",
+    "WordPress design"
+  ],
+  "services": [
+    "Website design",
+    "UI design",
+    "WordPress"
+  ],
+  "tools": [
+    "Figma",
+    "WordPress"
+  ],
+  "tags": [
+    "web",
+    "wordpress",
+    "public"
+  ],
+  "cover": {
+    "type": "image",
+    "motif": "homepage",
+    "alt": "The PPF homepage with the co-branded PPF / Hellenic Growth Fund lockup and the strategic-contracts mission statement over an aerial hero",
+    "src": "media/work/ppf-home.webp",
+    "full": "media/work/ppf-home-full.webp",
+    "caption": "Homepage"
+  },
+  "gallery": [
+    {
+      "src": "media/work/ppf-projects.webp",
+      "full": "media/work/ppf-projects-full.webp",
+      "caption": "Projects portfolio",
+      "alt": "The PPF projects page with category filters and a grid of strategic-project cards"
+    },
+    {
+      "src": "media/work/ppf-tenders.webp",
+      "full": "media/work/ppf-tenders-full.webp",
+      "caption": "Tenders",
+      "alt": "The PPF tenders page with a search field, category filter, and a list of public tender notices"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "PPF, the Project Preparation Facility (Μονάδα Στρατηγικών Συμβάσεων), was established in 2021 as an operationally independent unit of Growthfund. It matures, tenders, and monitors strategically important projects assigned by the Governmental Committee for Strategic Contracts. Its remit includes concessions and PPPs, procurement and services, infrastructure, and activity abroad."
+    },
+    {
+      "heading": "Challenge",
+      "body": "The site had to give PPF its own projects portfolio, live tenders, and press room while clearly showing its relationship with Growthfund. Public procurement content is dense and legalistic, so contractors, institutions, and citizens also needed to find tenders and projects easily."
+    },
+    {
+      "heading": "Process",
+      "body": "I retained the parent identity's palette and co-branded lockup, then gave PPF its own structure and voice. The site includes a filterable projects portfolio, a searchable tenders section, and a press room. WordPress lets the unit publish tenders, projects, and announcements in Greek and English."
+    },
+    {
+      "heading": "Output",
+      "body": "A bilingual WordPress site with a mission-led homepage, an about section, a filterable projects portfolio, a searchable tenders listing, a press-release feed, and careers and contact pages."
+    },
+    {
+      "heading": "Result",
+      "body": "A PPF site that retains the Growthfund connection and gives people direct routes to strategic projects and public tenders. [ADD REAL OUTCOME: launch response, stakeholder feedback, or a metric]"
+    }
+  ]
+}

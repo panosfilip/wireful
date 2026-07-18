@@ -1,0 +1,74 @@
+{
+  "order": 5,
+  "slug": "kifissia-municipality-redesign",
+  "title": "Municipality of Kifissia Website Redesign",
+  "status": "published",
+  "clientType": "Municipality of Kifissia (Δήμος Κηφισιάς)",
+  "liveUrl": "https://kifissia.gr",
+  "summary": "Website and UI design for the Municipality of Kifissia, replacing a legacy civic site with a WordPress platform organised around resident services.",
+  "problem": "The previous site was a deep archive of announcements, documents, and departments. Finding a service often required knowing which office ran it. The redesign needed to centre resident tasks and give the municipal team a site it could update without a developer.",
+  "role": [
+    "Website UI design",
+    "Information architecture",
+    "Visual direction",
+    "WordPress design"
+  ],
+  "services": [
+    "Website design",
+    "UI design",
+    "WordPress"
+  ],
+  "tools": [
+    "Figma",
+    "WordPress"
+  ],
+  "tags": [
+    "web",
+    "wordpress",
+    "public"
+  ],
+  "cover": {
+    "type": "image",
+    "motif": "sitemap",
+    "alt": "The Municipality of Kifissia homepage with a large search field over an aerial photo of the town centre and a clear top-level navigation",
+    "src": "media/work/kifissia-home.webp",
+    "full": "media/work/kifissia-home-full.webp",
+    "caption": "Homepage"
+  },
+  "gallery": [
+    {
+      "src": "media/work/kifissia-services.webp",
+      "full": "media/work/kifissia-services-full.webp",
+      "caption": "Services",
+      "alt": "The Kifissia Services page leading with electronic services and listing the municipality's directorates and departments"
+    },
+    {
+      "src": "media/work/kifissia-dimos.webp",
+      "full": "media/work/kifissia-dimos-full.webp",
+      "caption": "Our Municipality",
+      "alt": "The 'Our Municipality' section covering the town's identity, history, and governance, with a side navigation of departments"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "The Municipality of Kifissia serves three municipal units and roughly 73,000 residents in an area long known as Attica's \"garden city\". People use its website to issue certificates, report everyday problems, follow local news and events, and contact municipal departments. The redesign moved the site from a legacy platform to WordPress."
+    },
+    {
+      "heading": "Challenge",
+      "body": "Municipal sites need to retain every department, notice, and document while helping residents complete routine tasks. The work reorganised years of civic content around those tasks and a clearer sitemap, on a platform the municipal team could maintain."
+    },
+    {
+      "heading": "Process",
+      "body": "I structured the site around resident tasks rather than the municipal organisation. The top-level sitemap covers Services, Our Municipality, News & Events, and Contact, with prominent search and an \"apply online\" route on the homepage. The Services section leads with electronic services, including certificate issuance through Taxisnet codes and everyday-issue reporting through novoville, alongside the full directorate structure. WordPress lets the team publish announcements, events, and press releases themselves."
+    },
+    {
+      "heading": "Output",
+      "body": "A responsive WordPress site with a search-led homepage, e-services, urgent announcements, and news. It also includes a Services section, an \"Our Municipality\" section, a news and events calendar, and contact information."
+    },
+    {
+      "heading": "Result",
+      "body": "A municipal site organised around resident services, on a platform the team can update themselves. [ADD REAL OUTCOME: launch response, resident or stakeholder feedback, or a metric]"
+    }
+  ]
+}

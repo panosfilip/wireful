@@ -1,0 +1,37 @@
+{
+  "order": 26,
+  "slug": "capitano-eshop",
+  "title": "Capitano E-shop",
+  "status": "draft",
+  "clientType": "E-commerce",
+  "summary": "E-commerce website design for Capitano, with product information and purchase steps set out clearly.",
+  "problem": "The shop needed to support product discovery and purchasing without losing the brand's character.",
+  "role": [
+    "E-commerce UI design",
+    "Product-page design",
+    "Figma prototype"
+  ],
+  "services": [
+    "E-commerce design",
+    "Website design"
+  ],
+  "tools": [
+    "Figma"
+  ],
+  "tags": [
+    "web",
+    "commerce",
+    "commercial"
+  ],
+  "cover": {
+    "type": "placeholder",
+    "motif": "search",
+    "alt": "E-commerce website interface for Capitano"
+  },
+  "sections": [
+    {
+      "heading": "Output",
+      "body": "A responsive shop interface with product pages and purchase routes."
+    }
+  ]
+}

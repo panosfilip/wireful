@@ -1,0 +1,90 @@
+{
+  "order": 25,
+  "slug": "dtk-law-firm-website",
+  "title": "DTK Law Firm",
+  "status": "published",
+  "featured": 2,
+  "clientType": "DTK Law Firm: environmental, planning and investment law",
+  "liveUrl": "https://dtk.choosead.eu/",
+  "summary": "Website design and build for DTK Law Firm, a specialist environmental, planning, and investment practice. The new WordPress site replaces the firm's previous one with a clearer structure, a refreshed identity, and its research and publications brought to the front.",
+  "problem": "The firm's previous site did not reflect how DTK actually works. Its practice areas, its team, and above all its research and publications were hard to navigate, and the design did not read as the specialist, academically grounded firm that DTK is.",
+  "role": [
+    "Website UI design",
+    "Information architecture",
+    "Visual direction",
+    "WordPress design"
+  ],
+  "services": [
+    "Website design",
+    "UI design",
+    "WordPress"
+  ],
+  "tools": [
+    "Figma",
+    "WordPress"
+  ],
+  "tags": [
+    "web",
+    "wordpress",
+    "commercial",
+    "motion"
+  ],
+  "cover": {
+    "type": "video",
+    "motif": "homepage",
+    "alt": "The DTK Law homepage: the navy DTK wordmark and a headline on specialised legal support in environment and planning, resolving into the practice-area band as the page scrolls.",
+    "src": "media/work/dtk-hero.mp4",
+    "poster": "media/work/dtk-hero-poster.webp",
+    "caption": "Homepage"
+  },
+  "gallery": [
+    {
+      "type": "video",
+      "src": "media/work/dtk-services.mp4",
+      "poster": "media/work/dtk-services-poster.webp",
+      "caption": "Practice areas",
+      "alt": "The services page revealing DTK's practice areas as numbered cards, from spatial and urban planning to specialised legal research."
+    },
+    {
+      "type": "video",
+      "src": "media/work/dtk-team.mp4",
+      "poster": "media/work/dtk-team-poster.webp",
+      "caption": "The team",
+      "alt": "The 'Our team' page with black-and-white portraits of the firm's lawyers staggering into view."
+    },
+    {
+      "src": "media/work/dtk-articles.webp",
+      "full": "media/work/dtk-articles-full.webp",
+      "caption": "Publications",
+      "alt": "The publications hub split into scientific articles, legal news, and newsletters, above a list of recent publications."
+    },
+    {
+      "src": "media/work/dtk-contact.webp",
+      "full": "media/work/dtk-contact-full.webp",
+      "caption": "Contact",
+      "alt": "The contact page with an enquiry form and a photograph of a statue of Justice."
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "DTK Law Firm (K. Karatsolis, E. Tsianti & Associates) is an Athens practice led by Dr. Konstantinos Karatsolis. It works in a specific set of fields: spatial and urban planning, environmental law, the framework for building permits, investments and tourism developments, and sustainability and ESG. What sets the firm apart is that its legal work is tied to continuous scientific research, with studies, publications, and newsletters that track Greek and European regulation."
+    },
+    {
+      "heading": "Challenge",
+      "body": "The site had to serve two audiences at once: prospective clients weighing up a specialist firm, and a professional readership following the firm's legal analysis. It also needed to carry a large and growing body of publications, work in Greek and English, and be something the firm could keep updated itself."
+    },
+    {
+      "heading": "Process",
+      "body": "I designed the site in Figma, then built it on WordPress so the team can publish articles, newsletters, and publications without a developer. The information architecture is organised around five clear areas: the firm, the practice areas, the publications, careers, and contact. The identity pairs a navy and warm-sand palette with a distinctive display type and an olive-branch motif, applied consistently across every page. Headlines split into view and cards reveal as you scroll, so the pages feel considered without the motion getting in the way of the content."
+    },
+    {
+      "heading": "Output",
+      "body": "A bilingual WordPress site covering the firm and its team, the practice areas as individual services, a publications hub split into scientific articles, legal news, and newsletters, a publications library, careers, and contact. The firm can maintain all of it, in Greek and English, on its own."
+    },
+    {
+      "heading": "Result",
+      "body": "A current, better-organised site that presents DTK as the specialist, research-led firm it is, and gives its publications a proper home. It replaces the firm's previous website and gives the team a platform they can keep up to date."
+    }
+  ]
+}

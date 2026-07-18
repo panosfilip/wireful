@@ -1,0 +1,37 @@
+{
+  "order": 21,
+  "slug": "choose-website-redesign",
+  "title": "Choose Website Redesign",
+  "status": "draft",
+  "clientType": "Digital service",
+  "summary": "Website redesign work for Choose, reorganising the offer and its next steps.",
+  "problem": "Visitors needed to understand the offer and find the relevant next step without working through unnecessary content.",
+  "role": [
+    "Website UI redesign",
+    "Information architecture",
+    "Figma prototype"
+  ],
+  "services": [
+    "Website design",
+    "UX design"
+  ],
+  "tools": [
+    "Figma"
+  ],
+  "tags": [
+    "web",
+    "prototype",
+    "commercial"
+  ],
+  "cover": {
+    "type": "placeholder",
+    "motif": "homepage",
+    "alt": "Website redesign interface for Choose"
+  },
+  "sections": [
+    {
+      "heading": "Output",
+      "body": "Responsive page layouts and a design system ready for prototyping."
+    }
+  ]
+}

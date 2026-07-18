@@ -1,0 +1,75 @@
+{
+  "order": 2,
+  "slug": "teka-ui-redesign",
+  "title": "TEKA Website Redesign",
+  "status": "published",
+  "featured": 1,
+  "clientType": "TEKA: Hellenic Auxiliary Pensions Defined Contributions Fund",
+  "liveUrl": "https://teka.choosenet.gr/",
+  "summary": "Website redesign for TEKA, the national auxiliary pension fund, replacing the former teka.gov.gr with a clearer route through insurance, online services, investments, and updates.",
+  "problem": "People arrive at TEKA with different questions: whether the fund applies to them, how contributions work, where to see their personal account, or which document answers a specific case. The redesign had to make those routes visible before the institutional detail became a barrier.",
+  "role": [
+    "Website UI design",
+    "Information architecture",
+    "Content hierarchy",
+    "Public-sector design"
+  ],
+  "services": [
+    "Website design",
+    "UI design",
+    "Content structure",
+    "Public-sector design"
+  ],
+  "tools": [
+    "Figma"
+  ],
+  "tags": [
+    "web",
+    "systems",
+    "public"
+  ],
+  "cover": {
+    "type": "image",
+    "motif": "homepage",
+    "alt": "TEKA homepage with the auxiliary insurance introduction, employer and insured access, myTEKA and beTEKA cards, and a reserves chart",
+    "src": "media/work/teka-home.webp",
+    "full": "media/work/teka-home-full.webp",
+    "caption": "Homepage"
+  },
+  "gallery": [
+    {
+      "src": "media/work/teka-services.webp",
+      "full": "media/work/teka-services-full.webp",
+      "caption": "Insured services",
+      "alt": "TEKA electronic services page grouping myTEKA, beTEKA, insurance history, and credit-balance transfer"
+    },
+    {
+      "src": "media/work/teka-myteka.webp",
+      "full": "media/work/teka-myteka-full.webp",
+      "caption": "myTEKA account",
+      "alt": "TEKA myTEKA account page explaining the personal supplementary-insurance account and contribution history"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "TEKA manages supplementary pensions under the defined-contribution system. The site speaks to new and existing insured people, non-salaried workers considering optional enrolment, employers, and anyone looking for institutional or financial information. Its homepage introduces eligibility from 01.01.2004 and 01.01.2022, then routes people to employer and insured services, myTEKA, beTEKA, reserves and insured figures, and current updates."
+    },
+    {
+      "heading": "Challenge",
+      "body": "The former teka.gov.gr needed a retake that made a new pension system easier to understand without flattening the detail people need later. The main decisions are not the same for everyone, so the interface had to separate insured services, employer access, optional insurance, investments, FAQs, institutional information, and news without making the home page feel like a directory."
+    },
+    {
+      "heading": "Process",
+      "body": "I organised the homepage around actions instead of departments. The first screen explains who TEKA is for and puts employer and insured access together. Two large cards lead to myTEKA and beTEKA, while the chart turns fund figures into a quick visual read. The main navigation then expands into insurance, investments, FAQs, information about TEKA, and updates."
+    },
+    {
+      "heading": "Output",
+      "body": "A responsive website with dedicated paths for insurance, contributions, benefits, the insurance glossary, investment management, the TEKA portfolio, FAQs, institutional documents, announcements, and press information. The electronic-services page gathers myTEKA, beTEKA, insurance history, and the transfer of credit balances into one place, with practical guides below."
+    },
+    {
+      "heading": "Result",
+      "body": "The retake gives TEKA a public-facing starting point that explains eligibility, puts the relevant digital service near the top, and keeps detailed guidance and institutional material within the same structure."
+    }
+  ]
+}

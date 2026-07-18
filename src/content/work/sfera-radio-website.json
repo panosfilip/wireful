@@ -1,0 +1,68 @@
+{
+  "order": 12,
+  "slug": "sfera-radio-website",
+  "title": "Sfera 102.2",
+  "status": "published",
+  "clientType": "Sfera 102.2: music radio station",
+  "liveUrl": "https://sfera.gr",
+  "summary": "Website design for Sfera 102.2. The work replaced a heavy web-app-style site with a WordPress platform for live listening, programme information, and daily music news.",
+  "problem": "The old site was slow, awkward on mobile, and difficult for the station team to update. Sfera publishes premieres, news, contests, and the Top 30 every day, so editors needed to manage the site while keeping the live stream close at hand.",
+  "role": [
+    "Website UI design",
+    "Information architecture",
+    "Visual direction",
+    "WordPress design"
+  ],
+  "services": [
+    "Website design",
+    "UI design",
+    "WordPress"
+  ],
+  "tools": [
+    "Figma",
+    "WordPress"
+  ],
+  "tags": [
+    "web",
+    "wordpress",
+    "culture"
+  ],
+  "cover": {
+    "type": "image",
+    "motif": "homepage",
+    "alt": "Sfera 102.2 homepage with the live-listen call to action and rotating show feature",
+    "src": "media/work/sfera-home.webp"
+  },
+  "gallery": [
+    {
+      "src": "media/work/sfera-top30.webp",
+      "alt": "The Sfera Top 30 chart page"
+    },
+    {
+      "src": "media/work/sfera-program.webp",
+      "alt": "The Sfera program and schedule page"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "Sfera 102.2 is a Greek-music radio station in the Politis Group. Alongside live radio, it publishes first plays, the Top 30, presenter information, events, and contests. It runs on the group's shared WordPress platform, which also supports Music 89.2."
+    },
+    {
+      "heading": "Challenge",
+      "body": "The site needed to support an always-available live player and programme schedule alongside an editorial feed that changes every day. The old build made both harder to use and update."
+    },
+    {
+      "heading": "Process",
+      "body": "I structured the site around the main listener tasks: listen live, see what is playing, and find the latest premieres. I designed the UI system and moved the site to the shared Politis Group WordPress platform. Editors can publish news, contests, and schedule changes without a developer."
+    },
+    {
+      "heading": "Output",
+      "body": "A live, responsive site with streaming, a programme schedule, presenter pages, music news, the Top 30, events, and contests."
+    },
+    {
+      "heading": "Result",
+      "body": "A site the station team can update day to day, with live listening and new music easy to reach."
+    }
+  ]
+}

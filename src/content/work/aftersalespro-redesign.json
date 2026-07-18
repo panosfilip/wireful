@@ -1,0 +1,38 @@
+{
+  "order": 19,
+  "slug": "aftersalespro-redesign",
+  "title": "AftersalesPro Redesign Concept",
+  "status": "draft",
+  "clientType": "AftersalesPro",
+  "summary": "Figma redesign concept for AftersalesPro, setting out a clearer product interface before a platform refresh.",
+  "problem": "The product structure and interaction patterns needed to be resolved before the redesign moved into delivery.",
+  "role": [
+    "Product UI design",
+    "UX audit",
+    "Figma prototype"
+  ],
+  "services": [
+    "Product UI",
+    "UI redesign",
+    "Prototype"
+  ],
+  "tools": [
+    "Figma"
+  ],
+  "tags": [
+    "product",
+    "audit",
+    "commercial"
+  ],
+  "cover": {
+    "type": "placeholder",
+    "motif": "audit",
+    "alt": "Product interface redesign concept"
+  },
+  "sections": [
+    {
+      "heading": "Output",
+      "body": "A Figma redesign concept that defines the interface for a future product refresh."
+    }
+  ]
+}

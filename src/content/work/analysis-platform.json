@@ -1,0 +1,74 @@
+{
+  "order": 16,
+  "slug": "analysis-platform",
+  "title": "Analysis",
+  "status": "published",
+  "clientType": "Analysis: media training against disinformation",
+  "liveUrl": "https://analysis.ntlab.gr",
+  "summary": "Website and UI design for Analysis, a media-literacy project that trains journalists and news organisations in verification and fact-checking. The site explains the research project and gives people access to its free academy.",
+  "problem": "The site had to explain an EU research project to funders and partners while also serving journalists who wanted to enrol in the academy. Courses and resources needed to be easy to find without making the project information disappear.",
+  "role": [
+    "Website UI design",
+    "Information architecture",
+    "Visual direction",
+    "WordPress design"
+  ],
+  "services": [
+    "Website design",
+    "UI design",
+    "WordPress"
+  ],
+  "tools": [
+    "Figma",
+    "WordPress"
+  ],
+  "tags": [
+    "web",
+    "wordpress",
+    "education"
+  ],
+  "cover": {
+    "type": "image",
+    "motif": "search",
+    "alt": "Analysis homepage with the iridescent logo hero and the media-training tagline",
+    "src": "media/work/analysis-home.webp",
+    "full": "media/work/analysis-home-full.webp",
+    "caption": "Homepage"
+  },
+  "gallery": [
+    {
+      "src": "media/work/analysis-about.webp",
+      "full": "media/work/analysis-about-full.webp",
+      "caption": "About the project",
+      "alt": "The Analysis about page with a bold mission statement over a newsroom photo"
+    },
+    {
+      "src": "media/work/analysis-courses.webp",
+      "full": "media/work/analysis-courses-full.webp",
+      "caption": "The Academy",
+      "alt": "The Analysis Academy courses page listing the fact-checking training modules"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "Analysis is a media-training project that helps journalists and news organisations learn news verification and fact-checking. Its centrepiece is the Analysis Academy, a free six-week public programme covering fact-checking methodology, digital verification tools, advanced search, source tracking, and social-media and bot analysis. Partners are based in Greece, Austria, and Portugal."
+    },
+    {
+      "heading": "Challenge",
+      "body": "This is EU-facing research on disinformation, so the site needed to be credible without reading like an academic report. It also had to separate the project story, including the mission, partners, and results, from the academy's courses, resources, and news."
+    },
+    {
+      "heading": "Process",
+      "body": "I structured the site around its two audiences: funders and partners reading the project information, and journalists enrolling in the academy. The UI uses generous space, iridescent imagery, display type, and a hot-pink accent. The ANALYSIS acronym appears in the copy and identity."
+    },
+    {
+      "heading": "Output",
+      "body": "A responsive WordPress site with a mission and results homepage, an about section, a self-serve academy with searchable course modules, a resources library, and a news feed."
+    },
+    {
+      "heading": "Result",
+      "body": "A site for the media-literacy initiative that gives the academy a clear route from discovery to enrolment. [ADD REAL OUTCOME: enrolment numbers, partner or funder response, or a metric]"
+    }
+  ]
+}

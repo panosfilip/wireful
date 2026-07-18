@@ -1,0 +1,37 @@
+{
+  "order": 10,
+  "slug": "holiways-crete",
+  "title": "Holiways Crete",
+  "status": "draft",
+  "clientType": "Hospitality website",
+  "summary": "UXPin website prototype for Holiways Crete, combining destination content with the information visitors need to plan a stay.",
+  "problem": "Visitors needed to understand the offer quickly and find their way to the relevant accommodation and booking information.",
+  "role": [
+    "Website UI design",
+    "UX prototype",
+    "Visual direction"
+  ],
+  "services": [
+    "Website design",
+    "UX design"
+  ],
+  "tools": [
+    "UXPin"
+  ],
+  "tags": [
+    "web",
+    "prototype",
+    "hospitality"
+  ],
+  "cover": {
+    "type": "placeholder",
+    "motif": "homepage",
+    "alt": "Website interface concept for Holiways Crete"
+  },
+  "sections": [
+    {
+      "heading": "Output",
+      "body": "A responsive website prototype with destination content, clear navigation, and booking routes."
+    }
+  ]
+}

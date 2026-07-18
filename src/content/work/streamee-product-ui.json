@@ -1,0 +1,60 @@
+{
+  "order": 8,
+  "slug": "streamee-product-ui",
+  "title": "Streamee Website",
+  "status": "draft",
+  "year": "2022-2024",
+  "clientType": "Digital product",
+  "summary": "UI/UX and visual work for the Streamee web platform, covering interface design, branded assets, campaigns, and developer-ready production files.",
+  "problem": "The product needed a consistent visual language across app touchpoints and marketing without slowing down release work.",
+  "role": [
+    "Product graphic design",
+    "UI/UX design",
+    "Campaign visuals",
+    "Icon and illustration work",
+    "Developer collaboration"
+  ],
+  "services": [
+    "Product UI",
+    "Graphic design",
+    "Brand assets"
+  ],
+  "tools": [
+    "Figma",
+    "Adobe Illustrator",
+    "Adobe Photoshop"
+  ],
+  "tags": [
+    "product",
+    "campaign",
+    "commercial"
+  ],
+  "cover": {
+    "type": "image",
+    "motif": "search",
+    "alt": "Wireframe of a music app interface with branded content modules",
+    "src": "media/work/figma-projects-products.png"
+  },
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "Work from the Streamee period at Politis Group."
+    },
+    {
+      "heading": "Challenge",
+      "body": "Keep product screens, promotional material, and social content aligned while supporting active marketing and product needs."
+    },
+    {
+      "heading": "Process",
+      "body": "I translated product and marketing needs into UI assets, visual guidelines, original images, illustrations, motion pieces, and handoff-ready files for developers."
+    },
+    {
+      "heading": "Output",
+      "body": "A consistent set of app visuals, campaign assets, presentation material, and production-ready design files."
+    },
+    {
+      "heading": "Result",
+      "body": "Design support across product, marketing, and leadership needs, keeping the app and campaign ecosystem visually connected while work moved quickly."
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "order": 14,
+  "slug": "ellinikos-932-radio-website",
+  "title": "Ellinikos 93.2",
+  "status": "published",
+  "clientType": "Ellinikos 93.2: Greek-music radio station (Politis Group)",
+  "liveUrl": "https://ellinikos932.gr",
+  "summary": "First website for Ellinikos 93.2, a Greek-music radio station in the Politis Group. It provides live listening, programme information, and editorial content on the shared platform used by Sfera 102.2 and Music 89.2.",
+  "problem": "Ellinikos 93.2 had no website for its live stream, programme, or editorial content. Its first site needed to be easy for the team to run and share a platform and layout with its sister stations without losing its own identity.",
+  "role": [
+    "Website UI design",
+    "Information architecture",
+    "Visual direction",
+    "WordPress design"
+  ],
+  "services": [
+    "Website design",
+    "UI design",
+    "WordPress"
+  ],
+  "tools": [
+    "Figma",
+    "WordPress"
+  ],
+  "tags": [
+    "web",
+    "wordpress",
+    "culture"
+  ],
+  "cover": {
+    "type": "image",
+    "motif": "homepage",
+    "alt": "The Ellinikos 93.2 homepage with a navy Greek-sea hero, the hand-drawn station wordmark, a live-play button, and a producers section",
+    "src": "media/work/ellinikos-home.webp",
+    "full": "media/work/ellinikos-home-full.webp",
+    "caption": "Homepage"
+  },
+  "gallery": [
+    {
+      "src": "media/work/ellinikos-program.webp",
+      "full": "media/work/ellinikos-program-full.webp",
+      "caption": "Program",
+      "alt": "The Ellinikos 93.2 program schedule with day tabs, show cards, and an on-air-now card"
+    },
+    {
+      "src": "media/work/ellinikos-news.webp",
+      "full": "media/work/ellinikos-news-full.webp",
+      "caption": "Τα Νέα Μας",
+      "alt": "The Ellinikos 93.2 editorial feed with a category filter and grids of soundtrack and contest cards"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "Ελληνικός 93.2 is a radio station for Greek music, with a strong focus on έντεχνο and new releases. It is part of the Politis Group alongside Sfera 102.2 and Music 89.2, and uses the group's shared WordPress platform."
+    },
+    {
+      "heading": "Challenge",
+      "body": "Unlike its sister stations, Ellinikos started without a website. The first site had to include a live player, programme schedule, news, soundtracks, the \"Νέα Σκηνή\" new-artist strand, events, and interviews. It also needed to share the Politis Group platform while looking distinctly Ellinikos."
+    },
+    {
+      "heading": "Process",
+      "body": "I used the shared Politis Group structure, components, and publishing model, then created a separate identity with a navy palette, hand-drawn wordmark, and Greek-music imagery. The site centres on listening live, seeing the programme and presenters, and browsing news, soundtracks, and \"Νέα Σκηνή\"."
+    },
+    {
+      "heading": "Output",
+      "body": "A responsive website with streaming, a day-by-day programme and on-air card, presenter pages, and an editorial hub for news, soundtracks, \"Νέα Σκηνή\", events, interviews, contests, and videos. It runs on the same WordPress platform as Sfera and Music 89.2."
+    },
+    {
+      "heading": "Result",
+      "body": "Ellinikos now has a digital home for live music and editorial content that the group can maintain alongside its sister stations. [ADD REAL OUTCOME: launch or listener response, or a metric]"
+    }
+  ]
+}

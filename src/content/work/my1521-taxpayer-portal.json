@@ -1,0 +1,95 @@
+{
+  "order": 0,
+  "slug": "my1521-taxpayer-portal",
+  "title": "my1521 Taxpayer Service Portal",
+  "status": "published",
+  "clientType": "AADE: Independent Authority for Public Revenue",
+  "summary": "UI design for my1521, the taxpayer service system of AADE, Greece's public revenue authority. The work covers the public web portal that presents the phone and digital channels, and an in-progress redesign of the internal ticketing portal.",
+  "problem": "Getting help from AADE used to depend on knowing which office or phone line to contact. my1521 gathers those channels into one system, so the public portal had to explain the new model to every taxpayer, and the ticketing tool behind it had to give staff a clear view of requests routed across the authority's structure.",
+  "role": [
+    "Product UI design",
+    "UX flows",
+    "Figma production",
+    "Public-sector design"
+  ],
+  "services": [
+    "Product UI",
+    "Service design",
+    "Design system"
+  ],
+  "tools": [
+    "Figma"
+  ],
+  "tags": [
+    "product",
+    "systems",
+    "public"
+  ],
+  "cover": {
+    "type": "image",
+    "motif": "portal",
+    "src": "media/work/my1521-home.webp",
+    "full": "media/work/my1521-home-full.webp",
+    "caption": "Homepage",
+    "alt": "my1521 portal homepage introducing AADE's new taxpayer service model"
+  },
+  "gallery": [
+    {
+      "src": "media/work/my1521-phone.webp",
+      "group": "Web portal",
+      "full": "media/work/my1521-phone-full.webp",
+      "caption": "Phone service",
+      "alt": "Phone service page documenting the 1521 line, its hours, and the redesigned IVR menu"
+    },
+    {
+      "src": "media/work/my1521-digital.webp",
+      "group": "Web portal",
+      "full": "media/work/my1521-digital-full.webp",
+      "caption": "Digital service",
+      "alt": "Digital service page explaining what taxpayers can do on the 1521.aade.gr platform"
+    },
+    {
+      "src": "media/work/my1521-stats.webp",
+      "group": "Web portal",
+      "full": "media/work/my1521-stats-full.webp",
+      "caption": "Statistics",
+      "alt": "Statistics page presenting phone and digital service volumes with KPI cards and charts"
+    },
+    {
+      "src": "media/work/my1521-ticketing-groups.webp",
+      "group": "Ticketing portal",
+      "caption": "Answer-group search",
+      "alt": "Ticketing portal screen for finding answer groups through the thematic tree"
+    },
+    {
+      "src": "media/work/my1521-ticketing-services.webp",
+      "group": "Ticketing portal",
+      "caption": "Service administration",
+      "alt": "Ticketing portal screen for managing AADE services across the authority's organizational tree"
+    },
+    {
+      "src": "media/work/my1521-ticketing-admin.webp",
+      "group": "Ticketing portal",
+      "caption": "Admin panel",
+      "alt": "Ticketing portal admin panel with card-based tools for users, groups, and external systems"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "my1521 is AADE's multichannel taxpayer service system, funded under Greece 2.0 and NextGenerationEU. It runs on two channels, the 1521 phone line and the digital platform at 1521.aade.gr, with a three-level support model behind both: front-line agents answer first, specialized staff take over harder cases, and the competent AADE services resolve the rest. I designed the public web portal in Figma and started a UI redesign of the ticketing portal that AADE staff use to manage the requests."
+    },
+    {
+      "heading": "Web portal",
+      "body": "The portal explains the service in four page types. The homepage introduces the model and its two channels. The phone service page documents the redesigned IVR, its nine thematic menu options, opening hours, and call cost. The digital service page walks through what the platform offers and the three steps of submitting a question. The statistics page presents call and request volumes as KPI cards and charts, giving the authority a public place to report how the service performs. The audience is every taxpayer in Greece, so each page assumes no familiarity with tax procedures or AADE's internal structure."
+    },
+    {
+      "heading": "Ticketing redesign",
+      "body": "The ticketing portal is where staff handle what comes in: ticket creation and lists, internal tickets, tickets arriving from RMS, reports, user availability, a knowledge base, and an administrator panel. I started a UI transition of these screens: a persistent sidebar for the main areas, an answer-group search built around the thematic tree, service administration mapped onto AADE's organizational structure, and card-based admin tools for users, groups, and external systems. This part of the work is ongoing."
+    },
+    {
+      "heading": "Output",
+      "body": "The web portal design is complete across its four page types. The ticketing work continues screen by screen, replacing the interface while keeping the flows staff already use."
+    }
+  ]
+}

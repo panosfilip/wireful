@@ -1,0 +1,38 @@
+{
+  "order": 11,
+  "slug": "oasa-telematics-redesign",
+  "title": "OASA Telematics App Redesign",
+  "status": "draft",
+  "clientType": "University of Athens dissertation project",
+  "summary": "Figma redesign concept for the OASA Telematics app, focused on routes, arrivals, and the next travel decision.",
+  "problem": "People use transport information under time pressure. Routes, arrivals, and next steps need to be easy to see.",
+  "role": [
+    "UX research",
+    "App UI redesign",
+    "Figma prototype"
+  ],
+  "services": [
+    "Product UI",
+    "UX design",
+    "Prototype"
+  ],
+  "tools": [
+    "Figma"
+  ],
+  "tags": [
+    "product",
+    "research",
+    "public"
+  ],
+  "cover": {
+    "type": "placeholder",
+    "motif": "portal",
+    "alt": "Public transport app interface redesign"
+  },
+  "sections": [
+    {
+      "heading": "Output",
+      "body": "A Figma prototype for a more task-focused public-transport app."
+    }
+  ]
+}

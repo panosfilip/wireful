@@ -1,0 +1,71 @@
+{
+  "order": 24,
+  "slug": "repower-eu",
+  "title": "REPower.eu",
+  "status": "published",
+  "clientType": "Public energy-upgrade initiative",
+  "liveUrl": "https://repowereu.gr/",
+  "summary": "A landing page for REPower.eu, bringing two energy-upgrade programmes, their deadlines, and the next action into one place.",
+  "problem": "The programmes have different rules, timings, and routes. Once someone has an approval or voucher, they need to know which path applies and what remains to be done without working through a maze of official information.",
+  "role": [
+    "Website UI design",
+    "Campaign design",
+    "Figma prototype"
+  ],
+  "services": [
+    "Landing-page design",
+    "Campaign design"
+  ],
+  "tools": [
+    "Figma"
+  ],
+  "tags": [
+    "web",
+    "landing",
+    "public"
+  ],
+  "cover": {
+    "type": "image",
+    "motif": "landing",
+    "alt": "REPower.eu homepage with a Greek energy-agreement hero and links to programme information",
+    "src": "media/work/repower-eu-home.webp",
+    "full": "media/work/repower-eu-home-full.webp",
+    "caption": "Homepage"
+  },
+  "gallery": [
+    {
+      "src": "media/work/repower-eu-deadlines.webp",
+      "full": "media/work/repower-eu-home-full.webp",
+      "caption": "Deadlines overview",
+      "alt": "REPower.eu deadlines overview for the active energy-upgrade programmes"
+    },
+    {
+      "src": "media/work/repower-eu-exoikonomo.webp",
+      "full": "media/work/repower-eu-home-full.webp",
+      "caption": "Εξοικονομώ 2025",
+      "alt": "REPower.eu programme section for Εξοικονομώ 2025"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "REPower.eu is the public-facing hub for «Εξοικονομώ 2025» and «Αλλάζω Σύστημα Θέρμανσης και Θερμοσίφωνα». It is aimed at people who have already been approved or received a voucher, and need to find the deadline, steps, and official service that apply to them."
+    },
+    {
+      "heading": "Challenge",
+      "body": "This needed to behave like a practical guide, not a campaign splash page. The two programmes had to be distinct at a glance, deadlines had to be difficult to miss, and the route to the right official platform had to be obvious when someone needed more detail or needed to sign in."
+    },
+    {
+      "heading": "Process",
+      "body": "The page is built around the decisions people need to make: find your programme, check the date, see what needs to happen next, then continue to the relevant official service. A single navigation and a repeated set of calls to action keep those routes available throughout the page, while the detailed guidance sits below the overview rather than competing with it at the start."
+    },
+    {
+      "heading": "Output",
+      "body": "A live, single-page information hub organised around the active programmes, a deadline overview, detailed next steps, frequently asked questions, and links to the official programme platforms."
+    },
+    {
+      "heading": "Result",
+      "body": "A focused public landing page that gives two separate programme routes a shared starting point. It answers the first question, “Which programme am I in?”, then keeps the next step close at hand."
+    }
+  ]
+}

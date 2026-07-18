@@ -1,0 +1,108 @@
+{
+  "order": 22,
+  "slug": "pino-pizzeria-website",
+  "title": "Pino Pizzeria",
+  "status": "published",
+  "featured": 5,
+  "clientType": "Pino by Luca Piscazzi: Roman pizzeria in Glyfada",
+  "liveUrl": "https://soliddop.github.io/pino/",
+  "summary": "A modernised website concept for Pino, the Roman pizzeria in Glyfada, built as a working front-end prototype. The design carries the restaurant's story from Luca Piscazzi's kitchen to the Athens Riviera across one scroll-led page.",
+  "problem": "Pino's original website read like a stock restaurant template. The menu, the story, and the visit details were all there, but none of the character the pizzeria has in the room or on its Instagram came through on screen.",
+  "role": [
+    "Website UI design",
+    "Brand direction",
+    "Motion design",
+    "Front-end build"
+  ],
+  "services": [
+    "Website design",
+    "Art direction",
+    "Front-end prototype"
+  ],
+  "tools": [
+    "Figma",
+    "GSAP",
+    "Claude Code",
+    "Codex"
+  ],
+  "tags": [
+    "web",
+    "prototype",
+    "hospitality",
+    "motion",
+    "ai"
+  ],
+  "cover": {
+    "type": "video",
+    "motif": "homepage",
+    "alt": "The Pino homepage: an Eat. Drink. Roma. hero on a forest-green field that resolves into the story section as the page scrolls.",
+    "src": "media/work/pino-hero.mp4",
+    "poster": "media/work/pino-hero-poster.webp",
+    "caption": "Homepage"
+  },
+  "gallery": [
+    {
+      "type": "video",
+      "src": "media/work/pino-table.mp4",
+      "poster": "media/work/pino-table-poster.webp",
+      "caption": "Signature dishes",
+      "alt": "The signature-dish sequence sliding dish photographs past a large Pizza Romana outline."
+    },
+    {
+      "src": "media/work/pino-story.webp",
+      "caption": "The story",
+      "alt": "The story section, with a portrait of chef Luca Piscazzi beside his grandmother's photo and the tiled restaurant interior."
+    },
+    {
+      "src": "media/work/pino-menu.webp",
+      "full": "media/work/pino-menu-full.webp",
+      "caption": "Menu",
+      "alt": "The menu section split into Mangia and Bevi across mustard and cream panels."
+    },
+    {
+      "type": "video",
+      "src": "media/work/pino-scatter.mp4",
+      "poster": "media/work/pino-scatter-poster.webp",
+      "caption": "A night at Pino",
+      "alt": "The gallery section scattering a stack of restaurant and dish photos into place under the heading A night at Pino."
+    },
+    {
+      "src": "media/work/pino-reserve.webp",
+      "full": "media/work/pino-reserve-full.webp",
+      "caption": "Reservations",
+      "alt": "The reservations section with the headline Reserve your Roman table, the opening hours, and the Glyfada address."
+    },
+    {
+      "src": "media/work/pino-insta.webp",
+      "full": "media/work/pino-insta-full.webp",
+      "caption": "Instagram",
+      "alt": "The Instagram section showing the @pino_athens photo grid."
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "Pino is a Roman pizzeria in Glyfada, on the Athens Riviera, run by chef Luca Piscazzi and his wife Charlotte Luykx. The kitchen keeps to Roman tradition: thin-crust Roman pizza, cacio e pepe, carciofo, aperitivo, and dolci. Its voice moves between Italian and English, from \"Tradizione Romana\" to \"Mangia. Bevi.\", and that mix is part of the brand."
+    },
+    {
+      "heading": "Challenge",
+      "body": "A restaurant site has a short list of jobs: show the food, tell the story, and make it easy to book a table and find the door. The redesign had to keep those quick to reach while giving the page enough movement to feel like an evening at Pino, without letting the animation get between a visitor and the reservation button."
+    },
+    {
+      "heading": "Process",
+      "body": "The identity and layout came first in Figma: a cream, forest-green, and terracotta palette, the hand-drawn Pino wordmark, and a single page that scrolls from the hero into the story, the signature dishes, the room, reservations, and the Instagram feed. I then built it as a real front-end prototype in HTML, CSS, and JavaScript, using Claude Code and Codex to turn the design into working code rather than a static mockup."
+    },
+    {
+      "heading": "Motion",
+      "body": "Movement carries the story. GSAP runs the scroll: the hero headline splits line by line, dish photographs slide past an oversized \"Pizza Romana\" outline, the menu breaks into \"Mangia\" and \"Bevi\", and the closing gallery scatters a stack of photos into place under \"A night at Pino\". ScrollSmoother ties the sequence together so it reads as one continuous move down the page."
+    },
+    {
+      "heading": "Output",
+      "body": "A responsive single-page site with an English and Greek toggle. It runs through the hero, the story of Luca and the restaurant, a signature-dish sequence, the food and drink menu, a photo gallery, reservations with hours and location, and the Instagram feed, all as static HTML, CSS, and JavaScript."
+    },
+    {
+      "heading": "Result",
+      "body": "A working prototype that puts Pino's character on screen: Roman, warm, and a little playful. The motion supports the story instead of decorating it, and the menu and reservation routes stay in reach the whole way down."
+    }
+  ]
+}

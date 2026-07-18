@@ -1,0 +1,36 @@
+{
+  "order": 29,
+  "slug": "shoot-and-win-fysiko-aerio",
+  "title": "Shoot & Win",
+  "status": "draft",
+  "clientType": "Fysiko Aerio campaign",
+  "summary": "Interactive campaign experience for Fysiko Aerio, designed to turn a promotional mechanic into a clear, energetic digital journey.",
+  "problem": "The campaign needed to make entry, participation, and reward information immediately understandable across desktop and mobile.",
+  "role": [
+    "Campaign UI design",
+    "Interactive flow design",
+    "Visual direction"
+  ],
+  "services": [
+    "Campaign design",
+    "Interactive design"
+  ],
+  "tools": [
+    "Figma"
+  ],
+  "tags": [
+    "campaign",
+    "commercial"
+  ],
+  "cover": {
+    "type": "placeholder",
+    "motif": "landing",
+    "alt": "Interactive campaign landing page for Shoot and Win"
+  },
+  "sections": [
+    {
+      "heading": "Output",
+      "body": "A campaign flow that brings entry, interaction, and prize communication into one coherent experience."
+    }
+  ]
+}

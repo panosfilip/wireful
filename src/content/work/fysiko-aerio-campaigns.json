@@ -1,0 +1,52 @@
+{
+  "order": 7,
+  "slug": "fysiko-aerio-campaigns",
+  "title": "Fysiko Aerio Campaign Experiences",
+  "status": "draft",
+  "clientType": "Fysiko Aerio: Hellenic Energy Company",
+  "summary": "Campaign landing pages and interactive work for a national energy brand, including Park Your Cinema, a basketball shoot-and-win game, and Village Cinemas collaborations.",
+  "problem": "Energy is a low-engagement category. The campaigns used games, cinema tie-ins, and seasonal landing pages while retaining the brand and a clear conversion route.",
+  "role": [
+    "Campaign design",
+    "Landing pages",
+    "Interactive concepts",
+    "UI design"
+  ],
+  "services": [
+    "Campaign design",
+    "Web design",
+    "Interactive"
+  ],
+  "tools": [
+    "Figma",
+    "Adobe Creative Suite"
+  ],
+  "tags": [
+    "campaign",
+    "commercial"
+  ],
+  "cover": {
+    "type": "placeholder",
+    "motif": "landing",
+    "alt": "Wireframe of a campaign landing page with game entry and dual call-to-action"
+  },
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "A series of campaign projects for Fysiko Aerio, the Hellenic Energy Company, including Park Your Cinema landing pages, a basketball shoot-and-win game, and Village Cinemas collaborations."
+    },
+    {
+      "heading": "Challenge",
+      "body": "Each activation needed its own character while remaining recognisably part of the same brand. Every experience also had to work on a phone as well as a desktop."
+    },
+    {
+      "heading": "Process",
+      "body": "I designed the landing structures, game entry flows, and visual systems per campaign, keeping components reusable across activations and seasons.",
+      "mediaPlaceholder": "[ADD SCREENSHOTS: Fysiko Aerio campaign screens]"
+    },
+    {
+      "heading": "Output",
+      "body": "A family of campaign landings and interactive experiences for a national energy brand."
+    }
+  ]
+}

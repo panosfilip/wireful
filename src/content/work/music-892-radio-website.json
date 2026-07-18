@@ -1,0 +1,74 @@
+{
+  "order": 13,
+  "slug": "music-892-radio-website",
+  "title": "Music 89.2",
+  "status": "published",
+  "clientType": "Music 89.2: music radio station (Politis Group)",
+  "liveUrl": "https://music892.gr",
+  "summary": "Website design for Music 89.2, a Politis Group music radio station. The WordPress site shares a platform with Sfera 102.2 while keeping Music 89.2's own identity.",
+  "problem": "Music 89.2 needed a live player, programme schedule, and editorial feed that the newsroom could update. It also had to share a platform and layout with Sfera while remaining recognisably Music 89.2.",
+  "role": [
+    "Website UI design",
+    "Information architecture",
+    "Visual direction",
+    "WordPress design"
+  ],
+  "services": [
+    "Website design",
+    "UI design",
+    "WordPress"
+  ],
+  "tools": [
+    "Figma",
+    "WordPress"
+  ],
+  "tags": [
+    "web",
+    "wordpress",
+    "culture"
+  ],
+  "cover": {
+    "type": "image",
+    "motif": "homepage",
+    "alt": "The Music 89.2 homepage with a bold black hero, the station wordmark, a producers feature, and a yellow Listen Now call to action",
+    "src": "media/work/music-home.webp",
+    "full": "media/work/music-home-full.webp",
+    "caption": "Homepage"
+  },
+  "gallery": [
+    {
+      "src": "media/work/music-program.webp",
+      "full": "media/work/music-program-full.webp",
+      "caption": "Program",
+      "alt": "The Music 89.2 program schedule with day tabs, show cards, and a Live Now card"
+    },
+    {
+      "src": "media/work/music-world.webp",
+      "full": "media/work/music-world-full.webp",
+      "caption": "Music World",
+      "alt": "The Music 89.2 Music World feed with a grid of music-news and events cards"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "Music 89.2 is a music radio station in the Politis Group, alongside Sfera 102.2. Its site covers the programme and presenters, Music World news and events, contests, videos, and the station's \"Κουνάβι\" community. It uses the group's shared WordPress platform."
+    },
+    {
+      "heading": "Challenge",
+      "body": "The site needed an always-available live player and programme schedule, plus an editorial feed updated daily. Music 89.2 and Sfera also needed a common platform and layout, without making the two stations look the same."
+    },
+    {
+      "heading": "Process",
+      "body": "I used the same structure, components, and publishing model as Sfera, then gave Music 89.2 a separate identity through black and acid yellow, oversized type, and its marquee wordmark. The site centres on listening live, checking the programme, and following music news and events."
+    },
+    {
+      "heading": "Output",
+      "body": "A responsive site with streaming, a day-by-day programme and \"Live Now\" card, producer and show pages, a Music World feed, contests, and videos. The group can manage it on the same WordPress platform as Sfera."
+    },
+    {
+      "heading": "Result",
+      "body": "A station site that keeps listening and music news close at hand while sharing a maintainable platform with Sfera. [ADD REAL OUTCOME: listener response or a metric]"
+    }
+  ]
+}

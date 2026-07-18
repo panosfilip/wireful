@@ -1,0 +1,79 @@
+{
+  "order": 1,
+  "slug": "aade-mypoint-customer-service",
+  "title": "AADE myPoint Customer Service Screens",
+  "status": "published",
+  "clientType": "AADE: Independent Authority for Public Revenue",
+  "summary": "I designed the two moments in AADE's myPoint priority system: choosing a service at the entrance and catching your number from the waiting room. The work connects a portrait touch kiosk with a wall-mounted queue screen.",
+  "problem": "A visitor may be standing at the kiosk with other people waiting behind them, then looking across a room while holding a paper ticket or checking a phone. I had to make six tax services easy to distinguish, keep Greek and English close at hand, and carry the chosen service through to the correct desk without asking the visitor to learn two different interfaces.",
+  "role": [
+    "Product UI design",
+    "Kiosk UI",
+    "Digital signage design",
+    "Figma production"
+  ],
+  "services": [
+    "Kiosk UI",
+    "Digital signage",
+    "Design system"
+  ],
+  "tools": [
+    "Figma"
+  ],
+  "tags": [
+    "product",
+    "systems",
+    "public"
+  ],
+  "cover": {
+    "type": "image",
+    "motif": "signage",
+    "src": "media/work/mypoint-cover.webp",
+    "caption": "Kiosk at a myPoint office",
+    "alt": "Touch kiosk with ticket printer running the priority system in an AADE office lobby"
+  },
+  "gallery": [
+    {
+      "src": "media/work/mypoint-kiosk-flow-1.webp",
+      "group": "Touch kiosk",
+      "caption": "Service selection and ticket method",
+      "alt": "Kiosk screens for choosing one of six services and picking a QR code or printed ticket"
+    },
+    {
+      "src": "media/work/mypoint-kiosk-flow-2.webp",
+      "group": "Touch kiosk",
+      "caption": "Printed and QR confirmation",
+      "alt": "Kiosk confirmation screens showing the assigned priority number and the scannable QR variant"
+    },
+    {
+      "src": "media/work/mypoint-queue-screen.webp",
+      "group": "Queue screen",
+      "caption": "Queue announcement layout",
+      "alt": "Waiting-room screen listing each service with the number being served and its service desk"
+    },
+    {
+      "src": "media/work/mypoint-queue-context.webp",
+      "group": "Queue screen",
+      "caption": "In the waiting room",
+      "alt": "Queue announcement screen wall-mounted over the waiting area of an AADE office"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "AADE, Greece's Independent Authority for Public Revenue, uses the myPoint priority system for in-person service. I designed the entrance and waiting-room interfaces around one continuous task: choose why you came, take a number, then recognize your call. For the Cholargos example, I carried AADE's navy, light blue, and ray motif across both screens. Each service also keeps its own color, giving visitors something familiar to follow after they leave the kiosk."
+    },
+    {
+      "heading": "Touch kiosk",
+      "body": "At the kiosk, speed matters. I gave each of the six services a large target and kept the Greek and English controls visible, so visitors can make the first decision without searching around the screen. Next, they choose between a paper ticket from the thermal printer and a QR code for their phone. The confirmation screen makes the assigned number the main event, explains where to wait, and counts down before returning to the start. The QR route notes the paper-saving option."
+    },
+    {
+      "heading": "Queue screen",
+      "body": "Once seated, the visitor is no longer reading at arm's length. I turned the service categories into a table built for quick glances across the room, pairing each current number with its destination desk. The category colors help the eye return to the right row. Branch, waiting-room, date, and time details establish where and when the information applies, while the side panel handles practical reminders, real-time updates, appointments, and the myAADEapp promotion."
+    },
+    {
+      "heading": "Output",
+      "body": "I built the full kiosk sequence and its companion television layout in Figma, then placed both into mockups of their intended settings. The OCG 360 kiosk covers service selection, ticket format, printed confirmation, and QR confirmation. On the television, the same labels and colors reappear beside desk assignments and waiting-room instructions. One choice carries through the whole visit, from the first tap to the call for a number."
+    }
+  ]
+}

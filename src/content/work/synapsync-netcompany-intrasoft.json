@@ -1,0 +1,38 @@
+{
+  "order": 20,
+  "slug": "synapsync-netcompany-intrasoft",
+  "title": "SynapSync",
+  "status": "draft",
+  "clientType": "Netcompany Intrasoft",
+  "summary": "Figma prototype for SynapSync, created for Netcompany Intrasoft to present a connected digital product concept.",
+  "problem": "The concept needed interface flows that could explain a complex product idea in a presentation.",
+  "role": [
+    "Product UI design",
+    "UX flows",
+    "Figma prototype"
+  ],
+  "services": [
+    "Product UI",
+    "UX design",
+    "Prototype"
+  ],
+  "tools": [
+    "Figma"
+  ],
+  "tags": [
+    "product",
+    "prototype",
+    "commercial"
+  ],
+  "cover": {
+    "type": "placeholder",
+    "motif": "portal",
+    "alt": "Enterprise product interface concept"
+  },
+  "sections": [
+    {
+      "heading": "Output",
+      "body": "A Figma prototype and concept presentation for a connected enterprise product."
+    }
+  ]
+}

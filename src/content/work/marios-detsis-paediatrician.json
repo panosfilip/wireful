@@ -1,0 +1,109 @@
+{
+  "order": 23,
+  "slug": "marios-detsis-paediatrician",
+  "title": "Dr. Marios Detsis",
+  "status": "published",
+  "featured": 3,
+  "clientType": "Dr. Marios Detsis: paediatrician in Zografou and Vrilissia",
+  "liveUrl": "https://pfilippaios.github.io/detsis-paidiatros/",
+  "summary": "A modernised website concept for Dr. Marios Detsis, a paediatrician with clinics in Zografou and Vrilissia. Built as a working front-end prototype, it gives parents a calm, readable path to the doctor's background, the services, and a booking.",
+  "problem": "The doctor's existing site was dated and hard to read on a phone, which is where most parents look for a paediatrician. Parents arrive with a specific worry and a young child in tow, so they need the essentials, who the doctor is, what he treats, where the clinics are, and how to book, without digging for them.",
+  "role": [
+    "Website UI design",
+    "Brand direction",
+    "Motion design",
+    "Front-end build"
+  ],
+  "services": [
+    "Website design",
+    "Art direction",
+    "Front-end prototype"
+  ],
+  "tools": [
+    "Figma",
+    "GSAP",
+    "Claude Code",
+    "Codex"
+  ],
+  "tags": [
+    "web",
+    "prototype",
+    "healthcare",
+    "motion",
+    "ai"
+  ],
+  "cover": {
+    "type": "video",
+    "motif": "homepage",
+    "alt": "The Dr. Marios Detsis homepage: a hero with the doctor's name and portrait, soft floating shapes, and a Book an appointment call to action.",
+    "src": "media/work/detsis-hero.mp4",
+    "poster": "media/work/detsis-hero-poster.webp",
+    "caption": "Homepage"
+  },
+  "gallery": [
+    {
+      "type": "video",
+      "src": "media/work/detsis-services.mp4",
+      "poster": "media/work/detsis-services-poster.webp",
+      "caption": "Services",
+      "alt": "The six paediatric service cards rising and staggering into view as the sections stack over one another."
+    },
+    {
+      "src": "media/work/detsis-doctor.webp",
+      "full": "media/work/detsis-doctor-full.webp",
+      "caption": "The doctor",
+      "alt": "The doctor's profile with a portrait, a short biography, and a timeline of qualifications from 2007 through the Brown Hasbro Children's Hospital."
+    },
+    {
+      "src": "media/work/detsis-clinics.webp",
+      "full": "media/work/detsis-clinics-full.webp",
+      "caption": "Two clinics",
+      "alt": "The clinics section presenting the Zografou and Vrilissia practices with interior photos."
+    },
+    {
+      "type": "video",
+      "src": "media/work/detsis-parents.mp4",
+      "poster": "media/work/detsis-parents-poster.webp",
+      "caption": "Parents & partners",
+      "alt": "The parent-reviews section followed by a scrolling strip of professional affiliation logos."
+    },
+    {
+      "src": "media/work/detsis-articles.webp",
+      "full": "media/work/detsis-articles-full.webp",
+      "caption": "Articles",
+      "alt": "The recent-articles section with cards on children's sleep, seasonal allergies, and oral hygiene."
+    },
+    {
+      "src": "media/work/detsis-cta.webp",
+      "full": "media/work/detsis-cta-full.webp",
+      "caption": "Contact",
+      "alt": "The contact section with the appointment call to action and the Zografou and Vrilissia clinic phone numbers."
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "Marios Detsis is a paediatrician who cares for infants, children, and adolescents at two clinics, in Zografou and Vrilissia. Alongside his practice he teaches at the Medical School of the European University of Cyprus and publishes on public health, epidemiology, and the prevention of infectious diseases. He is also a certified breastfeeding instructor."
+    },
+    {
+      "heading": "Challenge",
+      "body": "A paediatric site has to reassure before it does anything else. It needed to feel warm and calm for a worried parent while still reading as a serious medical practice, and it had to keep the booking and the clinic phone numbers within reach on every screen."
+    },
+    {
+      "heading": "Process",
+      "body": "I designed the identity and page in Figma around a soft palette, rounded cards, and playful but restrained detail, then built it as a front-end prototype in HTML, CSS, and JavaScript with Claude Code and Codex. The single page moves from the doctor and his background to the services, the two clinics, recent articles, parent reviews, and the contact details."
+    },
+    {
+      "heading": "Motion",
+      "body": "GSAP handles the movement, kept gentle so it reassures rather than distracts. The hero headline splits into lines as small shapes drift behind the doctor's portrait, the service cards rise and stagger into view, and the doctor, services, and clinics sections stack and recede as each one slides over the last. A strip of the doctor's professional affiliations scrolls quietly near the foot of the page."
+    },
+    {
+      "heading": "Output",
+      "body": "A responsive single-page site covering the doctor's profile and qualifications, six paediatric services, the two clinics with photos and addresses, recent articles, parent reviews, professional affiliations, and a contact section with a booking form and the clinic phone numbers. It runs as static HTML, CSS, and JavaScript."
+    },
+    {
+      "heading": "Result",
+      "body": "A calm, current site for a paediatric practice, with the doctor's background and the route to a booking both easy to find. The motion is there to reassure, and the clinic details stay one tap away the whole way down."
+    }
+  ]
+}

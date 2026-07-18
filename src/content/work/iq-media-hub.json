@@ -1,0 +1,74 @@
+{
+  "order": 15,
+  "slug": "iq-media-hub",
+  "title": "IQ Media Hub",
+  "status": "published",
+  "featured": 6,
+  "clientType": "IQ Media Hub: media innovation and knowledge-transfer platform",
+  "liveUrl": "https://iqmediahub.com/",
+  "summary": "Website design for IQ Media Hub, a cross-border media initiative that brings its Academy, Collaborations, R&D Lab, events, and editorial work into one public-facing platform.",
+  "problem": "IQ Media Hub needed a website that could explain a research-led media initiative quickly, then give journalists, publishers, and partners clear routes into learning, collaboration, research, events, and news.",
+  "role": [
+    "Information architecture",
+    "Website UI design",
+    "Visual direction",
+    "Figma prototype"
+  ],
+  "services": [
+    "Web design",
+    "UI design",
+    "Visual identity"
+  ],
+  "tools": [
+    "Figma"
+  ],
+  "tags": [
+    "web",
+    "prototype",
+    "education"
+  ],
+  "cover": {
+    "type": "image",
+    "motif": "search",
+    "alt": "IQ Media Hub homepage with the circular IQ Media mark, three-pillar navigation, featured courses, Lab News, and a Join Us form",
+    "src": "media/work/iqmedia-home.webp",
+    "full": "media/work/iqmedia-home-full.webp",
+    "caption": "Homepage"
+  },
+  "gallery": [
+    {
+      "src": "media/work/iqmedia-rd.webp",
+      "full": "media/work/iqmedia-rd-full.webp",
+      "caption": "R&D Lab",
+      "alt": "IQ Media Hub R&D Lab page with oversized editorial type, coloured line motifs, focus-area cards, and Lab News stories"
+    },
+    {
+      "src": "media/work/iqmedia-academy.webp",
+      "full": "media/work/iqmedia-academy-full.webp",
+      "caption": "The Academy",
+      "alt": "IQ Media Hub Academy page with a large editorial introduction, featured events, and course listings"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "IQ Media Hub is a consortium led by the Faculty of Communication and Mass Media of the National and Kapodistrian University of Athens, with partners from Greece, Cyprus, France, and Portugal. The site is organised around three pillars: The Academy, Collaborations, and the R&D Lab. It also publishes events, courses, and Lab News."
+    },
+    {
+      "heading": "Challenge",
+      "body": "The content moves between public explanation, professional learning, research, partner activity, and editorial publishing. The interface needed to make those routes easy to see without turning a knowledge-transfer project into a dense institutional directory."
+    },
+    {
+      "heading": "Process",
+      "body": "I built a typographic editorial system rather than a conventional institutional template. A pale blush ground and black serif display type carry most of the hierarchy, while the spaced sans wordmark keeps the navigation and section labels precise. Thin rules divide long-form content, and pink, cyan, orange, and green line motifs mark the pillars, people, and feature areas. I paired the narrative sections with repeatable blocks for pillar links, course and event rows, article cards, portrait profiles, and a recurring Join Us form. The same patterns carry across the homepage, Academy, R&D, Collaborations, and About pages."
+    },
+    {
+      "heading": "Output",
+      "body": "A responsive Figma website prototype with a public homepage, Academy and Learn sections, Collaborations, R&D Lab, Events, Blog, About Us, article and event templates, partner and team content, and a consistent route into the IQ Media Hub community."
+    },
+    {
+      "heading": "Result",
+      "body": "A public-facing hub that reads as a media innovation project first and an institutional site second. The homepage makes the three-pillar structure visible immediately, while the interior pages keep the same editorial language for learning, research, collaboration, events, and people."
+    }
+  ]
+}

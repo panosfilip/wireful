@@ -1,0 +1,37 @@
+{
+  "order": 9,
+  "slug": "spiritual-living-corfu",
+  "title": "Spiritual Living Corfu",
+  "status": "draft",
+  "clientType": "Hospitality website",
+  "summary": "UXPin website prototype for Spiritual Living Corfu, presenting the retreat, accommodation, and enquiry route.",
+  "problem": "Visitors needed to understand the retreat offering and find practical information without losing the character of the destination.",
+  "role": [
+    "Website UI design",
+    "UX prototype",
+    "Visual direction"
+  ],
+  "services": [
+    "Website design",
+    "UX design"
+  ],
+  "tools": [
+    "UXPin"
+  ],
+  "tags": [
+    "web",
+    "prototype",
+    "hospitality"
+  ],
+  "cover": {
+    "type": "placeholder",
+    "motif": "homepage",
+    "alt": "Website interface concept for Spiritual Living Corfu"
+  },
+  "sections": [
+    {
+      "heading": "Output",
+      "body": "A website prototype with sections for the retreat, accommodation, and enquiries."
+    }
+  ]
+}

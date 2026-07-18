@@ -1,0 +1,74 @@
+{
+  "order": 17,
+  "slug": "demo-pharmaceutical",
+  "title": "DEMO Pharmaceuticals",
+  "status": "published",
+  "clientType": "DEMO S.A.: pharmaceutical industry",
+  "liveUrl": "https://demo.gr",
+  "summary": "A corporate website concept for DEMO, one of Greece's largest pharmaceutical companies. It uses the company's existing brand system and presents its work before its organisational structure.",
+  "problem": "DEMO's previous site was organised around the company rather than what it does. It relied on a dense \"who we are\" grid, autoplay video, and sparse brochure pages. The concept needed to show the company's international work while retaining its established identity.",
+  "role": [
+    "Website UI design",
+    "Visual direction",
+    "Information architecture",
+    "WordPress design"
+  ],
+  "services": [
+    "Website design",
+    "UI design",
+    "WordPress"
+  ],
+  "tools": [
+    "Figma",
+    "WordPress"
+  ],
+  "tags": [
+    "web",
+    "wordpress",
+    "healthcare"
+  ],
+  "cover": {
+    "type": "image",
+    "motif": "homepage",
+    "alt": "The DEMO Pharmaceuticals homepage with a bold blue hero, the headline \"Bringing Global Access to Quality Medicines\", and an \"Always Forward, With Purpose and Integrity\" statement",
+    "src": "media/work/demo-home.webp",
+    "full": "media/work/demo-home-full.webp",
+    "caption": "Homepage"
+  },
+  "gallery": [
+    {
+      "src": "media/work/demo-what.webp",
+      "full": "media/work/demo-what-full.webp",
+      "caption": "What we do",
+      "alt": "The DEMO 'What we do' page headed \"Stronger, Healthier Communities\", framing research, development, and manufacturing"
+    },
+    {
+      "src": "media/work/demo-news.webp",
+      "full": "media/work/demo-news-full.webp",
+      "caption": "News & media",
+      "alt": "The DEMO News & Media hub with a rich grid of story cards, video, and report tiles"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "DEMO S.A. is one of Greece's largest pharmaceutical manufacturers. Established in 1965, it exports to markets around the world. Its corporate site speaks to patients and healthcare systems, prospective talent, partners, and the press."
+    },
+    {
+      "heading": "Challenge",
+      "body": "The concept needed to feel appropriate for an international pharmaceutical company without inventing a new identity. It retains DEMO's triangle mark, corporate blue, and typographic voice while reorganising the site around the company's work, products, and news."
+    },
+    {
+      "heading": "Process",
+      "body": "I kept DEMO's brand system and added a full-bleed blue hero, display type, and headlines about access to medicines. The information architecture groups content under Who we are, What we do, Talent management, and News & media. The News & Media hub uses story cards, video, and reports."
+    },
+    {
+      "heading": "Output",
+      "body": "A corporate site built on DEMO's design system, with a homepage, sections for R&D and manufacturing, company information, talent and careers content, and a News & Media hub."
+    },
+    {
+      "heading": "Result",
+      "body": "A concept that reorganises a corporate brochure around DEMO's work and uses the company's established brand. [ADD REAL OUTCOME: client or stakeholder response, or clarify whether this was commissioned or self-initiated]"
+    }
+  ]
+}
