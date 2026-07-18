@@ -15,6 +15,7 @@
 .hero-home {
   overflow-x: clip;
   overflow-y: visible;
+  border-bottom: 0;
 }
 
 .hero-home .hero-media {
@@ -44,10 +45,9 @@
   inset: auto -15% 0 -15%;
 }
 
-/* The portrait rests on the hero's bottom edge and paints over the section's
-   border-bottom, cutting the separator line under the photo. Repaint the
-   hairline above the content so it runs the full width of the boundary. */
-.hero-home::after,
+/* The About portrait uses a continuous separator. On the homepage the
+   portrait intentionally paints over the hero's border so the image itself
+   meets the marquee without a hairline crossing its bottom edge. */
 .hero-about::after {
   content: "";
   position: absolute;
@@ -443,8 +443,10 @@ html.js .is-loaded [data-intro] {
 /* ---- Marquee ---------------------------------------------------------------------------------- */
 
 .marquee {
+  position: relative;
+  z-index: 3;
   overflow: hidden;
-  border-bottom: 1px solid var(--line);
+  border-block: 1px solid var(--line);
   padding-block: clamp(1.1rem, 2.5vw, 1.6rem);
   user-select: none;
 }
@@ -603,4 +605,3 @@ html.js .marquee-track {
     color: var(--capability-tone);
   }
 }
-
