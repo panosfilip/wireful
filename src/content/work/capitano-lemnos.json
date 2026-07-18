@@ -1,0 +1,106 @@
+{
+  "order": 26,
+  "slug": "capitano-lemnos",
+  "title": "Capitano Lemnos",
+  "status": "published",
+  "clientType": "Capitano — wine & deli bar, Lemnos",
+  "liveUrl": "https://shop.capitanolemnos.gr/",
+  "liveLinks": [
+    { "label": "Visit the e-shop", "url": "https://shop.capitanolemnos.gr/" },
+    { "label": "Visit the landing page", "url": "https://capitanolemnos.gr/" }
+  ],
+  "summary": "Capitano is a wine and deli bar in Kontopouli, Lemnos, opened in June 2025. I designed its two connected digital faces: the one-page brand site and the e-shop.",
+  "problem": "A new bar on a village square needed one clear address online. The site had to explain what Capitano is, show the space and its food, and route people to either a table booking or the online shop. The shop had a different job: turn the deli's stock into a catalogue that can travel beyond Lemnos, while serving retail customers, businesses, gift buyers, and boats provisioning on the island. I needed both interfaces to feel like parts of the same place.",
+  "role": [
+    "E-commerce UI design",
+    "Landing page design",
+    "Figma prototype"
+  ],
+  "services": [
+    "E-commerce design",
+    "Website design"
+  ],
+  "tools": [
+    "Figma"
+  ],
+  "tags": [
+    "web",
+    "commerce",
+    "hospitality"
+  ],
+  "cover": {
+    "type": "image",
+    "motif": "search",
+    "src": "media/work/capitano-eshop-home.webp",
+    "full": "media/work/capitano-eshop-home-full.webp",
+    "caption": "E-shop homepage",
+    "alt": "Capitano e-shop homepage with wine bottles in a cooler and the line about wines from the Greek, global, and Lemnos vineyards"
+  },
+  "gallery": [
+    {
+      "src": "media/work/capitano-eshop-product.webp",
+      "group": "E-shop",
+      "full": "media/work/capitano-eshop-product-full.webp",
+      "caption": "Product page",
+      "alt": "Product page for a red wine with image carousel, price, and a structured attributes table"
+    },
+    {
+      "src": "media/work/capitano-eshop-producers.webp",
+      "group": "E-shop",
+      "full": "media/work/capitano-eshop-producers-full.webp",
+      "caption": "Producers directory",
+      "alt": "Producers directory with a logo grid of Lemnos and international wine producers"
+    },
+    {
+      "src": "media/work/capitano-eshop-yachting.webp",
+      "group": "E-shop",
+      "full": "media/work/capitano-eshop-yachting-full.webp",
+      "caption": "Yachting services",
+      "alt": "Yachting services page offering wine and drink supply to boats with a benefits strip"
+    },
+    {
+      "src": "media/work/capitano-eshop-tracking.webp",
+      "group": "E-shop",
+      "full": "media/work/capitano-eshop-tracking-full.webp",
+      "caption": "Order tracking",
+      "alt": "Order tracking screen with order details and a step-by-step progress timeline"
+    },
+    {
+      "src": "media/work/capitano-landing-home.webp",
+      "group": "Landing page",
+      "full": "media/work/capitano-landing-home-full.webp",
+      "caption": "Video hero",
+      "alt": "Landing page hero with the CAPITANO wordmark over a video of the deli display fridge"
+    },
+    {
+      "src": "media/work/capitano-landing-katalogos.webp",
+      "group": "Landing page",
+      "caption": "Story & catalogues",
+      "alt": "Story section with the bar's history and buttons for the Carta, Wine Book, and grocery catalogues"
+    },
+    {
+      "src": "media/work/capitano-landing-gallery.webp",
+      "group": "Landing page",
+      "caption": "Gallery",
+      "alt": "Photo gallery of the wine shelves, platters, and wine service at the bar"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Context",
+      "body": "Capitano opened under the chestnut-wood roof of an old building on Kontopouli square. It brings together wines from Lemnos, Greece, and abroad with Italian-focused cured meats and cheeses, signature cocktails, and products to take home. I carried that setting into both designs through a warm dark palette, the serif CAPITANO wordmark, the Wine & Deli subtitle, and a tile and star motif drawn from traditional floor tiles. The landing page speaks for the bar itself. The e-shop extends the same offer into a catalogue that can be ordered beyond the counter."
+    },
+    {
+      "heading": "The landing page",
+      "body": "I designed capitanolemnos.gr as the front door for a place people may be discovering for the first time. A full-bleed video of the display fridge puts the food, bottles, and atmosphere ahead of explanation. From there, the page answers the practical questions: who Capitano is, what is available, where the catalogues are, what the space looks like, and where to find it in Kontopouli. The navigation keeps booking and the e-shop visible because a visitor may want a table, while someone who has already visited may be looking for a Wine Book or a case to take home."
+    },
+    {
+      "heading": "The e-shop",
+      "body": "For the e-shop, I designed 18 screens in Figma around the different ways Capitano's stock can leave the bar. A customer can move from wine categories and filters to a product page with images, price, delivery information, and structured details about the bottle. The producers directory gives local Lemnos names a place beside international labels. Wishlist, order tracking, Greek and English, and the 18+ age gate support the retail journey. Separate B2B, gifting, and yachting pages address agreed-price wholesale orders, premium packs with greeting cards, and boats needing the right drinks delivered on time and at the correct temperature."
+    },
+    {
+      "heading": "Output",
+      "body": "Both designs shipped and are live. Together, they connect Capitano's bar on Kontopouli square with the moment a visitor gets home and wants another bottle or gift box from Lemnos. One site brings people to the table; the other carries a piece of the island beyond it."
+    }
+  ]
+}

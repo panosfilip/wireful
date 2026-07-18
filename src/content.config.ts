@@ -40,6 +40,20 @@ const work = defineCollection({
     clientType: z.string().optional(),
     liveUrl: z.string().url().optional(),
     /**
+     * Multiple outbound links for pages covering more than one shipped site.
+     * When present, the Details block renders these labeled links instead of
+     * the single "Visit live site" link. Keep `liveUrl` set as well: the
+     * Work-grid card's "Live site" badge reads only `liveUrl`.
+     */
+    liveLinks: z
+      .array(
+        z.object({
+          label: z.string(),
+          url: z.string().url(),
+        }),
+      )
+      .optional(),
+    /**
      * Where the work was done: an employer/agency name (e.g. "Choose") or
      * "Freelance". Leave unset to show a flagged placeholder on the page.
      */

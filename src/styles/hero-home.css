@@ -511,6 +511,22 @@ html.js .marquee-track {
   margin: 1rem 0 0;
 }
 
+@media (max-width: 649px) {
+  .section-head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+
+  .section-head > div {
+    width: 100%;
+  }
+
+  .section-head .section-link {
+    align-self: flex-start;
+  }
+}
+
 /* ---- Capability directory (offer) ------------------------------------------------------------------ */
 
 .capability-directory {

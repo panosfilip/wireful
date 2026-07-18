@@ -108,13 +108,21 @@ const jsonLd = {
           {cs.year && <p set:html={withPlaceholders(cs.year)} />}
           {cs.clientType && <p>{cs.clientType}</p>}
           {
-            cs.liveUrl && (
+            cs.liveLinks?.length ? (
+              cs.liveLinks.map((link) => (
+                <p>
+                  <a class="case-live-link" href={link.url} target="_blank" rel="noopener">
+                    {link.label} ↗
+                  </a>
+                </p>
+              ))
+            ) : cs.liveUrl ? (
               <p>
                 <a class="case-live-link" href={cs.liveUrl} target="_blank" rel="noopener">
                   Visit live site ↗
                 </a>
               </p>
-            )
+            ) : null
           }
           {
             cs.status === "placeholder" && (
