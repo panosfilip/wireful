@@ -5,8 +5,8 @@
   "status": "published",
   "clientType": "MSc dissertation project",
   "engagement": "National and Kapodistrian University of Athens",
-  "summary": "I redesigned OASA Telematics around the question a passenger actually has at a stop: should I wait, walk, or take another route? The work moved from user research and task analysis to a tested Android prototype in Figma.",
-  "problem": "The original app had the data, but getting to an answer still meant moving between arrivals, vehicle positions, route details, and announcements. The redesign had to bring those clues into one decision path on a small screen, often checked outdoors and in a hurry.",
+  "summary": "For my MSc dissertation, I redesigned the OASA Telematics Android app. I researched how passengers use arrivals and vehicle locations, rebuilt those tasks in Figma, and tested the prototype with users and UX experts.",
+  "problem": "At a stop, passengers may need arrivals, vehicle positions, route details, and service notices at the same time. In the original app, those pieces sat in separate views. I redesigned the main tasks so someone could choose a route and keep checking it without restarting the search.",
   "role": [
     "UX research",
     "Information architecture",
@@ -42,12 +42,12 @@
   "sections": [],
   "flowShowcase": {
     "context": {
-      "heading": "An independent redesign of a public-service app",
-      "body": "This was my MSc dissertation at the National and Kapodistrian University of Athens, not a project commissioned by OASA. I treated the app as a service used by daily commuters, occasional riders, older passengers, and people with accessibility needs. The scope covered the Android experience from first entry to live journey updates."
+      "heading": "Dissertation scope",
+      "body": "This was an independent MSc project at the National and Kapodistrian University of Athens. It was not commissioned by OASA. I designed the Android prototype for daily and occasional passengers, including older people and people who use accessibility settings. It follows the main journey through account access, planning, tracking, tickets, and support."
     },
     "research": {
-      "heading": "The research pointed to decisions, not more features",
-      "body": "Arrivals were the most-used part of the existing app, followed by vehicle positions. People wanted stronger live tracking, clearer maps, visible service notices, fewer taps, and a reliable way to use core information when connectivity drops. A six-person focus group added the practical details: show nearby stops, keep arrivals prominent, remember recent trips, and reduce the amount of information competing on each screen.",
+      "heading": "What passengers checked first",
+      "body": "In the initial survey, arrivals were the most-used feature in the existing app. Vehicle positions came next. Respondents asked for offline access, better live tracking, clearer maps, and service notices that were harder to miss. Six focus-group participants also wanted nearby stops, recent trips, and fewer competing elements on each screen.",
       "stats": [
         {
           "value": "100",
@@ -68,8 +68,8 @@
       ]
     },
     "structure": {
-      "heading": "Less navigation, more continuity",
-      "body": "The answer was not to keep adding destinations. In fact, 52% of survey participants felt the existing app already had the right number of functions. I used scenarios, hierarchical task analysis, essential use cases, and a closed card sort with ten participants to reorganise those functions around five jobs: plan a trip, locate a vehicle, inspect a route, manage tickets, and control personal settings. Low-fidelity flows in Whimsical came first; the high-fidelity system was then built and linked in Figma.",
+      "heading": "Organising the app around five tasks",
+      "body": "Fifty-two percent of survey participants thought the existing app already had the right number of functions. The problem was how those functions were grouped. Scenarios, hierarchical task analysis, essential use cases, and a closed card sort with ten participants produced five categories: trip planning, live vehicle location, route search, tickets, and profile settings. I drew the first flows in Whimsical, then built and linked the detailed screens in Figma.",
       "boards": [
         {
           "src": "media/work/oasa/figma-board-planner.webp",
@@ -85,8 +85,8 @@
     },
     "groups": [
       {
-        "heading": "Enter the app on your terms",
-        "body": "First use has three paths: sign in, create an account, or continue as a guest when an arrival time matters more than registration. The account branch keeps the work in a short sequence: enter the essential details, decide whether to add a profile photo, then move straight into journey planning.",
+        "heading": "Account access and registration",
+        "body": "The welcome screen offers sign-in, registration, and guest access. Guest access was added after testing because an account should not block someone who only needs the next arrival. Registration asks for account details first and treats the profile photo as optional before opening the planner.",
         "screens": [
           {
             "src": "media/work/oasa/welcome.webp",
@@ -116,8 +116,8 @@
         ]
       },
       {
-        "heading": "Plan a trip, then stay with it",
-        "body": "This is the main product flow from the dissertation. The map stays present while the passenger moves from a nearby starting point to destination search, departure comparison, route selection, step-by-step directions, nearby service, live vehicle tracking, stop arrivals, and service updates. It is one continuous decision path rather than a set of disconnected map tools.",
+        "heading": "Planning and tracking a trip",
+        "body": "I kept the map behind each planning state so the passenger does not lose their location while choosing a destination or comparing departures. Selecting a route opens the walking and boarding steps. Once the route is active, the passenger can check nearby vehicles, the current vehicle position, the next stop, and any service notification without setting it up again.",
         "screens": [
           {
             "src": "media/work/oasa/planner-start.webp",
@@ -172,8 +172,8 @@
         ]
       },
       {
-        "heading": "Keep tickets in the travel context",
-        "body": "The ticket flow gives ATH.ENA Card information its own place in the main navigation, beside routes rather than inside settings. The available Figma export captures the overview state, where a passenger can check the card and move into fare information without leaving the transport app.",
+        "heading": "ATH.ENA Card and fare information",
+        "body": "ATH.ENA Card information sits in the main navigation beside routes. The available Figma export shows the overview state, where a passenger can check the card and open fare information without searching through settings.",
         "screens": [
           {
             "src": "media/work/oasa/tickets.webp",
@@ -183,8 +183,8 @@
         ]
       },
       {
-        "heading": "Carry familiar journeys into the profile",
-        "body": "The profile is not just an account record. It brings favourite routes and recent journeys together with personal details, then provides a focused edit state for the information the passenger can change. That keeps repeat travel useful without crowding the planner itself.",
+        "heading": "Profile, favourites, and recent routes",
+        "body": "Favourite routes and recent journeys sit in the profile with the passenger's account details. They support repeat trips without filling the planner with personal history. A separate edit screen handles the profile photo, username, name, and phone number.",
         "screens": [
           {
             "src": "media/work/oasa/profile.webp",
@@ -199,8 +199,8 @@
         ]
       },
       {
-        "heading": "Make settings part of the service",
-        "body": "The settings flow covers more than preferences. It introduces the app, manages permissions, supports accessible use, publishes service news, opens a direct contact route, and keeps privacy and app information readable. Showing the whole sequence matters because these are the screens that make a public-service product understandable and accountable.",
+        "heading": "Settings, accessibility, and support",
+        "body": "I separated device permissions from accessibility controls. One decides which data the app can use. The other changes text size, contrast, screen-reader support, text to speech, and external-device support. The same settings index links to route notifications, service news, contact, privacy, and app information.",
         "screens": [
           {
             "src": "media/work/oasa/settings.webp",
@@ -246,8 +246,8 @@
       }
     ],
     "evaluation": {
-      "heading": "Testing changed the interface, not just the report",
-      "body": "The interactive Figma prototype was evaluated with WAMMI, think-aloud sessions, and a heuristic review. The 91.17% WAMMI score describes perceived usability of the prototype in this study, not performance of a live product. More useful than the headline score were the points of hesitation: unclear time controls, weak distinction between departure and arrival, buried nearby stops, and an account gate that slowed down first use.",
+      "heading": "What changed after testing",
+      "body": "Forty participants completed the WAMMI questionnaire after using the Figma prototype. I also ran five think-aloud sessions and a heuristic review with five experts. The WAMMI score was 91.17%. It measures perceived usability of this prototype, not a released app. Testing also exposed unclear time controls, weak departure and arrival labels, hard-to-find nearby stops, and an account gate that slowed down first use.",
       "stats": [
         {
           "value": "40",
@@ -276,8 +276,8 @@
       ]
     },
     "output": {
-      "heading": "A complete prototype, with a clear centre of gravity",
-      "body": "The final Android prototype covers onboarding, registration, trip planning, live vehicle and stop tracking, service notifications, tickets, profile, permissions, accessibility, and support. The breadth matters, but the central idea is simple: keep the passenger oriented as the question changes from where can I go, to what should I take, to where is it now."
+      "heading": "Prototype coverage",
+      "body": "The final Android prototype includes every distinct state in the supplied Figma exports: onboarding, registration, trip planning, live vehicle and stop tracking, service notifications, tickets, profile editing, permissions, accessibility controls, and support."
     }
   }
 }
