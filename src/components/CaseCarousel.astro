@@ -60,6 +60,28 @@ const { items, label = "Case studies" } = Astro.props;
 
     track.addEventListener("scroll", updateControls, { passive: true });
     window.addEventListener("resize", updateControls, { passive: true });
+
+    // Trackpads can latch a mostly vertical gesture to this horizontal scroller,
+    // making the page appear to stop while the pointer is over the cards. Keep
+    // horizontal gestures native, but explicitly pass vertical intent to the page.
+    track.addEventListener(
+      "wheel",
+      (event) => {
+        if (event.ctrlKey || Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+
+        event.preventDefault();
+        const lineHeight = parseFloat(getComputedStyle(document.documentElement).lineHeight) || 16;
+        const delta =
+          event.deltaMode === WheelEvent.DOM_DELTA_LINE
+            ? event.deltaY * lineHeight
+            : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
+              ? event.deltaY * window.innerHeight
+              : event.deltaY;
+        window.scrollBy({ top: delta, behavior: "auto" });
+      },
+      { passive: false },
+    );
+
     updateControls();
   });
 </script>

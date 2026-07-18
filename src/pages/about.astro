@@ -1,9 +1,12 @@
 ---
 import Base from "../layouts/Base.astro";
+import { Image } from "astro:assets";
 import { site, skills } from "../data/site";
 import { withPlaceholders } from "../utils/placeholders";
+import profileImage from "../../profile.png";
 
 const facts = [
+  { label: "Currently", value: "Senior UI/UX Engineer at Choose" },
   { label: "Role", value: "Senior UI/UX Engineer and Senior Graphic Designer" },
   { label: "Based in", value: site.location },
   {
@@ -50,11 +53,14 @@ const facts = [
         </p>
       </div>
       <div class="hero-portrait" data-intro style="--intro: 1">
-        <img
-          src="media/filippaios.webp"
+        <Image
+          src={profileImage}
           alt={`Portrait of ${site.fullName}`}
-          width="585"
-          height="856"
+          widths={[240, 300, 600]}
+          sizes="(max-width: 820px) 240px, 300px"
+          format="webp"
+          quality={88}
+          loading="eager"
           fetchpriority="high"
         />
         <span class="hero-portrait-tag" aria-hidden="true">me again</span>
@@ -86,11 +92,11 @@ const facts = [
               brands, hospitality businesses, academic projects, and freelance clients.
             </p>
             <p>
-              My day-to-day work includes Figma systems, responsive layouts, identity work,
-              UI details, content structure, and decisions for WordPress or Elementor builds. I
-              use AI and LLMs for research synthesis, content structure, concept exploration,
-              UX-writing options, and prototype planning. I review the output against the brief
-              and the design work.
+              I'm currently a Senior UI/UX Engineer at Choose, where my day-to-day work includes
+              Figma systems, responsive layouts, identity work, UI details, content structure, and
+              decisions for WordPress or Elementor builds. I use AI and LLMs for research
+              synthesis, content structure, concept exploration, UX-writing options, and prototype
+              planning. I review the output against the brief and the design work.
             </p>
             <p>
               I also teach Human-Computer Interaction at the National and Kapodistrian
