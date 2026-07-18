@@ -23,45 +23,49 @@ const showcase = cs.flowShowcase;
         </div>
       </section>
 
-      <section class="flow-band flow-band--research">
-        <div class="flow-band__inner">
-          <div class="flow-copy" data-reveal>
-            <h2>{showcase.research.heading}</h2>
-            <p>{showcase.research.body}</p>
+      {showcase.research && (
+        <section class="flow-band flow-band--research">
+          <div class="flow-band__inner">
+            <div class="flow-copy" data-reveal>
+              <h2>{showcase.research.heading}</h2>
+              <p>{showcase.research.body}</p>
+            </div>
+            <dl class="flow-stats" data-reveal-group>
+              {showcase.research.stats.map((stat) => (
+                <div>
+                  <dt>{stat.value}</dt>
+                  <dd>{stat.label}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
-          <dl class="flow-stats" data-reveal-group>
-            {showcase.research.stats.map((stat) => (
-              <div>
-                <dt>{stat.value}</dt>
-                <dd>{stat.label}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
+        </section>
+      )}
 
-      <section class="flow-structure">
-        <div class="flow-copy" data-reveal>
-          <h2>{showcase.structure.heading}</h2>
-          <p>{showcase.structure.body}</p>
-        </div>
-        <div class="flow-boards" data-reveal-group>
-          {showcase.structure.boards.map((board) => (
-            <figure>
-              <button
-                type="button"
-                data-lightbox={board.src}
-                data-lightbox-alt={board.alt}
-                aria-label={`Open ${board.caption}`}
-              >
-                <img src={board.src} alt={board.alt} loading="lazy" />
-                <span aria-hidden="true">Open board ↗</span>
-              </button>
-              <figcaption>{board.caption}</figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
+      {showcase.structure && (
+        <section class="flow-structure">
+          <div class="flow-copy" data-reveal>
+            <h2>{showcase.structure.heading}</h2>
+            <p>{showcase.structure.body}</p>
+          </div>
+          <div class="flow-boards" data-reveal-group>
+            {showcase.structure.boards.map((board) => (
+              <figure>
+                <button
+                  type="button"
+                  data-lightbox={board.src}
+                  data-lightbox-alt={board.alt}
+                  aria-label={`Open ${board.caption}`}
+                >
+                  <img src={board.src} alt={board.alt} loading="lazy" />
+                  <span aria-hidden="true">Open board ↗</span>
+                </button>
+                <figcaption>{board.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
 
       <div class="flow-groups">
         {showcase.groups.map((group, groupIndex) => (
@@ -107,7 +111,7 @@ const showcase = cs.flowShowcase;
                       <figure>
                         <button
                           type="button"
-                          data-lightbox={screen.src}
+                          data-lightbox={screen.full ?? screen.src}
                           data-lightbox-alt={screen.alt}
                           data-lightbox-orientation="portrait"
                           aria-label={`Open ${screen.caption}`}
@@ -128,25 +132,27 @@ const showcase = cs.flowShowcase;
         ))}
       </div>
 
-      <section class="flow-band flow-band--evaluation">
-        <div class="flow-band__inner">
-          <div class="flow-copy" data-reveal>
-            <h2>{showcase.evaluation.heading}</h2>
-            <p>{showcase.evaluation.body}</p>
+      {showcase.evaluation && (
+        <section class="flow-band flow-band--evaluation">
+          <div class="flow-band__inner">
+            <div class="flow-copy" data-reveal>
+              <h2>{showcase.evaluation.heading}</h2>
+              <p>{showcase.evaluation.body}</p>
+            </div>
+            <dl class="flow-stats flow-stats--evaluation" data-reveal-group>
+              {showcase.evaluation.stats.map((stat) => (
+                <div>
+                  <dt>{stat.value}</dt>
+                  <dd>{stat.label}</dd>
+                </div>
+              ))}
+            </dl>
+            <ul class="flow-changes" data-reveal-group>
+              {showcase.evaluation.changes.map((change) => <li>{change}</li>)}
+            </ul>
           </div>
-          <dl class="flow-stats flow-stats--evaluation" data-reveal-group>
-            {showcase.evaluation.stats.map((stat) => (
-              <div>
-                <dt>{stat.value}</dt>
-                <dd>{stat.label}</dd>
-              </div>
-            ))}
-          </dl>
-          <ul class="flow-changes" data-reveal-group>
-            {showcase.evaluation.changes.map((change) => <li>{change}</li>)}
-          </ul>
-        </div>
-      </section>
+        </section>
+      )}
 
       <section class="flow-output" data-reveal>
         <h2>{showcase.output.heading}</h2>

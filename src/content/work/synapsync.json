@@ -1,0 +1,142 @@
+{
+  "order": 20,
+  "slug": "synapsync",
+  "title": "SynapSync",
+  "status": "published",
+  "clientType": "Speculative brain-module companion app",
+  "engagement": "Self-initiated concept",
+  "summary": "SynapSync is a speculative companion app for a fictional brain module that treats activity and memories as phone-managed data. I designed the product premise, onboarding, core flows, and visual system in Figma.",
+  "problem": "A brain implant sounds invasive before its interface says a word. I had to make that far-fetched premise feel calm and legible on a phone without disguising what the fictional product does. Trust had to come from visible limits: read-only data, local storage, plain status language, and obvious off switches.",
+  "role": [
+    "Concept design",
+    "Product UI design",
+    "Interaction design",
+    "Visual system"
+  ],
+  "services": [
+    "Concept design",
+    "Product UI",
+    "Interaction design",
+    "Figma prototype"
+  ],
+  "tools": [
+    "Figma"
+  ],
+  "tags": [
+    "product",
+    "prototype"
+  ],
+  "cover": {
+    "type": "image",
+    "motif": "portal",
+    "alt": "Three SynapSync phone screens, Monitoring, the dashboard, and Brain Space, floating on a dark indigo background",
+    "src": "media/work/synapsync/cover.webp",
+    "caption": "Monitoring, dashboard, and Brain Space"
+  },
+  "sections": [],
+  "flowShowcase": {
+    "context": {
+      "heading": "Designing the premise",
+      "body": "SynapSync is a self-initiated speculative concept, not a shipped product or a real medical device. Its fictional premise is a near-future brain module that pairs with a phone, records brain activity, and stores memories as manageable data. I set out to design the companion app around that unsettling idea: explain it quickly, make device state easy to read, and give data control more prominence than technical spectacle. The work focuses on interface and interaction choices rather than validating the imagined technology."
+    },
+    "groups": [
+      {
+        "heading": "First launch and pairing",
+        "body": "I kept first launch deliberately spare because the premise needs explanation before decoration. Four onboarding screens describe monitoring, brain storage, and direct data management in plain language, supported by a progress bar, Skip control, and one forward action. The read-only promise appears before pairing, where it can answer the obvious privacy concern early. Pairing comes last and follows the familiar rhythm of connecting headphones or a watch. That ordinary final step frames the fictional module as an accessory while the copy still names what makes it unusual.",
+        "screens": [
+          {
+            "src": "media/work/synapsync/splash.webp",
+            "alt": "SynapSync splash screen showing the neuron logo and wordmark on a dark navy background",
+            "caption": "Introduce SynapSync"
+          },
+          {
+            "src": "media/work/synapsync/onboarding-1.webp",
+            "alt": "Onboarding screen reading View all your Synapsync data in one app, with a progress bar, a Skip control, and a forward arrow",
+            "caption": "Unify brain data"
+          },
+          {
+            "src": "media/work/synapsync/onboarding-2.webp",
+            "alt": "Onboarding screen reading Monitor everything in your brain, describing brain status such as alertness or fatigue",
+            "caption": "Monitor brain status"
+          },
+          {
+            "src": "media/work/synapsync/onboarding-3.webp",
+            "alt": "Onboarding screen reading Manage your Brain Space efficiently, noting that brain data is secure and read-only",
+            "caption": "Explain storage safeguards"
+          },
+          {
+            "src": "media/work/synapsync/onboarding-4.webp",
+            "alt": "Onboarding screen reading Manage your data directly as they happen, about managing memories through the device",
+            "caption": "Manage memories directly"
+          },
+          {
+            "src": "media/work/synapsync/onboarding-pairing.webp",
+            "alt": "Pairing screen reading Let's get started with a Pairing status message",
+            "caption": "Pair the module"
+          }
+        ]
+      },
+      {
+        "heading": "Dashboard and notifications",
+        "body": "I made the dashboard answer three immediate questions: is the module healthy, is it connected, and how much storage remains. Cards, green state marks, a waveform, battery status, and a sync toggle borrow the grammar of fitness trackers and paired devices. That reference is intentional. It gives a strange implant an ordinary operating model. A local-storage note sits beside recent activity instead of inside settings. Notifications use plain event sentences, so mock file and reading counts feel like records rather than surveillance logs.",
+        "screens": [
+          {
+            "src": "media/work/synapsync/dashboard.webp",
+            "alt": "SynapSync dashboard greeting Maria, with a Brain Health card and an At a glance grid of activity, sync, battery, connection, storage, and performance tiles",
+            "caption": "Check module health"
+          },
+          {
+            "src": "media/work/synapsync/notifications.webp",
+            "alt": "Notifications screen listing plain-language brain-module events with times and a Clear all notifications button",
+            "caption": "Review module events"
+          }
+        ]
+      },
+      {
+        "heading": "Brain monitoring",
+        "body": "I separated everyday condition checks from serious medical alerts to avoid placing stress beside stroke as if they carried the same weight. The status grid uses color and short verdicts for fast reading, but every red condition includes a next-step link rather than ending at alarm. A central brain illustration establishes the fictional module without crowding the decisions around it. Recommendations stay in plain language, while epilepsy, stroke, dementia, and migraine states occupy a distinct alert panel. The screen presents hierarchy, not a claim of medical accuracy.",
+        "screens": [
+          {
+            "src": "media/work/synapsync/monitoring.webp",
+            "full": "media/work/synapsync/monitoring-full.webp",
+            "alt": "Monitoring screen with brain status, a wired 3D brain-module illustration, four status cards, a recommendation block, and a serious-condition alert panel",
+            "caption": "Assess brain status"
+          }
+        ]
+      },
+      {
+        "heading": "Brain storage and data",
+        "body": "I treated memory management like phone storage because the interaction model is already familiar. Brain Space turns capacity into pictured regions for memory, learning, and creativity, then provides a tappable list with Recently Deleted. Brain Data shifts from capacity to retrieval: search, recent items, categories, local download, and manual sync. That distinction keeps browsing separate from storage maintenance. Visible deletion and download actions matter most here. They show exactly what the imagined owner can remove, find, or take off the module.",
+        "screens": [
+          {
+            "src": "media/work/synapsync/brain-space.webp",
+            "alt": "Brain Space storage screen with the brain split into Memory, Learning, and Creativity regions and a tappable user-data list",
+            "caption": "Review brain storage"
+          },
+          {
+            "src": "media/work/synapsync/brain-data.webp",
+            "full": "media/work/synapsync/brain-data-full.webp",
+            "alt": "Brain Data screen with a memory search field, recent memory cards, and a grid of data categories with download and sync actions",
+            "caption": "Find stored data"
+          }
+        ]
+      },
+      {
+        "heading": "Profile and module controls",
+        "body": "I wrote each profile switch as a direct account of its behavior and cost. Monitoring, automatic pairing, syncing, and performance controls say what changes when toggled. The performance setting includes a blunt energy-use warning instead of hiding the tradeoff in legal copy. Module power and Private Session controls make refusal visible: stop collection, or block another person from requesting a sync. Account details, software information, privacy policy, support, and logout remain conventional so the speculative settings have a familiar home.",
+        "screens": [
+          {
+            "src": "media/work/synapsync/profile.webp",
+            "full": "media/work/synapsync/profile-full.webp",
+            "alt": "SynapSync profile screen with the account plan and grouped toggle settings for services, module power, data management, performance, and privacy",
+            "caption": "Control module settings"
+          }
+        ]
+      }
+    ],
+    "output": {
+      "heading": "Concept deliverable",
+      "body": "The deliverable is a Figma concept with a visual system and connected screens covering first launch, daily status, storage, data browsing, alerts, and settings. As portfolio work, SynapSync shows how I handle an implausible premise through familiar interaction models, explicit limits, and careful information hierarchy. It does not argue that a brain module should exist. It asks what its phone interface would need to admit, explain, and let someone stop."
+    }
+  }
+}

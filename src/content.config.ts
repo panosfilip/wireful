@@ -108,27 +108,39 @@ const work = defineCollection({
           heading: z.string(),
           body: z.string(),
         }),
-        research: z.object({
-          heading: z.string(),
-          body: z.string(),
-          stats: z.array(
-            z.object({
-              value: z.string(),
-              label: z.string(),
-            }),
-          ),
-        }),
-        structure: z.object({
-          heading: z.string(),
-          body: z.string(),
-          boards: z.array(
-            z.object({
-              src: z.string(),
-              alt: z.string(),
-              caption: z.string(),
-            }),
-          ),
-        }),
+        /**
+         * Optional user-research band (survey/interview stats). Omit for
+         * concept work with no real research to report.
+         */
+        research: z
+          .object({
+            heading: z.string(),
+            body: z.string(),
+            stats: z.array(
+              z.object({
+                value: z.string(),
+                label: z.string(),
+              }),
+            ),
+          })
+          .optional(),
+        /**
+         * Optional information-architecture band with Figma board exports.
+         * Omit when there are no board overviews to show.
+         */
+        structure: z
+          .object({
+            heading: z.string(),
+            body: z.string(),
+            boards: z.array(
+              z.object({
+                src: z.string(),
+                alt: z.string(),
+                caption: z.string(),
+              }),
+            ),
+          })
+          .optional(),
         groups: z.array(
           z.object({
             heading: z.string(),
@@ -138,21 +150,32 @@ const work = defineCollection({
                 src: z.string(),
                 alt: z.string(),
                 caption: z.string(),
+                /**
+                 * Optional full-scroll export opened by the lightbox. Use it
+                 * when `src` is a viewport-height crop of a taller screen.
+                 */
+                full: z.string().optional(),
               }),
             ),
           }),
         ),
-        evaluation: z.object({
-          heading: z.string(),
-          body: z.string(),
-          stats: z.array(
-            z.object({
-              value: z.string(),
-              label: z.string(),
-            }),
-          ),
-          changes: z.array(z.string()),
-        }),
+        /**
+         * Optional post-testing evaluation band (usability scores, change
+         * log). Omit for concept work that was not user-tested.
+         */
+        evaluation: z
+          .object({
+            heading: z.string(),
+            body: z.string(),
+            stats: z.array(
+              z.object({
+                value: z.string(),
+                label: z.string(),
+              }),
+            ),
+            changes: z.array(z.string()),
+          })
+          .optional(),
         output: z.object({
           heading: z.string(),
           body: z.string(),
