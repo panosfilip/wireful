@@ -35,6 +35,15 @@
   clip-path: inset(-100vh 0 0);
 }
 
+/* The portrait glow normally bleeds 30% past the portrait's bottom; under the
+   hero clip that produced a hard chopped edge along the boundary. Anchor the
+   glow's box at the portrait bottom instead: the radial falloff (closest-side)
+   reaches zero exactly at the hero's edge, so it melts into the border
+   instead of being cut by it. */
+.hero-home .hero-portrait::before {
+  inset: auto -15% 0 -15%;
+}
+
 /* The portrait rests on the hero's bottom edge and paints over the section's
    border-bottom, cutting the separator line under the photo. Repaint the
    hairline above the content so it runs the full width of the boundary. */
