@@ -1,37 +1,72 @@
 {
   "order": 10,
   "slug": "holiways-crete",
-  "title": "Holiways Crete",
-  "status": "draft",
-  "clientType": "Hospitality website",
-  "summary": "UXPin website prototype for Holiways Crete, combining destination content with the information visitors need to plan a stay.",
-  "problem": "Visitors needed to understand the offer quickly and find their way to the relevant accommodation and booking information.",
+  "title": "Holiways Villas",
+  "status": "published",
+  "clientType": "Villa booking and private experiences website",
+  "liveUrl": "https://holiwaysvillas.com/",
+  "summary": "A responsive Figma design delivered in WordPress for finding, comparing and booking villas, with private experiences and services built into the same trip-planning flow.",
+  "problem": "The interface had to hold two different tasks together: searching a large villa catalogue and planning the stay around each property, from dates and guest count to transfers, private chefs and local experiences.",
   "role": [
     "Website UI design",
     "UX prototype",
-    "Visual direction"
+    "Visual direction",
+    "WordPress implementation"
   ],
   "services": [
     "Website design",
-    "UX design"
+    "UX design",
+    "WordPress development"
   ],
   "tools": [
-    "UXPin"
+    "Figma",
+    "WordPress"
   ],
   "tags": [
     "web",
+    "wordpress",
     "prototype",
     "hospitality"
   ],
   "cover": {
-    "type": "placeholder",
+    "type": "video",
     "motif": "homepage",
-    "alt": "Website interface concept for Holiways Crete"
+    "alt": "Holiways Villas homepage moving from the villa search to featured properties and collections",
+    "src": "media/work/holiways-home.mp4",
+    "poster": "media/work/holiways-home-poster.webp"
   },
   "sections": [
     {
+      "heading": "Context",
+      "body": "Holiways combines a broad villa catalogue with the practical work of planning a holiday. Visitors can browse by destination or collection, compare properties, check dates and guest capacity, then add services or private experiences. Owners and travel agents have their own routes without taking attention away from the traveller's main task."
+    },
+    {
+      "heading": "Process",
+      "body": "I designed the interface in Figma around the move from broad search to a confident shortlist, then carried it into WordPress. Location, dates and guest count stay close to the navigation. Villa cards bring the comparison facts forward: area, capacity, bedrooms, bathrooms and nightly price. Property pages shift the emphasis to photography, availability and the details someone needs before making an enquiry or booking."
+    },
+    {
       "heading": "Output",
-      "body": "A responsive website prototype with destination content, clear navigation, and booking routes."
+      "body": "The WordPress site covers villa discovery, property pages, offers, private experiences, on-demand services and supporting content. The homepage opens with the search itself. Inside a villa, the image gallery, location trail, specifications and booking controls share the first screen, while longer bedroom and amenity details remain available further down the page."
+    },
+    {
+      "heading": "Result",
+      "body": "The delivered site gives travellers one continuous route from destination-led browsing to concrete booking decisions. They can compare villas, open a property's full gallery and plan the rest of the stay without moving to a separate service."
+    }
+  ],
+  "gallery": [
+    {
+      "type": "video",
+      "src": "media/work/holiways-villa-gallery.mp4",
+      "poster": "media/work/holiways-villa-gallery-poster.webp",
+      "alt": "Geroulios Estate property page opening its full image gallery and moving through villa photographs",
+      "caption": "Villa detail and image gallery"
+    },
+    {
+      "type": "image",
+      "src": "media/work/holiways-experiences.webp",
+      "full": "media/work/holiways-experiences-full.webp",
+      "alt": "Private Experiences in Crete page with search, category filters and activity cards",
+      "caption": "Private experiences"
     }
   ]
 }

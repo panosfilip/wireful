@@ -12,9 +12,11 @@ interface Props {
    * case-study meta — see the .capability-tags--rows rule in global.css.
    */
   perRow?: number;
+  /** Render each pill as a real anchor to its taxonomy page (see CapabilityTag). */
+  linked?: boolean;
 }
 
-const { tags, variant = "card", perRow } = Astro.props;
+const { tags, variant = "card", perRow, linked = false } = Astro.props;
 
 const rows = perRow
   ? Array.from({ length: Math.ceil(tags.length / perRow) }, (_, i) =>
@@ -33,7 +35,7 @@ const rows = perRow
       {rows.map((row) => (
         <ul class="capability-tags-row" role="list">
           {row.map((tag) => (
-            <CapabilityTag tag={tag} />
+            <CapabilityTag tag={tag} linked={linked} />
           ))}
         </ul>
       ))}
@@ -41,7 +43,7 @@ const rows = perRow
   ) : (
     <ul class={`capability-tags capability-tags--${variant}`} aria-label="Project tags">
       {tags.map((tag) => (
-        <CapabilityTag tag={tag} />
+        <CapabilityTag tag={tag} linked={linked} />
       ))}
     </ul>
   )
@@ -60,21 +62,21 @@ const rows = perRow
 
   capabilityTags.forEach((tag) => {
     tag.addEventListener("click", (event) => {
-      if (!isTouchInterface.matches) return;
-      event.preventDefault();
-      event.stopPropagation();
-
-      if (tag.classList.contains("is-expanded")) {
-        window.location.href = new URL(
-          `work?tag=${tag.dataset.capabilityTag}#taxonomy`,
-          document.baseURI,
-        ).href;
+      // Touch: first tap only reveals the label; a second tap follows through.
+      if (isTouchInterface.matches && !tag.classList.contains("is-expanded")) {
+        event.preventDefault();
+        event.stopPropagation();
+        collapseTags();
+        tag.classList.add("is-expanded");
+        tag.setAttribute("aria-expanded", "true");
         return;
       }
 
-      collapseTags();
-      tag.classList.add("is-expanded");
-      tag.setAttribute("aria-expanded", "true");
+      // Open the tag's taxonomy page. Card tokens sit inside the card's own
+      // anchor, so claim the click — otherwise it opens the case study.
+      event.preventDefault();
+      event.stopPropagation();
+      window.location.href = new URL(tag.dataset.capabilityHref!, document.baseURI).href;
     });
   });
 </script>

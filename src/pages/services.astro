@@ -19,10 +19,11 @@ const services = [
     shortTitle: "Websites",
     title: "Website design and redesign",
     problem:
-      "For organisations with a site that has become difficult to navigate, explain, update, or extend.",
+      "For organisations creating a website from scratch, or replacing one that has become difficult to navigate, explain, update, or extend.",
     description:
-      "I work from the content and visitor tasks through to responsive page design. The final system accounts for the CMS, the people maintaining it, and the developers building it.",
+      "I can start with a new brief or an existing site. I work from the content, goals, and visitor tasks through to responsive page design, with a system that accounts for the CMS, the people maintaining it, and the developers building it.",
     work: [
+      "Website planning and content structure",
       "Information architecture and content hierarchy",
       "Responsive website UI",
       "WordPress and Elementor-aware design",
@@ -32,8 +33,8 @@ const services = [
     ],
     outputs: "Sitemaps, wireframes, Figma page designs, reusable components, production assets, and handoff notes.",
     proof: [
-      caseBySlug("teka-ui-redesign"),
-      caseBySlug("kifissia-municipality-redesign"),
+      caseBySlug("iq-media-hub"),
+      caseBySlug("capitano-lemnos"),
       caseBySlug("dtk-law-firm-website"),
     ],
     workLink: { href: "work?tag=web#taxonomy", label: "Browse website work" },
@@ -54,15 +55,18 @@ const services = [
       "Second opinion before development",
     ],
     outputs: "Annotated findings, severity-ranked recommendations, example redesigns where they help, and a review session with the team.",
-    proof: [],
-    workLink: { href: "contact", label: "Discuss a focused review" },
+    proof: [
+      caseBySlug("oasa-telematics-redesign"),
+      caseBySlug("teka-ui-redesign"),
+    ],
+    workLink: { href: "contact", label: "Discuss a project" },
   },
   {
     id: "products",
     shortTitle: "Product UI",
     title: "Product UI and prototypes",
     problem:
-      "For portals, dashboards, and internal tools that need to be worked through before development starts.",
+      "For portals, dashboards, and internal tools that need clear flows and screens before development starts.",
     description:
       "I turn requirements into flows, screens, states, and testable prototypes. This is useful when a team needs to resolve how the product behaves before committing engineering time.",
     work: [
@@ -74,8 +78,12 @@ const services = [
       "Design review with developers",
     ],
     outputs: "Flows, wireframes, interactive prototypes, responsive interface designs, component specifications, and developer-ready Figma files.",
-    proof: [],
-    workLink: { href: "contact", label: "Ask for relevant product work" },
+    proof: [
+      caseBySlug("my1521-taxpayer-portal"),
+      caseBySlug("streamee-product-ui"),
+      caseBySlug("aade-mypoint-customer-service"),
+    ],
+    workLink: { href: "work?tag=product#taxonomy", label: "Browse product work" },
   },
   {
     id: "brand",
@@ -93,7 +101,10 @@ const services = [
       "Print and outdoor material",
     ],
     outputs: "Identity direction, campaign toolkits, reusable templates, usage rules, and production-ready files.",
-    proof: [caseBySlug("cymoid-productions")],
+    proof: [
+      caseBySlug("cymoid-productions"),
+      caseBySlug("shoot-and-win-fysiko-aerio"),
+    ],
     workLink: { href: "work?tag=brand#taxonomy", label: "Browse brand work" },
   },
 ];
@@ -120,7 +131,7 @@ const description =
     </div>
     <div class="container">
       <h1 data-intro style="--intro: 1">
-        Design for
+        <span class="hero-lead-in">Design for</span>
         <span class="sr-only">websites, product UI, brand systems, and design audits</span>
         <span
           class="title-keyword"
@@ -130,12 +141,12 @@ const description =
         >.
       </h1>
       <p class="lead" data-intro style="--intro: 2">
-        I help organisations untangle difficult content, improve interfaces, and turn rough
-        requirements into work a team can build and maintain.
+        I help organisations shape new ideas, untangle difficult content, and turn rough
+        requirements into websites, interfaces, and systems a team can build and maintain.
       </p>
       <div class="hero-actions" data-intro style="--intro: 3">
         <a href="contact" class="btn" data-magnetic>Discuss a project</a>
-        <a href="work" class="btn btn-ghost">See relevant work</a>
+        <a href="work" class="btn btn-ghost">Browse all work</a>
       </div>
     </div>
   </section>
@@ -246,10 +257,11 @@ const description =
     <div class="container">
       <div class="services-working-layout">
         <header class="services-working-head" data-reveal>
-          <h2 id="working-heading">Start with what you <span class="title-keyword">have</span>.</h2>
+          <h2 id="working-heading">Choose how we <span class="title-keyword">work</span>.</h2>
           <p>
-            A live site, an early prototype, or a rough brief is enough. We can decide the useful
-            first step after looking at the work.
+            You can bring me a live site, an early idea, a prototype, or a rough brief. The right
+            setup depends on whether you need a focused answer, a complete project, or ongoing
+            design support.
           </p>
         </header>
 
@@ -257,22 +269,22 @@ const description =
           <article>
             <h3>Focused review</h3>
             <p>
-              I review an existing site, interface, or prototype. You receive annotated findings,
-              a ranked fix list, and a session to work through it.
+              Best when you have an existing site, interface, or prototype and need to know what to
+              improve first. You receive annotated findings, a ranked fix list, and a review session.
             </p>
           </article>
           <article>
-            <h3>Defined project</h3>
+            <h3>Complete design project</h3>
             <p>
-              We agree the problem, scope, deliverables, and review points before design begins.
-              Most of the work shown on this site followed this model.
+              Best for a new website, redesign, product interface, or brand system with a clear
+              beginning and end. We agree the scope, deliverables, and review points before design begins.
             </p>
           </article>
           <article>
             <h3>Ongoing support</h3>
             <p>
-              I join your team for a longer period and cover design work across a product, website,
-              campaign, or implementation.
+              Best when your team needs regular design help across a product, website, campaign, or
+              implementation. I join for an agreed period and work alongside the people delivering it.
             </p>
           </article>
           <p class="services-working-scope">
@@ -287,14 +299,14 @@ const description =
   <section class="section contact-cta services-cta" aria-labelledby="services-cta-heading">
     <div class="container">
       <h2 id="services-cta-heading" data-reveal>
-        Not sure what needs <span class="title-keyword">fixing yet</span>?
+        Not sure where to <span class="title-keyword">start</span>?
       </h2>
       <p class="lead" data-reveal style="--reveal-delay: 1">
-        Send the current site, prototype, or brief. A description of what is not working is enough to
-        begin.
+        Send the current site, an early idea, a prototype, or a brief. A short description of what
+        you want to make or improve is enough to begin.
       </p>
       <div class="hero-actions" data-reveal style="--reveal-delay: 2">
-        <a href="contact" class="btn" data-magnetic>Tell me about the problem</a>
+        <a href="contact" class="btn" data-magnetic>Discuss a project</a>
         <a href={site.emailHref} class="btn btn-ghost">Email me directly</a>
         <a href="work" class="section-link">Browse all work <span class="arrow">↗&#xFE0E;</span></a>
       </div>

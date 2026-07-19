@@ -3,6 +3,7 @@
   "slug": "kyverneio-palataki",
   "title": "Kyverneio: Palataki",
   "status": "draft",
+  "hidden": true,
   "clientType": "Hellenic Public Properties Company / ETAD",
   "summary": "Digital concept work for Kyverneio: Palataki, presenting the landmark as a cultural destination in Thessaloniki.",
   "problem": "The landmark needed a public-facing site that explained its history and its planned role as a cultural and visitor destination.",
@@ -20,7 +21,8 @@
   ],
   "tags": [
     "web",
-    "public"
+    "public",
+    "culture"
   ],
   "cover": {
     "type": "placeholder",

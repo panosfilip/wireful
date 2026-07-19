@@ -1,11 +1,114 @@
 /* ---- Case-study page ---------------------------------------------------------------------------------------------- */
 
+/* --case-hue is set inline per page from the project's primary capability
+   token (first tag) — see toneHues in src/data/projectTags.ts — so the hero
+   glow and meta markers lean toward the color the token already carries in
+   the Work grid. Only the hue varies; saturation/lightness are pinned per
+   theme so contrast stays controlled. 336 is the site magenta fallback. */
+.case-page {
+  /* The hero glow is wider than the viewport; clip it without creating a
+     scroll container (clip, unlike hidden, also keeps overflow-y visible). */
+  overflow-x: clip;
+  --case-hue: 336;
+  --case-accent: hsl(var(--case-hue) 72% 62%);
+  --case-glow: hsl(var(--case-hue) 85% 60% / 0.12);
+  --case-glow-core: hsl(var(--case-hue) 90% 65% / 0.2);
+}
+
+:root[data-theme="light"] .case-page {
+  --case-accent: hsl(var(--case-hue) 78% 40%);
+  --case-glow: hsl(var(--case-hue) 80% 45% / 0.08);
+  --case-glow-core: hsl(var(--case-hue) 85% 45% / 0.13);
+}
+
 .case-hero {
-  padding-block: clamp(5rem, 11vw, 9rem) clamp(2.5rem, 6vw, 4rem);
+  position: relative;
+  z-index: 0;
+  padding-block: clamp(5rem, 11vw, 9rem) clamp(2rem, 5vw, 3rem);
+}
+
+/* Cinematic top light: the source sits above the page edge and washes down
+   over the title — a brighter core at the very top inside a wider, softer
+   spill. The pseudo-element extends past the header's bottom edge so the
+   cover (a later sibling) rises over the tail of the light and the two read
+   as one composition rather than stacked blocks. */
+.case-hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: clamp(-8rem, -10vw, -4rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(120rem, 175vw);
+  height: calc(100% + clamp(20rem, 32vw, 30rem));
+  background:
+    radial-gradient(ellipse 55% 46% at 50% 0%, var(--case-glow-core), transparent 74%),
+    radial-gradient(ellipse 95% 74% at 50% 0%, var(--case-glow), transparent 80%);
+  pointer-events: none;
+}
+
+/* The light switches on with the intro stagger: a 1.6s bloom from dim and
+   slightly narrow to full spread, then a barely-there breathe (100↔86%
+   opacity over 14s) keeps it faintly alive. The breathe's delay equals the
+   bloom's duration so it takes over exactly where the bloom ends. Without
+   JS the glow is simply on; reduced-motion gets the same. */
+html.js .case-hero::before {
+  opacity: 0;
+}
+
+html.js .is-loaded .case-hero::before {
+  animation:
+    case-glow-bloom 1.6s var(--ease-expo) both,
+    case-glow-breathe 14s ease-in-out 1.6s infinite alternate;
+}
+
+@keyframes case-glow-bloom {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+@keyframes case-glow-breathe {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.86;
+  }
 }
 
 .case-hero h1 {
   max-width: 14em;
+}
+
+/* Third intro beat: a thin accent rule draws itself under the title between
+   the title (slot 1) and lead (slot 3) of the load stagger. */
+.case-hero__rule {
+  width: clamp(4rem, 9vw, 6.5rem);
+  height: 2px;
+  background: var(--case-accent);
+  margin-bottom: 1.4rem;
+  transform-origin: left center;
+}
+
+html.js .case-hero__rule {
+  transform: scaleX(0);
+}
+
+html.js .is-loaded .case-hero__rule {
+  animation: case-rule-draw 0.9s var(--ease-expo) forwards;
+  animation-delay: 180ms;
+}
+
+@keyframes case-rule-draw {
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .case-meta {
@@ -38,7 +141,7 @@
 
 .case-meta h2::before {
   content: "+ ";
-  color: var(--accent);
+  color: var(--case-accent, var(--accent));
 }
 
 .case-meta ul,

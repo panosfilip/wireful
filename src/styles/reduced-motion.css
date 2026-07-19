@@ -7,7 +7,8 @@
 
   html.js [data-reveal],
   html.js [data-reveal-group] > *,
-  html.js [data-intro] {
+  html.js [data-intro],
+  html.js .case-hero__rule {
     opacity: 1;
     transform: none;
     transition: none;
@@ -15,8 +16,25 @@
   }
 
   html.js .marquee-track,
-  html.js .tick-blink {
+  html.js .tick-blink,
+  html.js .primary-nav li a[aria-current="page"]::before {
     animation: none;
+  }
+
+  /* The global clamp only shortens durations; the mobile-menu stagger is
+     built from delays, so those must be zeroed explicitly. */
+  .site-header.nav-open .primary-nav li,
+  .site-header.nav-open .nav-overlay-foot {
+    transition-delay: 0s;
+  }
+
+  /* Kept separate from the block above: the glow needs its translateX(-50%)
+     centering, so it must not receive `transform: none`. The infinite
+     breathe would flicker at the clamped 0.01ms duration — stop it and show
+     the glow fully on. */
+  html.js .case-hero::before {
+    animation: none;
+    opacity: 1;
   }
 
   *,

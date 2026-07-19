@@ -1,38 +1,88 @@
 {
   "order": 19,
   "slug": "aftersalespro-redesign",
-  "title": "AftersalesPro Redesign Concept",
-  "status": "draft",
-  "clientType": "AftersalesPro",
-  "summary": "Figma redesign concept for AftersalesPro, setting out a clearer product interface before a platform refresh.",
-  "problem": "The product structure and interaction patterns needed to be resolved before the redesign moved into delivery.",
+  "title": "AftersalesPro Website Redesign",
+  "status": "published",
+  "clientType": "E-commerce aftersales platform",
+  "engagement": "Self-initiated concept",
+  "summary": "A website and logo concept for AftersalesPro that turns a complex e-commerce operations platform into a product story people can scan, understand, and remember.",
+  "problem": "AftersalesPro brings voucher creation, shipment tracking, returns, customer notifications, and support into one platform. The design challenge was to explain that range without turning the homepage into a catalogue of features. The concept needed to establish the product quickly, make its operational value visible, and give the brand a more recognisable front door.",
   "role": [
-    "Product UI design",
-    "UX audit",
-    "Figma prototype"
+    "Website concept",
+    "UI design",
+    "Logo design",
+    "Visual direction"
   ],
   "services": [
-    "Product UI",
-    "UI redesign",
-    "Prototype"
+    "Website design",
+    "Brand identity concept",
+    "Content hierarchy"
   ],
   "tools": [
     "Figma"
   ],
   "tags": [
-    "product",
-    "audit",
+    "web",
+    "brand",
     "commercial"
   ],
   "cover": {
-    "type": "placeholder",
-    "motif": "audit",
-    "alt": "Product interface redesign concept"
+    "type": "image",
+    "motif": "homepage",
+    "alt": "AftersalesPro website concept with a bold headline, new geometric logo, and a large product dashboard preview",
+    "src": "media/work/aftersalespro/aftersalespro-home.webp",
+    "full": "media/work/aftersalespro/aftersalespro-full.webp",
+    "caption": "Homepage concept"
   },
   "sections": [
     {
-      "heading": "Output",
-      "body": "A Figma redesign concept that defines the interface for a future product refresh."
+      "heading": "A product story, not a software brochure",
+      "body": "The opening screen answers the first commercial question at a glance: what is AftersalesPro, and what does it help a team manage? A plain-spoken headline sits beside the dashboard rather than a generic logistics image. The product becomes the proof. Partner and award marks follow close behind, so recognition supports the proposition without competing with it."
+    },
+    {
+      "heading": "A logo built around the parcel",
+      "body": "The identity concept introduces a compact geometric mark that reads as both a parcel and a continuous route. Its folded faces suggest movement through a delivery cycle, while the open centre keeps the symbol light enough for navigation, product UI, and small digital placements. The lowercase wordmark stays approachable, with the green “pro” acting as a quiet point of emphasis rather than a separate badge."
+    },
+    {
+      "heading": "Show the work behind the promise",
+      "body": "Instead of describing automation in broad terms, the services section places a real-looking workflow beside each explanation. Voucher creation leads the sequence, followed by tracking, returns, notifications, and store pickup. That makes the platform easier to picture in use: an operations team can connect a capability to the screen where the work would happen."
+    },
+    {
+      "heading": "Trust belongs in the main narrative",
+      "body": "Security certifications, industry recognition, support, and customer success are given full sections rather than being buried in the footer. For a platform that would sit between orders, carriers, and customer data, those details are part of the product argument. The page then moves into testimonials and practical articles, shifting from “what the platform does” to “what working with it could feel like.”"
+    },
+    {
+      "heading": "One visual language from pitch to proof",
+      "body": "White space keeps a dense offer readable. Teal panels separate product explanations from editorial and support content, while dark type gives the page a firm hierarchy. Rounded interface frames, subtle green light, and repeated product imagery connect the marketing page to the platform without making every section look like a dashboard."
+    },
+    {
+      "heading": "Concept deliverable",
+      "body": "The final deliverable is a long-form desktop homepage mockup and a new logo direction, designed in Figma. It is an independent redesign concept, not a commissioned or live AftersalesPro website, and no performance claims are attached to it. The work shows how I would sharpen the platform’s positioning, organise a large offer, and build a brand-led sales page around the product itself."
     }
+  ],
+  "gallery": [
+    {
+      "src": "media/work/aftersalespro/aftersalespro-services.webp",
+      "full": "media/work/aftersalespro/aftersalespro-full.webp",
+      "alt": "Teal services section in the AftersalesPro concept showing voucher creation and a product form",
+      "caption": "Services and product workflow"
+    },
+    {
+      "src": "media/work/aftersalespro/aftersalespro-trust.webp",
+      "full": "media/work/aftersalespro/aftersalespro-full.webp",
+      "alt": "AftersalesPro concept sections presenting security certifications and industry awards",
+      "caption": "Certifications and recognition"
+    },
+    {
+      "src": "media/work/aftersalespro/aftersalespro-content.webp",
+      "full": "media/work/aftersalespro/aftersalespro-full.webp",
+      "alt": "AftersalesPro concept with customer stories, article cards, newsletter panel, and redesigned footer",
+      "caption": "Customer stories and editorial content"
+    }
+  ],
+  "outcomes": [
+    "A clearer homepage narrative built around the product interface",
+    "A new geometric logo concept designed for both marketing and product contexts",
+    "A visual direction that connects services, trust signals, support, and editorial content"
   ]
 }

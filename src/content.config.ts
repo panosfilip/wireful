@@ -73,7 +73,9 @@ const work = defineCollection({
     role: z.array(z.string()),
     services: z.array(z.string()),
     tools: z.array(z.string()),
-    tags: z.array(z.enum(projectTags)),
+    tags: z
+      .array(z.enum(projectTags))
+      .max(6, "Projects can have at most 6 capability tokens"),
     cover: z.object({
       type: z.enum(["placeholder", "image", "video"]),
       motif: z.enum(coverMotifs),

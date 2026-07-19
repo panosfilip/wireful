@@ -25,8 +25,8 @@ const isActive = (href: string) => {
       <nav class="primary-nav" id="primary-nav" aria-label="Primary">
         <ul>
           {
-            links.map((link) => (
-              <li>
+            links.map((link, index) => (
+              <li style={`--nav-i: ${index}`}>
                 <a href={link.href} aria-current={isActive(link.href) ? "page" : undefined}>
                   {link.label}
                 </a>
@@ -34,6 +34,10 @@ const isActive = (href: string) => {
             ))
           }
         </ul>
+        {/* Only rendered visible inside the fullscreen mobile overlay */}
+        <div class="nav-overlay-foot">
+          <ContactIcons variant="header" />
+        </div>
       </nav>
       <div class="header-actions">
         <button
@@ -75,6 +79,19 @@ const isActive = (href: string) => {
   const nav = header.querySelector<HTMLElement>(".primary-nav")!;
   const themeToggle = header.querySelector<HTMLButtonElement>(".theme-toggle")!;
 
+  // Feedback click for the theme toggle (0.4s mono mp3, ~2KB). Created
+  // eagerly so the first toggle isn't late while the file fetches; volume
+  // kept low so it reads as feedback, not an event. play() is fired in the
+  // click handler, so autoplay policy is always satisfied; the catch covers
+  // the edge cases (interrupted load, muted contexts).
+  const toggleSound = new Audio(`${import.meta.env.BASE_URL}/media/ui-theme-toggle.mp3`);
+  toggleSound.preload = "auto";
+  toggleSound.volume = 0.45;
+  const playToggleSound = () => {
+    toggleSound.currentTime = 0;
+    toggleSound.play().catch(() => {});
+  };
+
   const updateThemeControl = () => {
     const isLight = document.documentElement.dataset.theme === "light";
     const label = `Switch to ${isLight ? "dark" : "light"} mode`;
@@ -85,6 +102,7 @@ const isActive = (href: string) => {
 
   updateThemeControl();
   themeToggle.addEventListener("click", () => {
+    playToggleSound();
     const theme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
@@ -103,7 +121,16 @@ const isActive = (href: string) => {
   const setOpen = (open: boolean) => {
     header.classList.toggle("nav-open", open);
     toggle.setAttribute("aria-expanded", String(open));
+    // The mobile menu covers the viewport, so the page must not scroll under it
+    document.documentElement.classList.toggle("nav-locked", open);
   };
+
+  // Leaving the mobile breakpoint hides the overlay via CSS; drop the state
+  // (and the scroll lock) with it.
+  const mobileNav = window.matchMedia("(max-width: 620px)");
+  mobileNav.addEventListener("change", (event) => {
+    if (!event.matches) setOpen(false);
+  });
 
   toggle.addEventListener("click", () => {
     setOpen(!header.classList.contains("nav-open"));

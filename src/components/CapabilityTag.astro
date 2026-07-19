@@ -3,21 +3,42 @@ import { projectTagDefinitions, type ProjectTag } from "../data/projectTags";
 
 interface Props {
   tag: ProjectTag;
+  /**
+   * Render the pill as a real anchor to the tag's taxonomy page. Only valid
+   * outside another link — card tokens sit inside the card's anchor, so they
+   * stay spans and navigate via the CapabilityTags click script instead.
+   */
+  linked?: boolean;
 }
 
-const { tag } = Astro.props;
+const { tag, linked = false } = Astro.props;
 const definition = projectTagDefinitions[tag];
+const href = `work/tags/${tag}/`;
 ---
 
 <li
   class={`capability-tag capability-tag--${definition.tone}`}
   data-capability-tag={tag}
+  data-capability-href={href}
   aria-expanded="false"
-  aria-label={`${definition.label}: tap once to reveal, tap again to view related projects`}
+  aria-label={`${definition.label}: opens all projects tagged ${definition.label}`}
   title={definition.label}
 >
-  <span class="capability-tag__pill">
-    <span class="capability-tag-mark" aria-hidden="true">{definition.mark}</span>
-    <span class="capability-tag-label">{definition.label}</span>
-  </span>
+  {
+    linked ? (
+      <a class="capability-tag__pill" href={href}>
+        <span class="capability-tag-mark" aria-hidden="true">
+          {definition.mark}
+        </span>
+        <span class="capability-tag-label">{definition.label}</span>
+      </a>
+    ) : (
+      <span class="capability-tag__pill">
+        <span class="capability-tag-mark" aria-hidden="true">
+          {definition.mark}
+        </span>
+        <span class="capability-tag-label">{definition.label}</span>
+      </span>
+    )
+  }
 </li>

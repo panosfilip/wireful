@@ -27,22 +27,12 @@
 }
 
 /* The homepage hero allows vertical overflow so the video reaches up behind
-   the navbar — which also lets content leak BELOW the hero: the portrait glow
-   (.hero-portrait::before, 30% bottom bleed) and, on scroll, the parallax
-   video whose bottom edge slides past the boundary and flickers over the
+   the navbar — which also lets content leak BELOW the hero: on scroll, the
+   parallax video's bottom edge slides past the boundary and flickers over the
    marquee. Clip only the bottom: open above (navbar atmosphere intact),
    sealed at the hero's bottom edge. */
 .hero-home {
   clip-path: inset(-100vh 0 0);
-}
-
-/* The portrait glow normally bleeds 30% past the portrait's bottom; under the
-   hero clip that produced a hard chopped edge along the boundary. Anchor the
-   glow's box at the portrait bottom instead: the radial falloff (closest-side)
-   reaches zero exactly at the hero's edge, so it melts into the border
-   instead of being cut by it. */
-.hero-home .hero-portrait::before {
-  inset: auto -15% 0 -15%;
 }
 
 /* The About portrait uses a continuous separator. On the homepage the
@@ -242,19 +232,6 @@ html.js .is-loaded [data-intro] {
   align-self: end;
 }
 
-.hero-portrait::before {
-  content: "";
-  position: absolute;
-  inset: auto -15% -30% -15%;
-  aspect-ratio: 1;
-  background:
-    radial-gradient(closest-side at 35% 45%, rgba(97, 12, 159, 0.55), transparent 70%),
-    radial-gradient(closest-side at 70% 60%, rgba(218, 12, 129, 0.3), transparent 70%);
-  opacity: 0.65;
-  transition: opacity 0.6s var(--ease-out);
-  pointer-events: none;
-}
-
 .hero-portrait img {
   position: relative;
   width: 116%;
@@ -291,10 +268,6 @@ html.js .is-loaded [data-intro] {
 }
 
 @media (hover: hover) {
-  .hero-portrait:hover::before {
-    opacity: 1;
-  }
-
   .hero-portrait:hover img {
     filter: grayscale(0) contrast(1) drop-shadow(0 30px 50px rgba(0, 0, 0, 0.55));
     transform: scale(1.02);

@@ -1,0 +1,71 @@
+---
+import Base from "../../../layouts/Base.astro";
+import CaseCard from "../../../components/CaseCard.astro";
+import CapabilityTags from "../../../components/CapabilityTags.astro";
+import { caseStudies } from "../../../data/caseStudies";
+import { site } from "../../../data/site";
+import { projectTagDefinitions, type ProjectTag } from "../../../data/projectTags";
+import { statusRank } from "../../../utils/workOrder";
+
+// One page per tag that actually has work behind it. Capability tokens only
+// render on projects carrying the tag, so every reachable token has a page.
+export function getStaticPaths() {
+  const tags = Object.keys(projectTagDefinitions) as ProjectTag[];
+  return tags
+    .filter((tag) => caseStudies.some((cs) => cs.tags.includes(tag)))
+    .map((tag) => ({ params: { tag } }));
+}
+
+const tag = Astro.params.tag as ProjectTag;
+const definition = projectTagDefinitions[tag];
+
+const tagged = caseStudies
+  .filter((cs) => cs.tags.includes(tag))
+  .sort((a, b) => statusRank(a.status) - statusRank(b.status));
+
+// The rest of the taxonomy, so a dead end here still leads somewhere. Only
+// tags with real work behind them — the others have no page to land on.
+const otherTags = (Object.keys(projectTagDefinitions) as ProjectTag[]).filter(
+  (t) => t !== tag && caseStudies.some((cs) => cs.tags.includes(t)),
+);
+---
+
+<Base
+  title={`${definition.label} work | ${site.name}`}
+  description={definition.description}
+>
+  <header class="case-hero">
+    <div class="container">
+      <h1 data-intro style="--intro: 1">
+        {definition.label} <span class="title-keyword">work</span>.
+      </h1>
+      <p class="lead" data-intro style="--intro: 2">
+        {definition.description}
+      </p>
+      <div class="hero-actions" data-intro style="--intro: 3">
+        <a href="work/" class="btn btn-ghost">All work</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="case-grid case-grid--equal" data-reveal>
+        {tagged.map((cs) => <CaseCard cs={cs} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div>
+          <h2>Browse another <span class="title-keyword">tag</span>.</h2>
+        </div>
+      </div>
+      <div data-reveal>
+        <CapabilityTags tags={otherTags} variant="detail" linked />
+      </div>
+    </div>
+  </section>
+</Base>

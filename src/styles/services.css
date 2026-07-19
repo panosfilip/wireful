@@ -51,6 +51,14 @@
   filter: blur(8px);
 }
 
+/* On phones the cycling phrase gets its own line under "Design for", so the
+   headline breaks in the same place no matter which phrase is showing */
+@media (max-width: 620px) {
+  .services-hero .hero-lead-in {
+    display: block;
+  }
+}
+
 .services-hero .lead {
   max-width: 61ch;
 }

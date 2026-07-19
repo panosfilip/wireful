@@ -253,7 +253,7 @@
   }
 }
 
-.primary-nav ul {
+.primary-nav > ul {
   display: flex;
   gap: clamp(1.1rem, 3vw, 2.2rem);
 }
@@ -314,7 +314,7 @@
     line-height: 1;
   }
 
-  .primary-nav ul {
+  .primary-nav > ul {
     gap: clamp(1rem, 1.6vw, 1.5rem);
   }
 
@@ -350,7 +350,7 @@
 }
 
 @media (min-width: 621px) and (max-width: 1100px) {
-  .primary-nav ul {
+  .primary-nav > ul {
     gap: clamp(0.8rem, 1.7vw, 1.4rem);
   }
 }
@@ -391,66 +391,165 @@
     display: inline-flex;
   }
 
-  /* While the menu is open the shell goes solid so bar + panel read as one */
-  .site-header.nav-open .header-shell {
-    background: var(--bg);
-    border-bottom-color: var(--line);
+  /* The fullscreen overlay provides the surface; the bar dissolves into it.
+     backdrop-filter must go (it would make the shell the containing block for
+     the fixed overlay), and the shell's own transitions are cut so the flip
+     doesn't animate blur/background over a fullscreen layer. */
+  .site-header.nav-open .header-shell,
+  :root[data-theme="light"] .site-header.nav-open .header-shell {
+    background: transparent;
+    border-bottom-color: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transition: none;
+  }
+
+  /* The overlay is a fixed sibling layer beneath the bar's own flex items —
+     z-index applies to flex items, so no extra positioning is needed. */
+  .header-inner > .wordmark,
+  .header-inner > .header-actions {
+    z-index: 2;
   }
 
   .primary-nav {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--bg);
-    border-bottom: 1px solid var(--line);
-    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.45);
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: calc(5.25rem + env(safe-area-inset-top)) var(--gutter)
+      calc(1.5rem + env(safe-area-inset-bottom));
+    overflow: hidden auto;
+    background:
+      radial-gradient(
+        120% 85% at 88% -8%,
+        color-mix(in srgb, var(--accent) 13%, transparent),
+        transparent 62%
+      ),
+      radial-gradient(
+        110% 80% at -12% 112%,
+        color-mix(in srgb, var(--magenta) 10%, transparent),
+        transparent 58%
+      ),
+      var(--bg);
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
+    will-change: opacity;
     transition:
       opacity 0.25s var(--ease-out),
-      transform 0.35s var(--ease-expo),
-      visibility 0s linear 0.35s;
+      visibility 0s linear 0.25s;
   }
 
   .site-header.nav-open .primary-nav {
     opacity: 1;
     visibility: visible;
-    transform: none;
-    transition:
-      opacity 0.25s var(--ease-out),
-      transform 0.35s var(--ease-expo);
+    transition: opacity 0.25s var(--ease-out);
   }
 
-  .primary-nav ul {
+  .primary-nav > ul {
     flex-direction: column;
-    gap: 0;
-    padding: 0.25rem var(--gutter) 0.75rem;
+    gap: 0.35rem;
+    padding: 0;
   }
 
-  .primary-nav li + li {
-    border-top: 1px solid var(--line);
+  .primary-nav > ul > li {
+    opacity: 0;
+    transform: translateY(1.25rem);
+    transition:
+      opacity 0.35s var(--ease-out),
+      transform 0.55s var(--ease-expo);
   }
 
-  .primary-nav li a {
-    display: flex;
+  .site-header.nav-open .primary-nav > ul > li {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(0.08s + var(--nav-i, 0) * 0.055s);
+  }
+
+  .primary-nav > ul > li a {
+    display: inline-flex;
     align-items: center;
-    width: 100%;
-    min-height: 3rem;
-    font-size: 0.9rem;
-    letter-spacing: 0.12em;
+    min-height: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.3rem, 10vw, 3.1rem);
+    line-height: 1.15;
+    letter-spacing: 0.015em;
+    text-transform: none;
+    color: var(--text);
+    padding-block: 0.1rem;
   }
 
-  .primary-nav li a::after {
+  .primary-nav > ul > li a::after {
     content: none;
   }
 
-  .primary-nav li a[aria-current="page"]::before {
-    content: "+";
-    margin-right: 0.5em;
+  /* The active page carries the wordmark's blinking tick, appended like
+     WIREFUL_ so the label stays flush with the others */
+  .primary-nav > ul > li a[aria-current="page"] {
     color: var(--accent);
   }
+
+  /* Reset the desktop underline geometry the base ::after rule sets up —
+     without this the tick renders as the absolutely-positioned 1px bar */
+  .primary-nav > ul > li a[aria-current="page"]::after {
+    content: "_";
+    position: static;
+    width: auto;
+    height: auto;
+    margin-left: 0.12em;
+    background: none;
+    transform: none;
+    color: var(--accent);
+  }
+
+  html.js .primary-nav > ul > li a[aria-current="page"]::after {
+    animation: tick-blink 1.15s steps(2, start) infinite;
+  }
+
+  .nav-overlay-foot {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    opacity: 0;
+    transform: translateY(0.75rem);
+    transition:
+      opacity 0.35s var(--ease-out),
+      transform 0.55s var(--ease-expo);
+  }
+
+  .site-header.nav-open .nav-overlay-foot {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.32s;
+  }
+
+  .nav-overlay-foot .contact-icons {
+    gap: 1.5rem;
+  }
+
+  .nav-overlay-foot .contact-icon svg {
+    width: 1.35rem;
+    height: 1.35rem;
+  }
+}
+
+/* The overlay footer only exists inside the fullscreen mobile menu */
+@media (min-width: 621px) {
+  .nav-overlay-foot {
+    display: none;
+  }
+}
+
+/* The fullscreen menu owns the viewport — the page must not scroll behind it */
+html.nav-locked,
+html.nav-locked body {
+  overflow: hidden;
 }
 
 @media (max-width: 360px) {

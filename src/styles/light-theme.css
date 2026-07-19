@@ -26,10 +26,6 @@
     linear-gradient(90deg, rgba(252, 250, 252, 0.76), rgba(252, 250, 252, 0.38) 52%, rgba(252, 250, 252, 0.1));
 }
 
-:root[data-theme="light"] .hero-portrait::before {
-  opacity: 0.34;
-}
-
 :root[data-theme="light"] .hero-portrait img {
   filter: grayscale(1) contrast(1.02) drop-shadow(0 28px 42px rgba(67, 40, 79, 0.2));
 }
@@ -78,11 +74,6 @@
   box-shadow: 0 2rem 5rem rgba(67, 40, 79, 0.12);
 }
 
-@media (max-width: 620px) {
-  :root[data-theme="light"] .primary-nav {
-    box-shadow: 0 1.5rem 3rem rgba(67, 40, 79, 0.14);
-  }
-}
 
 :root[data-theme="light"] .work-filter-menu,
 :root[data-theme="light"] .career-card,
