@@ -2,27 +2,32 @@
 import Base from "../layouts/Base.astro";
 import { Image } from "astro:assets";
 import { site, skills } from "../data/site";
-import { withPlaceholders } from "../utils/placeholders";
 import profileImage from "../../profile.png";
 
-const facts = [
-  { label: "Currently", value: "Senior UI/UX Engineer at Choose" },
-  { label: "Role", value: "Senior UI/UX Engineer and Senior Graphic Designer" },
-  { label: "Based in", value: site.location },
+const strengths = [
   {
-    label: "Focus",
-    value:
-      "Freelance websites, product UI, brand systems, Figma prototypes, AI-assisted workflows, WordPress-ready design, and consulting",
+    label: "Current role",
+    value: "Senior UI/UX Engineer at Choose",
   },
   {
-    label: "Experience",
+    label: "UI/UX",
     value:
-      "10+ years across brands, websites, product interfaces, campaigns, hospitality sites, music app UI, and academic digital initiatives",
+      "Senior-level experience shaping websites, digital services, product interfaces, and design systems",
   },
   {
-    label: "Teaching",
+    label: "Graphic design",
     value:
-      "UI Design Instructor / T.A. at NKUA, teaching Figma, interaction design, user-centred design, Think Aloud, and focus groups",
+      "A strong visual foundation across identity, campaigns, editorial design, print, and production",
+  },
+  {
+    label: "Delivery",
+    value:
+      "Practical understanding of responsive implementation, Figma handoff, WordPress, Elementor, and maintainable content",
+  },
+  {
+    label: "University teaching",
+    value:
+      "UI design and user-centred methods within Human-Computer Interaction at the University of Athens",
   },
 ];
 
@@ -44,12 +49,18 @@ const facts = [
       <div class="hero-copy">
         <h1 data-intro style="--intro: 1">{site.fullName}.</h1>
         <p class="lead" data-intro style="--intro: 2">
-          I'm behind <strong>WIREFUL<span class="tick tick-blink">_</span>, my personal
-          brand and story as a designer.</strong>
+          I’m the designer behind <strong>WIREFUL<span class="tick tick-blink">_</span>, my design
+          brand for websites, digital products, and visual systems.</strong>
         </p>
         <p class="lead" data-intro style="--intro: 2">
-          I design interfaces, websites, visual systems, and the supporting assets a business needs to
-          put them into use. I collaborate with senior professionals to provide high quality services and materials
+          I combine UI/UX with a senior graphic design background, content structure, and
+          implementation awareness to move work from early direction to a confident handoff. For
+          broader scopes, I collaborate with trusted developers, writers, photographers, and
+          production partners.
+        </p>
+        <p class="lead" data-intro style="--intro: 2">
+          Alongside my design work, I teach UI design and user-centred methods within
+          Human-Computer Interaction at the National and Kapodistrian University of Athens.
         </p>
       </div>
       <div class="hero-portrait" data-intro style="--intro: 1">
@@ -77,21 +88,23 @@ const facts = [
             <p>
               <strong>WIREFUL<span class="tick tick-blink">_</span></strong> starts with the
               wire: structure, flow, and the connections that hold an interface together. I
-              address those before the visual design. For more than ten years, I have designed
-              brand identities, websites, campaigns, and digital products for agencies, media
-              brands, hospitality businesses, academic projects, and freelance clients.
+              work through those before settling the visual direction. For more than ten years,
+              I have designed brand identities, websites, campaigns, and digital products for
+              agencies, institutions, media brands, hospitality businesses, and independent clients.
             </p>
             <p>
               I'm currently a Senior UI/UX Engineer at Choose, where my day-to-day work includes
               Figma systems, responsive layouts, identity work, UI details, content structure, and
-              decisions for WordPress or Elementor builds. I use AI and LLMs for research
-              synthesis, content structure, concept exploration, UX-writing options, and prototype
-              planning. I review the output against the brief and the design work.
+              decisions for WordPress or Elementor builds. That experience keeps my freelance
+              work grounded in the practical constraints of implementation, publishing, and handoff.
+              I also use AI tools selectively for research synthesis, exploration, and prototyping,
+              while keeping the final decisions rooted in the brief and design judgement.
             </p>
             <p>
-              I also teach Human-Computer Interaction at the National and Kapodistrian
-              University of Athens. My classes cover UI design, Figma, navigation, interaction
-              choices, usability standards, and user-centred methods.
+              At the National and Kapodistrian University of Athens, I teach UI design as part of
+              Human-Computer Interaction. My classes connect Figma and interface decisions with
+              navigation, usability standards, Think Aloud sessions, focus groups, and other
+              user-centred methods.
             </p>
           </div>
         </div>
@@ -142,13 +155,13 @@ const facts = [
 
   <section class="section">
     <div class="container">
-      <h2 data-reveal>At a <span class="title-keyword">glance</span></h2>
+      <h2 data-reveal>What I bring to the <span class="title-keyword">work</span>.</h2>
       <ul class="fact-list" data-reveal-group>
         {
-          facts.map((fact) => (
+          strengths.map((strength) => (
             <li>
-              <span class="fact-label">{fact.label}</span>
-              <span class="fact-value" set:html={withPlaceholders(fact.value)} />
+              <span class="fact-label">{strength.label}</span>
+              <span class="fact-value">{strength.value}</span>
             </li>
           ))
         }
@@ -160,7 +173,7 @@ const facts = [
     <div class="container">
       <h2 data-reveal>Want the <span class="title-keyword">longer version</span>?</h2>
       <p class="lead" data-reveal style="--reveal-delay: 1">
-        You can view the portfolio/profile PDFs or send me a short project note.
+        Explore the portfolio and profile PDFs, or tell me what you’re planning.
       </p>
       <div class="hero-actions" data-reveal style="--reveal-delay: 2">
         <a href="contact" class="btn" data-overlay-trigger data-magnetic>Start a project</a>

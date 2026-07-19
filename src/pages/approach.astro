@@ -5,12 +5,12 @@ import { approachPillars, principles, site } from "../data/site";
 import { caseStudies } from "../data/caseStudies";
 
 const proofWorkSlugs = [
-  "my1521-taxpayer-portal",
   "teka-ui-redesign",
-  "ppf-growthfund",
-  "ekapy-afternoon-surgeries",
-  "kifissia-municipality-redesign",
-  "eu-regions-week-2025",
+  "dtk-law-firm-website",
+  "holiways-crete",
+  "streamee-product-ui",
+  "shoot-and-win-fysiko-aerio",
+  "oasa-telematics-redesign",
 ];
 const proofWork = proofWorkSlugs.map((slug) => caseStudies.find((cs) => cs.slug === slug)!);
 const toolkit = [
@@ -128,9 +128,9 @@ const toolkit = [
     <div class="container">
       <h1 data-intro style="--intro: 1">A practical route from brief to <span class="title-keyword">build</span>.</h1>
       <p class="lead" data-intro style="--intro: 2">
-        A brand refresh, WordPress site, and product interface need different outputs. The work
-        follows the same order: define the problem, set the structure, design in Figma, and
-        prepare the files for build and maintenance.
+        Every project needs its own scope, but the work follows a dependable rhythm: understand
+        the problem, agree the structure, develop the design, and prepare it for delivery. You can
+        review the thinking and respond at every stage.
       </p>
     </div>
   </section>
@@ -145,9 +145,8 @@ const toolkit = [
       </div>
       <div class="principle-grid" data-reveal-group>
         {
-          principles.map((principle, i) => (
+          principles.map((principle) => (
             <div class="principle">
-              <span class="principle-num">0{i + 1}</span>
               <h3>{principle.title}</h3>
               <p>{principle.body}</p>
             </div>
@@ -164,7 +163,7 @@ const toolkit = [
         <div>
           <h2 id="process-heading">Four phases for <span class="title-keyword">most projects</span>.</h2>
           <p class="section-kicker">
-            Each phase produces work you can review and respond to.
+            The scope may expand or contract, but the decisions stay visible as the work develops.
           </p>
         </div>
       </div>
@@ -212,8 +211,8 @@ const toolkit = [
           <h2 id="toolkit-heading">The tools behind<br />the <span class="title-keyword">process</span>.</h2>
           <div class="prose">
             <p>
-              I use a focused set of tools to turn the brief into an interface that can be
-              reviewed, built, and maintained.
+              The toolkit changes with the job. Each tool earns its place by helping the team
+              understand, test, produce, or deliver the work.
             </p>
           </div>
         </div>
@@ -255,13 +254,13 @@ const toolkit = [
         </div>
         <a href="work" class="section-link">All work <span class="arrow">↗&#xFE0E;</span></a>
       </div>
-      <CaseCarousel items={proofWork} label="Public-sector and institutional projects" />
+      <CaseCarousel items={proofWork} label="Selected projects using this process" />
     </div>
   </section>
 
   <section class="section contact-cta">
     <div class="container">
-      <h2 data-reveal>Have a project that needs a <span class="title-keyword">clearer plan</span>?</h2>
+      <h2 data-reveal>Have a project ready to <span class="title-keyword">take shape</span>?</h2>
       <div class="hero-actions" data-reveal style="--reveal-delay: 1">
         <a href="contact" class="btn" data-overlay-trigger data-magnetic>Discuss a project</a>
         <a href="work" class="btn btn-ghost">See the work first</a>

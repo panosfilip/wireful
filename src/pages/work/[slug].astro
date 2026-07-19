@@ -133,16 +133,12 @@ const jsonLd = {
           <h2>Role</h2>
           <ul>{cs.role.map((r) => <li>{r}</li>)}</ul>
         </div>
-        <div>
-          <h2>Engagement</h2>
-          {
-            cs.engagement ? (
-              <p>{cs.engagement}</p>
-            ) : (
-              <p set:html={withPlaceholders("[ADD ENGAGEMENT]")} />
-            )
-          }
-        </div>
+        {cs.engagement && (
+          <div>
+            <h2>Engagement</h2>
+            <p>{cs.engagement}</p>
+          </div>
+        )}
         <div>
           <h2>Services</h2>
           <ul>{cs.services.map((s) => <li>{s}</li>)}</ul>

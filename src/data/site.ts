@@ -8,11 +8,11 @@ export const site = {
   name: "WIREFUL",
   owner: "Panagiotis Filippaios",
   fullName: "Panagiotis Filippaios",
-  role: "Senior UI/UX Engineer and Freelance Web Designer",
+  role: "Senior UI/UX Engineer and Freelance Designer",
   headline:
-    "Digital products and brands, made clear enough to build.",
+    "Websites, digital products, and brands, made clear enough to build.",
   intro:
-    "I'm Panagiotis Filippaios, a senior UI/UX engineer and designer in Athens. I turn rough briefs into interfaces, websites, and brand systems that teams can build and maintain.",
+    "I'm Panagiotis Filippaios, a senior UI/UX engineer and freelance designer in Athens. I shape early ideas and complex requirements into useful interfaces, distinctive websites, and coherent visual systems.",
   location: "Athens, Greece",
   email: "panosfilip@gmail.com",
   emailHref: "mailto:panosfilip@gmail.com",
@@ -33,7 +33,7 @@ export const site = {
     },
   ],
   description:
-    "WIREFUL is the portfolio of Panagiotis Filippaios, a UI/UX engineer and graphic designer in Athens working on Figma, WordPress, websites, product UI, brand systems, and design consulting.",
+    "WIREFUL is the design brand and portfolio of Panagiotis Filippaios, a senior UI/UX engineer and freelance designer in Athens with a background in senior graphic design.",
 };
 
 /** Capability ticker shown in the homepage marquee. */
@@ -80,7 +80,7 @@ export const offerAreas = [
 export const proofPoints = [
   { value: "10+", label: "years across UI/UX, web, brand, print, and digital campaigns" },
   { value: "200+", label: "freelance projects delivered for startups, SMEs, and established teams" },
-  { value: "98%", label: "positive feedback rate reported for design quality and deadline reliability" },
+  { value: "98%", label: "positive client feedback rate for design quality and dependable delivery" },
   { value: "HCI", label: "MSc background and UI design teaching at the University of Athens" },
 ];
 

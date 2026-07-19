@@ -127,15 +127,6 @@
   }
 }
 
-.principle-num {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  color: var(--accent);
-  display: block;
-  margin-bottom: 1.4rem;
-}
-
 .principle h3 {
   font-size: clamp(1.3rem, 2.2vw, 1.7rem);
   margin-bottom: 0.7rem;
@@ -454,4 +445,3 @@
     color: var(--text);
   }
 }
-
